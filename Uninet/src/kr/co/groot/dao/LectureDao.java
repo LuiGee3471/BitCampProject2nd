@@ -2,9 +2,12 @@ package kr.co.groot.dao;
 
 import java.util.List;
 
+import kr.co.groot.dto.Lecture;
+
 public class LectureDao {
 public List<Lecture>  selectAll(){
 		
+  return null;
 	}
 	
 	public int insertLecture() {
@@ -20,14 +23,16 @@ public List<Lecture>  selectAll(){
 	}
 	
 	public List<Lecture> selectByName(){
+	  return null;
 		
 	}
 	
 	public List<Lecture> selectByClass(){
+	  return null;
 		
 	}
 	
 	public List<Lecture> sortLecture(){
-		
+	  return null;
 	}
 }

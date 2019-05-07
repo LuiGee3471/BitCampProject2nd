@@ -1,12 +1,13 @@
 package kr.co.groot.dto;
 
-import com.sun.jmx.snmp.Timestamp;
+import java.sql.Timestamp;
+ 
 
 public class Post {
 	private int id;
 	private String title;
 	private String content;
-	private int writer_id;
+	private int writerId;
 	private Timestamp time;
 	private int count;
 	private int boardType;
@@ -35,12 +36,12 @@ public class Post {
 	  this.content = content;
 	}
 
-	public int getWriter_id() {
-	  return writer_id;
+	public int getWriterId() {
+	  return writerId;
 	}
 
-	public void setWriter_id(int writer_id) {
-	  this.writer_id = writer_id;
+	public void setWriterId(int writerId) {
+	  this.writerId = writerId;
 	}
 
 	public Timestamp getTime() {
