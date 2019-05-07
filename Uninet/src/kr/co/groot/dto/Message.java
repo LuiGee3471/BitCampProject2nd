@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 public class Message {
   private int id;
   private String content;
-  private int receiver_id;
-  private int sender_id;
+  private int receiverId;
+  private int senderId;
   private Timestamp time;
   private String staffname;
 
@@ -34,20 +34,20 @@ public class Message {
     this.content = content;
   }
 
-  public int getReceiver_id() {
-    return receiver_id;
+  public int getReceiverId() {
+    return receiverId;
   }
 
-  public void setReceiver_id(int receiver_id) {
-    this.receiver_id = receiver_id;
+  public void setReceiverId(int receiverId) {
+    this.receiverId = receiverId;
   }
 
-  public int getSender_id() {
-    return sender_id;
+  public int getSenderId() {
+    return senderId;
   }
 
-  public void setSender_id(int sender_id) {
-    this.sender_id = sender_id;
+  public void setSenderId(int senderId) {
+    this.senderId = senderId;
   }
 
   public Timestamp getTime() {
