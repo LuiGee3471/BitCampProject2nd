@@ -113,7 +113,7 @@ public class MessageDao {
       message.setContent(rs.getString("content"));
       message.setTime(rs.getTimestamp("time"));
       message.setStaffname(rs.getString("s.staff_name"));
-      message.setSender_id(rs.getInt("sender_id"));
+      message.setSenderId(rs.getInt("sender_id"));
     }
     if (rs != null) {
       rs.close();
