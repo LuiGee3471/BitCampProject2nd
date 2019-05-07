@@ -75,5 +75,4 @@ public class Comment {
   public void setReferComment(int referComment) {
     this.referComment = referComment;
   }
-
 }
