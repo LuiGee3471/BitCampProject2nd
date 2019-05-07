@@ -115,6 +115,7 @@ public class MessageDao {
       message.setTime(rs.getTimestamp("time"));
       message.setStaffname(rs.getString("s.staff_name"));
       message.setSenderId(rs.getInt("sender_id"));
+      messagelist.add(message);
     }
     if (rs != null) {
       rs.close();
