@@ -21,10 +21,8 @@ public class StaffDao {
   private DataSource ds;
 
   public StaffDao() throws NamingException {
-
     Context context = new InitialContext();
     ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
-
   }
 
   /*
