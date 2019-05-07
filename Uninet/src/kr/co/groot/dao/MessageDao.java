@@ -2,8 +2,12 @@ package kr.co.groot.dao;
 
 import java.util.List;
 
+import kr.co.groot.dto.Message;
+
 public class MessageDao {
 	public int insertMessage() {
+	  
+	  
 	  return 0;
 	}
 	

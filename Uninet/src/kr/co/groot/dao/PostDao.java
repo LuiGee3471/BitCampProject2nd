@@ -2,6 +2,8 @@ package kr.co.groot.dao;
 
 import java.util.List;
 
+import kr.co.groot.dto.Post;
+
 public class PostDao {
 	public List<Post> selectAll(){
 		return null;

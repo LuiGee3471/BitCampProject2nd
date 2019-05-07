@@ -2,8 +2,11 @@ package kr.co.groot.dao;
 
 import java.util.List;
 
+import kr.co.groot.dto.Staff;
+
 public class StaffDao {
 	public List<Staff> selectAll(){
+    return null;
 		
 	}
 	

@@ -2,6 +2,8 @@ package kr.co.groot.dao;
 
 import java.util.List;
 
+import kr.co.groot.dto.Comment;
+
 public class CommentDao {
 	public List<Comment> selectAll(){
 	  return null;
