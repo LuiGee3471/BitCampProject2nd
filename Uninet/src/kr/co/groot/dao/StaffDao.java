@@ -81,7 +81,7 @@ public class StaffDao {
     List<Staff> staffList = new ArrayList<>();
     while (rs.next()) {
       Staff staff = new Staff();
-      staff.setId(rs.getInt("id"));
+      staff.setId(rs.getInt(1));
       staff.setStaffId(rs.getString("staff_id"));
       staff.setEmail(rs.getString("email"));
       staff.setPhoneNumber(rs.getString("phoneNumber"));
@@ -118,7 +118,7 @@ public class StaffDao {
     List<Staff> staffList = new ArrayList<>();
     while (rs.next()) {
       Staff staff = new Staff();
-      staff.setId(rs.getInt("id"));
+      staff.setId(rs.getInt(1));
       staff.setStaffId(rs.getString("staff_id"));
       staff.setEmail(rs.getString("email"));
       staff.setPhoneNumber(rs.getString("phoneNumber"));
@@ -139,7 +139,7 @@ public class StaffDao {
     return staffList;
   }
 
-  public List<Staff> selectById(String input) {
+  public List<Staff> selectById(String input) throws SQLException {
     String sql = "select * from staff s " + 
         "left join department d " + 
         "on dept_id = d.id " + 
@@ -155,7 +155,7 @@ public class StaffDao {
     List<Staff> staffList = new ArrayList<>();
     while (rs.next()) {
       Staff staff = new Staff();
-      staff.setId(rs.getInt("id"));
+      staff.setId(rs.getInt(1));
       staff.setStaffId(rs.getString("staff_id"));
       staff.setEmail(rs.getString("email"));
       staff.setPhoneNumber(rs.getString("phoneNumber"));
