@@ -150,7 +150,7 @@ public class CommentDao {
       post.setId(rs.getInt("id"));
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriter_id(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writerId"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
       postList.add(post);
