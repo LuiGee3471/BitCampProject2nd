@@ -53,10 +53,10 @@ public class PostDao {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
-      post.setBoardType(rs.getInt("boardType"));
+      post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
     }
@@ -88,7 +88,7 @@ public class PostDao {
    */
   public int insertPost(Post post) throws SQLException {
     int row = 0;
-    String sql = "insert into post (id, title, content, writerId, time, count, boardType) values (?, ?, ?, ?, ?, ?, ?)";
+    String sql = "insert into post (id, title, content, writer_id, time, count, boardtype_id) values (?, ?, ?, ?, ?, ?, ?)";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class PostDao {
    */
   public int updatePost(Post post) throws SQLException {
     int row = 0;
-    String sql = "update post set id = ?, title = ?, content = ?, writerId = ? time = ?, count = ?, boardType = ?";
+    String sql = "update post set id = ?, title = ?, content = ?, writer_id = ? time = ?, count = ?, boardtype_id = ?";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -197,10 +197,10 @@ public class PostDao {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
-      post.setBoardType(rs.getInt("boardType"));
+      post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
     }
@@ -244,10 +244,10 @@ public class PostDao {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
-      post.setBoardType(rs.getInt("boardType"));
+      post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
     }
@@ -291,10 +291,10 @@ public class PostDao {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
-      post.setBoardType(rs.getInt("boardType"));
+      post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
     }
@@ -325,7 +325,7 @@ public class PostDao {
    */
   public List<Post> selectByWriter(int writerId) throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where writerId = ?";
+    String sql = "select * from post where writer_id = ?";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -336,10 +336,10 @@ public class PostDao {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
-      post.setBoardType(rs.getInt("boardType"));
+      post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
     }
@@ -380,10 +380,10 @@ public class PostDao {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
-      post.setBoardType(rs.getInt("boardType"));
+      post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
     }
