@@ -32,7 +32,7 @@ public class PostDao {
    * @date: 2019. 5. 7.
    * @author: 강기훈 
    * @description: 글 목록을 불러온다. 
-   * @param spec: 없음 
+   * @param spec: none
    * @return: List<Post>
    */
   public List<Post> selectAll() throws SQLException {
@@ -311,7 +311,7 @@ public class PostDao {
    * @date: 2019. 5. 7.
    * @author: 강기훈 
    * @description: 조회수가 높은 순으로 글 목록을 불러온다.
-   * @param spec: 
+   * @param spec: none
    * @return:  List<Post>
    */
   public List<Post> selectByCount() throws SQLException {
