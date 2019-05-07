@@ -42,6 +42,19 @@ public class StaffDao {
     return 0;
   }
 
+  /*
+   * @method Name: updateStaff
+   * 
+   * @date: 2019. 5. 7
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 교직원의 정보를 수정한다.
+   * 
+   * @param spec: Staff staff
+   *
+   * @return: int
+   */
   public int updateStaff(Staff staff) throws SQLException {
     String sql = "update staff set staff email = ?, phoneNumber = ?, "
         + "staff_name = ?, birthday = ?, isAdmin = ?, isManager = ?, "
@@ -66,6 +79,19 @@ public class StaffDao {
     return row;
   }
 
+  /*
+   * @method Name: selectByDept
+   * 
+   * @date: 2019. 5. 7
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 부서별로 교직원을 검색한다
+   * 
+   * @param spec: int deptId
+   * 
+   * @return: List<Staff>
+   */
   public List<Staff> selectByDept(int deptId) throws SQLException {
     String sql = "select * from staff s " + 
         "left join department d " + 
@@ -101,7 +127,20 @@ public class StaffDao {
     
     return staffList;
   }
-
+  
+  /*
+   * @method Name: selectByName
+   * 
+   * @date: 2019. 5. 7
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 입력한 값을 포함하는 이름을 가진 교직원을 불러온다
+   * 
+   * @param spec: String input
+   * 
+   * @return: List<Staff>
+   */
   public List<Staff> selectByName(String input) throws SQLException {
     String sql = "select * from staff s " + 
         "left join department d " + 
@@ -139,6 +178,19 @@ public class StaffDao {
     return staffList;
   }
 
+  /*
+   * @method Name: selectById
+   * 
+   * @date: 2019. 5. 7
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 입력한 값을 포함하는 아이디를 가진 교직원을 검색한다.
+   * 
+   * @param spec: String input
+   * 
+   * @return: List<Staff>
+   */
   public List<Staff> selectById(String input) throws SQLException {
     String sql = "select * from staff s " + 
         "left join department d " + 
