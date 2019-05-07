@@ -1,43 +1,401 @@
 package kr.co.groot.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import kr.co.groot.dto.Post;
 
 public class PostDao {
-  public List<Post> selectAll() {
-    return null;
+  private Connection conn;
+  private PreparedStatement pstmt;
+  private ResultSet rs;
+  private DataSource ds;
+
+  public PostDao() {
+    try {
+      Context context = new InitialContext();
+      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
-  public int insertPost() {
-    return 0;
+  /*
+   * @method Name: selectAll
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 글 목록을 불러온다.
+   * 
+   * @param spec: 없음
+   * 
+   * @return: List<Post>
+   */
+  public List<Post> selectAll() throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writerId"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardType"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+
+    return list;
   }
 
-  public int deletePost() {
-    return 0;
+  /*
+   * @method Name: insertPost
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판에 글을 등록한다.
+   * 
+   * @param spec: Post post
+   * 
+   * @return: int
+   */
+  public int insertPost(Post post) throws SQLException {
+    int row = 0;
+    String sql = "insert into post (id, title, content, writerId, time, count, boardType) values (?, ?, ?, ?, ?, ?, ?)";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, post.getId());
+    pstmt.setString(2, post.getTitle());
+    pstmt.setString(3, post.getContent());
+    pstmt.setInt(4, post.getWriterId());
+    pstmt.setTimestamp(5, post.getTime());
+    pstmt.setInt(6, post.getCount());
+    pstmt.setInt(7, post.getBoardType());
+    row = pstmt.executeUpdate();
+
+    pstmt.close();
+    conn.close();
+
+    return row;
   }
 
-  public int updatePost() {
-    return 0;
+  /*
+   * @method Name: deletePost
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판에서 글을 삭제한다.
+   * 
+   * @param spec: int id
+   * 
+   * @return: int
+   */
+  public int deletePost(int id) throws SQLException {
+    int row = 0;
+    String sql = "delete from post where id = ?";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+
+    row = pstmt.executeUpdate();
+
+    pstmt.close();
+    conn.close();
+
+    return row;
   }
 
-  public List<Post> selectByTitle() {
-    return null;
+  /*
+   * @method Name: updatePost
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판에서 글을 수정한다.
+   * 
+   * @param spec: Post post
+   * 
+   * @return: int
+   */
+  public int updatePost(Post post) throws SQLException {
+    int row = 0;
+    String sql = "update post set id = ?, title = ?, content = ?, writerId = ? time = ?, count = ?, boardType = ?";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, post.getId());
+    pstmt.setString(2, post.getTitle());
+    pstmt.setString(3, post.getContent());
+    pstmt.setInt(4, post.getWriterId());
+    pstmt.setTimestamp(5, post.getTime());
+    pstmt.setInt(6, post.getCount());
+    pstmt.setInt(7, post.getBoardType());
+    row = pstmt.executeUpdate();
+
+    pstmt.close();
+    conn.close();
+
+    return row;
   }
 
-  public List<Post> selectByContent() {
-    return null;
+  /*
+   * @method Name: selectByTitle
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 제목으로 글을 검색한다.
+   * 
+   * @param spec: String title
+   * 
+   * @return: List<Post>
+   */
+  public List<Post> selectByTitle(String title) throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post where title like ?";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    title = "%" + title + "%";
+    pstmt.setString(1, title);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writerId"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardType"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
   }
 
-  public List<Post> selectByAll() {
-    return null;
+  /*
+   * @method Name: selectByContent
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 내용으로 글을 검색한다.
+   * 
+   * @param spec: String content
+   * 
+   * @return: List<Post>
+   */
+  public List<Post> selectByContent(String content) throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post where content like ?";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    content = "%" + content + "%";
+    pstmt.setString(1, content);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writerId"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardType"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
   }
 
-  public List<Post> selectByWriter() {
-    return null;
+  /*
+   * @method Name: selectByAll
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 제목과 내용으로 글을 검색한다.
+   * 
+   * @param spec: String all
+   * 
+   * @return: List<Post>
+   */
+  public List<Post> selectByAll(String all) throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post where content like ? or title like ?";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    all = "%" + all + "%";
+    pstmt.setString(1, all);
+    pstmt.setString(2, all);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writerId"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardType"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
   }
 
-  public List<Post> selectByCount() {
-    return null;
+  /*
+   * @method Name: selectByWriter
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 특정 작성자가 쓴 글을 검색한다.
+   * 
+   * @param spec: int writerId
+   * 
+   * @return: List<Post>
+   */
+  public List<Post> selectByWriter(int writerId) throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post where writerId = ?";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, writerId);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writerId"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardType"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+
+  /*
+   * @method Name: selectByCount
+   * 
+   * @date: 2019. 5. 7.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 조회수가 높은 순으로 글 목록을 불러온다.
+   * 
+   * @param spec:
+   * 
+   * @return: List<Post>
+   */
+  public List<Post> selectByCount() throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post order by count desc";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writerId"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardType"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
   }
 }

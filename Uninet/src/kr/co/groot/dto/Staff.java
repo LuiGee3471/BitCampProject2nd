@@ -16,6 +16,14 @@ public class Staff {
   private int deptId;
   private String deptName;
 
+  public String getStaffName() {
+    return staffName;
+  }
+
+  public void setStaffName(String staffName) {
+    this.staffName = staffName;
+  }
+
   public String getDeptName() {
     return deptName;
   }
@@ -54,14 +62,6 @@ public class Staff {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public String getStaffName() {
-    return staffName;
-  }
-
-  public void setStaffName(String staffName) {
-    this.staffName = staffName;
   }
 
   public String getPhoneNumber() {
