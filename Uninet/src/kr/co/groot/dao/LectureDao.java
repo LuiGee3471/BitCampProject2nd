@@ -2,6 +2,8 @@ package kr.co.groot.dao;
 
 import java.util.List;
 
+import kr.co.groot.dto.Lecture;
+
 public class LectureDao {
 public List<Lecture>  selectAll(){
 		

@@ -48,11 +48,4 @@ public class Message {
   public void setTime(Timestamp time) {
     this.time = time;
   }
-
-  @Override
-  public String toString() {
-    return "Message [id=" + id + ", content=" + content + ", receiver_id=" + receiver_id + ", sender_id=" + sender_id
-        + ", time=" + time + "]";
-  }
-
 }
