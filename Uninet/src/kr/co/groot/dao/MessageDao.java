@@ -100,7 +100,8 @@ public class MessageDao {
    */
   public List<Message> selectByReceiver(int receiver_id) throws SQLException {
     List<Message> messagelist = null;
-    String sql = "select content, time, s.staff_name AS sender from message m\r\n" + "LEFT JOIN staff s\r\n"
+    String sql = "select content, time, s.staff_name AS sender from message m " 
+        + "LEFT JOIN staff s "
         + "on m.sender_id = s.id";
 
     conn = ds.getConnection();
