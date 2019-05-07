@@ -8,6 +8,15 @@ public class Message {
   private int receiver_id;
   private int sender_id;
   private Timestamp time;
+  private String staffname;
+
+  public String getStaffname() {
+    return staffname;
+  }
+
+  public void setStaffname(String staffname) {
+    this.staffname = staffname;
+  }
 
   public int getId() {
     return id;
@@ -48,4 +57,7 @@ public class Message {
   public void setTime(Timestamp time) {
     this.time = time;
   }
+
+
+  
 }
