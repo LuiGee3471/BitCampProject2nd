@@ -2,6 +2,8 @@ package kr.co.groot.service;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +24,8 @@ public class RegisterCheckAction implements Action {
     String password = request.getParameter("password");
     String email = request.getParameter("email");
     String name = request.getParameter("name");
-    System.out.println(request.getParameter("birthday") + " 00:00:00");
-    Timestamp birthday = Timestamp.valueOf(request.getParameter("birthday") + "00:00:00");
+    LocalDate birthdate = LocalDate.parse(request.getParameter("birthday"));
+    Timestamp birthday = Timestamp.valueOf(birthdate.atStartOfDay());
     String phoneNumber = request.getParameter("phoneNumber");
     
     try {
