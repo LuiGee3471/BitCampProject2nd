@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
+import kr.co.groot.service.LoginAction;
 
 @WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login", "/register" })
 public class SignController extends HttpServlet {
