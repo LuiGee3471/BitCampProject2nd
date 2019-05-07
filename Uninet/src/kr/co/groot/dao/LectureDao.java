@@ -19,12 +19,20 @@ public class LectureDao {
   private PreparedStatement pstmt;
   private ResultSet rs;
   private DataSource ds;
-
+   
   public LectureDao() throws NamingException {
     Context context = new InitialContext();
     ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
   }
 
+  /*
+   * @method Name: selectAll
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 모든 강의 정보를 불러온다 
+   * @param spec: none 
+   * @return: List<Lecture>
+   */
   public List<Lecture> selectAll() throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
@@ -62,6 +70,14 @@ public class LectureDao {
     return lectureList;
   }
 
+  /*
+   * @method Name: insertLecture
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 강의를 새로 추가한다. 
+   * @param spec: Lecture lecture
+   * @return: int
+   */
   public int insertLecture(Lecture lecture) throws SQLException {
     String sql = "insert into lecture (lecture_name, credit, time, "
         + "lecture_type_id, prof_id) values (?, ?, ?, ?, ?)";
@@ -82,6 +98,14 @@ public class LectureDao {
     return row;
   }
 
+  /*
+   * @method Name: deleteLecture
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 강의 정보를 삭제한다.
+   * @param spec: int id
+   * @return: int
+   */
   public int deleteLecture(int id) throws SQLException {
     String sql = "delete from lecture where id = ?";
 
@@ -94,6 +118,14 @@ public class LectureDao {
     return row;
   }
 
+  /*
+   * @method Name: updateLecture
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 강의 정보를 수정한다
+   * @param spec: Lecture lecture
+   * @return: int
+   */
   public int updateLecture(Lecture lecture) throws SQLException {
     String sql = "update lecture set lecture_name = ?, credit = ?, time = ?, "
         + "lecture_type_id = ?, prof_id = ? where id = ?";
@@ -115,6 +147,14 @@ public class LectureDao {
     return row;
   }
 
+  /*
+   * @method Name: selectByName
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 입력값을 가지고 있는 강의 정보를 가져온다.
+   * @param spec: String criterion(기준), String input
+   * @return: List<Lecture>
+   */
   public List<Lecture> selectByName(String criterion, String input) throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
@@ -173,6 +213,14 @@ public class LectureDao {
     return lectureList;   
   }
 
+  /*
+   * @method Name: selectByLectureType
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 종별로 강의를 검색한다
+   * @param spec: int lectureType
+   * @return: List<Lecture>
+   */
   public List<Lecture> selectByLectureType(int lectureType) throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
@@ -212,6 +260,14 @@ public class LectureDao {
     return lectureList;
   }
 
+  /*
+   * @method Name: sortLecture
+   * @date: 2019. 5. 7
+   * @author: 윤종석
+   * @description: 입력 기준에 따라 정렬된 강의 데이터를 불러온다.
+   * @param spec: String criterion(기준)
+   * @return: List<Lecture>
+   */
   public List<Lecture> sortLecture(String criterion) throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
