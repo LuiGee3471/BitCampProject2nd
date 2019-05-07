@@ -27,12 +27,18 @@ public class PostDao {
       System.out.println(e.getMessage());
     }
   }
+
   /*
-   * @method Name:  selectAll
+   * @method Name: selectAll
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
-   * @description: 글 목록을 불러온다. 
-   * @param spec: none
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 글 목록을 불러온다.
+   * 
+   * @param spec: 없음
+   * 
    * @return: List<Post>
    */
   public List<Post> selectAll() throws SQLException {
@@ -66,12 +72,18 @@ public class PostDao {
 
     return list;
   }
+
   /*
    * @method Name: insertPost
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
-   * @description: 게시판에 글을 등록한다. 
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판에 글을 등록한다.
+   * 
    * @param spec: Post post
+   * 
    * @return: int
    */
   public int insertPost(Post post) throws SQLException {
@@ -94,12 +106,18 @@ public class PostDao {
 
     return row;
   }
+
   /*
    * @method Name: deletePost
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
+   * 
+   * @author: 강기훈
+   * 
    * @description: 게시판에서 글을 삭제한다.
+   * 
    * @param spec: int id
+   * 
    * @return: int
    */
   public int deletePost(int id) throws SQLException {
@@ -117,12 +135,18 @@ public class PostDao {
 
     return row;
   }
+
   /*
    * @method Name: updatePost
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
-   * @description: 게시판에서 글을 수정한다. 
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판에서 글을 수정한다.
+   * 
    * @param spec: Post post
+   * 
    * @return: int
    */
   public int updatePost(Post post) throws SQLException {
@@ -145,13 +169,19 @@ public class PostDao {
 
     return row;
   }
+
   /*
    * @method Name: selectByTitle
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
-   * @description: 제목으로 글을 검색한다. 
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 제목으로 글을 검색한다.
+   * 
    * @param spec: String title
-   * @return:  List<Post>
+   * 
+   * @return: List<Post>
    */
   public List<Post> selectByTitle(String title) throws SQLException {
     List<Post> list = new ArrayList<>();
@@ -186,13 +216,19 @@ public class PostDao {
     }
     return list;
   }
+
   /*
    * @method Name: selectByContent
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
+   * 
+   * @author: 강기훈
+   * 
    * @description: 내용으로 글을 검색한다.
+   * 
    * @param spec: String content
-   * @return:  List<Post>
+   * 
+   * @return: List<Post>
    */
   public List<Post> selectByContent(String content) throws SQLException {
     List<Post> list = new ArrayList<>();
@@ -226,13 +262,19 @@ public class PostDao {
     }
     return list;
   }
+
   /*
    * @method Name: selectByAll
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
+   * 
+   * @author: 강기훈
+   * 
    * @description: 제목과 내용으로 글을 검색한다.
+   * 
    * @param spec: String all
-   * @return:  List<Post>
+   * 
+   * @return: List<Post>
    */
   public List<Post> selectByAll(String all) throws SQLException {
     List<Post> list = new ArrayList<>();
@@ -267,13 +309,19 @@ public class PostDao {
     }
     return list;
   }
+
   /*
    * @method Name: selectByWriter
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
+   * 
+   * @author: 강기훈
+   * 
    * @description: 특정 작성자가 쓴 글을 검색한다.
+   * 
    * @param spec: int writerId
-   * @return:  List<Post>
+   * 
+   * @return: List<Post>
    */
   public List<Post> selectByWriter(int writerId) throws SQLException {
     List<Post> list = new ArrayList<>();
@@ -306,13 +354,19 @@ public class PostDao {
     }
     return list;
   }
+
   /*
    * @method Name: selectByCount
+   * 
    * @date: 2019. 5. 7.
-   * @author: 강기훈 
+   * 
+   * @author: 강기훈
+   * 
    * @description: 조회수가 높은 순으로 글 목록을 불러온다.
-   * @param spec: none
-   * @return:  List<Post>
+   * 
+   * @param spec:
+   * 
+   * @return: List<Post>
    */
   public List<Post> selectByCount() throws SQLException {
     List<Post> list = new ArrayList<>();
