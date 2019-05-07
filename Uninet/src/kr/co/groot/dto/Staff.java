@@ -7,13 +7,30 @@ public class Staff {
   private String staffId;
   private String password;
   private String email;
-  private String name;
+  private String staffName;
   private String phoneNumber;
   private Timestamp birthday;
   private String image;
   private String isManager;
   private String isAdmin;
   private int deptId;
+  private String deptName;
+
+  public String getStaffName() {
+    return staffName;
+  }
+
+  public void setStaffName(String staffName) {
+    this.staffName = staffName;
+  }
+
+  public String getDeptName() {
+    return deptName;
+  }
+
+  public void setDeptName(String deptName) {
+    this.deptName = deptName;
+  }
 
   public int getId() {
     return id;
@@ -45,14 +62,6 @@ public class Staff {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public String getPhoneNumber() {
