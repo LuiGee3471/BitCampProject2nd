@@ -12,6 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import kr.co.groot.dto.Comment;
 import kr.co.groot.dto.Post;
 
 public class PostDao {
@@ -403,13 +404,14 @@ public class PostDao {
   public Post getContent(int id) throws SQLException {
     Post post = new Post();
     String sql = "select * from post where id = ?";
+   
     
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
     
-   
+    while(rs.next()) {
     String title = rs.getString("title");
     String content = rs.getString("content");
     int writerId = rs.getInt("writer_id");
@@ -424,7 +426,7 @@ public class PostDao {
     post.setTime(time);
     post.setCount(count);
     post.setBoardType(boardType);
-    
+    }
     if (rs != null) {
       rs.close();
     }
@@ -530,6 +532,39 @@ public class PostDao {
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
       list.add(post);
+      }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+  
+  public List<Comment> getCommentList(int id) throws SQLException{
+    
+    String sql = "select * from comment where id = ?";
+    
+    List<Comment> list = new ArrayList<>();
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    while(rs.next()) {
+     Comment comment = new Comment();
+     comment.setId(rs.getInt("id"));
+     comment.setWriterId(rs.getInt("writer_id"));
+     comment.setContent(rs.getString("content"));
+     comment.setTime(rs.getTimestamp("time"));
+     comment.setRecomment(rs.getString("recomment"));
+     comment.setRefer(rs.getInt("refer"));
+     comment.setReferComment(rs.getInt("refer_comment"));
+     list.add(comment);
     }
     if (rs != null) {
       rs.close();
