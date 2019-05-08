@@ -16,10 +16,9 @@ public class LectureUpdateokAction implements Action {
     lecture.setLectureName(request.getParameter("lecturename"));
     lecture.setCredit(Integer.parseInt(request.getParameter("credit")));
     lecture.setTime(request.getParameter("lecturetime"));
-    lecture.setLectureType(request.getParameter("lecturetype"));
-    lecture.setMajorName(request.getParameter("major"));
-    lecture.setProfName(request.getParameter("professor"));
-    
+    lecture.setLectureTypeId(Integer.parseInt(request.getParameter("lecturetype")));
+    lecture.setProfId(Integer.parseInt(request.getParameter("professor")));
+    lecture.setId(Integer.parseInt(request.getParameter("id")));
     int row = 0;
     try {
       LectureDao dao = new LectureDao();
@@ -28,7 +27,25 @@ public class LectureUpdateokAction implements Action {
       e.printStackTrace();
     }
        
-    return null;
+    String msg = "";
+    String url = "";
+    
+    if(row > 0 ) {
+      msg = "수정 성공";
+      url = "list";
+    } else {
+      msg = "수정 실패";
+      url = "updatePage";
+    }
+    
+    request.setAttribute("msg", msg);
+    request.setAttribute("url", url);
+    
+    forward = new ActionForward();
+    forward.setRedirect(false);
+    forward.setPath("/WEB-INF/views/redirect.jsp");
+    
+    return forward;
   }
 
 }

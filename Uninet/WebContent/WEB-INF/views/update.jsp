@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var = "lectureList" value = "${requestScope.lectureList}"></c:set>
-<c:set var = "profList" value = "${requestScope.profList}"></c:set>
-<c:set var = "ltList" value = "${requestScope.ltList}"></c:set>
-<c:set var = "majorList" value = "${requestScope.majorList}"></c:set>
+<c:set var="lectureList" value="${requestScope.lectureList}"></c:set>
+<c:set var="profList" value="${requestScope.profList}"></c:set>
+<c:set var="ltList" value="${requestScope.ltList}"></c:set>
+<c:set var="majorList" value="${requestScope.majorList}"></c:set>
 
 
 <!DOCTYPE html>
@@ -17,19 +17,19 @@
 
 <h1> 왜안되냐 ㅡㅡ</h1>
     <!-- 강의 선택  -->
-   <div class = "container">
-   <span class = "lable">강의</span>
-      <select name = "lecturename">
+   <div class="container">
+   <span class="lable">강의</span>
+      <select name="lecturename">
         <option value="">강의 선택</option>
         <c:forEach var = "lecture" items = "${lectureList}">
-        <option value = "${lecture.id}">${lecture.lectureName}</option>
+        <option value="${lecture.id}">${lecture.lectureName}</option>
         </c:forEach>
       </select><br>
     <!-- 강의 선택  -->
     
      <!-- 학점 선택  -->
-   <span class = "lable">학점</span>
-      <select name = "credit">
+   <span class="lable">학점</span>
+      <select name="credit">
         <option value="">학점 선택</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -63,7 +63,7 @@
      <!-- 종별 선택  -->
    <span class = "lable">종별</span>
       <select name = "lecturetype">
-        <option value="0">종별 선택</option>
+        <option value="">종별 선택</option>
         <c:forEach var = "lect" items = "${ltList}">
         <option value = "${lect.id}">${lect.lectureType}</option>
         </c:forEach>
@@ -73,7 +73,7 @@
      <!-- 학과 선택  -->
    <span class = "lable">학과</span>
       <select name = "major">
-        <option value="0">학과 선택</option>
+        <option value="">학과 선택</option>
         <c:forEach var = "major" items = "${majorList}">
         <option value = "${major.id}">${major.majorName}</option>
         </c:forEach>
@@ -83,7 +83,7 @@
      <!-- 교수 선택  -->
    <span class = "lable">교수</span>
       <select name = "professor">
-        <option value="0">교수 선택</option>
+        <option value="">교수 선택</option>
         <c:forEach var = "professor" items = "${profList}">
         <option value = "${professor.id}">${professor.profName}</option>
         </c:forEach>

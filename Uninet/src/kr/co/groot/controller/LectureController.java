@@ -53,7 +53,7 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/sort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/updatepage")) {
+    } else if (urlCommand.equals("/lecture/updatePage")) {
       action = new LectureUpdateAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/update")) {
