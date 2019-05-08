@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<div class = "container">
   <table class = "lecturetable">
     <tr>
       <td>강의이름</td>
@@ -26,7 +28,7 @@
       <td>${lecture.lectureType}</td>
       <td>${lecture.majorName}</td>
       <td>${lecture.profName }</td>
-      <td><a href = "#=${lecture.id}">수정</a></td>
+      <td><a href = "updatepage?id=${lecture.id}">수정</a></td>
       <td><a href = "delete?id=${lecture.id}">삭제</a></td>
       <td></td>
     </tr>
@@ -34,6 +36,8 @@
   
   
   </table>
+  
+ </div>
 
 
 

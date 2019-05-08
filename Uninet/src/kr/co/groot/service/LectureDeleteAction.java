@@ -15,18 +15,19 @@ public class LectureDeleteAction implements Action{
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
       
     ActionForward forward = null;
-    LectureDao dao = null;
+    
     int id = Integer.parseInt(request.getParameter("id"));
-    System.out.println(id);
     int result = 0;
     try {
+      LectureDao dao = new LectureDao();
       result = dao.deleteLecture(id);
-    } catch (SQLException e) {
+      System.out.println("결과 : " + result);
+    } catch (Exception e) {
       e.printStackTrace();
     }
     
     String msg = "";
-    String url = "lecture/list";
+    String url = "list";
     
     if(result > 0) {
       msg = "삭제되었습니다";
@@ -38,6 +39,7 @@ public class LectureDeleteAction implements Action{
     request.setAttribute("msg", msg);
     request.setAttribute("url", url);
     
+    forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/redirect.jsp");
     
