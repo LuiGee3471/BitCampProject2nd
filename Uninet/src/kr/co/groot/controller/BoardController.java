@@ -13,6 +13,7 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.BoardDeleteAction;
 import kr.co.groot.service.BoardListAction;
 import kr.co.groot.service.BoardReadAction;
+import kr.co.groot.service.BoardUpdateAction;
 import kr.co.groot.service.BoardWriteAction;
 
 @WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*" })
@@ -47,7 +48,7 @@ public class BoardController extends HttpServlet {
         action = new BoardUpdateAction();
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/comment")) {
-        action = new BoardCommentAction();
+        action = new CommentListAction();
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/recomment")) {
         action = new BoardRecommentAction();
