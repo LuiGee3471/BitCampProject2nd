@@ -10,48 +10,70 @@ public class Comment {
   private int refer;
   private int referComment;
   private String recomment;
+  private long diff;
+
+  public long getDiff() {
+    return diff;
+  }
+
+  public void setDiff(long diff) {
+    this.diff = diff;
+  }
+
   public int getId() {
     return id;
   }
+
   public void setId(int id) {
     this.id = id;
   }
+
   public int getWriterId() {
     return writerId;
   }
+
   public void setWriterId(int writerId) {
     this.writerId = writerId;
   }
+
   public String getContent() {
     return content;
   }
+
   public void setContent(String content) {
     this.content = content;
   }
+
   public Timestamp getTime() {
     return time;
   }
+
   public void setTime(Timestamp time) {
     this.time = time;
   }
+
   public int getRefer() {
     return refer;
   }
+
   public void setRefer(int refer) {
     this.refer = refer;
   }
+
   public int getReferComment() {
     return referComment;
   }
+
   public void setReferComment(int referComment) {
     this.referComment = referComment;
   }
+
   public String getRecomment() {
     return recomment;
   }
+
   public void setRecomment(String recomment) {
     this.recomment = recomment;
   }
 
-  
 }

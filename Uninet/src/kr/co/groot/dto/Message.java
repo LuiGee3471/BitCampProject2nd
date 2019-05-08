@@ -9,6 +9,24 @@ public class Message {
   private int senderId;
   private Timestamp time;
   private String staffname;
+  private long diff;
+  private String timeFormat;
+
+  public String getTimeFormat() {
+    return timeFormat;
+  }
+
+  public void setTimeFormat(String timeFormat) {
+    this.timeFormat = timeFormat;
+  }
+
+  public long getDiff() {
+    return diff;
+  }
+
+  public void setDiff(long diff) {
+    this.diff = diff;
+  }
 
   public String getStaffname() {
     return staffname;
@@ -58,6 +76,4 @@ public class Message {
     this.time = time;
   }
 
-
-  
 }
