@@ -1,0 +1,92 @@
+@import 'reset.css';
+
+.textbox {
+  width:68%;
+  margin-left: 30px;
+  border:2px solid; 
+  border-color: gray;
+  padding:15px; 
+  margin-top:10px;
+  background-color:#F9F9F9;
+}
+
+.titlebox {
+  width:68%;
+  margin-left: 30px;
+  font-family:sans-serif;
+  font-weight:bold;
+  font-size:30px;
+  border:1px solid; 
+  border-color: gray;
+  padding:15px; 
+}
+
+.content {
+  margin-left: 30px;
+  width:70%;
+  margin-top:10px;
+  border:1px solid; 
+  border-color: gray;
+  border-bottom-color: gray;
+}
+
+.content td{
+  padding:10px 0px 0px 20px;
+}
+
+.content .endline{
+  border-bottom:1px solid gray;
+   color:gray;
+}
+
+.content .detail{
+  color:gray;
+}
+
+.content .posttitle{
+ font-weight:bold;
+ font-size:15px;
+ color:black;
+ font-style:none;
+  
+}
+
+.contenttitle {
+  margin-top:15px;
+  margin-left: 30px;
+  width: 70%;
+  height: 50px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  margin-bottom:0;
+  resize: none;
+}
+.contentbox {
+  margin-left: 30px;
+  width: 70%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  resize: none;
+}
+.subtn {
+    background:none;
+    border: none;
+    padding:7px 12px;
+    background-color: white;
+    border:1px solid #C62917;
+    color: #C62917;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.7em;
+    cursor: pointer;
+    margin-left: 950px;
+}
+
+

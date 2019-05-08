@@ -45,7 +45,7 @@ public class PostDao {
    */
   public List<Post> selectAll() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post";
+    String sql = "select p.title, p.content, p.writer_id, p.time, p.count, p.boardtype_id, p.id, s.staff_id from post p join staff s on p.writer_id = s.id";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -60,6 +60,7 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setStaffId(rs.getString("staff_id"));
       list.add(post);
     }
     if (rs != null) {
@@ -533,39 +534,6 @@ public class PostDao {
       post.setId(rs.getInt("id"));
       list.add(post);
       }
-    if (rs != null) {
-      rs.close();
-    }
-    if (pstmt != null) {
-      pstmt.close();
-    }
-    if (conn != null) {
-      conn.close();
-    }
-    return list;
-  }
-  
-  public List<Comment> getCommentList(int id) throws SQLException{
-    
-    String sql = "select * from comment where id = ?";
-    
-    List<Comment> list = new ArrayList<>();
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    rs = pstmt.executeQuery();
-    
-    while(rs.next()) {
-     Comment comment = new Comment();
-     comment.setId(rs.getInt("id"));
-     comment.setWriterId(rs.getInt("writer_id"));
-     comment.setContent(rs.getString("content"));
-     comment.setTime(rs.getTimestamp("time"));
-     comment.setRecomment(rs.getString("recomment"));
-     comment.setRefer(rs.getInt("refer"));
-     comment.setReferComment(rs.getInt("refer_comment"));
-     list.add(comment);
-    }
     if (rs != null) {
       rs.close();
     }

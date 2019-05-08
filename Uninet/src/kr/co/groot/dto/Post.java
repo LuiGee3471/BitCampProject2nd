@@ -11,8 +11,17 @@ public class Post {
 	private Timestamp time;
 	private int count;
 	private int boardType;
+	private String staffId;
 
-	public int getId() {
+	public String getStaffId() {
+    return staffId;
+  }
+
+  public void setStaffId(String staffId) {
+    this.staffId = staffId;
+  }
+
+  public int getId() {
 	  return id;
 	}
 
