@@ -53,7 +53,7 @@
       <div class="card board">
         <h3><a href="notice">공지사항</a></h3>
         <c:forEach var="notice" items="<%=recentNotice%>">
-          <a href="#" class="list"><span class="board-title">${notice.title}</span>
+          <a href="notice/read?id=${notice.id}" class="list"><span class="board-title">${notice.title}</span>
           <c:choose>
             <c:when test="${notice.diff < 2}">
               <span class="time">방금</span></a>
@@ -70,7 +70,7 @@
       <div class="card board">
         <h3><a href="board">자유게시판</a></h3>     
         <c:forEach var="post" items="<%=recentPost%>">
-        <a href="#" class="list"><span class="board-title">${post.title}</span>
+        <a href="board/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
           <c:choose>
             <c:when test="${post.diff < 2}">
               <span class="time">방금</span></a>
@@ -97,7 +97,14 @@
       <div class="card board">
         <h3><a href="#">인기 게시물</a></h3>
         <c:forEach var="post" items="<%=popularList%>">
-          <a href="#" class="list"><span class="board-title">${post.title}</span>
+          <c:choose>
+            <c:when test="${post.boardType == 1}">
+              <a href="notice/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
+            </c:when>
+            <c:otherwise>
+              <a href="board/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
+            </c:otherwise>
+          </c:choose>
           <c:choose>
             <c:when test="${post.diff < 2}">
               <span class="time">방금</span></a>
