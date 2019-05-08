@@ -16,21 +16,10 @@ public class MyPageMyAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-    ActionForward forward = null;
-    try {
-      HttpSession session = request.getSession();
-      String id = (String)session.getAttribute("id");
-      StaffDao dao = new StaffDao();
-      Staff staff = dao.selectStaff(id);
-      request.setAttribute("staffInfo", staff);
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/mypage/my.jsp");
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } catch (NamingException e) {
-      System.out.println(e.getMessage());
-    }
+    ActionForward forward = new ActionForward();
+    
+    forward.setRedirect(false);
+    forward.setPath("/WEB-INF/views/mypage/my.jsp");
     
     return forward;
   }

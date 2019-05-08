@@ -17,22 +17,10 @@ public class MyPageSetInfoAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
-    StaffDao dao;
-    Staff staff;
-    try {
-      HttpSession session = request.getSession();
-      String id = (String)session.getAttribute("id");
-      dao = new StaffDao();
-      staff = dao.selectStaff(id);
-      request.setAttribute("staffInfo", staff);
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/mypage/setinfo.jsp");
-    }catch(SQLException e) {
-      System.out.println(e.getMessage());
-    }catch(NamingException e) {
-      System.out.println(e.getMessage());
-    }
+    
+    forward = new ActionForward();
+    forward.setRedirect(false);
+    forward.setPath("/WEB-INF/views/mypage/setinfo.jsp");
     return forward;
   }
 
