@@ -1,0 +1,77 @@
+@import 'master.css';
+
+nav {
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid #d6d6d6;
+  background: #fff;
+  display: flex;
+}
+
+.navbar {
+  width: 1180px;
+  height: 100%;
+  display: flex;
+  margin: auto;
+}
+
+.menu {
+  margin: auto;
+}
+
+.menu ul {
+  display: flex;
+}
+
+.menu ul li {
+  margin: 0 10px;
+  height: 76px;
+  display: flex;
+}
+
+.active {
+  border-bottom: 4px solid #c62917;
+}
+
+.menu ul li a {
+  margin: auto;
+  color: #4c4c4c;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.menu ul li a:hover {
+  color: #c62917;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.logo {
+  margin: auto 0;
+  margin-right: 20px;
+}
+
+.mypage {
+  margin: auto 0;
+}
+
+.title {
+  font-size: 13px;
+  line-height: 15px;
+  color: #c62917;
+  font-weight: bold;
+}
+
+.campus {
+  font-size: 22px;
+  color: #4c4c4c;
+  line-height: 25px;
+}
