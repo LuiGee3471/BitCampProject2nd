@@ -52,7 +52,7 @@
 .mymenu a {
   display: block;
   text-align: center;
-  padding: 10px 0 10px 10px;
+  padding: 10px 37px 10px 0px;
   font-size: 14px;
   line-height: 20px;
   text-decoration: none;
@@ -63,4 +63,79 @@
 
 .mycomment {
   border-bottom: none;
+}
+
+.fa-list-ul {
+  color: #3C87FF;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.fa-comment {
+  color: #78D473;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.boards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 605px;
+  margin-left: 30px;
+}
+
+.board {
+  color: #666;
+  font-size: 12px;
+  letter-spacing: -1px;
+  width: 295px;
+  height: 194px;
+  margin: 2.5px;
+  background-color: #FFFFFF;
+}
+
+.board h3 {
+  padding: 10px;
+}
+
+.board h3 a {
+  color: #c62917;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.list {
+  border-top: 1px solid #e3e3e3;
+  display: block;
+  padding: 10px;
+}
+
+.list .board-title {
+  height: 17px;
+  line-height: 18px;
+  color: #4c4c4c;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+
+.message {
+  padding: 20px 30px 20px 10px;
+  border-top: 1px solid #e3e3e3;
+}
+
+.message-title {
+  font-size: 14px;
+  color: #292929;
+  font-weight: bold;
+  padding: 0px !important;
+  margin-bottom: 5px;
+}
+
+.content {
+  height: 36px;
+  line-height: 18px;
+  overflow: hidden;
+  color: #4c4c4c;
+  font-size: 13px;
 }
