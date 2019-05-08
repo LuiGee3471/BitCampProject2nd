@@ -1,5 +1,21 @@
+<%@page import="kr.co.groot.dto.Message"%>
+<%@page import="kr.co.groot.dao.MessageDao"%>
+<%@page import="kr.co.groot.dto.Post"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.groot.dao.PostDao"%>
+<%@page import="kr.co.groot.dto.Staff"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%
+    Staff staff = (Staff) session.getAttribute("staff");
+    PostDao postDao = new PostDao();
+    List<Post> recentNotice = postDao.selectRecentNotice();
+    List<Post> recentPost = postDao.selectRecentPost();
+    List<Post> popularList = postDao.selectByCountForMain();
+    MessageDao messageDao = new MessageDao();
+    List<Message> messageList = messageDao.selectRecentMessage(staff.getId());
+  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,23 +23,56 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/top-bottom.css">
 <link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
-    <div class="my-card card">
-      <img class="profile" src="https://via.placeholder.com/60" alt="프로필 사진" >
-      <h3 class="name">이름</h3>
-      <p class="dept">부서</p>
-      <div class="buttons">
-        <a href="mypage">내 정보</a>
-        <a href="logout">로그아웃</a>
+    <div class="myprofile">
+      <div class="my-card card">
+        <img class="profile" src="images/${staff.image}" alt="프로필 사진">
+        <h3 class="name">${staff.staffName}</h3>
+        <p class="dept">${staff.deptName}</p>
+        <div class="buttons">
+          <a href="mypage">내 정보</a><a href="logout">로그아웃</a>
+        </div>
+      </div>
+      <div class="mymenu card">
+        <a href="mypost"><i class="fas fa-list-ul"></i>내가 쓴 글</a> 
+        <a href="mycomment" class="mycomment">
+          <i class="far fa-comment"></i>댓글단 글
+        </a>
       </div>
     </div>
-    <div class="mymenu card">
-      <a href="mypost"><i class="fas fa-list"></i>내가 쓴 글</a>
-      <a href="mycomment" class="mycomment">댓글 단 글</a>
+    <div class="boards">
+      <div class="card board">
+        <h3><a href="notice">공지사항</a></h3>
+        <c:forEach var="notice" items="<%=recentNotice%>">
+          <a href="#" class="list"><span class="board-title">${notice.title}</span><span class="time"></span></a>
+        </c:forEach>
+      </div>
+      <div class="card board">
+        <h3><a href="board">자유게시판</a></h3>
+        <c:forEach var="post" items="<%=recentPost%>">
+          <a href="#" class="list"><span class="board-title">${post.title}</span><span class="time"></span></a>
+        </c:forEach>    
+      </div>
+      <div class="card board">
+        <h3><a href="message">쪽지</a></h3>
+        <c:forEach var="message" items="<%=messageList%>">
+          <a href="message" class="message">
+            <h3 class="message-title">${message.staffname}</h3>
+            <span class="content">${message.content}</span>
+          </a>
+        </c:forEach>
+      </div>
+      <div class="card board">
+        <h3><a href="#">인기 게시물</a></h3>
+        <c:forEach var="post" items="<%=popularList%>">
+          <a href="#" class="list"><span class="board-title">${post.title}</span><span class="time"></span></a>
+        </c:forEach>  
+      </div>
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />

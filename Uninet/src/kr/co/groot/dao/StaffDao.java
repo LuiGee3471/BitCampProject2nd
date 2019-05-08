@@ -116,8 +116,8 @@ public class StaffDao {
   public int insertStaff(Staff staff) throws SQLException {
     int row = 0;
     String sql = "insert into staff(staff_id, password, staff_name, phonenumber,"
-        + "email, birthday, dept_id, image, isManager, isAdmin) "
-        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + "email, birthday, dept_id) "
+        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -128,9 +128,6 @@ public class StaffDao {
     pstmt.setString(5, staff.getEmail());
     pstmt.setTimestamp(6, staff.getBirthday());
     pstmt.setInt(7, staff.getDeptId());
-    pstmt.setString(8, staff.getImage());
-    pstmt.setString(9, staff.getIsManager());
-    pstmt.setString(10, staff.getIsAdmin());
 
     row = pstmt.executeUpdate();
     pstmt.close();
