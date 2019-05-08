@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   </head>
   <body>
-    <form action="registerCheck" method="POST">
+    <form action="registerCheck" method="POST" id="registerForm">
       <div id="first-div">
         <select name="dept" id="dept">
           <option value="">부서 선택</option>

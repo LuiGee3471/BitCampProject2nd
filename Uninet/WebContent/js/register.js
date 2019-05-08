@@ -10,6 +10,13 @@ const agree = $('#agree');
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/;
 const phoneRegExp = /^010([0-9]{4})([0-9]{4})$/;
 
+$("#registerForm").keypress(function(event) {
+	if (event.keyCode == 13) {
+		event.preventDefault();
+		return false;
+	}
+});
+
 dept.change(() => {
   second.removeClass('unseen');
 });

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
@@ -41,10 +42,14 @@ public class RegisterCheckAction implements Action {
       StaffDao dao = new StaffDao();
       int row = dao.insertStaff(staff);
       
+      staff = dao.selectStaff(id);
+      
       if (row > 0) {
+        HttpSession session = request.getSession();
+        session.setAttribute("staff", staff);
         forward = new ActionForward();
         forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/main.jsp");
+        forward.setPath("/main");
       } else {
         forward = new ActionForward();
         String msg = "회원 가입이 실패했습니다.";
