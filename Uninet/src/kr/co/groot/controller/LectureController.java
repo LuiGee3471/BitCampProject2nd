@@ -19,7 +19,7 @@ import kr.co.groot.service.LectureSortAction;
 import kr.co.groot.service.LectureUpdateAction;
 import kr.co.groot.service.LectureWriteAction;
 
-@WebServlet(description = "강의CRUD/검색/정렬 처리", urlPatterns = { "/Lecture/*" })
+@WebServlet(description = "강의CRUD/검색/정렬 처리", urlPatterns = { "/lecture/*" })
 public class LectureController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -40,36 +40,35 @@ public class LectureController extends HttpServlet {
     if (urlCommand.equals("/lecture/delete")) {
       action = new LectureDeleteAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("lecture/list")) {
+    } else if (urlCommand.equals("/lecture/list")) {
       action = new LectureListAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("lecture/input")) {
+    } else if (urlCommand.equals("/lecture/input")) {
       action = new LectureSearchByInputAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("lecture/major")) {
+    } else if (urlCommand.equals("/lecture/major")) {
       action = new LectureSearchByMajorAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("lecture/sort")) {
+    } else if (urlCommand.equals("/lecture/sort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("lecture/update")) {
+    } else if (urlCommand.equals("/lecture/update")) {
       action = new LectureUpdateAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("lecture/write")) {
+    } else if (urlCommand.equals("/lecture/write")) {
       action = new LectureWriteAction();
       forward = action.execute(request, response);
     }
 
-    if(forward != null) {
-        if(forward.isRedirect()) {
-          response.sendRedirect(forward.getPath());
-        } else {
-          RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
-          dis.forward(request, response);
-        }
+    if (forward != null) {
+      if (forward.isRedirect()) {
+        response.sendRedirect(forward.getPath());
+      } else {
+        RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
+        dis.forward(request, response);
+      }
     }
-    
-    
+
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
