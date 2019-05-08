@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
+import kr.co.groot.service.BoardDeleteAction;
 import kr.co.groot.service.BoardListAction;
 import kr.co.groot.service.BoardReadAction;
 import kr.co.groot.service.BoardWriteAction;

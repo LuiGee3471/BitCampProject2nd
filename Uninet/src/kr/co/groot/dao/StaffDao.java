@@ -115,7 +115,7 @@ public class StaffDao {
    */
   public int insertStaff(Staff staff) throws SQLException {
     int row = 0;
-    String sql = "insert into staff(staff_id, password, staff_name, phone_number,"
+    String sql = "insert into staff(staff_id, password, staff_name, phonenumber,"
         + "email, birthday, dept_id, image, isManager, isAdmin) "
         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
