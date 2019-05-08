@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
 <nav>
   <div class="navbar">
-    <a href="/main" class="logo"><img src="https://via.placeholder.com/40" alt="로고"></a>
+    <a href="main" class="logo"><img src="https://via.placeholder.com/40" alt="로고"></a>
     <div class="heading">
       <h3 class="title">유니넷</h3>
       <h2 class="campus">비트캠퍼스</h2>

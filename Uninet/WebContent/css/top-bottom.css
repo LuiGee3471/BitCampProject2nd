@@ -75,3 +75,37 @@ nav {
   color: #4c4c4c;
   line-height: 25px;
 }
+
+.copyright {
+  color: #666;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.bottom-nav {
+  display: flex;
+  margin: auto;
+}
+
+.bottom-nav li {
+  margin: 0 5px;
+}
+
+.bottom-nav li a {
+  color: #737373;
+  font-size: 13px;
+  text-decoration: none;
+  line-height: 15px;
+}
+
+.bottom {
+  margin: 0 auto 25px auto;
+  width: 1180px;
+  display: flex;
+}
+
+.container {
+  margin: 110px auto 25px;
+  width: 944px;
+  height: 100%;
+}

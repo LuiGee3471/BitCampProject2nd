@@ -7,5 +7,5 @@ body {
 }
 
 * {
-  font-family: "맑은 고딕", 돋움, tahoma;
+  font-family: "맑은 고딕", 돋움, tahoma !important;
 }
