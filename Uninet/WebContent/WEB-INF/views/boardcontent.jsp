@@ -13,6 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <jsp:include page="/common/top.jsp" flush="false" />
 <c:set var = "post" value="${requestScope.post}"/>
 <c:set var = "staff" value="${requestScope.staff}"/>
@@ -38,6 +39,7 @@ ${comment.time}
 </tr>
 </table>
 </c:forEach>
+</div>
 <jsp:include page="/common/bottom.jsp" flush="false" />
 </body>
 </html>
