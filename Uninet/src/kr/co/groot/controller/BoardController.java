@@ -13,6 +13,7 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.BoardDeleteAction;
 import kr.co.groot.service.BoardListAction;
 import kr.co.groot.service.BoardReadAction;
+import kr.co.groot.service.BoardUpdateAction;
 import kr.co.groot.service.BoardWriteAction;
 
 @WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*" })
@@ -28,7 +29,7 @@ public class BoardController extends HttpServlet {
       String requestUri = request.getRequestURI();
       String contextPath = request.getContextPath();
       String urlCommand = requestUri.substring(contextPath.length());
-      
+     
       Action action = null;
       ActionForward forward = null;
       if(urlCommand.equals("/board/list")) {
