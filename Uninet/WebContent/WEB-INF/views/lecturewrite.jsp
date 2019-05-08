@@ -1,31 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="lectureList" value="${requestScope.lectureList}"></c:set>
-<c:set var="profList" value="${requestScope.profList}"></c:set>
-<c:set var="ltList" value="${requestScope.ltList}"></c:set>
-<c:set var="majorList" value="${requestScope.majorList}"></c:set>
-
-
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사원 수정</title>
+<title>Insert title here</title>
 </head>
 <body>
 
-<h1> 왜안되냐 ㅡㅡ</h1>
-    <!-- 강의 선택  -->
+  <form action="write" method = "GET">
    <div class="container">
-   <span class="lable">강의</span>
-      <select name="lecturename">
-        <option value="">강의 선택</option>
-        <c:forEach var = "lecture" items = "${lectureList}">
-        <option value="${lecture.id}">${lecture.lectureName}</option>
-        </c:forEach>
-      </select><br>
-    <!-- 강의 선택  -->
+   <!-- 과목 입력 -->
+   <label for = "lectureName">과목</label>
+   <input type = "text" id = "lectureName" name = "lectureName" placeholder = "과목입력">
+   <!-- 과목 입력 -->
+    <br>
     
      <!-- 학점 선택  -->
    <span class="lable">학점</span>
@@ -70,16 +60,7 @@
       </select><br>
     <!-- 종별 선택  -->
     
-     <!-- 학과 선택  -->
-   <span class = "lable">학과</span>
-      <select name = "major">
-        <option value="">학과 선택</option>
-        <c:forEach var = "major" items = "${majorList}">
-        <option value = "${major.id}">${major.majorName}</option>
-        </c:forEach>
-      </select><br>
-    <!-- 학과 선택  -->
-   
+ 
      <!-- 교수 선택  -->
    <span class = "lable">교수</span>
       <select name = "professor">
@@ -94,9 +75,9 @@
     <a class = "" href = "list">취소하고 돌아가기</a> 
     
   
-  
   </div>
    
+    </form>
 
 </body>
 </html>

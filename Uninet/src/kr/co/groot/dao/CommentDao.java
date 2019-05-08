@@ -37,24 +37,23 @@ public class CommentDao {
    * @return: List<Comment> 
    */
 
-  public List<Comment> selectAll() throws Exception {
+  public List<Comment> selectAll(int refer) throws Exception {
     List<Comment> commentList = new ArrayList<Comment>();
-    String sql = "select * from comment";
+    String sql = "select s.staff_id, c.content, c.time from post p LEFT join comment c on p.id = c.refer left join staff s on p.writer_id = s.id where refer =?";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, refer);
     rs = pstmt.executeQuery();
 
     while (rs.next()) {
       Comment comment = new Comment();
-      comment.setId(rs.getInt("id"));
-      comment.setTitle(rs.getString("title"));
       comment.setContent(rs.getString("content"));
       comment.setWriterId(rs.getInt("writerId"));
-      comment.setDate(rs.getTimestamp("date"));
-      comment.setCount(rs.getInt("count"));
+      comment.setTime(rs.getTimestamp("time"));
       comment.setRefer(rs.getInt("refer"));
       comment.setReferComment(rs.getInt("referComment"));
+      comment.setRecomment(rs.getString("recomment"));
       commentList.add(comment);
     }
     rs.close();
@@ -64,7 +63,7 @@ public class CommentDao {
   }
 
   /*
-   * @method Name:  selectAll
+   * @method Name:  insertComment
    * @date: 2019. 5. 7.
    * @author: 곽호원 
    * @description: 댓글 추가. 
@@ -73,23 +72,22 @@ public class CommentDao {
    */
   public int insertComment(Comment comment) throws Exception {
     int row = 0;
-    String sql = "insert into comment(title, content, writerId, date, count, refer, referComment) values (?,?,?,?,?,?,?)";
+    String sql = "insert into comment(content, writer_id, time, refer, recomment, refer_comment) values (?,?,?,?,?,?)";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, comment.getTitle());
-    pstmt.setString(2, comment.getContent());
-    pstmt.setInt(3, comment.getWriterId());
-    pstmt.setTimestamp(4, comment.getDate());
-    pstmt.setInt(5, comment.getCount());
-    pstmt.setInt(6, comment.getRefer());
-    pstmt.setInt(7, comment.getReferComment());
+    pstmt.setString(1, comment.getContent());
+    pstmt.setInt(2, comment.getWriterId());
+    pstmt.setTimestamp(3, comment.getTime());
+    pstmt.setInt(4, comment.getRefer());
+    pstmt.setString(5, comment.getRecomment());
+    pstmt.setInt(6, comment.getReferComment());
     row = pstmt.executeUpdate();
     pstmt.close();
     conn.close();
     return row;
   }
   /*
-   * @method Name:  selectAll
+   * @method Name:  updateComment
    * @date: 2019. 5. 7.
    * @author: 곽호원 
    * @description: 댓글 수정. 
@@ -98,12 +96,11 @@ public class CommentDao {
    */
   public int updateComment(Comment comment) throws Exception {
     int row = 0;
-    String sql = "update comment set title= ?, content= ? where writerId= ?";
+    String sql = "update comment set content= ? where writer_id = ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, comment.getTitle());
-    pstmt.setString(2, comment.getContent());
-    pstmt.setInt(3, comment.getWriterId());
+    pstmt.setString(1, comment.getContent());
+    pstmt.setInt(2, comment.getWriterId());
     row = pstmt.executeUpdate();
     pstmt.close();
     conn.close();
@@ -111,7 +108,7 @@ public class CommentDao {
   }
 
   /*
-   * @method Name:  selectAll
+   * @method Name:  deleteComment
    * @date: 2019. 5. 7.
    * @author: 곽호원 
    * @description: 댓글 삭제. 
@@ -120,7 +117,7 @@ public class CommentDao {
    */
   public int deleteComment(int writerId) throws Exception {
     int row = 0;
-    String sql = "delete from comment where writerId= ?";
+    String sql = "delete from comment where writer_id= ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, writerId);
@@ -130,7 +127,7 @@ public class CommentDao {
   }
 
   /*
-   * @method Name:  selectAll
+   * @method Name:  selectByWriter
    * @date: 2019. 5. 7.
    * @author: 곽호원 
    * @description: 내가 쓴 댓글 검색 

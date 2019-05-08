@@ -17,8 +17,9 @@ import kr.co.groot.service.LectureSearchByInputAction;
 import kr.co.groot.service.LectureSearchByMajorAction;
 import kr.co.groot.service.LectureSortAction;
 import kr.co.groot.service.LectureUpdateAction;
-import kr.co.groot.service.LectureUpdateokAction;
+import kr.co.groot.service.LectureUpdateOkAction;
 import kr.co.groot.service.LectureWriteAction;
+import kr.co.groot.service.LectureWriteOkAction;
 
 @WebServlet(description = "강의CRUD/검색/정렬 처리", urlPatterns = { "/lecture/*" })
 public class LectureController extends HttpServlet {
@@ -53,14 +54,17 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/sort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/updatePage")) {
+    } else if (urlCommand.equals("/lecture/update")) {
       action = new LectureUpdateAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/update")) {
-      action = new LectureUpdateokAction();
+    } else if (urlCommand.equals("/lecture/updateOk")) {
+      action = new LectureUpdateOkAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/write")) {
       action = new LectureWriteAction();
+      forward = action.execute(request, response);
+    } else if (urlCommand.equals("/lecture/writeOk")) {
+      action = new LectureWriteOkAction();
       forward = action.execute(request, response);
     }
 
