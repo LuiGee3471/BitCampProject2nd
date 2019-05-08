@@ -40,7 +40,7 @@ public class BoardWriteAction implements Action {
 
       } else {
         msg = "실패하였습니다.";
-        url = "/board/list";
+        url = "board/list";
       }
       request.setAttribute("msg", msg);
       request.setAttribute("url", url);

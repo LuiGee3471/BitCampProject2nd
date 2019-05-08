@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.BoardListAction;
+import kr.co.groot.service.BoardReadAction;
 import kr.co.groot.service.BoardWriteAction;
 
 @WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*" })

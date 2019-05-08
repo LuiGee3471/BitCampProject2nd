@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -397,5 +398,42 @@ public class PostDao {
       conn.close();
     }
     return list;
+  }
+  
+  public Post getContent(int id) throws SQLException {
+    Post post = new Post();
+    String sql = "select * from post where id = ?";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+   
+    String title = rs.getString("title");
+    String content = rs.getString("content");
+    int writerId = rs.getInt("writer_id");
+    Timestamp time = rs.getTimestamp("time");
+    int count = rs.getInt("count");
+    int boardType = rs.getInt("boardtype_id");
+    
+    post.setId(id);
+    post.setTitle(title);
+    post.setContent(content);
+    post.setWriterId(writerId);
+    post.setTime(time);
+    post.setCount(count);
+    post.setBoardType(boardType);
+    
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return post;
   }
 }
