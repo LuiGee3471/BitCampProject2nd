@@ -16,7 +16,7 @@ import kr.co.groot.service.BoardReadAction;
 import kr.co.groot.service.BoardUpdateAction;
 import kr.co.groot.service.BoardWriteAction;
 
-@WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*" })
+@WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*", "/notice/*" })
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -29,6 +29,7 @@ public class BoardController extends HttpServlet {
       String requestUri = request.getRequestURI();
       String contextPath = request.getContextPath();
       String urlCommand = requestUri.substring(contextPath.length());
+      System.out.println(urlCommand);
       
       Action action = null;
       ActionForward forward = null;
