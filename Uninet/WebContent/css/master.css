@@ -1,0 +1,11 @@
+@import 'reset.css';
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  font-family: "맑은 고딕", 돋움, tahoma;
+}
