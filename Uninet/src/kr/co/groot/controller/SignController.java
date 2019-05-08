@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
@@ -16,7 +17,7 @@ import kr.co.groot.service.RegisterAction;
 import kr.co.groot.service.RegisterCheckAction;
 
 @WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login",
-    "/register", "/registerCheck", "/main" })
+    "/register", "/registerCheck", "/main", "/logout" })
 public class SignController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -46,6 +47,10 @@ public class SignController extends HttpServlet {
       forward = new ActionForward();
       forward.setRedirect(false);
       forward.setPath("/WEB-INF/views/main.jsp");
+    } else if (urlCommand.equals("/logout")) {
+      HttpSession session = request.getSession();
+      session.invalidate();
+      response.sendRedirect("index.html");
     }
 
     if (forward != null) {

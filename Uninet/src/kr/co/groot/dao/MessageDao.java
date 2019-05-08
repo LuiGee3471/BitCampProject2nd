@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -20,10 +21,49 @@ public class MessageDao {
   private DataSource ds;
 
   public MessageDao() throws NamingException {
-
     Context context = new InitialContext();
     ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
+  }
 
+  /*
+   * @method Name: selectAll
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 모든 쪽지 데이터를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Message>
+   */
+  public List<Message> selectAll() throws SQLException {
+    List<Message> messagelist = new ArrayList<Message>();
+    String sql = "select * from message";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    if (rs.next()) {
+      Message message = new Message();
+      message.setContent(rs.getString("content"));
+      message.setTime(rs.getTimestamp("time"));
+      message.setStaffname(rs.getString("s.staff_name"));
+      message.setSenderId(rs.getInt("sender_id"));
+      messagelist.add(message);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return messagelist;
   }
 
   /*
@@ -99,10 +139,9 @@ public class MessageDao {
    * @return: List<Message>
    */
   public List<Message> selectByReceiver(int receiver_id) throws SQLException {
-    List<Message> messagelist = null;
-    String sql = "select content, time, s.staff_name AS sender from message m " 
-        + "LEFT JOIN staff s "
-        + "on m.sender_id = s.id";
+    List<Message> messagelist = new ArrayList<Message>();
+    String sql = "select content, time, s.staff_name AS sender from message m "
+        + "LEFT JOIN staff s " + "on m.sender_id = s.id";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -115,6 +154,57 @@ public class MessageDao {
       message.setTime(rs.getTimestamp("time"));
       message.setStaffname(rs.getString("s.staff_name"));
       message.setSenderId(rs.getInt("sender_id"));
+      messagelist.add(message);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return messagelist;
+  }
+
+  /*
+   * @method Name: selectRecentMessage
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 메인화면에 출력할 최근 쪽지 두개를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Message>
+   */
+  public List<Message> selectRecentMessage(int id) throws SQLException {
+    List<Message> messagelist = new ArrayList<Message>();
+    String sql = "select message.*, staff_name " + "from message "
+        + "left join staff " + "on message.sender_id = staff.id "
+        + "where receiver_id = ? "
+        + "order by time desc";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Message message = new Message();
+      message.setId(rs.getInt("id"));
+      if (rs.getString("content").length() > 20) {
+        message.setContent(rs.getString("content").substring(0, 20) + "...");
+      } else {
+        message.setContent(rs.getString("content"));  
+      }
+      message.setTime(rs.getTimestamp("time"));
+      message.setReceiverId(rs.getInt("receiver_id"));
+      message.setSenderId(rs.getInt("sender_id"));
+      message.setStaffname(rs.getString("staff_name"));
       messagelist.add(message);
     }
     if (rs != null) {

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
@@ -16,11 +17,11 @@ public class LoginAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
+    HttpSession session = request.getSession();
     
     String id = request.getParameter("id");
     String password = request.getParameter("password");
-    
-    
+      
     try {
       StaffDao dao = new StaffDao();
       Staff staff = dao.selectStaff(id);
@@ -32,7 +33,8 @@ public class LoginAction implements Action {
       }
       
       if (correctPassword.equals(password)) {
-        response.sendRedirect(request.getContextPath() + "/main");
+        session.setAttribute("staff", staff);        
+        response.sendRedirect("main");
       } else {
         forward = new ActionForward();
         String msg = "아이디나 비밀번호를 바르게 입력해주세요.";
@@ -47,7 +49,8 @@ public class LoginAction implements Action {
     } catch (SQLException e) {
       System.out.println(e.getMessage());
     } catch (IOException e) {
-      System.out.println(e.getMessage());
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
     
     return forward;

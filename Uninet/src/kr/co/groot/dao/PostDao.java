@@ -436,4 +436,110 @@ public class PostDao {
     }
     return post;
   }
+  
+  public List<Post> selectRecentNotice() throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post where boardtype_id = 1 order by time desc limit 4";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      if (rs.getString("title").length() > 15) {
+        post.setTitle(rs.getString("title").substring(0, 15) + "...");
+      } else {
+        post.setTitle(rs.getString("title"));
+      }
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+  
+  public List<Post> selectRecentPost() throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post where boardtype_id = 2 order by time desc limit 4";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      if (rs.getString("title").length() > 15) {
+        post.setTitle(rs.getString("title").substring(0, 15) + "...");
+      } else {
+        post.setTitle(rs.getString("title"));
+      }
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+  
+  public List<Post> selectByCountForMain() throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select * from post order by count desc limit 4";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+    
+   
+    while (rs.next()) {
+      Post post = new Post();
+      if (rs.getString("title").length() > 15) {
+        post.setTitle(rs.getString("title").substring(0, 15) + "...");
+      } else {
+        post.setTitle(rs.getString("title"));
+      }
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setId(rs.getInt("id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
 }
