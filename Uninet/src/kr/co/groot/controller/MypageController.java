@@ -1,4 +1,4 @@
-package kr.co.groot.controller;
+﻿package kr.co.groot.controller;
 
 import java.io.IOException;
 
@@ -32,19 +32,19 @@ public class MypageController extends HttpServlet {
     
     Action action = null;
     ActionForward forward = null;
-    if(urlCommand.equals("/mypage/my")) {
+    if(urlCommand.equals("/mypage")) {
       action = new MyPageMyAction();
       forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/setInfo")) {
+    }else if(urlCommand.equals("/mypage/setinfo")) {
       action = new MyPageSetInfoAction();
       forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/setPwd")) {
+    }else if(urlCommand.equals("/mypage/setpassword")) {
       action = new MyPageSetPwdAction();
       forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/setPicture")) {
+    }else if(urlCommand.equals("/mypage/setpicture")) {
       action = new MyPageSetPictureAction();
       forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/admin/")) {
+    }else if(urlCommand.equals("/mypage/admin")) {
       action = new MyPageAdminAction();
       forward = action.execute(request, response);
     }

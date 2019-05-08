@@ -5,11 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
+<jsp:include page="/common/top.jsp" flush="false" />
 <c:set var = "post" value="${requestScope.post}"/>
-<span>${post.writerId}</span>
+<c:set var = "staff" value="${requestScope.staff}"/>
+<span>${staff.staffId}</span>
 <span>${post.time}</span>
 <br>
 <h1>${post.title}</h1>
@@ -31,5 +39,7 @@ ${comment.time}
 </tr>
 </table>
 </c:forEach>
+</div>
+<jsp:include page="/common/bottom.jsp" flush="false" />
 </body>
 </html>

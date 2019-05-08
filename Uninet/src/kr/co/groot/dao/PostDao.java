@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -453,7 +455,9 @@ public class PostDao {
    */
   public List<Post> selectRecentNotice() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where boardtype_id = 1 order by time desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post where boardtype_id = 1 order by time desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -472,6 +476,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {
@@ -501,7 +507,9 @@ public class PostDao {
    */
   public List<Post> selectRecentPost() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where boardtype_id = 2 order by time desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post where boardtype_id = 2 order by time desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -520,6 +528,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {
@@ -549,7 +559,9 @@ public class PostDao {
    */
   public List<Post> selectByCountForMain() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post order by count desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff,"
+        + " date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post order by count desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -568,6 +580,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {

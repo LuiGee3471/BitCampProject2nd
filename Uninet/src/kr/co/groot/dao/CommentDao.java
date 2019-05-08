@@ -3,6 +3,7 @@ package kr.co.groot.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,38 @@ public class CommentDao {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+  }
+public List<Comment> getCommentList(int id) throws SQLException{
+    
+    String sql = "select * from comment where refer = ?";
+    
+    List<Comment> list = new ArrayList<>();
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    while(rs.next()) {
+     Comment comment = new Comment();
+     comment.setId(rs.getInt("id"));
+     comment.setWriterId(rs.getInt("writer_id"));
+     comment.setContent(rs.getString("content"));
+     comment.setTime(rs.getTimestamp("time"));
+     comment.setRecomment(rs.getString("recomment"));
+     comment.setRefer(rs.getInt("refer"));
+     comment.setReferComment(rs.getInt("refer_comment"));
+     list.add(comment);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
   }
   /*
    * @method Name:  selectAll

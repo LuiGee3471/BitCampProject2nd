@@ -10,6 +10,9 @@ public class Comment {
   private String recomment;
   private int refer;
   private int referComment;
+<<<<<<< HEAD
+=======
+  private String recomment;
   private long diff;
 
   public long getDiff() {
@@ -19,6 +22,7 @@ public class Comment {
   public void setDiff(long diff) {
     this.diff = diff;
   }
+>>>>>>> dab16f4a4f7a5bf5baec31229a65ba55fd8b5a70
 
   public int getId() {
     return id;
@@ -52,6 +56,7 @@ public class Comment {
     this.time = time;
   }
 
+<<<<<<< HEAD
   public String getRecomment() {
     return recomment;
   }
@@ -60,6 +65,8 @@ public class Comment {
     this.recomment = recomment;
   }
 
+=======
+>>>>>>> dab16f4a4f7a5bf5baec31229a65ba55fd8b5a70
   public int getRefer() {
     return refer;
   }
@@ -75,4 +82,17 @@ public class Comment {
   public void setReferComment(int referComment) {
     this.referComment = referComment;
   }
+<<<<<<< HEAD
 }
+=======
+
+  public String getRecomment() {
+    return recomment;
+  }
+
+  public void setRecomment(String recomment) {
+    this.recomment = recomment;
+  }
+
+}
+>>>>>>> dab16f4a4f7a5bf5baec31229a65ba55fd8b5a70

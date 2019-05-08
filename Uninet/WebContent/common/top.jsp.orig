@@ -8,14 +8,25 @@
       <h2 class="campus">비트캠퍼스</h2>
     </div>
 
+<<<<<<< HEAD
+  <div class="menu">
+    <ul>
+      <li><a href="notice">공지사항</a></li>
+      <li><a href="board/list">자유게시판</a></li>
+      <li><a href="lecture/list">강의 관리</a></li>
+      <li><a href="stat">통계</a></li>
+    </ul>
+  </div>
+=======
     <div class="menu">
       <ul>
         <li><a href="<%=request.getContextPath()%>/notice">공지사항</a></li>
         <li><a href="<%=request.getContextPath()%>/board/list">자유게시판</a></li>
-        <li><a href="<%=request.getContextPath()%>/lecture/list">강의 관리</a></li>
+        <li><a href="<%=request.getContextPath()%>/lecture">강의 관리</a></li>
         <li><a href="<%=request.getContextPath()%>/stat">통계</a></li>
       </ul>
     </div>
+>>>>>>> dab16f4a4f7a5bf5baec31229a65ba55fd8b5a70
 
     <div class="mypage">
       <a href="message"><img src="https://via.placeholder.com/40" alt="쪽지"></a>
