@@ -49,7 +49,7 @@ public class BoardController extends HttpServlet {
         action = new BoardUpdateAction();
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/comment")) {
-        action = new BoardCommentAction();
+        action = new CommentListAction();
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/recomment")) {
         action = new BoardRecommentAction();
