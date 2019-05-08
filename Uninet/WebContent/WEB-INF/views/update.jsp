@@ -2,6 +2,9 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var = "lectureList" value = "${requestScope.lectureList}"></c:set>
+<c:set var = "profList" value = "${requestScope.profList}"></c:set>
+<c:set var = "ltList" value = "${requestScope.ltList}"></c:set>
+<c:set var = "majorList" value = "${requestScope.majorList}"></c:set>
 
 
 <!DOCTYPE html>
@@ -61,8 +64,8 @@
    <span class = "lable">종별</span>
       <select name = "lecturetype">
         <option value="0">종별 선택</option>
-        <c:forEach var = "lecture" items = "${lectureType}">
-        <option value = "${lecturetypelist}">${lecturetypelist}</option>
+        <c:forEach var = "lect" items = "${ltList}">
+        <option value = "${lect.id}">${lect.lectureType}</option>
         </c:forEach>
       </select><br>
     <!-- 종별 선택  -->
@@ -71,8 +74,8 @@
    <span class = "lable">학과</span>
       <select name = "major">
         <option value="0">학과 선택</option>
-        <c:forEach var = "majorlist" items = "${lectureMajorList}">
-        <option value = "${majorlist}">${majorlist}</option>
+        <c:forEach var = "major" items = "${majorList}">
+        <option value = "${major.id}">${major.majorName}</option>
         </c:forEach>
       </select><br>
     <!-- 학과 선택  -->
@@ -81,8 +84,8 @@
    <span class = "lable">교수</span>
       <select name = "professor">
         <option value="0">교수 선택</option>
-        <c:forEach var = "professorlist" items = "${lectureProfessorList}">
-        <option value = "${professorlist}">${professorlist}</option>
+        <c:forEach var = "professor" items = "${profList}">
+        <option value = "${professor.id}">${professor.profName}</option>
         </c:forEach>
       </select><br>
     <!-- 교수 선택  -->
