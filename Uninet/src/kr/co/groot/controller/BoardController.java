@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
+import kr.co.groot.service.BoardCommentAction;
 import kr.co.groot.service.BoardDeleteAction;
 import kr.co.groot.service.BoardListAction;
 import kr.co.groot.service.BoardReadAction;
+import kr.co.groot.service.BoardRecommentAction;
+import kr.co.groot.service.BoardSearchAction;
 import kr.co.groot.service.BoardUpdateAction;
 import kr.co.groot.service.BoardWriteAction;
 
@@ -49,7 +52,7 @@ public class BoardController extends HttpServlet {
         action = new BoardUpdateAction();
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/comment")) {
-        action = new CommentListAction();
+        action = new BoardCommentAction();
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/recomment")) {
         action = new BoardRecommentAction();

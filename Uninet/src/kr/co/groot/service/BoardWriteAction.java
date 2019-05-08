@@ -31,7 +31,6 @@ public class BoardWriteAction implements Action {
       post.setBoardType(Integer.parseInt(request.getParameter("boardType")));
       
       PostDao dao = new PostDao();
-      
       result = dao.insertPost(post);
       
       if (result > 0) {
