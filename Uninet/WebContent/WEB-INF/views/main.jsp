@@ -1,3 +1,7 @@
+<%@page import="java.time.temporal.Temporal"%>
+<%@page import="java.time.temporal.ChronoUnit"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Timestamp"%>
 <%@page import="kr.co.groot.dto.Message"%>
 <%@page import="kr.co.groot.dao.MessageDao"%>
 <%@page import="kr.co.groot.dto.Post"%>
@@ -49,13 +53,35 @@
       <div class="card board">
         <h3><a href="notice">공지사항</a></h3>
         <c:forEach var="notice" items="<%=recentNotice%>">
-          <a href="#" class="list"><span class="board-title">${notice.title}</span><span class="time"></span></a>
+          <a href="notice/read?id=${notice.id}" class="list"><span class="board-title">${notice.title}</span>
+          <c:choose>
+            <c:when test="${notice.diff < 2}">
+              <span class="time">방금</span></a>
+            </c:when>
+            <c:when test="${notice.diff < 60}">
+              <span class="time">${notice.diff}분 전</span></a>
+            </c:when>
+          <c:otherwise>
+            <span class="time">${notice.timeFormat}</span></a>
+          </c:otherwise>
+          </c:choose>
         </c:forEach>
       </div>
       <div class="card board">
-        <h3><a href="board">자유게시판</a></h3>
+        <h3><a href="board">자유게시판</a></h3>     
         <c:forEach var="post" items="<%=recentPost%>">
-          <a href="#" class="list"><span class="board-title">${post.title}</span><span class="time"></span></a>
+        <a href="board/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
+          <c:choose>
+            <c:when test="${post.diff < 2}">
+              <span class="time">방금</span></a>
+            </c:when>
+            <c:when test="${post.diff < 60}">
+              <span class="time">${post.diff}분 전</span></a>
+            </c:when>
+            <c:otherwise>
+              <span class="time">${post.timeFormat}</span></a>
+            </c:otherwise>
+          </c:choose>
         </c:forEach>    
       </div>
       <div class="card board">
@@ -63,14 +89,33 @@
         <c:forEach var="message" items="<%=messageList%>">
           <a href="message" class="message">
             <h3 class="message-title">${message.staffname}</h3>
-            <span class="content">${message.content}</span>
+            <span class="content">${message.content}</span><br>
+            <span class="time message-time">${message.timeFormat}</span>
           </a>
         </c:forEach>
       </div>
       <div class="card board">
         <h3><a href="#">인기 게시물</a></h3>
         <c:forEach var="post" items="<%=popularList%>">
-          <a href="#" class="list"><span class="board-title">${post.title}</span><span class="time"></span></a>
+          <c:choose>
+            <c:when test="${post.boardType == 1}">
+              <a href="notice/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
+            </c:when>
+            <c:otherwise>
+              <a href="board/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
+            </c:otherwise>
+          </c:choose>
+          <c:choose>
+            <c:when test="${post.diff < 2}">
+              <span class="time">방금</span></a>
+            </c:when>
+            <c:when test="${post.diff < 60}">
+              <span class="time">${post.diff}분 전</span></a>
+            </c:when>
+            <c:otherwise>
+              <span class="time">${post.timeFormat}</span></a>
+            </c:otherwise>
+          </c:choose>
         </c:forEach>  
       </div>
     </div>

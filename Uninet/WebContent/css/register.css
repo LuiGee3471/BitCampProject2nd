@@ -1,5 +1,98 @@
-@import 'reset.css';
+@import 'master.css';
+
+body {
+  display: flex;
+  background-color: #F8F8F8;
+}
+
+.label {
+  margin-top: 50px; 
+  margin-bottom : 5px;
+  color: #737373;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+div#first-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#registerForm {
+  margin: auto;
+  width: 360px;
+}
+
+div#second-div {
+  display: flex;
+  flex-direction: column;
+}
+
+div#third-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.check-label {
+  height: 28px;
+  line-height: 28px;
+  color: #292929;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#agree {
+  margin-top: 50px;
+}
+
+.seen {
+  opacity: 1 !important;
+  transition: 0.5s;
+}
 
 .unseen {
-  display: none;
+  opacity: 0 !important;
+  transition: 0.5s;
+}
+
+input[type=text], input[type=password], input[type=date] {
+  border: 0;
+  width: 100%;
+  height: 28px;
+  line-height: 28px;
+  color: #292929;
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
+  vertical-align: center;
+  margin-top: -1px;
+  padding: 5px 10px;
+  border: 1px solid #d6d6d6;
+  background-color: #FFF
+}
+
+#dept {
+  border: 0;
+  width: 100%;
+  height: 36px;
+  line-height: 28px;
+  color: #292929;
+  font-size: 16px;
+  outline: none;
+  vertical-align: center;
+  padding: 5px 10px;
+  border: 1px solid #d6d6d6;
+  background-color: #FFF;
+}
+
+#btn {
+  background-color: #c62917;
+  margin: 20px auto;
+  border: 0;
+  outline: 0;
+  padding: 8px 10px;
+  font-size: 16px;
+  color: white;
+  width: 100%;
 }

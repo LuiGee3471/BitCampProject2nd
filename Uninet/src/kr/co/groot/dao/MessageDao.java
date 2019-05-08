@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,10 +184,12 @@ public class MessageDao {
    */
   public List<Message> selectRecentMessage(int id) throws SQLException {
     List<Message> messagelist = new ArrayList<Message>();
-    String sql = "select message.*, staff_name " + "from message "
-        + "left join staff " + "on message.sender_id = staff.id "
-        + "where receiver_id = ? "
-        + "order by time desc";
+    String sql = "select m.*, s.staff_name, round(time_to_sec(timediff(NOW(), m.time)) / 60) as diff, " + 
+        "date_format(m.time, '%m/%d %H:%i') as timeFormat " + 
+        "from message m " + 
+        "left join staff s on m.sender_id = s.id " + 
+        "where receiver_id = ? " + 
+        "order by time desc";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -205,6 +208,8 @@ public class MessageDao {
       message.setReceiverId(rs.getInt("receiver_id"));
       message.setSenderId(rs.getInt("sender_id"));
       message.setStaffname(rs.getString("staff_name"));
+      message.setDiff(rs.getLong("diff"));
+      message.setTimeFormat(rs.getString("timeFormat"));
       messagelist.add(message);
     }
     if (rs != null) {

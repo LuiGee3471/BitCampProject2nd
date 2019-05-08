@@ -17,6 +17,7 @@ import kr.co.groot.service.LectureSearchByInputAction;
 import kr.co.groot.service.LectureSearchByMajorAction;
 import kr.co.groot.service.LectureSortAction;
 import kr.co.groot.service.LectureUpdateAction;
+import kr.co.groot.service.LectureUpdateokAction;
 import kr.co.groot.service.LectureWriteAction;
 
 @WebServlet(description = "강의CRUD/검색/정렬 처리", urlPatterns = { "/lecture/*" })
@@ -27,7 +28,7 @@ public class LectureController extends HttpServlet {
 
   }
 
-  protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+  private void doProcess(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     String requestUri = request.getRequestURI();
     String contextPath = request.getContextPath();
@@ -52,8 +53,11 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/sort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/update")) {
+    } else if (urlCommand.equals("/lecture/updatePage")) {
       action = new LectureUpdateAction();
+      forward = action.execute(request, response);
+    } else if (urlCommand.equals("/lecture/update")) {
+      action = new LectureUpdateokAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/write")) {
       action = new LectureWriteAction();

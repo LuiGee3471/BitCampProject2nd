@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class PostDao {
    */
   public List<Post> selectAll() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select p.title, p.content, p.writer_id, p.time, p.count, p.boardtype_id, p.id, s.staff_id from post p join staff s on p.writer_id = s.id";
+    String sql = "select * from post";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -60,7 +62,6 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
-      post.setStaffId(rs.getString("staff_id"));
       list.add(post);
     }
     if (rs != null) {
@@ -401,32 +402,31 @@ public class PostDao {
     }
     return list;
   }
-  
+
   public Post getContent(int id) throws SQLException {
     Post post = new Post();
     String sql = "select * from post where id = ?";
-   
-    
+
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
-    
-    while(rs.next()) {
-    String title = rs.getString("title");
-    String content = rs.getString("content");
-    int writerId = rs.getInt("writer_id");
-    Timestamp time = rs.getTimestamp("time");
-    int count = rs.getInt("count");
-    int boardType = rs.getInt("boardtype_id");
-    
-    post.setId(id);
-    post.setTitle(title);
-    post.setContent(content);
-    post.setWriterId(writerId);
-    post.setTime(time);
-    post.setCount(count);
-    post.setBoardType(boardType);
+
+    while (rs.next()) {
+      String title = rs.getString("title");
+      String content = rs.getString("content");
+      int writerId = rs.getInt("writer_id");
+      Timestamp time = rs.getTimestamp("time");
+      int count = rs.getInt("count");
+      int boardType = rs.getInt("boardtype_id");
+
+      post.setId(id);
+      post.setTitle(title);
+      post.setContent(content);
+      post.setWriterId(writerId);
+      post.setTime(time);
+      post.setCount(count);
+      post.setBoardType(boardType);
     }
     if (rs != null) {
       rs.close();
@@ -439,10 +439,25 @@ public class PostDao {
     }
     return post;
   }
-  
+
+  /*
+   * @method Name: selectRecentNotice
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 메인화면에 출력할 최근 공지 4개를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Post>
+   */
   public List<Post> selectRecentNotice() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where boardtype_id = 1 order by time desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post where boardtype_id = 1 order by time desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -461,6 +476,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {
@@ -474,10 +491,25 @@ public class PostDao {
     }
     return list;
   }
-  
+
+  /*
+   * @method Name: selectRecentPost
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 메인화면에 출력할 최근 자유게시판 글 4개를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Post>
+   */
   public List<Post> selectRecentPost() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where boardtype_id = 2 order by time desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post where boardtype_id = 2 order by time desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -496,6 +528,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {
@@ -509,16 +543,30 @@ public class PostDao {
     }
     return list;
   }
-  
+
+  /*
+   * @method Name: selectRecentNotice
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 메인화면에 출력할 조회수가 가장 높은 글 4개를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Post>
+   */
   public List<Post> selectByCountForMain() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post order by count desc limit 4";
-    
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff,"
+        + " date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post order by count desc limit 4";
+
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     rs = pstmt.executeQuery();
-    
-   
+
     while (rs.next()) {
       Post post = new Post();
       if (rs.getString("title").length() > 15) {
@@ -532,8 +580,43 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
-      }
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+
+  public List<Comment> getCommentList(int id) throws SQLException {
+
+    String sql = "select * from comment where id = ?";
+
+    List<Comment> list = new ArrayList<>();
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Comment comment = new Comment();
+      comment.setId(rs.getInt("id"));
+      comment.setWriterId(rs.getInt("writer_id"));
+      comment.setContent(rs.getString("content"));
+      comment.setTime(rs.getTimestamp("time"));
+      comment.setRecomment(rs.getString("recomment"));
+      comment.setRefer(rs.getInt("refer"));
+      comment.setReferComment(rs.getInt("refer_comment"));
+      list.add(comment);
+    }
     if (rs != null) {
       rs.close();
     }
