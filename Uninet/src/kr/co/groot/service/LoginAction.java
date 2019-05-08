@@ -1,5 +1,6 @@
 package kr.co.groot.service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -31,9 +32,7 @@ public class LoginAction implements Action {
       }
       
       if (correctPassword.equals(password)) {
-        forward = new ActionForward();
-        forward.setRedirect(false);
-        forward.setPath("/main");
+        response.sendRedirect(request.getContextPath() + "/main");
       } else {
         forward = new ActionForward();
         String msg = "아이디나 비밀번호를 바르게 입력해주세요.";
@@ -46,6 +45,8 @@ public class LoginAction implements Action {
     } catch (NamingException e) {
       System.out.println(e.getMessage());
     } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    } catch (IOException e) {
       System.out.println(e.getMessage());
     }
     

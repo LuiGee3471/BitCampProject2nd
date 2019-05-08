@@ -16,7 +16,7 @@ import kr.co.groot.service.RegisterAction;
 import kr.co.groot.service.RegisterCheckAction;
 
 @WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login",
-    "/register", "/registerCheck" })
+    "/register", "/registerCheck", "/main" })
 public class SignController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -42,6 +42,10 @@ public class SignController extends HttpServlet {
     } else if (urlCommand.equals("/registerCheck")) {
       action = new RegisterCheckAction();
       forward = action.execute(request, response);
+    } else if (urlCommand.equals("/main")) {
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/main.jsp");
     }
 
     if (forward != null) {
