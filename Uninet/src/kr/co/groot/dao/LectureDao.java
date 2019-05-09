@@ -204,7 +204,7 @@ public class LectureDao {
     default:
       column = "lecture_name";
     }
-    
+   
     String sql = firstSQL + column + lastSQL;
 
     conn = ds.getConnection();
@@ -305,15 +305,13 @@ public class LectureDao {
    * @return: List<Lecture>
    */
   public List<Lecture> sortLecture(String criterion) throws SQLException {
-    String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
+    String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
         + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id" + "ORDER BY ? asc";
-
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "ORDER BY ";
+    
     String order = "";
-
+    String lastSQL = " asc ";
     switch (criterion) {
     case "basic":
       order = "id";
@@ -333,8 +331,11 @@ public class LectureDao {
     default:
       order = "id";
     }
-
-    pstmt.setString(1, order);
+    
+    String sql = firstSQL + order + lastSQL;
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    
 
     rs = pstmt.executeQuery();
 
