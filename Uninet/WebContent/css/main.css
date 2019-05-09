@@ -149,13 +149,3 @@
   color: #4c4c4c;
   font-size: 13px;
 }
-
-.pageLogo {
-  margin: auto 0;
-}
-
-.pageTitle {
-  margin: auto 0;
-  display: flex;
-  flex-direction: column;
-}
