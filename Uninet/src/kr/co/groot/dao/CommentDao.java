@@ -27,11 +27,19 @@ public class CommentDao {
     ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
   }
 
-  public List<Comment> getCommentList(int id) throws SQLException {
+  public List<Comment> getCommentList(int id) throws SQLException, NamingException {
 
-    String sql = "select * from comment where refer = ?";
+    String sql = "select comment.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, " 
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, "
+        + "staff.staff_id "
+        + "from comment "
+        + "left join staff "
+        + "on comment.writer_id = staff.id "
+        + "where refer = ?";
 
     List<Comment> list = new ArrayList<>();
+    StaffDao staffDao = new StaffDao();
+    
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
@@ -46,6 +54,10 @@ public class CommentDao {
       comment.setRecomment(rs.getString("recomment"));
       comment.setRefer(rs.getInt("refer"));
       comment.setReferComment(rs.getInt("refer_comment"));
+      comment.setWriter(staffDao.selectByUniqueId(rs.getInt("id")));
+      comment.setDiff(rs.getLong("diff"));
+      comment.setTimeFormat(rs.getString("timeFormat"));
+      
       list.add(comment);
     }
     if (rs != null) {
@@ -214,5 +226,24 @@ public class CommentDao {
     pstmt.close();
     conn.close();
     return postList;
+  }
+  
+  public int getCommentCount(int id) throws SQLException {
+    String sql = "select count(*) as count from comment where refer = ?";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    
+    rs = pstmt.executeQuery();
+    rs.next();
+    
+    int row = rs.getInt(1);
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return row;
   }
 }
