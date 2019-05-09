@@ -112,6 +112,7 @@
             maxlength="50" placeholder="댓글을 입력하세요" /> <input
             class="submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
+            <input type="hidden" value="${id}" name="commentId">
         </form>
       </div>
     </div>

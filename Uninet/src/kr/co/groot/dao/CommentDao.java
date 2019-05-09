@@ -125,15 +125,12 @@ public class CommentDao {
    */
   public int insertComment(Comment comment) throws Exception {
     int row = 0;
-    String sql = "insert into comment(content, writer_id, time, refer, recomment, refer_comment) values (?,?,?,?,?,?)";
+    String sql = "insert into comment(content, writer_id, time, refer) values (?,?,NOW(),?)";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, comment.getContent());
     pstmt.setInt(2, comment.getWriterId());
-    pstmt.setTimestamp(3, comment.getTime());
-    pstmt.setInt(4, comment.getRefer());
-    pstmt.setString(5, comment.getRecomment());
-    pstmt.setInt(6, comment.getReferComment());
+    pstmt.setInt(3, comment.getRefer());
     row = pstmt.executeUpdate();
     pstmt.close();
     conn.close();
