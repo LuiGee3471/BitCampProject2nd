@@ -17,21 +17,35 @@ public class BoardCommentAction implements Action {
     ActionForward forward = null;
     int id = Integer.parseInt(request.getParameter("commentId"));
     Comment comment = new Comment();
+    int result = 0;
     try {
       HttpSession session = request.getSession();
       Staff staff = (Staff) session.getAttribute("staff");
       CommentDao dao = new CommentDao();
+      String url = "";
+      String msg = "";
      
           
       comment.setContent(request.getParameter("comment"));
       comment.setWriterId(staff.getId());
       comment.setRefer(Integer.parseInt(request.getParameter("commentId")));
-      dao.insertComment(comment);
+      result= dao.insertComment(comment);
       
-      request.setAttribute("postId", id);
       forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/boardcontent.jsp");
+      
+      if(result>0) {
+        forward.setRedirect(false);
+        forward.setPath("/coment/writeok");
+      }else {
+        msg = "실패하였습니다.";
+        url = "board/read";
+        forward.setRedirect(false);
+        forward.setPath("/WEB-INF/views/redierct.jsp");
+        request.setAttribute("msg", msg);
+        request.setAttribute("url", url);
+        
+      }
+     
     }catch (Exception e) {
       System.out.println(e.getMessage());
     }
