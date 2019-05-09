@@ -98,7 +98,7 @@ public class LectureDao {
     pstmt.setInt(2, lecture.getCredit());
     pstmt.setString(3, lecture.getTime());
     pstmt.setInt(4, lecture.getLectureTypeId());
-    pstmt.setInt(5, lecture.getMajorId());
+    pstmt.setInt(5, lecture.getProfId());
 
     int row = pstmt.executeUpdate();
 

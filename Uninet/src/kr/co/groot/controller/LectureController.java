@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.LectureDeleteAction;
@@ -54,7 +53,7 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/sort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/update")) {
+    } else if (urlCommand.equals("/lecture/updatePage")) {
       action = new LectureUpdateAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/updateOk")) {

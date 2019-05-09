@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<c:set var="profList" value="${requestScope.profList}"></c:set>
+<c:set var="ltList" value="${requestScope.ltList}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,7 @@
 </head>
 <body>
 
-  <form action="write" method = "GET">
+  <form action="writeOk" method = "GET">
    <div class="container">
    <!-- 과목 입력 -->
    <label for = "lectureName">과목</label>
@@ -36,7 +38,7 @@
       <option value="목">목</option>
       <option value="금">금</option>
     </select>
-      <select name = "lecturetime">
+      <select name = "lectureTime">
         <option value="">교시 선택</option>
         <option value = "1">1</option>
         <option value = "2">2</option>
@@ -52,7 +54,7 @@
     
      <!-- 종별 선택  -->
    <span class = "lable">종별</span>
-      <select name = "lecturetype">
+      <select name = "lectureTypeId">
         <option value="">종별 선택</option>
         <c:forEach var = "lect" items = "${ltList}">
         <option value = "${lect.id}">${lect.lectureType}</option>
@@ -63,7 +65,7 @@
  
      <!-- 교수 선택  -->
    <span class = "lable">교수</span>
-      <select name = "professor">
+      <select name = "professorId">
         <option value="">교수 선택</option>
         <c:forEach var = "professor" items = "${profList}">
         <option value = "${professor.id}">${professor.profName}</option>
@@ -71,7 +73,7 @@
       </select><br>
     <!-- 교수 선택  -->
     
-    <input type = "submit" value = "수정하기" class = ""><br>
+    <input type = "submit" value = "추가하기" class = ""><br>
     <a class = "" href = "list">취소하고 돌아가기</a> 
     
   

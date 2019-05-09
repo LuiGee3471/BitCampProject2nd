@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.LectureDao;
+import kr.co.groot.dao.LectureTypeDao;
+import kr.co.groot.dao.ProfessorDao;
 import kr.co.groot.dto.Lecture;
+import kr.co.groot.dto.LectureType;
+import kr.co.groot.dto.Major;
+import kr.co.groot.dto.Professor;
 
 
 public class LectureWriteAction implements Action{
@@ -20,14 +25,26 @@ public class LectureWriteAction implements Action{
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
-    LectureDao dao;
+  
+    List<LectureType> ltList = null;
+    List<Professor> profList = null;
+    List<Lecture> list = null;
     try {
-      dao = new LectureDao();
-      List<Lecture> list = dao.selectAll();
+      LectureDao dao = new LectureDao();
+      list = dao.selectAll();
+      
+      ProfessorDao professor = new ProfessorDao();
+      profList = professor.selectAll();
+      
+      LectureTypeDao lectureType = new LectureTypeDao();
+      ltList = lectureType.selectAll();
     } catch (Exception e) {
       e.printStackTrace();
     }
 
+    request.setAttribute("profList", profList);
+    request.setAttribute("ltList", ltList);
+    
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/lecturewrite.jsp");
     return forward;
