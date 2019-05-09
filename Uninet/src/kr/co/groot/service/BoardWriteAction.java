@@ -44,9 +44,9 @@ public class BoardWriteAction implements Action {
       String url = "";
       String msg = "";
       
-      String title = multi.getParameter("title");
-      String content = multi.getParameter("content");
-      System.out.println(title + content);
+      
+      
+      
       
       post.setTitle(title);
       post.setContent(content);
