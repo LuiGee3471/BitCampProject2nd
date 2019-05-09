@@ -59,7 +59,7 @@
       <div class="article-sub">
         <span class="comment-option">쪽지</span>
         <div class="article-stat">
-          <i class="far fa-eye">${post.count}</i> <i class="far fa-comment">${commentCount}</i>
+          <i class="far fa-eye">${post.count}</i>&nbsp;<i class="far fa-comment">${commentCount}</i>
         </div>
       </div>
     </div>
