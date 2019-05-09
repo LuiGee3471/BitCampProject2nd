@@ -49,7 +49,7 @@ public class RegisterCheckAction implements Action {
         session.setAttribute("staff", staff);
         forward = new ActionForward();
         forward.setRedirect(false);
-        forward.setPath("/main");
+        forward.setPath("/registerOK");
       } else {
         forward = new ActionForward();
         String msg = "회원 가입이 실패했습니다.";
