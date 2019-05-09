@@ -43,11 +43,11 @@ public class LectureWriteOkAction implements Action{
     
     if (result > 0) {
       msg = "등록 성공";
-      url = "list.do";
+      url = "list";
 
     } else {
       msg = "등록 실패";
-      url = "list.do";
+      url = "list";
     }
     request.setAttribute("msg", msg);
     request.setAttribute("url", url);
