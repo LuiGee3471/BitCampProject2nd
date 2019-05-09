@@ -113,6 +113,7 @@
           <input
             class="submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
+            <input type="hidden" value="${id}" name="commentId">
         </form>
       </div>
     </div>
