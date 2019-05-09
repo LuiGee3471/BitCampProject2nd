@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -18,6 +19,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+	  
+	  /* 검색 비동기 */
 	  $("#closeBtn").on("click", function() {
 	    // if ($("#searchInput").val()) {
         /* alert($("#searchInput").val() + " 검색합니다"); */
@@ -43,6 +46,35 @@
             );
       // } 
 	  });
+	  
+	  /* 검색 비동기 */
+	  
+	  
+	  $("#closeBtn2").on("click", function() {
+	    // if ($("#searchInput").val()) {
+        /* alert($("#searchInput").val() + " 검색합니다"); */
+				const sortVal = $("input[name='sort']:checked").val();
+        console.log(sortVal);
+       
+        $.ajax( 
+            {
+          		url: "lectureSort",
+          		dataType : "html",
+          		data :  {
+          		  sort : sortVal,
+          		},
+          		success : function(data) {
+          		  $("#searchResult").html(data);
+          		  console.log(data);
+          		},
+          		error : function(xhr) {
+          		  console.log(xhr.status);
+          		}
+        		}
+            );
+      // } 
+	  });
+ 
 	});
 
 
@@ -81,30 +113,25 @@
     </c:forEach>
     </tbody>
   </table>
-    
-  
-  
  </div>
  
-  <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    검색하기
-  </button>
 
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          <label>과목명</label>
+ <p>
+  <button class="button" data-modal="modalOne">
+    강의 검색
+  </button>
+</p>
+<p>
+  <button class="button" data-modal="modalTwo">
+   정렬
+  </button>
+</p>
+
+<div id="modalOne" class="modal">
+  <div class="modal-content">
+    <div class="contact-form">
+      <a class="close">&times;</a>
+       <label>과목명</label>
           <input type = "radio" value = "lecture" name = "searchradio">
           <br>
           <label>교수명</label>
@@ -112,62 +139,87 @@
           <br>
           <label>전공명</label>
           <input type = "radio" value = "major" name = "searchradio">
-          
+          <br>
           <label for = "searchInput">Input</label>
-          <input type = "text" name = "searchInput" id = "searchInput"  placeholder = "검색어">  
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" id = "closeBtn" class="btn btn-danger" data-dismiss="modal">검색 </button>
-        </div>
-        
-      </div>
+          <input type = "text" name = "searchInput" id = "searchInput"  placeholder = "검색어">
+          <br>
+          <button type="button" id = "closeBtn">검색</button> 
     </div>
   </div>
-  
-   <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
-    정렬하기
-  </button>
+</div>
 
-  <!-- The Modal -->
-  <div class="modal" id="myModal2">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"></h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          <label>기본</label>
-          <input type = "radio" value = "" name = "sort" id = "sort">
+<div id="modalTwo" class="modal">
+  <div class="modal-content">
+    <div class="contact-form">
+      <span class="close">&times;</span>
+    <label>기본</label>
+          <input type = "radio" value = "basic" name = "sort">
           <br>
-          <label>과목명</label>
-          <input type = "radio" value = "" name = "sort" id = "sort">
+          <label>강의</label>
+          <input type = "radio" value = "lecture" name = "sort">
           <br>
-          <label>교수명</label>
-          <input type = "radio" value = "" name = "sort" id = "sort">
+          <label>학점</label>
+          <input type = "radio" value = "credit" name = "sort">
           <br>
-          <label>학점명</label>
-          <input type = "radio" value = "" name = "sort" id = "sort">
-          
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" id = "closeBtn" class="btn btn-danger" data-dismiss="modal">검색 </button>
-        </div>
-        
-      </div>
+          <label>교수</label>
+          <input type = "radio" value = "prof" name = "sort">
+          <br>
+          <label>전공</label>
+          <input type = "radio" value = "major" name = "sort">
+          <br>
+          <button type="button" id = "closeBtn2">정렬</button>
     </div>
   </div>
+</div>
+  
   <jsp:include page="/common/bottom.jsp" flush="false" />
 
 
 </body>
+<script type="text/javascript">
+var modalBtns = [...document.querySelectorAll(".button")];
+modalBtns.forEach(function(btn){
+  btn.onclick = function() {
+    var modal = btn.getAttribute('data-modal');
+    document.getElementById(modal).style.display = "block";
+  }
+});
+
+var closeBtns = [...document.querySelectorAll(".close")];
+var closeBtns2 = [...document.querySelectorAll("#closeBtn")];
+var closeBtns3 = [...document.querySelectorAll("#closeBtn2")];
+closeBtns.forEach(function(btn){
+  btn.onclick = function() {
+    var modal = btn.closest('.modal');
+    modal.style.display = "none";
+  }
+});
+
+closeBtns2.forEach(function(btn){
+  btn.onclick = function() {
+    var modal = btn.closest('.modal');
+    modal.style.display = "none";
+  }
+});
+
+closeBtns3.forEach(function(btn){
+  btn.onclick = function() {
+    var modal = btn.closest('.modal');
+    modal.style.display = "none";
+  }
+});
+
+
+
+
+
+window.onclick = function(event) {
+  if (event.target.className === "modal") {
+    event.target.style.display = "none";
+  }
+}
+
+
+</script>
+
 </html>

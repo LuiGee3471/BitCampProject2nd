@@ -8,12 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.LectureDeleteAction;
 import kr.co.groot.service.LectureListAction;
 import kr.co.groot.service.LectureSearchByInputAction;
-import kr.co.groot.service.LectureSearchByMajorAction;
 import kr.co.groot.service.LectureSortAction;
 import kr.co.groot.service.LectureUpdateAction;
 import kr.co.groot.service.LectureUpdateOkAction;
@@ -47,9 +47,6 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/input")) {
       action = new LectureSearchByInputAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/major")) {
-      action = new LectureSearchByMajorAction();
-      forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/sort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
@@ -67,6 +64,9 @@ public class LectureController extends HttpServlet {
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/inputtext")) {
       action = new LectureSearchByInputAction();
+      forward = action.execute(request, response);
+    } else if (urlCommand.equals("/lecture/lectureSort")) {
+      action = new LectureSortAction();
       forward = action.execute(request, response);
     }
 
