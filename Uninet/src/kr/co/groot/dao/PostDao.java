@@ -5,13 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.co.groot.dto.Comment;
@@ -23,13 +22,9 @@ public class PostDao {
   private ResultSet rs;
   private DataSource ds;
 
-  public PostDao() {
-    try {
-      Context context = new InitialContext();
-      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+  public PostDao() throws NamingException {
+    Context context = new InitialContext();
+    ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
   }
 
   /*
@@ -47,7 +42,7 @@ public class PostDao {
    */
   public List<Post> selectAll() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post";
+    String sql = "select p.title, p.content, p.writer_id, p.time, p.count, p.boardtype_id, p.id, s.staff_id from post p join staff s on p.writer_id = s.id";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -62,6 +57,7 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setStaffId(rs.getString("staff_id"));
       list.add(post);
     }
     if (rs != null) {
@@ -402,31 +398,32 @@ public class PostDao {
     }
     return list;
   }
-
+  
   public Post getContent(int id) throws SQLException {
     Post post = new Post();
     String sql = "select * from post where id = ?";
-
+   
+    
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
-
-    while (rs.next()) {
-      String title = rs.getString("title");
-      String content = rs.getString("content");
-      int writerId = rs.getInt("writer_id");
-      Timestamp time = rs.getTimestamp("time");
-      int count = rs.getInt("count");
-      int boardType = rs.getInt("boardtype_id");
-
-      post.setId(id);
-      post.setTitle(title);
-      post.setContent(content);
-      post.setWriterId(writerId);
-      post.setTime(time);
-      post.setCount(count);
-      post.setBoardType(boardType);
+    
+    while(rs.next()) {
+    String title = rs.getString("title");
+    String content = rs.getString("content");
+    int writerId = rs.getInt("writer_id");
+    Timestamp time = rs.getTimestamp("time");
+    int count = rs.getInt("count");
+    int boardType = rs.getInt("boardtype_id");
+    
+    post.setId(id);
+    post.setTitle(title);
+    post.setContent(content);
+    post.setWriterId(writerId);
+    post.setTime(time);
+    post.setCount(count);
+    post.setBoardType(boardType);
     }
     if (rs != null) {
       rs.close();
