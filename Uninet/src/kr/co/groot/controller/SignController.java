@@ -17,7 +17,7 @@ import kr.co.groot.service.RegisterAction;
 import kr.co.groot.service.RegisterCheckAction;
 
 @WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login",
-    "/register", "/registerCheck", "/main", "/logout" })
+    "/register", "/registerCheck", "/main", "/logout", "/registerOK" })
 public class SignController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -43,6 +43,10 @@ public class SignController extends HttpServlet {
     } else if (urlCommand.equals("/registerCheck")) {
       action = new RegisterCheckAction();
       forward = action.execute(request, response);
+    } else if (urlCommand.equals("/registerOK")) {
+      forward = new ActionForward();
+      forward.setRedirect(true);
+      forward.setPath("main");
     } else if (urlCommand.equals("/main")) {
       forward = new ActionForward();
       forward.setRedirect(false);
@@ -50,7 +54,9 @@ public class SignController extends HttpServlet {
     } else if (urlCommand.equals("/logout")) {
       HttpSession session = request.getSession();
       session.invalidate();
-      response.sendRedirect("index.html");
+      forward = new ActionForward();
+      forward.setRedirect(true);
+      forward.setPath(request.getContextPath());
     }
 
     if (forward != null) {
