@@ -12,20 +12,6 @@
   href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$("#textbox")
-				.click(
-						function() {
-							$("#textbox").remove();
-							var str = "<textarea class='contenttitle'>글제목</textarea><br>"
-									+ "<textarea class='contentbox'>내용</textarea>"
-									+ "<br><input class ='subtn' type='submit' value ='글쓰기'>";
-
-							$(".titlebox").after(str);
-						});
-	});
-</script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -33,10 +19,14 @@
     <div class="titlebox">
       <h1>자유게시판</h1>
     </div>
-    <form action="board/write">
-      <div class="textbox" id="textbox" name="textbox">
-        <span>새 글을 작성하세요!</span>
-      </div>
+    <div class="textbox" id="textbox">
+      <span>새 글을 작성하세요!</span>
+    </div>
+    <form action="write" id="postform" class="unseen" method="post">
+      <input type="text" placeholder="글 제목" name="title">
+      <textarea placeholder="글 내용" name="content"></textarea>
+      <input type="submit" value="글쓰기">
+      <input type="hidden" name="boardType" value="2">
     </form>
     <table class="content">
       <c:forEach var="post" items="${requestScope.list}">
@@ -47,7 +37,17 @@
           <td>${post.content}</td>
         </tr>
         <tr class="endline">
-          <td>${post.time}${post.staffId}</td>
+          <c:choose>
+            <c:when test="${post.diff < 2}">
+              <td>방금&nbsp;${post.staffId}</td>
+            </c:when>
+            <c:when test="${post.diff < 60}">
+              <td>${post.diff}분 전&nbsp;${post.staffId}</td>
+            </c:when>
+            <c:otherwise>
+              <td>${post.timeFormat}&nbsp;${post.staffId}</td>
+            </c:otherwise>
+          </c:choose>
         </tr>
       </c:forEach>
     </table>
@@ -61,5 +61,11 @@
     <input type="button" value="검색하기" id="btn" class="button" />
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script type="text/javascript">
+    $("#textbox").click(function() {
+      $(this).addClass("unseen");
+      $("#postform").removeClass("unseen");
+    });
+  </script>
 </body>
 </html>

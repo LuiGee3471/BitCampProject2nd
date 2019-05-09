@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.co.groot.dto.Comment;
@@ -21,34 +22,31 @@ public class CommentDao {
   private ResultSet rs;
   private DataSource ds;
 
-  public CommentDao() {
-    try {
-      Context context = new InitialContext();
-      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+  public CommentDao() throws NamingException {
+    Context context = new InitialContext();
+    ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
   }
-public List<Comment> getCommentList(int id) throws SQLException{
-    
+
+  public List<Comment> getCommentList(int id) throws SQLException {
+
     String sql = "select * from comment where refer = ?";
-    
+
     List<Comment> list = new ArrayList<>();
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
-    
-    while(rs.next()) {
-     Comment comment = new Comment();
-     comment.setId(rs.getInt("id"));
-     comment.setWriterId(rs.getInt("writer_id"));
-     comment.setContent(rs.getString("content"));
-     comment.setTime(rs.getTimestamp("time"));
-     comment.setRecomment(rs.getString("recomment"));
-     comment.setRefer(rs.getInt("refer"));
-     comment.setReferComment(rs.getInt("refer_comment"));
-     list.add(comment);
+
+    while (rs.next()) {
+      Comment comment = new Comment();
+      comment.setId(rs.getInt("id"));
+      comment.setWriterId(rs.getInt("writer_id"));
+      comment.setContent(rs.getString("content"));
+      comment.setTime(rs.getTimestamp("time"));
+      comment.setRecomment(rs.getString("recomment"));
+      comment.setRefer(rs.getInt("refer"));
+      comment.setReferComment(rs.getInt("refer_comment"));
+      list.add(comment);
     }
     if (rs != null) {
       rs.close();
@@ -62,12 +60,17 @@ public List<Comment> getCommentList(int id) throws SQLException{
     return list;
   }
   /*
-   * @method Name:  selectAll
+   * @method Name: selectAll
+   * 
    * @date: 2019. 5. 7.
-   * @author: 곽호원 
-   * @description: 댓글 전체 검색. 
-   * @param spec: void 
-   * @return: List<Comment> 
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 댓글 전체 검색.
+   * 
+   * @param spec: void
+   * 
+   * @return: List<Comment>
    */
 
   public List<Comment> selectAll(int refer) throws Exception {
@@ -96,12 +99,17 @@ public List<Comment> getCommentList(int id) throws SQLException{
   }
 
   /*
-   * @method Name:  insertComment
+   * @method Name: insertComment
+   * 
    * @date: 2019. 5. 7.
-   * @author: 곽호원 
-   * @description: 댓글 추가. 
-   * @param spec: Comment comment 
-   * @return: int 
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 댓글 추가.
+   * 
+   * @param spec: Comment comment
+   * 
+   * @return: int
    */
   public int insertComment(Comment comment) throws Exception {
     int row = 0;
@@ -119,13 +127,19 @@ public List<Comment> getCommentList(int id) throws SQLException{
     conn.close();
     return row;
   }
+
   /*
-   * @method Name:  updateComment
+   * @method Name: updateComment
+   * 
    * @date: 2019. 5. 7.
-   * @author: 곽호원 
-   * @description: 댓글 수정. 
-   * @param spec: Comment comment 
-   * @return: int 
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 댓글 수정.
+   * 
+   * @param spec: Comment comment
+   * 
+   * @return: int
    */
   public int updateComment(Comment comment) throws Exception {
     int row = 0;
@@ -141,12 +155,17 @@ public List<Comment> getCommentList(int id) throws SQLException{
   }
 
   /*
-   * @method Name:  deleteComment
+   * @method Name: deleteComment
+   * 
    * @date: 2019. 5. 7.
-   * @author: 곽호원 
-   * @description: 댓글 삭제. 
-   * @param spec: int writerId 
-   * @return: int 
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 댓글 삭제.
+   * 
+   * @param spec: int writerId
+   * 
+   * @return: int
    */
   public int deleteComment(int writerId) throws Exception {
     int row = 0;
@@ -160,12 +179,17 @@ public List<Comment> getCommentList(int id) throws SQLException{
   }
 
   /*
-   * @method Name:  selectByWriter
+   * @method Name: selectByWriter
+   * 
    * @date: 2019. 5. 7.
-   * @author: 곽호원 
-   * @description: 내가 쓴 댓글 검색 
-   * @param spec: int writerId 
-   * @return: List<Post> 
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 내가 쓴 댓글 검색
+   * 
+   * @param spec: int writerId
+   * 
+   * @return: List<Post>
    */
   public List<Post> selectByWriter(int writerId) throws Exception {
     List<Post> postList = new ArrayList<Post>();

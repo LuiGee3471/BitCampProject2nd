@@ -16,56 +16,66 @@ import kr.co.groot.service.MyPageMyAction;
 import kr.co.groot.service.MyPageSetInfoAction;
 import kr.co.groot.service.MyPageSetPictureAction;
 import kr.co.groot.service.MyPageSetPwdAction;
+import kr.co.groot.service.MyPageUpdateInfoAction;
+import kr.co.groot.service.MypagePwdUpdateAction;
 
 @WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*" })
 public class MypageController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  public MypageController() {
-  }
+	public MypageController() {
+	}
 
-  protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    String requestUri = request.getRequestURI();
-    String contextPath = request.getContextPath();
-    String urlCommand = requestUri.substring(contextPath.length());
-    
-    Action action = null;
-    ActionForward forward = null;
-    if(urlCommand.equals("/mypage")) {
-      action = new MyPageMyAction();
-      forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/setinfo")) {
-      action = new MyPageSetInfoAction();
-      forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/setpassword")) {
-      action = new MyPageSetPwdAction();
-      forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/setpicture")) {
-      action = new MyPageSetPictureAction();
-      forward = action.execute(request, response);
-    }else if(urlCommand.equals("/mypage/admin")) {
-      action = new MyPageAdminAction();
-      forward = action.execute(request, response);
-    }
-    
-    if(forward != null) {
-      if(forward.isRedirect()) {
-        response.sendRedirect(forward.getPath());
-      } else {
-        RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
-        dis.forward(request, response);
-        
-      }
-    }
-  }
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String requestUri = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String urlCommand = requestUri.substring(contextPath.length());
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doProcess(request, response);
-  }
+		Action action = null;
+		ActionForward forward = null;
+		if (urlCommand.equals("/mypage")) {
+			action = new MyPageMyAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/setinfo")) {
+			action = new MyPageSetInfoAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/setpassword")) {
+			action = new MyPageSetPwdAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/setpicture")) {
+			action = new MyPageSetPictureAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/admin")) {
+			action = new MyPageAdminAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/updateInfo")) {
+			action = new MyPageUpdateInfoAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/updatePwd")) {
+			action = new MypagePwdUpdateAction();
+			forward = action.execute(request, response);
+		}
 
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doProcess(request, response);
-  }
+		if (forward != null) {
+			if (forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			} else {
+				RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
+				dis.forward(request, response);
+
+			}
+		}
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
+	}
 
 }

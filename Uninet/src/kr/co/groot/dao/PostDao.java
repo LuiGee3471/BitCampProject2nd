@@ -72,6 +72,56 @@ public class PostDao {
 
     return list;
   }
+  
+  public List<Post> selectPostByBoardType(int boardType) throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post "
+        + "left join staff "
+        + "on post.writer_id = staff.id "
+        + "where boardtype_id = ? order by time desc limit 20";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, boardType);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      if (rs.getString("title").length() > 30) {
+        post.setTitle(rs.getString("title").substring(0, 30) + "...");
+      } else {
+        post.setTitle(rs.getString("title"));
+      }
+      
+      if (rs.getString("title").length() > 40) {
+        post.setContent(rs.getString("content").substring(0, 40) + "...");
+      } else {
+        post.setContent(rs.getString("content"));
+      }
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setStaffId(rs.getString("staff_id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+
 
   /*
    * @method Name: insertPost
@@ -88,17 +138,15 @@ public class PostDao {
    */
   public int insertPost(Post post) throws SQLException {
     int row = 0;
-    String sql = "insert into post (id, title, content, writer_id, time, count, boardtype_id) values (?, ?, ?, ?, ?, ?, ?)";
+    String sql = "insert into post (title, content, writer_id, time, count, boardtype_id)"
+        + " values (?, ?, ?, NOW(), 0, ?)";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, post.getId());
-    pstmt.setString(2, post.getTitle());
-    pstmt.setString(3, post.getContent());
-    pstmt.setInt(4, post.getWriterId());
-    pstmt.setTimestamp(5, post.getTime());
-    pstmt.setInt(6, post.getCount());
-    pstmt.setInt(7, post.getBoardType());
+    pstmt.setString(1, post.getTitle());
+    pstmt.setString(2, post.getContent());
+    pstmt.setInt(3, post.getWriterId());
+    pstmt.setInt(4, post.getBoardType());
     row = pstmt.executeUpdate();
 
     pstmt.close();
