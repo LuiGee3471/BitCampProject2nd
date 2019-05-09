@@ -109,7 +109,8 @@
       <div class="comment-input">
         <form action="comment" method="post" class="comment-form">
           <input class="comment-text" type="text" name="comment"
-            maxlength="50" placeholder="댓글을 입력하세요" /> <input
+            maxlength="50" placeholder="댓글을 입력하세요" /> 
+          <input
             class="submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
             <input type="hidden" value="${id}" name="commentId">
