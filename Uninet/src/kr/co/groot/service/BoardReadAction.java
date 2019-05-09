@@ -19,26 +19,9 @@ public class BoardReadAction implements Action{
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
    ActionForward forward = null;
-   try {
-     PostDao dao = new PostDao();
-     CommentDao dao2 = new CommentDao();
-     StaffDao dao3 = new StaffDao();
-     int id = Integer.parseInt(request.getParameter("id"));
-     Post post= dao.getContent(id);
-     List<Comment> commentlist;
-     commentlist = dao2.getCommentList(id);
-     Staff staff = dao3.selectByUniqueId(id);
-     request.setAttribute("post",post);
-     request.setAttribute("staff", staff);
-     System.out.println("ok");
-     request.setAttribute("id", id);
-     request.setAttribute("commentlist",commentlist);
-     forward = new ActionForward();
-     forward.setRedirect(false);
-     forward.setPath("/WEB-INF/views/boardcontent.jsp"); 
-   } catch (Exception e) {
-   System.out.println(e.getMessage());
-  }
-    return forward;
+   
+   PostDao postDao = new PostDao();
+   CommentDao commentDao = new CommentDao();
+   
   }
 }

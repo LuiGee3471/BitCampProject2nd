@@ -6,7 +6,7 @@ nav {
   position: fixed;
   left: 0;
   top: 0;
-  border-bottom: 1px solid #d6d6d6;
+  border-bottom: 1px solid #d6d6d6 !important;
   background: #fff;
   display: flex;
 }
@@ -109,4 +109,5 @@ nav {
   width: 826px;
   height: auto;
   display: flex;
+  overflow: scroll;
 }
