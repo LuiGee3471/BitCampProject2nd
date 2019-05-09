@@ -11,6 +11,8 @@ public class Post {
   private int count;
   private int boardType;
   private String staffId;
+  private long diff; // 현재와 글 올린 시간 차이
+  private String timeFormat; // 올린 시간 문자열 형태
 
   public String getStaffId() {
     return staffId;
@@ -19,9 +21,6 @@ public class Post {
   public void setStaffId(String staffId) {
     this.staffId = staffId;
   }
-
-  private long diff; // 현재와 글 올린 시간 차이
-  private String timeFormat; // 올린 시간 문자열 형태
 
   public String getTimeFormat() {
     return timeFormat;

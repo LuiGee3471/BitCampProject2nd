@@ -11,6 +11,24 @@ public class Comment {
   private int refer;
   private int referComment;
   private long diff;
+  private String timeFormat; // 올린 시간 문자열 형태
+  private Staff writer;
+
+  public String getTimeFormat() {
+    return timeFormat;
+  }
+
+  public void setTimeFormat(String timeFormat) {
+    this.timeFormat = timeFormat;
+  }
+
+  public Staff getWriter() {
+    return writer;
+  }
+
+  public void setWriter(Staff writer) {
+    this.writer = writer;
+  }
 
   public long getDiff() {
     return diff;

@@ -72,15 +72,12 @@ public class PostDao {
 
     return list;
   }
-  
+
   public List<Post> selectPostByBoardType(int boardType) throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
-        + "from post "
-        + "left join staff "
-        + "on post.writer_id = staff.id "
-        + "where boardtype_id = ? order by time desc limit 20";
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
+        + "on post.writer_id = staff.id " + "where boardtype_id = ? order by time desc limit 20";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -94,7 +91,7 @@ public class PostDao {
       } else {
         post.setTitle(rs.getString("title"));
       }
-      
+
       if (rs.getString("title").length() > 40) {
         post.setContent(rs.getString("content").substring(0, 40) + "...");
       } else {
@@ -121,7 +118,6 @@ public class PostDao {
     }
     return list;
   }
-
 
   /*
    * @method Name: insertPost
@@ -446,32 +442,30 @@ public class PostDao {
     }
     return list;
   }
-  
-  public Post getContent(int id) throws SQLException {
-    Post post = new Post();
-    String sql = "select * from post where id = ?";
-   
-    
+
+  public Post getPost(int id) throws SQLException {
+    String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
+        + "on post.writer_id = staff.id " + "where post.id = ?";
+
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
     
-    while(rs.next()) {
-    String title = rs.getString("title");
-    String content = rs.getString("content");
-    int writerId = rs.getInt("writer_id");
-    Timestamp time = rs.getTimestamp("time");
-    int count = rs.getInt("count");
-    int boardType = rs.getInt("boardtype_id");
-    
-    post.setId(id);
-    post.setTitle(title);
-    post.setContent(content);
-    post.setWriterId(writerId);
-    post.setTime(time);
-    post.setCount(count);
-    post.setBoardType(boardType);
+    Post post = null;
+    if (rs.next()) {
+      post = new Post();
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setStaffId(rs.getString("staff_id"));
     }
     if (rs != null) {
       rs.close();
@@ -605,8 +599,7 @@ public class PostDao {
   public List<Post> selectByCountForMain() throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff,"
-        + " date_format(time, '%m/%d %H:%i') as timeFormat "
-        + "from post order by count desc limit 4";
+        + " date_format(time, '%m/%d %H:%i') as timeFormat " + "from post order by count desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -641,36 +634,28 @@ public class PostDao {
     return list;
   }
 
-  public List<Comment> getCommentList(int id) throws SQLException {
+  /*
+   * @method Name: addCount
+   * 
+   * @date: 2019. 5. 9
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 글의 조회수를 높인다.
+   * 
+   * @param spec: int id
+   * 
+   * @return: void
+   */
+  public void addCount(int id) throws SQLException {
+    String sql = "Update post set count = count + 1 where id = ?";
 
-    String sql = "select * from comment where id = ?";
-
-    List<Comment> list = new ArrayList<>();
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
-    rs = pstmt.executeQuery();
+    pstmt.executeUpdate();
 
-    while (rs.next()) {
-      Comment comment = new Comment();
-      comment.setId(rs.getInt("id"));
-      comment.setWriterId(rs.getInt("writer_id"));
-      comment.setContent(rs.getString("content"));
-      comment.setTime(rs.getTimestamp("time"));
-      comment.setRecomment(rs.getString("recomment"));
-      comment.setRefer(rs.getInt("refer"));
-      comment.setReferComment(rs.getInt("refer_comment"));
-      list.add(comment);
-    }
-    if (rs != null) {
-      rs.close();
-    }
-    if (pstmt != null) {
-      pstmt.close();
-    }
-    if (conn != null) {
-      conn.close();
-    }
-    return list;
+    pstmt.close();
+    conn.close();
   }
 }
