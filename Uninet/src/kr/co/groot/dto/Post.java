@@ -10,6 +10,16 @@ public class Post {
   private Timestamp time;
   private int count;
   private int boardType;
+  private String staffId;
+
+  public String getStaffId() {
+    return staffId;
+  }
+
+  public void setStaffId(String staffId) {
+    this.staffId = staffId;
+  }
+
   private long diff; // 현재와 글 올린 시간 차이
   private String timeFormat; // 올린 시간 문자열 형태
 
