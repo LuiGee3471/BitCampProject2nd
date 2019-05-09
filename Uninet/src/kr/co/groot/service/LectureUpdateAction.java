@@ -22,6 +22,7 @@ public class LectureUpdateAction implements Action{
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
     int id = Integer.parseInt(request.getParameter("id"));
+    System.out.println("id의 값은 : " + id);
     List<Lecture> lectureList = null;
     List<Professor> profList = null;
     List<LectureType> ltList = null;
@@ -48,10 +49,11 @@ public class LectureUpdateAction implements Action{
     request.setAttribute("profList", profList);
     request.setAttribute("ltList", ltList);
     request.setAttribute("majorList", majorList);
+    request.setAttribute("id", id);
 
     
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/update.jsp");
+    forward.setPath("/WEB-INF/views/lectureupdate.jsp");
     return forward;
   }
 
