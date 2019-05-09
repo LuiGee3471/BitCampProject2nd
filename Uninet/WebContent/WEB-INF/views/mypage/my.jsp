@@ -10,7 +10,7 @@
   LocalDate newBirthday = birthday.toLocalDateTime().toLocalDate();
   String birthdayString = newBirthday.toString();
 %>
-<c:set var="staff" value="${staff}" />
+<c:set var="staff" value="${sessionScope.staff}" />
 <!DOCTYPE html>
 <html>
 <head>

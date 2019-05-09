@@ -9,25 +9,23 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
-public class MyPageUpdateInfoAction implements Action {
+public class MypagePwdUpdateAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		Staff staff = (Staff) session.getAttribute("staff");
-		ActionForward forward = new ActionForward();
-		staff.setEmail(request.getParameter("staffEmail"));
-		staff.setPhoneNumber(request.getParameter("staffPhone"));
-		staff.setStaffName(request.getParameter("staffName"));
+		
+		staff.setPassword(request.getParameter("updatePwd"));
 		staff.setId(staff.getId());
 		
 		String msg = "";
 		String url = "";
 		try {
 			StaffDao dao = new StaffDao();
-			System.out.println("1");
-			int row = dao.updateInfo(staff);
-			System.out.println("2");
+			int row = dao.updatePwd(staff);
+			System.out.println("row " +row);
 			if (row > 0) {
 				msg = "수정 성공";
 				url = "../mypage";
@@ -35,18 +33,18 @@ public class MyPageUpdateInfoAction implements Action {
 				session.setAttribute("staff", staff);
 			} else {
 				msg = "수정 실패";
-				url = "setinfo";
+				url = "setpassword";
 			}
 			System.out.println(row);
 			request.setAttribute("msg", msg);
 			request.setAttribute("url", url);
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/WEB-INF/views/redirect.jsp");
 			System.out.println("123");
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
-		forward = new ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("/WEB-INF/views/redirect.jsp");
 		return forward;
 	}
 

@@ -204,13 +204,13 @@ public class StaffDao {
   
   public int updateInfo(Staff staff) throws SQLException{
 	  int row = 0;	
-	  String sql = "update staff set email = ?, phoneNumber = ?, staff_name = ? where staff_id =?";
+	  String sql = "update staff set email = ?, phoneNumber = ?, staff_name = ? where id =?";
 	  conn = ds.getConnection();
 	  pstmt = conn.prepareStatement(sql);
 	  pstmt.setString(1, staff.getEmail());
 	  pstmt.setString(2, staff.getPhoneNumber());
 	  pstmt.setString(3, staff.getStaffName());
-	  pstmt.setString(4, staff.getStaffId());
+	  pstmt.setInt(4, staff.getId());
 	  
 	  row = pstmt.executeUpdate();
 	  
@@ -390,5 +390,22 @@ public class StaffDao {
     conn.close();
 
     return staff; 
+  }
+  public int updatePwd(Staff staff) throws Exception {
+	  int row = 0;
+	  String sql = "update staff set password = ? where id=?";
+	  
+	  conn = ds.getConnection();
+	  pstmt = conn.prepareStatement(sql);
+	  pstmt.setString(1, staff.getPassword());
+	  pstmt.setInt(2, staff.getId());
+	  
+	  row = pstmt.executeUpdate();
+	  
+	  pstmt.close();
+	  conn.close();
+	  System.out.println("변경완료");
+	  System.out.println(row);
+	  return row;
   }
 }
