@@ -201,6 +201,25 @@ public class StaffDao {
 
     return row;
   }
+  
+  public int updateInfo(Staff staff) throws SQLException{
+	  int row = 0;	
+	  String sql = "update staff set email = ?, phoneNumber = ?, staff_name = ? where staff_id =?";
+	  conn = ds.getConnection();
+	  pstmt = conn.prepareStatement(sql);
+	  pstmt.setString(1, staff.getEmail());
+	  pstmt.setString(2, staff.getPhoneNumber());
+	  pstmt.setString(3, staff.getStaffName());
+	  pstmt.setString(4, staff.getStaffId());
+	  
+	  row = pstmt.executeUpdate();
+	  
+	  pstmt.close();
+	  conn.close();
+	  System.out.println("변경완료");
+	  System.out.println(row);
+	  return row;
+  }
 
   /*
    * @method Name: selectByDept

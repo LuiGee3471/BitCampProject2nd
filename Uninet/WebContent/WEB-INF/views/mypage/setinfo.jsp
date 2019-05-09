@@ -1,7 +1,16 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Timestamp"%>
+<%@page import="kr.co.groot.dto.Staff"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="staff" value="${sessionScope.staff}" />
+<% 
+  Staff staff = (Staff) session.getAttribute("staff");
+  Timestamp birthday = staff.getBirthday();
+  LocalDate newBirthday = birthday.toLocalDateTime().toLocalDate();
+  String birthdayString = newBirthday.toString();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,35 +31,21 @@
     </li>
     <li><a href="<%=request.getContextPath()%>/mypage/admin">회원관리</a></li>
   </ul>
-  <table class="stafftable" border="1">
-    
-    <tr>
-      <th colspan="3"><span>개인정보 변경</span></th>
-    </tr>
-    <tr>
-      <td><span>이름(실명)</span></td>
-      <td><input type="text" value="${staff.staffName }"></td>
-    </tr>
-    <tr>
-    <tr>
-      <td><span>이메일</span></td>
-      <td><input type="text" value="${staff.email }"></td>
-    </tr>
-    <tr>
-      <td><span>생년월일</span></td>
-      <td>${staff.birthday }</td>
-    </tr>
-    <tr>
-      <td><span>연락처</span></td>
-      <td><input type="text" value="${staff.phoneNumber }"></td>
-    </tr>
-    <tr>
-      <td><span>현재 비밀번호</span></td>
-      <td><input type="password" value=""></td>
-    </tr>
-    <tr>
-      <td colspan="2"><input type="submit" value="개인정보 변경"></td>
-    </tr>
-  </table>
+  <form action="updateInfo?staff_Id=${sessionScope.staff.staffId }" method="get">
+  	<input type = "hidden" id = "staff_Id" name ="staff_Id" value = "${sessionScope.staff.staffId}">
+      <span class="lable">개인정보 변경</span><br>
+      ${sessionScope.staff.staffId }<br>
+      <span class="lable">이름(실명)</span>
+      <input type="text" id="staffName" name="staffName" value="${staff.staffName }"><br>
+      <span class="lable">이메일</span>
+      <input type="text" name="staffEmail" value="${staff.email }"><br>
+      <span class="lable">생년월일</span>
+      <%= birthdayString %><br>
+      <span class="lable">연락처</span>
+      <input type="text" id="staffPhone" name="staffPhone" value="${staff.phoneNumber }"><br>
+      <span class="lable">현재 비밀번호</span>
+      <input type="password" id="currentPwd" name="currentPwd" value=""><br>
+      <input type="submit" value="개인정보 변경">
+  </form>
 </body>
 </html>
