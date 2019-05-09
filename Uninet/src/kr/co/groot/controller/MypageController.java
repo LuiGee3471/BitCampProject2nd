@@ -17,6 +17,7 @@ import kr.co.groot.service.MyPageSetInfoAction;
 import kr.co.groot.service.MyPageSetPictureAction;
 import kr.co.groot.service.MyPageSetPwdAction;
 import kr.co.groot.service.MyPageUpdateInfoAction;
+import kr.co.groot.service.MyPageUpdatePictureAction;
 import kr.co.groot.service.MypagePwdUpdateAction;
 
 @WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*" })
@@ -54,6 +55,9 @@ public class MypageController extends HttpServlet {
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/updatePwd")) {
 			action = new MypagePwdUpdateAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/updatePicture")) {
+			action = new MyPageUpdatePictureAction();
 			forward = action.execute(request, response);
 		}
 
