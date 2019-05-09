@@ -38,7 +38,6 @@ public class BoardWriteAction implements Action {
       if (result > 0) {
         forward.setRedirect(false);
         forward.setPath("/board/list");
-
       } else {
         msg = "실패하였습니다.";
         url = "board/list";
