@@ -2,7 +2,7 @@
 <Context>
 <Resource maxWait="-1" maxIdle="20" maxActive="100"
 	password="1004" username="bituser"
-	url="jdbc:mysql://192.168.0.56:3306/project2nd?serverTimezone=UTC"
+	url="jdbc:mysql://192.168.0.56:3306/project2nd?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8"
 	driverClassName="com.mysql.cj.jdbc.Driver" type="javax.sql.DataSource"
 	auth="Container" name="jdbc/mysql" />
 </Context>

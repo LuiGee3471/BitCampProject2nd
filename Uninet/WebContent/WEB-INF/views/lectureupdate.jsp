@@ -12,15 +12,18 @@
 <head>
 <meta charset="UTF-8">
 <title>사원 수정</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <body>
 
-<h1> 왜안되냐 ㅡㅡ</h1>
-   
+<jsp:include page="/common/top.jsp" flush="false" />
+   <div class="container">
     <form action="updateOk" method = "GET">
     <input type="hidden" value = "${requestScope.id}" name="id">
-   <div class="container">
-  
+   
     <!-- 과목 입력 -->
     <label for = "lectureName">과목</label>
     <input type = "text" id = "lectureName" name = "lectureName" placeholder = "과목입력">
@@ -86,9 +89,11 @@
     <a class = "" href = "list">취소하고 돌아가기</a> 
     
   
-  </div>
+ 
    
     </form>
+    </div>
+   <jsp:include page="/common/bottom.jsp" flush="false" />
 
 </body>
 </html>

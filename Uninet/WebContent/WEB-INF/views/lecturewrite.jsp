@@ -8,11 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <body>
-
-  <form action="writeOk" method = "GET">
+<jsp:include page="/common/top.jsp" flush="false" />
    <div class="container">
+  <form action="writeOk" method = "GET">
    <!-- 과목 입력 -->
    <label for = "lectureName">과목</label>
    <input type = "text" id = "lectureName" name = "lectureName" placeholder = "과목입력">
@@ -76,10 +80,10 @@
     <input type = "submit" value = "추가하기" class = ""><br>
     <a class = "" href = "list">취소하고 돌아가기</a> 
     
-  
-  </div>
-   
+
     </form>
+     </div>
+      <jsp:include page="/common/bottom.jsp" flush="false" />
 
 </body>
 </html>

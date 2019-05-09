@@ -40,11 +40,9 @@ public class LectureDao {
    */
   public List<Lecture> selectAll() throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
-        + "ON p.major_id = m.id";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -164,7 +162,7 @@ public class LectureDao {
     System.out.println("row : " + row);
     pstmt.close();
     conn.close();
-    
+
     return row;
   }
 
@@ -181,19 +179,18 @@ public class LectureDao {
    * 
    * @return: List<Lecture>
    */
-  public List<Lecture> selectByName(String criterion, String input)
-      throws SQLException {
-    String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id"
-        + "WHERE ? LIKE ?";
+  public List<Lecture> selectByName(String criterion, String input) throws SQLException {
+    String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id "
+        + "LEFT JOIN major m " 
+        + "ON p.major_id = m.id " 
+        + "WHERE ";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
+    String lastSQL = " LIKE ?";
+    
     String column = "";
-
     switch (criterion) {
     case "lecture":
       column = "lecture_name";
@@ -207,11 +204,17 @@ public class LectureDao {
     default:
       column = "lecture_name";
     }
+    
+    String sql = firstSQL + column + lastSQL;
 
-    String strToSearch = "%" + input + "%";
-    pstmt.setString(1, column);
-    pstmt.setString(2, strToSearch);
-
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    
+    String strToSearch = "%%" + input + "%%";
+    System.out.println(column + strToSearch);
+    
+    pstmt.setString(1, strToSearch);
+  
     rs = pstmt.executeQuery();
 
     List<Lecture> lectureList = new ArrayList<>();
@@ -252,14 +255,11 @@ public class LectureDao {
    * 
    * @return: List<Lecture>
    */
-  public List<Lecture> selectByLectureType(int lectureType)
-      throws SQLException {
+  public List<Lecture> selectByLectureType(int lectureType) throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id"
-        + "WHERE lt.id = ?";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id" + "WHERE lt.id = ?";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -306,11 +306,9 @@ public class LectureDao {
    */
   public List<Lecture> sortLecture(String criterion) throws SQLException {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id"
-        + "ORDER BY ? asc";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id" + "ORDER BY ? asc";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -364,10 +362,5 @@ public class LectureDao {
 
     return lectureList;
   }
-  
-  
- 
-  
- 
-  
+
 }
