@@ -28,31 +28,13 @@
 	  <li><a href="<%=request.getContextPath()%>/mypage/setpicture">프로필 이미지 변경</a></li>
 	  <li><a href="<%=request.getContextPath()%>/mypage/admin">회원관리</a></li>
 	</ul>
-	<table class="stafftable" border="1">
-	 
-	<tr>
-	<th><span>기본 정보</span></th><th><span><a href="logout">로그아웃</a></span></th>
-	</tr>
-	<tr>
-	<td><span>이름</span></td><td>${staff.staffName}</td>
-	</tr>
-	<tr>
-	<tr>
-	<td><span>사진</span></td><td><img alt="" src="<%=request.getContextPath()%>/images/${staff.image}"></td>
-	</tr>
-	<tr>
-	<td><span>아이디</span></td><td>${staff.staffId}</td>
-	</tr>
-	<tr>
-	<td><span>이메일</span></td><td>${staff.email}</td>
-	</tr>
-	<tr>
-	<td><span>생년월일</span></td><td><%=birthdayString%></td>
-	</tr>
-	<tr>
-	<td><span>연락처</span></td><td>${staff.phoneNumber}</td>
-	</tr>
+	<span>기본 정보</span><span><a href="logout">로그아웃</a></span><br>
+	<span>이름</span><span>${staff.staffName}</span><br>
+	<span>사진</span><span><img alt="" width="150px" height="150px" src="<%=request.getContextPath()%>/images/${staff.image}"></span><br>
+	<span>아이디</span><span>${staff.staffId}</span><br>
+	<span>이메일</span><span>${staff.email}</span><br>
+	<span>생년월일</span><span><%=birthdayString%></span><br>
+	<span>연락처</span><span>${staff.phoneNumber}</span><br>
 	
-	</table>
 </body>
 </html>
