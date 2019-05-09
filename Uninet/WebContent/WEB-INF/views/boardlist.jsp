@@ -37,7 +37,8 @@
     </form>
     <div class="articles">
     <c:forEach var="post" items="${list}">  
-      <div class="article">
+    <a href="read?id=${post.id}">
+      <div class="article">   
         <div class="article-main">
         <h4 class="article-title">${post.title}</h4>
         <p class="article-content">${post.content}</p>
@@ -56,6 +57,7 @@
         </p>
         </div>
       </div>
+      </a>
     </c:forEach>
     </div>
     <form class="searchInput">
