@@ -23,12 +23,14 @@ public class BoardListAction implements Action{
     try {
       PostDao dao = new PostDao();
       List<Post> postlist;
-      postlist = dao.selectAll(); 
+      postlist = dao.selectPostByBoardType(2); 
       request.setAttribute("list", postlist);
       forward = new ActionForward();
       forward.setRedirect(false);
       forward.setPath("/WEB-INF/views/boardlist.jsp");
     } catch (SQLException e) {  
+      System.out.println(e.getMessage());
+    } catch (NamingException e) {
       System.out.println(e.getMessage());
     } 
     return forward;

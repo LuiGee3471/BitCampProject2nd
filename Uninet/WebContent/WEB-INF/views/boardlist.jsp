@@ -33,10 +33,14 @@
     <div class="titlebox">
       <h1>자유게시판</h1>
     </div>
-    <form action="board/write">
-      <div class="textbox" id="textbox" name="textbox">
-        <span>새 글을 작성하세요!</span>
-      </div>
+    <div class="textbox" id="textbox" name="textbox">
+      <span>새 글을 작성하세요!</span>
+    </div>
+    <form action="write" id="postform" class="unseen">
+      <input type="text" placeholder="글 제목" name="title">
+      <textarea placeholder="글 내용" name="content"></textarea>
+      <input type="submit" value="글쓰기">
+      <input type="hidden" name="boardType" value="2">
     </form>
     <table class="content">
       <c:forEach var="post" items="${requestScope.list}">
