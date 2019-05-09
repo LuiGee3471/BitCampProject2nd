@@ -202,6 +202,19 @@ public class StaffDao {
     return row;
   }
   
+  /*
+   * @method Name: updateInfo
+   * 
+   * @date: 2019. 5. 9
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 마이페이지에서 개인 정보 수정.
+   * 
+   * @param spec: Staff staff
+   *
+   * @return: int
+   */
   public int updateInfo(Staff staff) throws SQLException{
 	  int row = 0;	
 	  String sql = "update staff set email = ?, phoneNumber = ?, staff_name = ? where id =?";
@@ -391,6 +404,20 @@ public class StaffDao {
 
     return staff; 
   }
+  
+  /*
+   * @method Name: updatePwd
+   * 
+   * @date: 2019. 5. 9
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 마이페이지에서 비밀번호를 수정한다.
+   * 
+   * @param spec: Staff staff
+   *
+   * @return: int
+   */
   public int updatePwd(Staff staff) throws Exception {
 	  int row = 0;
 	  String sql = "update staff set password = ? where id=?";
@@ -398,6 +425,35 @@ public class StaffDao {
 	  conn = ds.getConnection();
 	  pstmt = conn.prepareStatement(sql);
 	  pstmt.setString(1, staff.getPassword());
+	  pstmt.setInt(2, staff.getId());
+	  
+	  row = pstmt.executeUpdate();
+	  
+	  pstmt.close();
+	  conn.close();
+	  System.out.println("변경완료");
+	  System.out.println(row);
+	  return row;
+  }
+  /*
+   * @method Name: updateImage
+   * 
+   * @date: 2019. 5. 9
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 마이페이지에서 프로필 이미지를 변경.
+   * 
+   * @param spec: Staff staff
+   *
+   * @return: int
+   */
+  public int updateImage(Staff staff) throws Exception {
+	  int row = 0;
+	  String sql = "update staff set image = ? where id = ?";
+	  conn = ds.getConnection();
+	  pstmt = conn.prepareStatement(sql);
+	  pstmt.setString(1, staff.getImage());
 	  pstmt.setInt(2, staff.getId());
 	  
 	  row = pstmt.executeUpdate();

@@ -59,7 +59,7 @@
       <div class="article-sub">
         <span class="comment-option">쪽지</span>
         <div class="article-stat">
-          <i class="far fa-eye">${post.count}</i> <i class="far fa-comment">${commentCount}</i>
+          <i class="far fa-eye">${post.count}</i>&nbsp;<i class="far fa-comment">${commentCount}</i>
         </div>
       </div>
     </div>
@@ -109,9 +109,11 @@
       <div class="comment-input">
         <form action="comment" method="post" class="comment-form">
           <input class="comment-text" type="text" name="comment"
-            maxlength="50" placeholder="댓글을 입력하세요" /> <input
+            maxlength="50" placeholder="댓글을 입력하세요" /> 
+          <input
             class="submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
+            <input type="hidden" value="${id}" name="commentId">
         </form>
       </div>
     </div>

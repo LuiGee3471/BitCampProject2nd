@@ -2,7 +2,9 @@
   pageEncoding="UTF-8"%>
 <nav>
   <div class="navbar">
-    <a href="<%=request.getContextPath()%>/main" class="pageLogo"><img src="https://via.placeholder.com/40" alt="로고"></a>
+    <a href="<%=request.getContextPath()%>/main" class="pageLogo">
+      <img src="<%=request.getContextPath()%>/images/logo.png" alt="로고" class="pageLogo-image">
+    </a>
     <div class="pageTitle">
       <h3 class="title">유니넷</h3>
       <h2 class="campus">비트캠퍼스</h2>
@@ -18,8 +20,8 @@
     </div>
 
     <div class="mypage">
-      <a href="message"><img src="https://via.placeholder.com/40" alt="쪽지"></a>
-      <a href="mypage"><img src="https://via.placeholder.com/40" alt="쪽지"></a>
+      <a class="my-link" href="message"><img src="<%=request.getContextPath()%>/images/mail.png" alt="쪽지"></a>
+      <a class="my-link" href="mypage"><img src="<%=request.getContextPath()%>/images/user.png" alt="마이페이지"></a>
     </div>
   </div>
 </nav>
