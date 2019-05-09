@@ -81,11 +81,9 @@ public List<Comment> getCommentList(int id) throws SQLException{
     while (rs.next()) {
       Comment comment = new Comment();
       comment.setId(rs.getInt("id"));
-      comment.setTitle(rs.getString("title"));
       comment.setContent(rs.getString("content"));
       comment.setWriterId(rs.getInt("writerId"));
-      comment.setDate(rs.getTimestamp("date"));
-      comment.setCount(rs.getInt("count"));
+      comment.setTime(rs.getTimestamp("date"));
       comment.setRefer(rs.getInt("refer"));
       comment.setReferComment(rs.getInt("referComment"));
       commentList.add(comment);
