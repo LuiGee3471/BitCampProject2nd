@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.co.groot.dto.Comment;
@@ -21,13 +22,9 @@ public class PostDao {
   private ResultSet rs;
   private DataSource ds;
 
-  public PostDao() {
-    try {
-      Context context = new InitialContext();
-      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+  public PostDao() throws NamingException {
+    Context context = new InitialContext();
+    ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
   }
 
   /*
@@ -45,7 +42,7 @@ public class PostDao {
    */
   public List<Post> selectAll() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post";
+    String sql = "select p.title, p.content, p.writer_id, p.time, p.count, p.boardtype_id, p.id, s.staff_id from post p join staff s on p.writer_id = s.id";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -60,6 +57,7 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setStaffId(rs.getString("staff_id"));
       list.add(post);
     }
     if (rs != null) {
@@ -74,6 +72,56 @@ public class PostDao {
 
     return list;
   }
+  
+  public List<Post> selectPostByBoardType(int boardType) throws SQLException {
+    List<Post> list = new ArrayList<>();
+    String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post "
+        + "left join staff "
+        + "on post.writer_id = staff.id "
+        + "where boardtype_id = ? order by time desc limit 20";
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, boardType);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      Post post = new Post();
+      if (rs.getString("title").length() > 30) {
+        post.setTitle(rs.getString("title").substring(0, 30) + "...");
+      } else {
+        post.setTitle(rs.getString("title"));
+      }
+      
+      if (rs.getString("title").length() > 40) {
+        post.setContent(rs.getString("content").substring(0, 40) + "...");
+      } else {
+        post.setContent(rs.getString("content"));
+      }
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setStaffId(rs.getString("staff_id"));
+      list.add(post);
+    }
+    if (rs != null) {
+      rs.close();
+    }
+    if (pstmt != null) {
+      pstmt.close();
+    }
+    if (conn != null) {
+      conn.close();
+    }
+    return list;
+  }
+
 
   /*
    * @method Name: insertPost
@@ -90,17 +138,15 @@ public class PostDao {
    */
   public int insertPost(Post post) throws SQLException {
     int row = 0;
-    String sql = "insert into post (id, title, content, writer_id, time, count, boardtype_id) values (?, ?, ?, ?, ?, ?, ?)";
+    String sql = "insert into post (title, content, writer_id, time, count, boardtype_id)"
+        + " values (?, ?, ?, NOW(), 0, ?)";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, post.getId());
-    pstmt.setString(2, post.getTitle());
-    pstmt.setString(3, post.getContent());
-    pstmt.setInt(4, post.getWriterId());
-    pstmt.setTimestamp(5, post.getTime());
-    pstmt.setInt(6, post.getCount());
-    pstmt.setInt(7, post.getBoardType());
+    pstmt.setString(1, post.getTitle());
+    pstmt.setString(2, post.getContent());
+    pstmt.setInt(3, post.getWriterId());
+    pstmt.setInt(4, post.getBoardType());
     row = pstmt.executeUpdate();
 
     pstmt.close();
@@ -400,31 +446,32 @@ public class PostDao {
     }
     return list;
   }
-
+  
   public Post getContent(int id) throws SQLException {
     Post post = new Post();
     String sql = "select * from post where id = ?";
-
+   
+    
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
-
-    while (rs.next()) {
-      String title = rs.getString("title");
-      String content = rs.getString("content");
-      int writerId = rs.getInt("writer_id");
-      Timestamp time = rs.getTimestamp("time");
-      int count = rs.getInt("count");
-      int boardType = rs.getInt("boardtype_id");
-
-      post.setId(id);
-      post.setTitle(title);
-      post.setContent(content);
-      post.setWriterId(writerId);
-      post.setTime(time);
-      post.setCount(count);
-      post.setBoardType(boardType);
+    
+    while(rs.next()) {
+    String title = rs.getString("title");
+    String content = rs.getString("content");
+    int writerId = rs.getInt("writer_id");
+    Timestamp time = rs.getTimestamp("time");
+    int count = rs.getInt("count");
+    int boardType = rs.getInt("boardtype_id");
+    
+    post.setId(id);
+    post.setTitle(title);
+    post.setContent(content);
+    post.setWriterId(writerId);
+    post.setTime(time);
+    post.setCount(count);
+    post.setBoardType(boardType);
     }
     if (rs != null) {
       rs.close();
@@ -453,7 +500,9 @@ public class PostDao {
    */
   public List<Post> selectRecentNotice() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where boardtype_id = 1 order by time desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post where boardtype_id = 1 order by time desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -472,6 +521,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {
@@ -501,7 +552,9 @@ public class PostDao {
    */
   public List<Post> selectRecentPost() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where boardtype_id = 2 order by time desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post where boardtype_id = 2 order by time desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -520,6 +573,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {
@@ -549,7 +604,9 @@ public class PostDao {
    */
   public List<Post> selectByCountForMain() throws SQLException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post order by count desc limit 4";
+    String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff,"
+        + " date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post order by count desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -568,6 +625,8 @@ public class PostDao {
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
       post.setId(rs.getInt("id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       list.add(post);
     }
     if (rs != null) {

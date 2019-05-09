@@ -98,7 +98,7 @@ public class LectureDao {
     pstmt.setInt(2, lecture.getCredit());
     pstmt.setString(3, lecture.getTime());
     pstmt.setInt(4, lecture.getLectureTypeId());
-    pstmt.setInt(5, lecture.getMajorId());
+    pstmt.setInt(5, lecture.getProfId());
 
     int row = pstmt.executeUpdate();
 
@@ -152,6 +152,7 @@ public class LectureDao {
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
+
     pstmt.setString(1, lecture.getLectureName());
     pstmt.setInt(2, lecture.getCredit());
     pstmt.setString(3, lecture.getTime());
@@ -160,10 +161,10 @@ public class LectureDao {
     pstmt.setInt(6, lecture.getId());
 
     int row = pstmt.executeUpdate();
-
+    System.out.println("row : " + row);
     pstmt.close();
     conn.close();
-
+    
     return row;
   }
 

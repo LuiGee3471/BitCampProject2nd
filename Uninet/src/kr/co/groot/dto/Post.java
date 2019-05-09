@@ -1,71 +1,98 @@
 package kr.co.groot.dto;
 
 import java.sql.Timestamp;
- 
 
 public class Post {
-	private int id;
-	private String title;
-	private String content;
-	private int writerId;
-	private Timestamp time;
-	private int count;
-	private int boardType;
+  private int id;
+  private String title;
+  private String content;
+  private int writerId;
+  private Timestamp time;
+  private int count;
+  private int boardType;
+  private String staffId;
 
-	public int getId() {
-	  return id;
-	}
+  public String getStaffId() {
+    return staffId;
+  }
 
-	public void setId(int id) {
-	  this.id = id;
-	}
+  public void setStaffId(String staffId) {
+    this.staffId = staffId;
+  }
 
-	public String getTitle() {
-	  return title;
-	}
+  private long diff; // 현재와 글 올린 시간 차이
+  private String timeFormat; // 올린 시간 문자열 형태
 
-	public void setTitle(String title) {
-	  this.title = title;
-	}
+  public String getTimeFormat() {
+    return timeFormat;
+  }
 
-	public String getContent() {
-	  return content;
-	}
+  public void setTimeFormat(String timeFormat) {
+    this.timeFormat = timeFormat;
+  }
 
-	public void setContent(String content) {
-	  this.content = content;
-	}
+  public long getDiff() {
+    return diff;
+  }
 
-	public int getWriterId() {
-	  return writerId;
-	}
+  public void setDiff(long diff) {
+    this.diff = diff;
+  }
 
-	public void setWriterId(int writerId) {
-	  this.writerId = writerId;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public Timestamp getTime() {
-	  return time;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setTime(Timestamp time) {
-	  this.time = time;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public int getCount() {
-	  return count;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public void setCount(int count) {
-	  this.count = count;
-	}
+  public String getContent() {
+    return content;
+  }
 
-	public int getBoardType() {
-	  return boardType;
-	}
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-	public void setBoardType(int boardType) {
-	  this.boardType = boardType;
-	}
+  public int getWriterId() {
+    return writerId;
+  }
+
+  public void setWriterId(int writerId) {
+    this.writerId = writerId;
+  }
+
+  public Timestamp getTime() {
+    return time;
+  }
+
+  public void setTime(Timestamp time) {
+    this.time = time;
+  }
+
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
+  }
+
+  public int getBoardType() {
+    return boardType;
+  }
+
+  public void setBoardType(int boardType) {
+    this.boardType = boardType;
+  }
 
 }

@@ -363,4 +363,32 @@ public class StaffDao {
 
     return staffList;
   }
+  public Staff selectByUniqueId(int id) throws SQLException{
+    String sql = "select * from staff where id = ?";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    Staff staff = new Staff();
+    while(rs.next()) {
+      
+      staff.setId(rs.getInt("id"));
+      staff.setStaffId(rs.getString("staff_id"));
+      staff.setEmail(rs.getString("email"));
+      staff.setPhoneNumber(rs.getString("phoneNumber"));
+      staff.setStaffName(rs.getString("staff_name"));
+      staff.setBirthday(rs.getTimestamp("birthday"));
+      staff.setImage(rs.getString("image"));
+      staff.setIsAdmin(rs.getString("isAdmin"));
+      staff.setIsManager(rs.getString("isManager"));
+      staff.setDeptId(rs.getInt("dept_id"));
+    
+    }
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return staff; 
+  }
 }
