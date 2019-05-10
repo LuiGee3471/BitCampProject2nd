@@ -36,6 +36,7 @@ $(document).ready(function(){
   });
 });
 </script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
 </head>
 <body>
   <h3>개인정보 수정 페이지</h3>

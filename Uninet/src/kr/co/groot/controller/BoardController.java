@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.BoardCommentAction;
+import kr.co.groot.service.BoardDeleteCommentAction;
 import kr.co.groot.service.BoardDeleteAction;
 import kr.co.groot.service.BoardListAction;
 import kr.co.groot.service.BoardReadAction;
@@ -63,6 +64,9 @@ public class BoardController extends HttpServlet {
         forward = action.execute(request, response);        
       } else if(urlCommand.equals("/board/search")) {
         action = new BoardSearchAction();
+        forward = action.execute(request, response);        
+      }else if(urlCommand.equals("/board/deleteComment")) {
+        action = new BoardDeleteCommentAction();
         forward = action.execute(request, response);        
       }
       

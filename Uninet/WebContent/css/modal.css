@@ -27,7 +27,7 @@
   margin-top: 200px;
 }
 
-@media ( min-width : 1366px) {
+@media (min-width: 1366px) {
   .modal-content {
     background-color: #fefefe;
     margin: 10vh auto; /* 15% from the top and centered */
@@ -45,7 +45,8 @@
   font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -70,20 +71,21 @@ button.button:hover {
   margin-top: 40px;
 }
 
-input[type=text] {
+input[type='text'] {
   border: none;
-  border-bottom: 2px solid #7efff5;
+  border-bottom: 2px solid #77160a;
   width: 400px;
 }
 
-input[type=text]:focus {
+input[type='text']:focus {
   outline: none;
 }
 
 .label-input {
-  color: #7efff5;
+  color: #77160a;
   font-weight: bold;
   font-size: 1.5em;
+  position: relative;
 }
 
 .searchBtn {
@@ -93,9 +95,10 @@ input[type=text]:focus {
   height: 30px;
   background-color: white;
   border: none;
-  color: #7EFFF5;
+  color: #77160a;
   font-weight: bold;
   font-size: 21px;
+  position: absolute;
 }
 
 .searchBtn2 {
@@ -106,7 +109,7 @@ input[type=text]:focus {
   height: 30px;
   background-color: white;
   border: none;
-  color: #7EFFF5;
+  color: #77160a;
   font-weight: bold;
   font-size: 21px;
 }

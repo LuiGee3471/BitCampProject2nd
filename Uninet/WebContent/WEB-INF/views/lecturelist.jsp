@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -84,12 +85,13 @@
   <table class = "lecturetable">
   <thead>
     <tr>
-      <td>강의이름</td>
-      <td>학점</td>
-      <td>시간</td>
-      <td>종별</td> 
-      <td>학과</td>
-      <td>교수</td>
+      <th>강의이름</th>
+      <th>학점</th>
+      <th>시간</th>
+      <th>종별</th> 
+      <th>학과</th>
+      <th>교수</th>
+      <th colspan = "2"></th>
     </tr>
    </thead>
    <tbody id = "searchResult">
