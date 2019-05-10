@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.MyPageAdminAction;
+import kr.co.groot.service.MyPageAdminSearchByInputAction;
 import kr.co.groot.service.MyPageModifyAction;
 import kr.co.groot.service.MyPageModifyOkAction;
 import kr.co.groot.service.MyPageMyAction;
@@ -66,6 +67,9 @@ public class MypageController extends HttpServlet {
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/modifyOk")) {
 			action = new MyPageModifyOkAction();
+			forward = action.execute(request, response);
+		} else if (urlCommand.equals("/mypage/inputText")) {
+			action = new MyPageAdminSearchByInputAction();
 			forward = action.execute(request, response);
 		}
 

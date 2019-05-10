@@ -322,14 +322,30 @@ public class StaffDao {
    * 
    * @return: List<Staff>
    */
-  public List<Staff> selectByName(String input) throws SQLException {
-    String sql = "select * from staff s " + "left join department d "
-        + "on dept_id = d.id " + "where staff_name like ?";
+  public List<Staff> selectByName(String select , String input) throws SQLException {
+    String fristSQL = "select * from staff s " + "left join department d "
+        + "on dept_id = d.id " + "where ";
+    
+    String lastSQL = " LIKE ?";
+    String column = "";
+    
+    switch(select) {
+    case "name" :
+    	column = "staff_name";
+    	break;
+    case "deptName" :
+    	column = "dept_name";
+    	break;
+    default :
+    	column = "staff_name";	
+    }
+    String sql = fristSQL + column + lastSQL;
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    input = "%" + input + "%";
-    pstmt.setString(1, input);
+    String strToSearch = "%%" + input + "%%";
+    System.out.println(column + strToSearch);
+    pstmt.setString(1, strToSearch);
 
     rs = pstmt.executeQuery();
 
@@ -350,6 +366,7 @@ public class StaffDao {
       staffList.add(staff);
     }
 
+    System.out.println("이름 검색 : " +staffList);
     rs.close();
     pstmt.close();
     conn.close();
