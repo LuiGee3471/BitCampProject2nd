@@ -19,7 +19,7 @@ public class MyPageUpdatePictureAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		String uploadpath = "C:\\Users\\howon\\OneDrive\\Documents\\Team3_1\\Uninet\\WebContent\\images";
+		String uploadpath = request.getServletContext().getRealPath("images");
 		System.out.println(uploadpath);
 		int size = 1024 * 1024 * 10;
 		
@@ -37,7 +37,6 @@ public class MyPageUpdatePictureAction implements Action {
 			Enumeration<String> filenames = multi.getFileNames();
 			String file = filenames.nextElement();
 			String image = multi.getFilesystemName(file);
-			
 			staff.setImage(image);
 			StaffDao dao = new StaffDao();
 			int row = dao.updateImage(staff);
