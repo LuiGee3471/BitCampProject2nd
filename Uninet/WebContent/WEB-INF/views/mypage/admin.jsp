@@ -12,8 +12,10 @@
 <script type="text/javascript">
 	$(function() {
 		$('#btn').on("click", function() {
-		const inputVal = $('#searchInput').val();
-		const searchVal = $("input[name='orderBy']").val();
+		const inputVal = $("#input").val();
+		const searchVal = $("#search option:selected").val();
+		console.log(inputVal);
+		console.log(searchVal);
 			if (!$('#input').val()) {
 				alert('값을 입력해주세요');
 			} else {
@@ -72,7 +74,7 @@
 	</table>
 	<select id="search" name="orderBy">
 		<option value="name">이름별 검색</option>
-		<option value="dept">부서별 검색</option>
+		<option value="deptName">부서별 검색</option>
 	</select>
 	<input type="text" id="input" name="searchInput">
 	<input type="button" id="btn" value="검색">

@@ -323,8 +323,8 @@ public class StaffDao {
    * @return: List<Staff>
    */
   public List<Staff> selectByName(String select , String input) throws SQLException {
-    String fristSQL = "select * from staff s " + "left join department d "
-        + "on dept_id = d.id " + "where ";
+    String fristSQL = "select * from staff s left join department d "
+                     +"on dept_id = d.id where ";
     
     String lastSQL = " LIKE ?";
     String column = "";
@@ -339,6 +339,7 @@ public class StaffDao {
     default :
     	column = "staff_name";	
     }
+    System.out.println("column 은 : " + column);
     String sql = fristSQL + column + lastSQL;
 
     conn = ds.getConnection();

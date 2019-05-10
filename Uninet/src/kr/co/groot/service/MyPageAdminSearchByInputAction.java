@@ -18,10 +18,11 @@ public class MyPageAdminSearchByInputAction implements Action {
 		ActionForward forward = new ActionForward();
 		List<Staff> staffList = new ArrayList<Staff>();
 		System.out.println("123");
-		String input = request.getParameter("searchInput");
+		String input = request.getParameter("searchText");
 		String search = request.getParameter("orderBy");
-		System.out.println(input+"222222");
-		System.out.println(search+"111111");
+
+		System.out.println("input : " + input);
+		System.out.println("search : " + search);
 		StaffDao dao;
 		try {
 			dao = new StaffDao();
