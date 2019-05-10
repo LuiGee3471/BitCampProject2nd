@@ -51,10 +51,11 @@ public class BoardWriteAction implements Action {
       forward = new ActionForward();
 
       if (result > 0) {
+        forward.setRedirect(false);
         forward.setPath("/board/writeok");
       } else {
         msg = "실패하였습니다.";
-        url = "board/list";
+        url = "board/list?page=1&option=false&boardtype=2";
         forward.setRedirect(false);
         forward.setPath("/WEB-INF/views/redirect.jsp");
         request.setAttribute("msg", msg);
