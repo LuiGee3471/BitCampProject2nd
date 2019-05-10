@@ -45,7 +45,7 @@ public class BoardController extends HttpServlet {
       } else if (urlCommand.equals("/board/writeok")) {
         forward = new ActionForward();
         forward.setRedirect(true);
-        forward.setPath("list");
+        forward.setPath("list?page=1&option=default&boardtype=2");
       } else if(urlCommand.equals("/board/read")) {
         action = new BoardReadAction();
         forward = action.execute(request, response);        

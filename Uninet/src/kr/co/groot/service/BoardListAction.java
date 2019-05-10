@@ -47,7 +47,10 @@ public class BoardListAction implements Action{
       }
       
       request.setAttribute("boardName", boardName);
+      request.setAttribute("boardType", boardType);
       request.setAttribute("list", list);
+      request.setAttribute("option", option);
+      request.setAttribute("word", word);
       request.setAttribute("currentPage", pageNumber);
       request.setAttribute("pages", page);
       

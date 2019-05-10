@@ -35,7 +35,8 @@ public class CommentDao {
         + "from comment "
         + "left join staff "
         + "on comment.writer_id = staff.id "
-        + "where refer = ?";
+        + "where refer = ? "
+        + "order by refer_comment asc, time asc";
 
     List<Comment> list = new ArrayList<>();
     StaffDao staffDao = new StaffDao();
@@ -241,6 +242,22 @@ public class CommentDao {
     pstmt.close();
     conn.close();
     
+    return row;
+  }
+  
+  public int insertRecomment(Comment comment) throws Exception {
+    int row = 0;
+    String sql = "insert into comment(content, writer_id, time, refer,recomment, refer_comment) values (?,?,NOW(),?,'Y',?)";
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setString(1, comment.getContent());
+    pstmt.setInt(2, comment.getWriterId());
+    pstmt.setInt(3, comment.getRefer());
+    pstmt.setInt(4, comment.getReferComment());
+    
+    row = pstmt.executeUpdate();
+    pstmt.close();
+    conn.close();
     return row;
   }
 }

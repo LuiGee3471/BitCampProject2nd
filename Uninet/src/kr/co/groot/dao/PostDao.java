@@ -711,6 +711,10 @@ public class PostDao {
     rs.next();
     int count = rs.getInt(1); 
     
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
     return count;
   }
   
@@ -758,6 +762,10 @@ public class PostDao {
     
     rs.next();
     int count = rs.getInt(1); 
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
     
     return count;
   }

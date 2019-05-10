@@ -112,7 +112,9 @@
         <div class="btn next-btn">&gt;</div>
       </c:if>
     </div>
-    <div class="btn next-page">다음&nbsp;&gt;</div>
+    <c:if test="${currentPage < pages}">
+      <div class="btn next-page">다음&nbsp;&gt;</div>
+    </c:if>
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
@@ -121,6 +123,50 @@
       $(this).addClass("unseen");
       $("#postform").removeClass("unseen");
     });
+    
+    $(".page-btn").click(function() {
+    	var pageNo = Number($(this).text());
+    	var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+    	location.href = url;
+    });
+    
+    $(".next-page").click(function() {
+    	var url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+    	location.href = url;
+    });
+    
+    $(".prv-btn").click(function() {
+    	var currentPage = ${currentPage};
+    	var decision = currentPage % 3;
+    	var pageToMove;
+    	if (decision === 1) {
+    		pageToMove = currentPage - 1;
+    	} else if (decision === 2){
+    		pageToMove = currentPage - 2;
+    	} else {
+    		pageToMove = currentPage - 3;
+    	}
+    	
+    	var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+    	location.href = url;
+    });
+    
+    $(".next-btn").click(function() {
+        var currentPage = ${currentPage};
+        var decision = currentPage % 3;
+        var pageToMove;
+        if (decision === 1) {
+          pageToMove = currentPage + 3;
+        } else if (decision === 2){
+          pageToMove = currentPage + 2;
+        } else {
+          pageToMove = currentPage + 1;
+        }
+        
+        var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+        location.href = url;
+      });
+    
   </script>
 </body>
 </html>
