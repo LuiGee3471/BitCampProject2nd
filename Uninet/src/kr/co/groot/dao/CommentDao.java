@@ -177,12 +177,13 @@ public class CommentDao {
    * 
    * @return: int
    */
-  public int deleteComment(int writerId) throws Exception {
+  public int deleteComment(int id) throws Exception {
     int row = 0;
-    String sql = "delete from comment where writer_id= ?";
+    String sql = "update comment set content= '삭제된 댓글입니다' where id= ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, writerId);
+    pstmt.setInt(1, id);
+    row = pstmt.executeUpdate();
     pstmt.close();
     conn.close();
     return row;

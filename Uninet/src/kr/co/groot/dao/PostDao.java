@@ -76,8 +76,9 @@ public class PostDao {
   public List<Post> selectPostByBoardType(int boardType) throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
-        + "on post.writer_id = staff.id " + "where boardtype_id = ? order by time desc limit 20";
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post " + "left join staff " + "on post.writer_id = staff.id "
+        + "where boardtype_id = ? order by time desc limit 20";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -227,11 +228,13 @@ public class PostDao {
    * 
    * @return: List<Post>
    */
-  public List<Post> selectByTitle(String title, int boardType) throws SQLException {
+  public List<Post> selectByTitle(String title, int boardType)
+      throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
-        + "on post.writer_id = staff.id " + "where title like ? "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post " + "left join staff " + "on post.writer_id = staff.id "
+        + "where title like ? "
         + "and boardtype_id = ? order by time desc limit 20";
 
     conn = ds.getConnection();
@@ -281,11 +284,13 @@ public class PostDao {
    * 
    * @return: List<Post>
    */
-  public List<Post> selectByContent(String content, int boardType) throws SQLException {
+  public List<Post> selectByContent(String content, int boardType)
+      throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
-        + "on post.writer_id = staff.id " + "where content like ? "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post " + "left join staff " + "on post.writer_id = staff.id "
+        + "where content like ? "
         + "and boardtype_id = ? order by time desc limit 20";
 
     conn = ds.getConnection();
@@ -334,11 +339,13 @@ public class PostDao {
    * 
    * @return: List<Post>
    */
-  public List<Post> selectByAll(String word, int boardType) throws SQLException {
+  public List<Post> selectByAll(String word, int boardType)
+      throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
-        + "on post.writer_id = staff.id " + "where title like ? or content like ? "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post " + "left join staff " + "on post.writer_id = staff.id "
+        + "where title like ? or content like ? "
         + "and boardtype_id = ? order by time desc limit 20";
 
     conn = ds.getConnection();
@@ -436,9 +443,9 @@ public class PostDao {
   public List<Post> selectByCount(int boardType) throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
-        + "on post.writer_id = staff.id " + "where boardtype_id = ? "
-        + "order by count desc limit 20";
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post " + "left join staff " + "on post.writer_id = staff.id "
+        + "where boardtype_id = ? " + "order by count desc limit 20";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -473,14 +480,15 @@ public class PostDao {
 
   public Post getPost(int id) throws SQLException {
     String sql = "select post.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id " + "from post " + "left join staff "
-        + "on post.writer_id = staff.id " + "where post.id = ?";
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, staff.staff_id "
+        + "from post " + "left join staff " + "on post.writer_id = staff.id "
+        + "where post.id = ?";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
-    
+
     Post post = null;
     if (rs.next()) {
       post = new Post();
@@ -627,7 +635,8 @@ public class PostDao {
   public List<Post> selectByCountForMain() throws SQLException {
     List<Post> list = new ArrayList<>();
     String sql = "select *, round(time_to_sec(timediff(NOW(), time)) / 60) as diff,"
-        + " date_format(time, '%m/%d %H:%i') as timeFormat " + "from post order by count desc limit 4";
+        + " date_format(time, '%m/%d %H:%i') as timeFormat "
+        + "from post order by count desc limit 4";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -686,7 +695,7 @@ public class PostDao {
     pstmt.close();
     conn.close();
   }
-  
+
   /*
    * @method Name: countHowManyPost
    * 
@@ -702,22 +711,22 @@ public class PostDao {
    */
   public int countHowManyPost(int boardType) throws SQLException {
     String sql = "select count(*) from post where boardtype_id = ?";
-    
+
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, boardType);
     rs = pstmt.executeQuery();
-    
+
     rs.next();
-    int count = rs.getInt(1); 
-    
+    int count = rs.getInt(1);
+
     rs.close();
     pstmt.close();
     conn.close();
-    
+
     return count;
   }
-  
+
   /*
    * @method Name: countHowManyPostWithOption
    * 
@@ -731,72 +740,74 @@ public class PostDao {
    * 
    * @return: int
    */
-  public int countHowManyPostWithOption(String option, String word, int boardType) throws SQLException {
-    String sql1 = "select count(*) from post where";
+  public int countHowManyPostWithOption(String option, String word,
+      int boardType) throws SQLException {
+    String sql1 = "select count(*) from post where ";
     String sql2 = "";
     String sql3 = "and boardtype_id = ?";
     word = "%" + word + "%";
-    
+
     conn = ds.getConnection();
-    
+
     switch (option) {
     case "title":
       sql2 = "title LIKE ? ";
-      pstmt = conn.prepareStatement(sql1 + sql2);
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
       pstmt.setString(1, word);
       pstmt.setInt(2, boardType);
+      break;
     case "content":
       sql2 = "content LIKE ? ";
-      pstmt = conn.prepareStatement(sql1 + sql2);
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
       pstmt.setString(1, word);
       pstmt.setInt(2, boardType);
+      break;
     case "all":
       sql2 = "(title LIKE ? OR content LIKE ?) ";
-      pstmt = conn.prepareStatement(sql1 + sql2);
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
       pstmt.setString(1, word);
       pstmt.setString(2, word);
       pstmt.setInt(3, boardType);
+      break;
     }
-    
+
     rs = pstmt.executeQuery();
-    
+
     rs.next();
-    int count = rs.getInt(1); 
+    int count = rs.getInt(1);
     
+    System.out.println("post count: " + count);
+
     rs.close();
     pstmt.close();
     conn.close();
-    
+
     return count;
   }
-  
-  public List<Post> getPostByPage(int page, int boardType) throws SQLException, NamingException {
+
+  public List<Post> getPostByPage(int page, int boardType)
+      throws SQLException, NamingException {
     CommentDao commentDao = new CommentDao();
     String sql1 = "set @rownum:=0";
-    String sql2 = "select * " + 
-        "from (select " + 
-        "@rownum:=@rownum + 1 as no, " + 
-        "p.*, " + 
-        "round(time_to_sec(timediff(NOW(), time)) / 60) as diff, " + 
-        "date_format(time, '%m/%d %H:%i') as timeFormat, " + 
-        "s.staff_id " + 
-        "from post p " + 
-        "left join staff s " + 
-        "on p.writer_id = s.id " + 
-        "where boardtype_id = ? " + 
-        "order by time desc) q " + 
-        "where no > ? " + 
-        "limit 20";
-    
+    String sql2 = "select * " + "from (select " + "@rownum:=@rownum + 1 as no, "
+        + "p.*, " + "round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, " + "s.staff_id "
+        + "from post p " + "left join staff s " + "on p.writer_id = s.id "
+        + "where boardtype_id = ? " + "order by time desc) q " + "where no > ? "
+        + "limit 20";
+
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql1);
     pstmt.executeUpdate();
     pstmt = conn.prepareStatement(sql2);
     pstmt.setInt(1, boardType);
     pstmt.setInt(2, (page - 1) * 20);
-    
+
     rs = pstmt.executeQuery();
-    
+
     List<Post> list = new ArrayList<Post>();
     while (rs.next()) {
       Post post = new Post();
@@ -813,21 +824,21 @@ public class PostDao {
       post.setCommentCount(commentDao.getCommentCount(post.getId()));
       list.add(post);
     }
-    
-    System.out.println(list);
-    
+
     rs.close();
     pstmt.close();
     conn.close();
-    
+
     return list;
   }
-  
+
   public List<Post> getPostByOption(int page, int boardType, String option, String word) throws NamingException, SQLException {
     CommentDao commentDao = new CommentDao();
-    String column = "";
-    word = "%" + word + "%";
+    word = "'%" + word + "%'";
     
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * from ";
+    String column = "";
     switch (option) {
     case "title":
       column = "title like " + word;
@@ -837,33 +848,32 @@ public class PostDao {
       break;
     case "all":
       column = "title like " + word + " or content like " + word;
+      break;
     }
     
-    String sql1 = "set @rownum:=0";
-    String sql2 = "select * from (" 
-        + "select " 
-        + "@rownum:=@rownum + 1 as no, "
-        + "p.*, " 
+    String sql3 = "(select @rownum:=@rownum + 1 as no, p.*, "
         + "round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, " 
-        + "s.staff_id "
-        + "from post p " 
-        + "left join staff s " 
-        + "on p.writer_id = s.id "
-        + "where boardtype_id = ? "
-        + "and "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, "
+        + "s.staff_id from post p "
+        + "left join staff s on p.writer_id = s.id "
+        + "where boardtype_id = "
+        + boardType
+        + " and "
         + column
-        + "order by time desc) q " 
-        + "where no > ? " 
+        + " order by time desc) q";
+
+   
+    String sql4 = " where no > ? " 
         + "limit 20";
+    
+    String sql = sql2 + sql3 + sql4;
     
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql1);
     pstmt.executeUpdate();
-    pstmt = conn.prepareStatement(sql2);
-    pstmt.setInt(1, boardType);
-    pstmt.setInt(2, (page - 1) * 20);
     
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, (page - 1) * 20);
     rs = pstmt.executeQuery();
     
     List<Post> list = new ArrayList<Post>();
