@@ -60,14 +60,15 @@
       </a>
     </c:forEach>
     </div>
-    <form class="searchInput">
-    <select name="searchPost" id="postSelect" class="postSelect">
-      <option value="titleSearch">제목</option>
-      <option value="contentSearch">내용</option>
-      <option value="allSearch">제목+내용</option>
-      <option value="orderByCount">조회순</option>
+    <form action="search" class="searchInput" method="post">
+    <select name="searchOption" id="postSelect" class="postSelect">
+      <option value="title">제목</option>
+      <option value="content">내용</option>
+      <option value="all">제목+내용</option>
+      <option value="count">조회순</option>
     </select> 
-    <input type="text" name="search" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/> 
+    <input type="text" name="searchWord" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/>
+    <input type="hidden" name="boardType" value="2"> 
     <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
     </form>
   </div>

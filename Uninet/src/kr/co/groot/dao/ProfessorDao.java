@@ -32,6 +32,20 @@ public class ProfessorDao {
 
   }
   
+  /*
+   * @method Name: selectAll
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 교수정보를  모두 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Professor>
+   */
+  
   public List<Professor> selectAll() throws SQLException {
     String sql = "select * from professor";
     conn = ds.getConnection();
