@@ -164,7 +164,7 @@
 .searchInput {
   display: flex;
   width: 230px;
-  margin-left: 28px;
+  margin-left: 23px;
   margin-top: 5px;
   padding: 8px 25px 5px 5px;
   border: 1px solid #a6a6a6;
@@ -267,6 +267,7 @@
 
 .board-bottom {
   display: flex;
+  justify-content: space-between;
 }
 
 .btn {
@@ -285,12 +286,27 @@
 }
 
 .page-btns {
-  margin-left: 40px;
   margin-top: 5px;
   display: flex;
 }
 
 .next-page {
-  margin: 5px 23px 0 auto;
+  /* margin: 5px 23px 0 auto; */
   font-size: 14px;
+  margin-top: 5px;
+  margin-right: 23px;
+}
+
+.current-btn {
+  font-weight: bold;
+}
+
+.prev-page {
+  margin: 5px 23px 0;
+  font-size: 14px;
+}
+
+.invisible {
+  opacity: 0;
+  cursor: default;
 }
