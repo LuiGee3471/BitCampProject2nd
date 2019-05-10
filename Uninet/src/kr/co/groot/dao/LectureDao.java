@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.json.simple.JSONObject;
+
 import kr.co.groot.dto.Lecture;
 
 public class LectureDao {
@@ -363,5 +365,30 @@ public class LectureDao {
 
     return lectureList;
   }
-
+    public JSONObject countByLecture() throws SQLException {
+      String sql = "select m.major_name, count(*) as count " 
+          +"from lecture l left join professor p on l.prof_id = p.id " 
+          +"left join major m on p.id = m.id " 
+          +"group by m.id";
+      System.out.println("하잇");
+      JSONObject json = new JSONObject();
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+          
+      
+      while(rs.next()) {
+        json.put(rs.getString("major_name"), rs.getInt("count"));
+      }
+      rs.close();
+      pstmt.close();
+      conn.close();
+      
+      System.out.println(json);
+      return json;
+      
+    }
+  
+  
+  
 }
