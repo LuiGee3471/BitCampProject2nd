@@ -264,3 +264,33 @@
   width: 100%;
   display: flex;
 }
+
+.board-bottom {
+  display: flex;
+}
+
+.btn {
+  border: 1px solid #C62917;
+  color: #C62917;
+  padding: 3px 5px;
+  line-height: 25px;
+  border-radius: 5px;
+  height: 25px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.page-btn {
+  padding: 3px 8px;
+}
+
+.page-btns {
+  margin-left: 40px;
+  margin-top: 5px;
+  display: flex;
+}
+
+.next-page {
+  margin: 5px 23px 0 auto;
+  font-size: 14px;
+}

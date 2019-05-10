@@ -9,22 +9,16 @@ import kr.co.groot.dao.PostDao;
 public class Paginator {
   private PostDao postDao;
   
-  public int getPageNumber(String option) throws NamingException, SQLException {
+  public int getPageNumber(int boardType) throws NamingException, SQLException {
     postDao = new PostDao();
-    int page = 0;
     
-    switch (option) {
-    case "default":
-    case "count":
-      int post = postDao.countHowManyPost();
-      page = (post % 20 == 0) ? (post / 20) : (post / 20 + 1);
-      break;
-    }
+    int post = postDao.countHowManyPost(boardType);
+    int page = (post % 20 == 0) ? (post / 20) : (post / 20 + 1);
     
     return page;
   }
   
-  public int getPageNumber(String option, String word) throws NamingException, SQLException {
+  public int getPageNumber(String option, String word, int boardType) throws NamingException, SQLException {
     postDao = new PostDao();
     int page = 0;
     int post = 0;
@@ -32,12 +26,12 @@ public class Paginator {
     switch (option) {
     case "default":
     case "count":
-      post = postDao.countHowManyPost();
+      post = postDao.countHowManyPost(boardType);
       break;
     case "title":
     case "content":
     case "all":
-      post = postDao.countHowManyPostWithOption(option, word);
+      post = postDao.countHowManyPostWithOption(option, word, boardType);
       break;
     }
     

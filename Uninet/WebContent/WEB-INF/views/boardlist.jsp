@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+  int totalPages = (int) request.getAttribute("pages");
+  int currentPage = (int) request.getAttribute("currentPage");
+  int startPage = 1;
+  if (currentPage >= 4) {
+    if (currentPage % 3 == 1) {
+      startPage = currentPage;
+    } else if (currentPage % 3 == 2) {
+      startPage = currentPage - 1;
+    } else {
+      startPage = currentPage - 2;
+    }
+  }
+  int endPage = 3;
+  if (totalPages <= 3) {
+    endPage = totalPages;
+  } else {
+    if (totalPages - startPage >= 3) {
+      endPage = startPage + 2;
+    } else {
+      endPage = totalPages;
+    }
+  }
+  
+  System.out.println("startpage: " + startPage);
+  System.out.println("endPage: " + endPage);
+  pageContext.setAttribute("startPage", startPage);
+  pageContext.setAttribute("endPage", endPage);
+%>
 <c:set var="list" value="${requestScope.list}" />
 <!DOCTYPE html>
 <html>
@@ -11,14 +40,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet"
   href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<title>Insert title here</title>
+<title>유니넷</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
     <div class="titlebox">
-      <h1>자유게시판</h1>
+      <h1>${requestScope.boardName}</h1>
     </div>
     <div class="textbox" id="textbox">
       <span>새 글을 작성해주세요!</span>
@@ -60,6 +89,7 @@
       </a>
     </c:forEach>
     </div>
+    <div class="board-bottom">
     <form action="search" class="searchInput" method="post">
     <select name="searchOption" id="postSelect" class="postSelect">
       <option value="title">제목</option>
@@ -71,6 +101,19 @@
     <input type="hidden" name="boardType" value="2"> 
     <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
     </form>
+    <div class="page-btns">
+      <c:if test="${pages > 4 && currentPage > 3}">
+        <div class="btn prv-btn">&lt;</div>
+      </c:if>
+      <c:forEach var="page" begin="${startPage}" end="${endPage}">
+        <div class="btn page-btn">${page}</div>
+      </c:forEach>
+      <c:if test="${pages - currentPage >= 3}">
+        <div class="btn next-btn">&gt;</div>
+      </c:if>
+    </div>
+    <div class="btn next-page">다음&nbsp;&gt;</div>
+    </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script type="text/javascript">

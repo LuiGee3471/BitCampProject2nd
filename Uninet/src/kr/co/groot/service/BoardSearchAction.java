@@ -48,7 +48,7 @@ public class BoardSearchAction implements Action{
       }
     
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/boardlist.jsp");
+    forward.setPath("/board/list?option=" + option);
     return forward;
   }
 
