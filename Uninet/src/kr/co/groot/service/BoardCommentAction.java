@@ -25,32 +25,29 @@ public class BoardCommentAction implements Action {
       String url = "";
       String msg = "";
      
-          
       comment.setContent(request.getParameter("comment"));
       comment.setWriterId(staff.getId());
-      comment.setRefer(Integer.parseInt(request.getParameter("commentId")));
+      comment.setWriter(staff);
+      comment.setRefer(id);
       result= dao.insertComment(comment);
       
       forward = new ActionForward();
       
       if(result>0) {
-        forward.setRedirect(false);
-        forward.setPath("/coment/writeok");
+        forward.setRedirect(true);
+        forward.setPath("read?id="+id);
       }else {
         msg = "실패하였습니다.";
-        url = "board/read";
+        url = "board/read?id="+id;
         forward.setRedirect(false);
         forward.setPath("/WEB-INF/views/redierct.jsp");
         request.setAttribute("msg", msg);
         request.setAttribute("url", url);
         
       }
-     
     }catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    
-     
     return forward;
   }
 

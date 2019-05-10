@@ -54,7 +54,7 @@ public class CommentDao {
       comment.setRecomment(rs.getString("recomment"));
       comment.setRefer(rs.getInt("refer"));
       comment.setReferComment(rs.getInt("refer_comment"));
-      comment.setWriter(staffDao.selectByUniqueId(rs.getInt("id")));
+      comment.setWriter(staffDao.selectByUniqueId(rs.getInt("writer_id")));
       comment.setDiff(rs.getLong("diff"));
       comment.setTimeFormat(rs.getString("timeFormat"));
       

@@ -139,6 +139,16 @@ body {
   font-weight: bold;
 }
 
+.comment-currentid {
+  margin: 0 10px 5px 0;
+  max-width: 90px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color:#60BBC2;
+}
+
 .comment-content {
   padding-bottom: 5px;
   line-height: 20px;
