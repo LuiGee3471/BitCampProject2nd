@@ -60,7 +60,7 @@
       </a>
     </c:forEach>
     </div>
-    <form class="searchInput">
+    <form action="search" class="searchInput" method="post">
     <select name="searchPost" id="postSelect" class="postSelect">
       <option value="titleSearch">제목</option>
       <option value="contentSearch">내용</option>
