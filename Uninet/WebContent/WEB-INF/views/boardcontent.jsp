@@ -12,6 +12,11 @@
   List<Comment> comments = (List<Comment>) request.getAttribute("comments");
   int id = (int) request.getAttribute("postId");
   
+  for (Comment c : comments) {
+    System.out.println("ID: " + c.getWriterId() + " Content: " + c.getContent());
+    System.out.println("Writer: " + c.getWriter().getStaffId());
+  }
+  
   StaffDao staffDao = new StaffDao();
   Staff writer = staffDao.selectByUniqueId(post.getWriterId());
   System.out.println(writer.getStaffId());

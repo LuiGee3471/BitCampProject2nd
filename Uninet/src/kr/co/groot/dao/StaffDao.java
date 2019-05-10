@@ -384,8 +384,7 @@ public class StaffDao {
     pstmt.setInt(1, id);
     rs = pstmt.executeQuery();
     Staff staff = new Staff();
-    while(rs.next()) {
-      
+    if (rs.next()) {     
       staff.setId(rs.getInt("id"));
       staff.setStaffId(rs.getString("staff_id"));
       staff.setEmail(rs.getString("email"));
@@ -396,7 +395,8 @@ public class StaffDao {
       staff.setIsAdmin(rs.getString("isAdmin"));
       staff.setIsManager(rs.getString("isManager"));
       staff.setDeptId(rs.getInt("dept_id"));
-    
+      
+      System.out.println("ID: " + id + " staff_id: " + staff.getStaffId());
     }
     rs.close();
     pstmt.close();
