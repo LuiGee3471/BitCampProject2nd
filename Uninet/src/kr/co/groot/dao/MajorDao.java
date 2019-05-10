@@ -30,6 +30,20 @@ public class MajorDao {
 
   }
   
+  /*
+   * @method Name: selectAll
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 학과정보를  모두 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Major>
+   */
+  
   public List<Major> selectAll() throws SQLException {
     String sql = "select * from major";
     conn = ds.getConnection();
