@@ -22,13 +22,17 @@
 <body>
   <div class = "chartMove">
 <jsp:include page="/common/top.jsp" flush="false" />
-    <canvas id="container" width="400" height="140"></canvas>
+    <canvas id="container" width="400" height="100"></canvas>
+    <div class = "chart-select">
+      <div class = "chart-select-center">
       <select id="chart" name="chart" class="selsize">
         <option value="lecture">학과별 강의 수</option>
         <option value="professor">학과별 교수 인원</option>
         <option value="day">요일별 수업 개수</option>
-      </select> <a class="" href="<%=request.getContextPath()%>/main">&lt;돌아가기</a>
+      </select> <a class="chart-link" href="<%=request.getContextPath()%>/main">&lt;돌아가기</a>
       </div>
+    </div>
+  </div>
 
 <script>
 
@@ -58,7 +62,11 @@ $(function() {
               'rgba(255, 206, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
               'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(126,255, 245, 0.2)',
+              'rgba(75 ,75 ,75, 0.2)',
+              'rgba(50 ,255 ,126, 0.2)',
+              'rgba(255 ,250 ,101,0.2)'
             ],
             borderColor: [
               'rgba(255, 99, 132, 1)',
@@ -66,7 +74,11 @@ $(function() {
               'rgba(255, 206, 86, 1)',
               'rgba(75, 192, 192, 1)',
               'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 159, 64, 1)',
+              'rgba(126, 255, 245, 1)',
+              'rgba(75 ,75 ,75, 1)',
+              'rgba(50, 255, 126, 1)',
+              'rgba(255 ,250 ,101, 1)'
           ],
           borderWidth: 1,
             data: valuelist,
@@ -76,11 +88,10 @@ $(function() {
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: keylist,
       };
-
       
-      /* if (myChart) {
+      if (myChart) {
         myChart.destroy();
-      } */
+      }
 
       myChart = new Chart(ctx, {
         type: 'bar',
@@ -129,10 +140,13 @@ $(function() {
         },
           title: {
             display: true,
-            text: "학과별 강의수"
+            text: '학과별 강의 수',
+            fontColor:'#4c4c4c',
+            fontSize:20
           }
         },
       });
+
 
 
 });
@@ -187,7 +201,8 @@ $("#chart").change(function() {
                 'rgba(255, 159, 64, 0.2)',
 	              'rgba(126,255, 245, 0.2)',
 	              'rgba(75 ,75 ,75, 0.2)',
-	              'rgba(50 ,255 ,126, 0.2)'
+	              'rgba(50 ,255 ,126, 0.2)',
+	              'rgba(255 ,250 ,101,0.2)'
 	            ],
 	            borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -198,7 +213,8 @@ $("#chart").change(function() {
                 'rgba(255, 159, 64, 1)',
 	              'rgba(126, 255, 245, 1)',
 	              'rgba(75 ,75 ,75, 1)',
-	              'rgba(50, 255, 126, 1)'
+	              'rgba(50, 255, 126, 1)',
+	              'rgba(255 ,250 ,101, 1)'
             ],
             borderWidth: 1,
 	            data: valuelist,
@@ -260,7 +276,9 @@ $("#chart").change(function() {
 	        },
 	          title: {
 	            display: true,
-	            text: titleText
+	            text: titleText,
+	            fontColor:'#4c4c4c',
+	            fontSize:20
 	          }
 	        },
 	      });
