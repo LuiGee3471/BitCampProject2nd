@@ -686,4 +686,48 @@ public class PostDao {
     pstmt.close();
     conn.close();
   }
+  
+  public int countHowManyPost() throws SQLException {
+    String sql = "select count(*) from post";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    int count = rs.getInt(1); 
+    
+    return count;
+  }
+  
+  public int countHowManyPostWithOption(String option, String word) throws SQLException {
+    String sql1 = "select count(*) from post where";
+    String sql2 = "";
+    word = "%" + word + "%";
+    
+    conn = ds.getConnection();
+    
+    switch (option) {
+    case "title":
+      sql2 = "title LIKE ?";
+      pstmt = conn.prepareStatement(sql1 + sql2);
+      pstmt.setString(1, word);
+    case "content":
+      sql2 = "content LIKE ?";
+      pstmt = conn.prepareStatement(sql1 + sql2);
+      pstmt.setString(1, word);
+    case "all":
+      sql2 = "title LIKE ? OR content LIKE ?";
+      pstmt = conn.prepareStatement(sql1 + sql2);
+      pstmt.setString(1, word);
+      pstmt.setString(2, word);
+    }
+    
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    int count = rs.getInt(1); 
+    
+    return count;
+  }
 }
