@@ -29,6 +29,9 @@ public class BoardListAction implements Action{
       int boardType = Integer.parseInt(request.getParameter("boardtype"));
       String option = request.getParameter("option");
       String word = request.getParameter("word");
+      if (word == null) {
+        word = "";
+      }
       String boardName = (boardType == 1) ? "공지사항" : "자유게시판";
       
       List<Post> list = null;
@@ -44,7 +47,10 @@ public class BoardListAction implements Action{
       case "all":
         list = postDao.getPostByOption(pageNumber, boardType, option, word);
         page = paginator.getPageNumber(option, word, boardType);
+        break;
       }
+      
+      System.out.println("페이지 수: " + page);
       
       request.setAttribute("boardName", boardName);
       request.setAttribute("boardType", boardType);

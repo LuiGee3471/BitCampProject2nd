@@ -14,7 +14,8 @@
       startPage = currentPage - 2;
     }
   }
-  int endPage = 3;
+  
+  int endPage = 0;
   if (totalPages <= 3) {
     endPage = totalPages;
   } else {
@@ -25,8 +26,7 @@
     }
   }
   
-  System.out.println("startpage: " + startPage);
-  System.out.println("endPage: " + endPage);
+  System.out.println(startPage + " / " + endPage);
   pageContext.setAttribute("startPage", startPage);
   pageContext.setAttribute("endPage", endPage);
 %>
@@ -90,31 +90,51 @@
     </c:forEach>
     </div>
     <div class="board-bottom">
-    <form action="search" class="searchInput" method="post">
-    <select name="searchOption" id="postSelect" class="postSelect">
-      <option value="title">제목</option>
-      <option value="content">내용</option>
-      <option value="all">제목+내용</option>
-      <option value="count">조회순</option>
-    </select> 
-    <input type="text" name="searchWord" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/>
-    <input type="hidden" name="boardType" value="2"> 
-    <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
-    </form>
+    <c:choose>
+    <c:when test="${currentPage == 1}">
+      <form action="list" class="searchInput" method="post">
+        <select name="option" id="postSelect" class="postSelect">
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+          <option value="all">제목+내용</option>
+          <option value="count">조회순</option>
+        </select> 
+        <input type="text" name="word" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/>
+        <input type="hidden" name="boardtype" value="2">
+        <input type="hidden" name="page" value="1"> 
+        <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
+      </form>
+    </c:when>
+    <c:otherwise>
+      <div class="btn prev-page">&lt;&nbsp;이전</div>
+    </c:otherwise>
+    </c:choose>
     <div class="page-btns">
-      <c:if test="${pages > 4 && currentPage > 3}">
+      <c:if test="${pages > 3 && currentPage > 3}">
         <div class="btn prv-btn">&lt;</div>
       </c:if>
       <c:forEach var="page" begin="${startPage}" end="${endPage}">
-        <div class="btn page-btn">${page}</div>
+        <c:choose>
+          <c:when test="${page == currentPage}">
+            <div class="btn page-btn current-btn">${page}</div>
+          </c:when>
+          <c:otherwise>
+            <div class="btn page-btn">${page}</div>
+          </c:otherwise>
+        </c:choose>
       </c:forEach>
-      <c:if test="${pages - currentPage >= 3}">
+      <c:if test="${pages - endPage > 0}">
         <div class="btn next-btn">&gt;</div>
       </c:if>
     </div>
-    <c:if test="${currentPage < pages}">
-      <div class="btn next-page">다음&nbsp;&gt;</div>
-    </c:if>
+    <c:choose>
+      <c:when test="${currentPage < pages}">
+        <div class="btn next-page">다음&nbsp;&gt;</div>
+      </c:when>
+      <c:otherwise>
+        <div class="btn next-page invisible">다음&nbsp;&gt;</div>
+      </c:otherwise>
+    </c:choose>
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
@@ -126,13 +146,15 @@
     
     $(".page-btn").click(function() {
     	var pageNo = Number($(this).text());
-    	var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+    	var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
     	location.href = url;
     });
     
     $(".next-page").click(function() {
-    	var url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
-    	location.href = url;
+    	if (!$(this).hasClass("invisible")) {
+    	  var url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+    	  location.href = url;
+    	}
     });
     
     $(".prv-btn").click(function() {
@@ -147,7 +169,7 @@
     		pageToMove = currentPage - 3;
     	}
     	
-    	var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+    	var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
     	location.href = url;
     });
     
@@ -163,7 +185,7 @@
           pageToMove = currentPage + 1;
         }
         
-        var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>";
+        var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
         location.href = url;
       });
     

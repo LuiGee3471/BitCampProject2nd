@@ -12,5 +12,9 @@ public class test {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd hh:mm");
 		String day = sdf.format(birthday);
 		System.out.println(day);
+		
+		int post = 61;
+		int page = (post % 20 == 0) ? (post / 20) : (post / 20 + 1);
+		System.out.println("Pages: " + page);
 	}
 }

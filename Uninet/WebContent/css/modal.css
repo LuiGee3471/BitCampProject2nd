@@ -73,7 +73,7 @@ button.button:hover {
 
 input[type=text] {
   border : none;
-  border-bottom: 2px solid #7efff5;
+  border-bottom: 2px solid #77160A;
   width: 400px;
 }
 
@@ -83,9 +83,10 @@ input[type=text]:focus {
 }
 
 .label-input {
-  color:#7efff5;
+  color:#77160A;
   font-weight: bold;
   font-size: 1.5em;
+  position: relative;
 }
 .searchBtn {
   margin-top:10px;
@@ -94,9 +95,10 @@ input[type=text]:focus {
   height:30px;
   background-color:white;
   border:none;
-  color:#7EFFF5;
+  color:#77160A;
   font-weight:bold;
   font-size:21px;
+  position: absolute; 
 }
 
 
@@ -108,7 +110,7 @@ input[type=text]:focus {
   height:30px;
   background-color:white;
   border:none;
-  color:#7EFFF5;
+  color:#77160A;
   font-weight:bold;
   font-size:21px;
 }

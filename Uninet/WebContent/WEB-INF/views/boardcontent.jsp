@@ -90,7 +90,13 @@
               <div class="comment-sub">
                 <span class="recomment-option" id="recomment">대댓글</span> 
                 <span class="comment-option">쪽지</span>
-                <c:if test="${curruser.staffId == comment.writer.staffId}"><span class="comment-option" id="commentDelete">삭제</span></c:if>
+                <form action="deleteComment" method ="post">
+                <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="delete-option" id="commentDelete">삭제</button>
+                <input type="hidden" value="${comment.id}" name="deleteId">
+                <input type="hidden" value="${id}" name="postId">
+                </c:if>
+               
+                </form>
               </div>
             </div>
             <div id="recomment-input" class="recomment-input unseen">
@@ -125,7 +131,12 @@
               </div>
               <div class="comment-sub">
                 <span class="comment-option">쪽지</span>
-                <c:if test="${curruser.staffId == comment.writer.staffId}"><span class="comment-option" id="commentDelete">삭제</span></c:if>
+                <form action="deleteComment" method ="post">
+                <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="recomment-delete" id="commentDelete">삭제</button>
+                <input type="hidden" value="${comment.id}" name="deleteId">
+                <input type="hidden" value="${id}" name="postId">
+                </c:if>
+                </form>
               </div>
             </div>
           </c:otherwise>
@@ -151,6 +162,11 @@
      var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
      recommentDiv.removeClass("unseen");
   });
+  
+  $(".delete-option").click(function() {
+    
+    
+  })
 </script>
 </body>
 </html>

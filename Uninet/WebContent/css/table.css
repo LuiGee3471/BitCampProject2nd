@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.lecturetable tr{
+  border:none;
+  border-bottom:1px solid black;
+  
+}
+
+.lecturetable th, td {
+  padding:10px;
+}

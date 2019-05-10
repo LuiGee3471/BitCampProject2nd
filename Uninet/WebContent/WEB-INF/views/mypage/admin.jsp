@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>회원관리</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -37,6 +40,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="/common/top.jsp" flush="false" />
 	<h3>내정보</h3>
 	<ul>
 		<li><h4>내정보</h4></li>
@@ -80,5 +84,6 @@
 	</select>
 	<input type="text" id="input" name="searchInput">
 	<input type="button" id="btn" value="검색">
+  <jsp:include page="/common/bottom.jsp" flush="false" />
 </body>
 </html>
