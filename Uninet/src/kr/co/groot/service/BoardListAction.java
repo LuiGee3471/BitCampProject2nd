@@ -14,6 +14,7 @@ import kr.co.groot.dao.PostDao;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Post;
 import kr.co.groot.dto.Staff;
+import kr.co.groot.page.Paginator;
 
 
 public class BoardListAction implements Action{
@@ -23,16 +24,37 @@ public class BoardListAction implements Action{
     ActionForward forward = null;
     try {
       PostDao postDao = new PostDao();
-      CommentDao commentDao = new CommentDao();
-      List<Post> postlist;
-      postlist = postDao.selectPostByBoardType(2);
-      for (Post p : postlist) {
-        p.setCommentCount(commentDao.getCommentCount(p.getId()));
+      Paginator paginator = new Paginator();
+      int pageNumber = Integer.parseInt(request.getParameter("page"));
+      int boardType = Integer.parseInt(request.getParameter("boardtype"));
+      String option = request.getParameter("option");
+      String word = request.getParameter("word");
+      String boardName = (boardType == 1) ? "공지사항" : "자유게시판";
+      
+      List<Post> list = null;
+      int page = 1;
+      switch (option) {
+      case "default":
+      case "count":
+        list = postDao.getPostByPage(pageNumber, boardType);
+        page = paginator.getPageNumber(boardType);
+        break;
+      case "title":
+      case "content":
+      case "all":
+        list = postDao.getPostByOption(pageNumber, boardType, option, word);
+        page = paginator.getPageNumber(option, word, boardType);
       }
-      request.setAttribute("list", postlist);
+      
+      request.setAttribute("boardName", boardName);
+      request.setAttribute("list", list);
+      request.setAttribute("currentPage", pageNumber);
+      request.setAttribute("pages", page);
+      
       forward = new ActionForward();
       forward.setRedirect(false);
       forward.setPath("/WEB-INF/views/boardlist.jsp");
+      
     } catch (SQLException e) {  
       System.out.println(e.getMessage());
     } catch (NamingException e) {

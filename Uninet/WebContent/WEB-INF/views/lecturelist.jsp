@@ -103,12 +103,13 @@
       <td>${lecture.profName }</td>
       <td><a href = "updatePage?id=${lecture.id}">수정</a></td>
       <td><a href = "delete?id=${lecture.id}">삭제</a></td>
-      <td><a href = "write">추가</a></td>
+      <td></td>
         
     </tr>
     </c:forEach>
     </tbody>
   </table>
+  <a href = "write"><button class="">수업추가</button></a>
  </div>
  
 

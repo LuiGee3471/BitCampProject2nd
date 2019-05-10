@@ -99,6 +99,34 @@ public class StaffDao {
     
     return staff;
   }
+  
+  public Staff selectInfo(int id) throws SQLException {
+	    String sql = "select * from staff left join department "
+	        + "on staff.dept_id = department.id where staff.id = ?";
+	    Staff staff = new Staff();
+
+	    conn = ds.getConnection();
+	    pstmt = conn.prepareStatement(sql);
+	    pstmt.setInt(1, id);
+	    rs = pstmt.executeQuery();
+
+	    if (rs.next()) {
+	      staff.setId(rs.getInt("id"));
+	      staff.setStaffId(rs.getString(2));
+	      staff.setPassword(rs.getString(3));
+	      staff.setEmail(rs.getString(4));
+	      staff.setPhoneNumber(rs.getString(5));
+	      staff.setStaffName(rs.getString(6));
+	      staff.setBirthday(rs.getTimestamp(7));
+	      staff.setImage(rs.getString(8));
+	      staff.setIsAdmin(rs.getString(9));
+	      staff.setIsManager(rs.getString(10));
+	      staff.setDeptId(rs.getInt(11));
+	      staff.setDeptName(rs.getString("dept_name"));
+	    }
+	    
+	    return staff;
+	  }
 
   /*
    * @method Name: insertStaff
@@ -464,6 +492,37 @@ public class StaffDao {
 	  conn.close();
 	  System.out.println("변경완료");
 	  System.out.println(row);
+	  return row;
+  }
+  /*
+   * @method Name: modifyStaff
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 관리자페이지에서 직원 정보 변경.
+   * 
+   * @param spec: Staff staff
+   *
+   * @return: int
+   */
+  public int modifyStaff(Staff staff) throws Exception {
+	  int row = 0;
+	  String sql = "update staff set phoneNumber = ? , isAdmin = ? , isManager = ? , dept_id = ? where id = ? ";
+	  conn = ds.getConnection();
+	  pstmt = conn.prepareStatement(sql);
+	  pstmt.setString(1, staff.getPhoneNumber());
+	  pstmt.setString(2, staff.getIsAdmin());
+	  pstmt.setString(3, staff.getIsManager());
+	  pstmt.setInt(4, staff.getDeptId());
+	  pstmt.setInt(5, staff.getId());
+	  
+	  row = pstmt.executeUpdate();
+	  
+	  pstmt.close();
+	  conn.close();
+	  
 	  return row;
   }
 }

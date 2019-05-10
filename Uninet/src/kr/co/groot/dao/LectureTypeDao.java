@@ -27,6 +27,19 @@ public class LectureTypeDao {
     ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
 
   }
+  /*
+   * @method Name: selectAll
+   * 
+   * @date: 2019. 5. 8
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 종별정보를  모두 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<LectureType>
+   */
   
   public List<LectureType> selectAll() throws SQLException {
     String sql = "select * from lecturetype";

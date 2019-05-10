@@ -185,13 +185,10 @@ public class LectureDao {
     String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
         + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id "
-        + "LEFT JOIN major m " 
-        + "ON p.major_id = m.id " 
-        + "WHERE ";
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "WHERE ";
 
     String lastSQL = " LIKE ?";
-    
+
     String column = "";
     switch (criterion) {
     case "lecture":
@@ -206,17 +203,17 @@ public class LectureDao {
     default:
       column = "lecture_name";
     }
-   
+
     String sql = firstSQL + column + lastSQL;
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    
+
     String strToSearch = "%%" + input + "%%";
     System.out.println(column + strToSearch);
-    
+
     pstmt.setString(1, strToSearch);
-  
+
     rs = pstmt.executeQuery();
 
     List<Lecture> lectureList = new ArrayList<>();
@@ -311,7 +308,7 @@ public class LectureDao {
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
         + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
         + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "ORDER BY ";
-    
+
     String order = "";
     String lastSQL = " asc ";
     switch (criterion) {
@@ -333,11 +330,10 @@ public class LectureDao {
     default:
       order = "id";
     }
-    
+
     String sql = firstSQL + order + lastSQL;
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
-    
 
     rs = pstmt.executeQuery();
 
@@ -365,30 +361,107 @@ public class LectureDao {
 
     return lectureList;
   }
-    public JSONObject countByLecture() throws SQLException {
-      String sql = "select m.major_name, count(*) as count " 
-          +"from lecture l left join professor p on l.prof_id = p.id " 
-          +"left join major m on p.id = m.id " 
-          +"group by m.id";
-      System.out.println("하잇");
-      JSONObject json = new JSONObject();
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      rs = pstmt.executeQuery();
-          
-      
-      while(rs.next()) {
-        json.put(rs.getString("major_name"), rs.getInt("count"));
-      }
-      rs.close();
-      pstmt.close();
-      conn.close();
-      
-      System.out.println(json);
-      return json;
-      
+  /*
+   * @method Name: countByLecture
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 학과별 강의수를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: JSON
+   */
+
+  public JSONObject countByLecture() throws SQLException {
+    String sql = "select m.major_name, count(*) as count " + "from lecture l left join professor p on l.prof_id = p.id "
+        + "left join major m on p.id = m.id " + "group by m.id " + "order by m.major_name";
+    System.out.println("하잇");
+    JSONObject json = new JSONObject();
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      json.put(rs.getString("major_name"), rs.getInt("count"));
     }
-  
-  
-  
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    System.out.println(json);
+    return json;
+
+  }
+
+  /*
+   * @method Name: countByTime
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 요일별 수업개수를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: JSON
+   */
+  public JSONObject countByTime() throws SQLException {
+    String sql = "select lecture_name, substr(time, 1, 1) as day, " + "count(substr(time, 1, 1)) as count from lecture "
+        + "group by substr(time, 1, 1) " + "order by field(day, '월','화','수','목','금')";
+    JSONObject json = new JSONObject();
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      json.put(rs.getString("day"), rs.getInt("count"));
+    }
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    System.out.println(json);
+    return json;
+
+  }
+
+  /*
+   * @method Name: countByProfessor
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 학과별 교수 인원 수를 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: JSON
+   */
+
+  public JSONObject countByProfessor() throws SQLException {
+    String sql = "select m.major_name as major_name, count(m.major_name) as count "
+        + "from professor p left join major m " + "on p.major_id = m.id " + "group by m.major_name";
+
+    JSONObject json = new JSONObject();
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      json.put(rs.getString("major_name"), rs.getInt("count"));
+    }
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    System.out.println(json);
+    return json;
+
+  }
+
 }
