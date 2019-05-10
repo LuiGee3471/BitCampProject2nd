@@ -68,7 +68,7 @@
         </c:forEach>
       </div>
       <div class="card board">
-        <h3><a href="board/list">자유게시판</a></h3>     
+        <h3><a href="board/list?page=1&option=default&boardtype=2">자유게시판</a></h3>     
         <c:forEach var="post" items="<%=recentPost%>">
         <a href="board/read?id=${post.id}" class="list"><span class="board-title">${post.title}</span>
           <c:choose>

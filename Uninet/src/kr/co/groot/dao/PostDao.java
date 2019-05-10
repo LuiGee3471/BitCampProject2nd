@@ -687,11 +687,25 @@ public class PostDao {
     conn.close();
   }
   
-  public int countHowManyPost() throws SQLException {
-    String sql = "select count(*) from post";
+  /*
+   * @method Name: countHowManyPost
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 게시판의 글 개수를 구한다
+   * 
+   * @param spec: int boardType
+   * 
+   * @return: int
+   */
+  public int countHowManyPost(int boardType) throws SQLException {
+    String sql = "select count(*) from post where boardtype_id = ?";
     
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, boardType);
     rs = pstmt.executeQuery();
     
     rs.next();
@@ -700,27 +714,44 @@ public class PostDao {
     return count;
   }
   
-  public int countHowManyPostWithOption(String option, String word) throws SQLException {
+  /*
+   * @method Name: countHowManyPostWithOption
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 특정 조건 하에서 게시판 글 개수를 구한다
+   * 
+   * @param spec: String option, String word, int boardType
+   * 
+   * @return: int
+   */
+  public int countHowManyPostWithOption(String option, String word, int boardType) throws SQLException {
     String sql1 = "select count(*) from post where";
     String sql2 = "";
+    String sql3 = "and boardtype_id = ?";
     word = "%" + word + "%";
     
     conn = ds.getConnection();
     
     switch (option) {
     case "title":
-      sql2 = "title LIKE ?";
+      sql2 = "title LIKE ? ";
       pstmt = conn.prepareStatement(sql1 + sql2);
       pstmt.setString(1, word);
+      pstmt.setInt(2, boardType);
     case "content":
-      sql2 = "content LIKE ?";
+      sql2 = "content LIKE ? ";
       pstmt = conn.prepareStatement(sql1 + sql2);
       pstmt.setString(1, word);
+      pstmt.setInt(2, boardType);
     case "all":
-      sql2 = "title LIKE ? OR content LIKE ?";
+      sql2 = "(title LIKE ? OR content LIKE ?) ";
       pstmt = conn.prepareStatement(sql1 + sql2);
       pstmt.setString(1, word);
       pstmt.setString(2, word);
+      pstmt.setInt(3, boardType);
     }
     
     rs = pstmt.executeQuery();
@@ -729,5 +760,125 @@ public class PostDao {
     int count = rs.getInt(1); 
     
     return count;
+  }
+  
+  public List<Post> getPostByPage(int page, int boardType) throws SQLException, NamingException {
+    CommentDao commentDao = new CommentDao();
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * " + 
+        "from (select " + 
+        "@rownum:=@rownum + 1 as no, " + 
+        "p.*, " + 
+        "round(time_to_sec(timediff(NOW(), time)) / 60) as diff, " + 
+        "date_format(time, '%m/%d %H:%i') as timeFormat, " + 
+        "s.staff_id " + 
+        "from post p " + 
+        "left join staff s " + 
+        "on p.writer_id = s.id " + 
+        "where boardtype_id = ? " + 
+        "order by time desc) q " + 
+        "where no > ? " + 
+        "limit 20";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql2);
+    pstmt.setInt(1, boardType);
+    pstmt.setInt(2, (page - 1) * 20);
+    
+    rs = pstmt.executeQuery();
+    
+    List<Post> list = new ArrayList<Post>();
+    while (rs.next()) {
+      Post post = new Post();
+      post.setId(rs.getInt("id"));
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setStaffId(rs.getString("staff_id"));
+      post.setCommentCount(commentDao.getCommentCount(post.getId()));
+      list.add(post);
+    }
+    
+    System.out.println(list);
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return list;
+  }
+  
+  public List<Post> getPostByOption(int page, int boardType, String option, String word) throws NamingException, SQLException {
+    CommentDao commentDao = new CommentDao();
+    String column = "";
+    word = "%" + word + "%";
+    
+    switch (option) {
+    case "title":
+      column = "title like " + word;
+      break;
+    case "content":
+      column = "content like " + word;
+      break;
+    case "all":
+      column = "title like " + word + " or content like " + word;
+    }
+    
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * from (" 
+        + "select " 
+        + "@rownum:=@rownum + 1 as no, "
+        + "p.*, " 
+        + "round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, " 
+        + "s.staff_id "
+        + "from post p " 
+        + "left join staff s " 
+        + "on p.writer_id = s.id "
+        + "where boardtype_id = ? "
+        + "and "
+        + column
+        + "order by time desc) q " 
+        + "where no > ? " 
+        + "limit 20";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql2);
+    pstmt.setInt(1, boardType);
+    pstmt.setInt(2, (page - 1) * 20);
+    
+    rs = pstmt.executeQuery();
+    
+    List<Post> list = new ArrayList<Post>();
+    while (rs.next()) {
+      Post post = new Post();
+      post.setId(rs.getInt("id"));
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setDiff(rs.getLong("diff"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setStaffId(rs.getString("staff_id"));
+      post.setCommentCount(commentDao.getCommentCount(post.getId()));
+      list.add(post);
+    }
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return list;
   }
 }
