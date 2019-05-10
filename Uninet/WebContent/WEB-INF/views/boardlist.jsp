@@ -139,14 +139,16 @@
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script type="text/javascript">
-    $("#textbox").click(function() {
-      $(this).addClass("unseen");
-      $("#postform").removeClass("unseen");
-    });
-    
-    $(".page-btn").click(function() {
-    	var pageNo = Number($(this).text());
-    	var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+			$("#textbox").click(function() {
+				$(this).addClass("unseen");
+				$("#postform").removeClass("unseen");
+			});
+
+			$(".page-btn")
+					.click(
+							function() {
+								var pageNo = Number($(this).text());
+								var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
     	location.href = url;
     });
     

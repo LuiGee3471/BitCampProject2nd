@@ -20,8 +20,8 @@
     </div>
 
     <div class="mypage">
-      <a class="my-link" href="message"><img src="<%=request.getContextPath()%>/images/mail.png" alt="쪽지"></a>
-      <a class="my-link" href="mypage"><img src="<%=request.getContextPath()%>/images/user.png" alt="마이페이지"></a>
+      <a class="my-link" href="<%=request.getContextPath()%>/message"><img src="<%=request.getContextPath()%>/images/mail.png" alt="쪽지"></a>
+      <a class="my-link" href="<%=request.getContextPath()%>/mypage"><img src="<%=request.getContextPath()%>/images/user.png" alt="마이페이지"></a>
     </div>
   </div>
 </nav>

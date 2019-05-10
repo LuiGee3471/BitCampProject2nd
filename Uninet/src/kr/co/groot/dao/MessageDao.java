@@ -83,11 +83,13 @@ public class MessageDao {
 
   public int insertMessage(Message message) throws SQLException {
     int row = 0;
-    String sql = "insert into message(content) values(?)";
+    String sql = "insert into message(content, receiver_id, sender_id, time) values(?, ?, ?, NOW())";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, message.getContent());
+    pstmt.setInt(2, message.getReceiverId());
+    pstmt.setInt(3, message.getSenderId());
 
     row = pstmt.executeUpdate();
 

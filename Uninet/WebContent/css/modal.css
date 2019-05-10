@@ -4,114 +4,160 @@
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 8888; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 8888; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 10vh auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 2px solid #888;
-    width: 40%; /* Could be more or less, depending on screen size */
-    height: 20%;
-    margin-top:200px;
-    
+  background-color: #fefefe;
+  margin: 10vh auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 2px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+  height: 20%;
+  margin-top: 200px;
 }
-@media (min-width: 1366px) {
+
+@media ( min-width : 1366px) {
   .modal-content {
     background-color: #fefefe;
     margin: 10vh auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 30%; /* Could be more or less, depending on screen size */
-    }
+  }
 }
 
 /* The Close Button */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 button.button {
-    background:none;
-  border-top:none;
-  border-right:none;
-  border-left:none;
-  border-bottom:#02274a 1px solid;
-  padding:0 0 3px 0;
-  font-size:16px;
+  background: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: #02274a 1px solid;
+  padding: 0 0 3px 0;
+  font-size: 16px;
 }
 
 button.button:hover {
-  border-bottom:#a99567 1px solid;
-  color:#a99567;
+  border-bottom: #a99567 1px solid;
+  color: #a99567;
 }
 
 .input-text {
-  margin-top : 40px;
+  margin-top: 40px;
 }
 
 input[type=text] {
-  border : none;
+  border: none;
   border-bottom: 2px solid #7efff5;
   width: 400px;
 }
 
 input[type=text]:focus {
-  outline:none;
-
+  outline: none;
 }
 
 .label-input {
-  color:#7efff5;
+  color: #7efff5;
   font-weight: bold;
   font-size: 1.5em;
 }
-.searchBtn {
-  margin-top:10px;
-  margin-left:400px;
-  width:60px;
-  height:30px;
-  background-color:white;
-  border:none;
-  color:#7EFFF5;
-  font-weight:bold;
-  font-size:21px;
-}
 
+.searchBtn {
+  margin-top: 10px;
+  margin-left: 400px;
+  width: 60px;
+  height: 30px;
+  background-color: white;
+  border: none;
+  color: #7EFFF5;
+  font-weight: bold;
+  font-size: 21px;
+}
 
 .searchBtn2 {
   margin-top: 100px;
-  margin-left:400px;
-  margin-bottom:40px;
-  width:60px;
-  height:30px;
-  background-color:white;
-  border:none;
-  color:#7EFFF5;
-  font-weight:bold;
-  font-size:21px;
+  margin-left: 400px;
+  margin-bottom: 40px;
+  width: 60px;
+  height: 30px;
+  background-color: white;
+  border: none;
+  color: #7EFFF5;
+  font-weight: bold;
+  font-size: 21px;
 }
 
+.message-modal {
+  position: relative;
+}
 
+.message-form {
+  display: flex;
+  flex-direction: column;
+}
 
+.message-text {
+  padding: 5px;
+  width: 100%;
+  height: 80px;
+  line-height: 20px;
+  border: 1px solid #e3e3e3;
+  box-sizing: border-box;
+  resize: none;
+  color: #292929;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.message-title {
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  font-size: 35px;
+}
+
+.message-submit {
+  margin-top: 5px;
+  margin-left: auto;
+  padding: 0 12px;
+  height: 30px;
+  line-height: 30px;
+  border: 0;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #c62917;
+  cursor: pointer;
+}
