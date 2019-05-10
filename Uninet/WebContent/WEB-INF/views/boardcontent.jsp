@@ -11,7 +11,8 @@
   Post post = (Post) request.getAttribute("post");
   List<Comment> comments = (List<Comment>) request.getAttribute("comments");
   int id = (int) request.getAttribute("postId");
-  
+  session = request.getSession();
+  Staff staff = (Staff) session.getAttribute("staff");
   StaffDao staffDao = new StaffDao();
   Staff writer = staffDao.selectByUniqueId(post.getWriterId());
   System.out.println(writer.getStaffId());
@@ -24,6 +25,7 @@
 <c:set var="comments" value="${comments}"/>
 <c:set var="id" value="${postId}"/> 
 <c:set var="writer" value="${writer}"/>
+<c:set var="curruser" value="${staff}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +76,10 @@
                     src="<%=request.getContextPath()%>/images/${comment.writer.image}" 
                     alt="" 
                     class="comment-photo" /> 
-                  <span class="comment-id">${comment.writer.staffId}</span>
+                  <c:choose>
+                    <c:when test="${curruser.staffId == comment.writer.staffId}"><span class="comment-currentid">${curruser.staffId}(글쓴이)</span></c:when>
+                    <c:otherwise><span class="comment-id">${comment.writer.staffId}</span></c:otherwise>
+                  </c:choose>
                 </div>
                 <p class="comment-content">${comment.content}</p>
                 <span class="time">${comment.timeFormat}</span>
@@ -93,7 +98,10 @@
                     src="<%=request.getContextPath()%>/images/${comment.writer.image}" 
                     alt=""
                     class="comment-photo" /> 
-                  <span class="comment-id">${comment.writer.staffId}</span>
+                 <c:choose>
+                    <c:when test="${curruser.staffId == comment.writer.staffId}"><span class="comment-currentid">${comment.writer.staffId}(글쓴이)</span></c:when>
+                    <c:otherwise><span class="comment-id">${comment.writer.staffId}</span></c:otherwise>
+                  </c:choose>
                 </div>
                 <p class="comment-content">${comment.content}</p>
                 <span class="time">${comment.timeFormat}</span>
