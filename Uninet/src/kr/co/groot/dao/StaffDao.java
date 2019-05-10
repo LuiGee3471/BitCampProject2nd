@@ -387,6 +387,8 @@ public class StaffDao {
     if (rs.next()) {     
       staff.setId(rs.getInt("id"));
       staff.setStaffId(rs.getString("staff_id"));
+       System.out.println(rs.getString("staff_id"));
+       System.out.println(rs.getString("staff_id"));
       staff.setEmail(rs.getString("email"));
       staff.setPhoneNumber(rs.getString("phoneNumber"));
       staff.setStaffName(rs.getString("staff_name"));

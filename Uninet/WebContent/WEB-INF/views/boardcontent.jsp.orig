@@ -11,7 +11,17 @@
   Post post = (Post) request.getAttribute("post");
   List<Comment> comments = (List<Comment>) request.getAttribute("comments");
   int id = (int) request.getAttribute("postId");
+<<<<<<< HEAD
+  
+  for (Comment c : comments) {
+    System.out.println("ID: " + c.getWriterId() + " Content: " + c.getContent());
+    System.out.println("Writer: " + c.getWriter().getStaffId());
+  }
+  
+=======
+  session = request.getSession();
   Staff staff = (Staff) session.getAttribute("staff");
+>>>>>>> 5e2d29b2392aa2d6505039777723004d76ed5603
   StaffDao staffDao = new StaffDao();
   Staff writer = staffDao.selectByUniqueId(post.getWriterId());
   System.out.println(writer.getStaffId());
