@@ -10,6 +10,7 @@
 <%
 	request.getParameter("id");
 %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
 <body>
 	<h3>회원정보 수정 페이지</h3>
 	<c:set var="staff" value="${requestScope.staff }" />
@@ -21,9 +22,7 @@
 		<span>이메일</span> <input type="email" id="email" name="email"
 			value="${staff.email}" readOnly><br> <span>핸드폰 번호</span>
 		<input type="text" id="phoneNumber" name="phoneNumber"
-			value="${staff.phoneNumber}"><br> <span>생년월일</span> <input
-			type="text" id="birthday" name="birthday" value="${staff.birthday}"
-			readOnly><br> 
+			value="${staff.phoneNumber}"><br> 
 			<c:if test="${staff.isAdmin } eq 'Y' "></c:if>
 			<span>사이트 관리자 </span> <input type="text"
 			id="isAdmin" name="isAdmin" value="${staff.isAdmin }"><br>
