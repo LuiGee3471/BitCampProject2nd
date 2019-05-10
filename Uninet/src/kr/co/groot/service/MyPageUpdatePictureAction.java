@@ -12,7 +12,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
-import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
 public class MyPageUpdatePictureAction implements Action {
