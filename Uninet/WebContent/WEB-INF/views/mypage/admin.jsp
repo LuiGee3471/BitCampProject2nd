@@ -68,6 +68,8 @@
 				<td>${staffList.birthday }</td>
 				<td>${staffList.deptName }</td>
 				<td><a href="modify?id=${staffList.id }">수정</a></td>
+				<td><a href="delete?id=${staffList.id }">삭제</a></td>
+        
 			</tr>
 		</c:forEach>
 		</tbody>
