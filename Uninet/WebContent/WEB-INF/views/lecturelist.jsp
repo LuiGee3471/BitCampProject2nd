@@ -128,19 +128,25 @@
   <div class="modal-content">
     <div class="contact-form">
       <a class="close">&times;</a>
-       <label>과목명</label>
-          <input type = "radio" value = "lecture" name = "searchradio">
+        <div class = "label-container">
+       <label for = "lectureSelect">과목명</label>
+          <input type = "radio" value = "lecture" name = "searchradio" id = "lectureSelect">
+          
+          <label for = profSelect>교수명</label>
+          <input type = "radio" value = "prof" name = "searchradio" id = "profSelect">
+          
+          <label for = majorSelect>전공명</label>
+          <input type = "radio" value = "major" name = "searchradio" id = "majorSelect">
+          </div>
+          <div class = "input-text">
+          <label for = "searchInput" class = "label-input">Input</label>
+          </div>
           <br>
-          <label>교수명</label>
-          <input type = "radio" value = "prof" name = "searchradio">
-          <br>
-          <label>전공명</label>
-          <input type = "radio" value = "major" name = "searchradio">
-          <br>
-          <label for = "searchInput">Input</label>
           <input type = "text" name = "searchInput" id = "searchInput"  placeholder = "검색어">
           <br>
-          <button type="button" id = "closeBtn">검색</button> 
+           
+          <button type="button" class = "searchBtn" id = "closeBtn">검색</button>
+          
     </div>
   </div>
 </div>
@@ -149,22 +155,24 @@
   <div class="modal-content">
     <div class="contact-form">
       <span class="close">&times;</span>
-    <label>기본</label>
+          <label>기본</label>
           <input type = "radio" value = "basic" name = "sort">
-          <br>
+          
           <label>강의</label>
           <input type = "radio" value = "lecture" name = "sort">
-          <br>
+          
           <label>학점</label>
           <input type = "radio" value = "credit" name = "sort">
-          <br>
+          
           <label>교수</label>
           <input type = "radio" value = "prof" name = "sort">
-          <br>
+          
           <label>전공</label>
           <input type = "radio" value = "major" name = "sort">
+          
           <br>
-          <button type="button" id = "closeBtn2">정렬</button>
+          <button type="button" class = "searchBtn2" id = "closeBtn2">정렬</button>
+         
     </div>
   </div>
 </div>

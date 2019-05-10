@@ -80,7 +80,7 @@
                     alt="" 
                     class="comment-photo" /> 
                   <c:choose>
-                    <c:when test="${curruser.staffId == comment.writer.staffId}"><span class="comment-currentid">${curruser.staffId}(글쓴이)</span></c:when>
+                    <c:when test="${writer.staffId == comment.writer.staffId}"><span class="comment-currentid">${writer.staffId}(글쓴이)</span></c:when>
                     <c:otherwise><span class="comment-id">${comment.writer.staffId}</span></c:otherwise>
                   </c:choose>
                 </div>
@@ -116,7 +116,7 @@
                     alt=""
                     class="comment-photo" /> 
                  <c:choose>
-                    <c:when test="${curruser.staffId == comment.writer.staffId}"><span class="comment-currentid">${comment.writer.staffId}(글쓴이)</span></c:when>
+                    <c:when test="${writer.staffId == comment.writer.staffId}"><span class="comment-currentid">${writer.staffId}(글쓴이)</span></c:when>
                     <c:otherwise><span class="comment-id">${comment.writer.staffId}</span></c:otherwise>
                   </c:choose>
                 </div>

@@ -7,20 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>회원관리</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#btn').on("click", function() {
+		const inputVal = $("#input").val();
+		const searchVal = $("#search option:selected").val();
+		console.log(inputVal);
+		console.log(searchVal);
 			if (!$('#input').val()) {
 				alert('값을 입력해주세요');
 			} else {
 				$.ajax({
-					url : "search",
+					url : "inputText",
 					dataType : "html",
 					data : {
-						searchText : $('#input').val(),
-						orderBy : $('#search').val()
+						searchText : inputVal,
+						orderBy : searchVal
 					},
 					success : function(data) {
 						console.log(data);
@@ -33,6 +40,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="/common/top.jsp" flush="false" />
 	<h3>내정보</h3>
 	<ul>
 		<li><h4>내정보</h4></li>
@@ -54,6 +62,7 @@
 			<th>생일</th>
 			<th>부서</th>
 		</tr>
+		<tbody id="searchResult">
 		<c:forEach var="staffList" items="${requestScope.staffList }">
 			<tr>
 				<td>${staffList.staffName }</td>
@@ -63,14 +72,18 @@
 				<td>${staffList.birthday }</td>
 				<td>${staffList.deptName }</td>
 				<td><a href="modify?id=${staffList.id }">수정</a></td>
+				<td><a href="delete?id=${staffList.id }">삭제</a></td>
+        
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 	<select id="search" name="orderBy">
-		<option value="dept">부서별 검색</option>
 		<option value="name">이름별 검색</option>
+		<option value="deptName">부서별 검색</option>
 	</select>
-	<input type="text" id="input" name="searchText">
+	<input type="text" id="input" name="searchInput">
 	<input type="button" id="btn" value="검색">
+  <jsp:include page="/common/bottom.jsp" flush="false" />
 </body>
 </html>

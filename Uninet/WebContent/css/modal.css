@@ -21,8 +21,11 @@
     background-color: #fefefe;
     margin: 10vh auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 90%; /* Could be more or less, depending on screen size */
+    border: 2px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 20%;
+    margin-top:200px;
+    
 }
 @media (min-width: 1366px) {
   .modal-content {
@@ -63,3 +66,52 @@ button.button:hover {
   border-bottom:#a99567 1px solid;
   color:#a99567;
 }
+
+.input-text {
+  margin-top : 40px;
+}
+
+input[type=text] {
+  border : none;
+  border-bottom: 2px solid #7efff5;
+  width: 400px;
+}
+
+input[type=text]:focus {
+  outline:none;
+
+}
+
+.label-input {
+  color:#7efff5;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.searchBtn {
+  margin-top:10px;
+  margin-left:400px;
+  width:60px;
+  height:30px;
+  background-color:white;
+  border:none;
+  color:#7EFFF5;
+  font-weight:bold;
+  font-size:21px;
+}
+
+
+.searchBtn2 {
+  margin-top: 100px;
+  margin-left:400px;
+  margin-bottom:40px;
+  width:60px;
+  height:30px;
+  background-color:white;
+  border:none;
+  color:#7EFFF5;
+  font-weight:bold;
+  font-size:21px;
+}
+
+
+
