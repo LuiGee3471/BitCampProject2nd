@@ -14,7 +14,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+
 	$(function() {
 	  
 	  /* 검색 비동기 */
@@ -91,7 +93,7 @@
       <th>종별</th> 
       <th>학과</th>
       <th>교수</th>
-      <th colspan = "2"></th>
+      <th colspan = "3"></th>
     </tr>
    </thead>
    <tbody id = "searchResult">
@@ -103,15 +105,15 @@
       <td>${lecture.lectureType}</td>
       <td>${lecture.majorName}</td>
       <td>${lecture.profName }</td>
-      <td><a href = "updatePage?id=${lecture.id}">수정</a></td>
-      <td><a href = "delete?id=${lecture.id}">삭제</a></td>
+      <td><a href = "updatePage?id=${lecture.id}"><i class="fas fa-user-cog"></i></a></td>
+      <td><a href = "delete?id=${lecture.id}"><i class="fas fa-user-alt-slash"></i></a></td>
       <td></td>
         
     </tr>
     </c:forEach>
     </tbody>
   </table>
-  <a href = "write"><button class="">수업추가</button></a>
+  <a href = "write"><button class=""><i class="fas fa-user-plus"></i></button></a>
  </div>
  
 

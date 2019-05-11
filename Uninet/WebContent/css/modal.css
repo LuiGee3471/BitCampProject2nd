@@ -73,7 +73,7 @@ button.button:hover {
 
 input[type='text'] {
   border: none;
-  border-bottom: 2px solid #77160a;
+  border-bottom: 2px solid #CA2917;
   width: 400px;
 }
 
@@ -82,7 +82,7 @@ input[type='text']:focus {
 }
 
 .label-input {
-  color: #77160a;
+  color: #CA2917;
   font-weight: bold;
   font-size: 1.5em;
   position: relative;
@@ -95,7 +95,7 @@ input[type='text']:focus {
   height: 30px;
   background-color: white;
   border: none;
-  color: #77160a;
+  color: #CA2917;
   font-weight: bold;
   font-size: 21px;
   position: absolute;
@@ -109,7 +109,7 @@ input[type='text']:focus {
   height: 30px;
   background-color: white;
   border: none;
-  color: #77160a;
+  color: #CA2917;
   font-weight: bold;
   font-size: 21px;
 }
