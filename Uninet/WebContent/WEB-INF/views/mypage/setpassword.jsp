@@ -61,16 +61,16 @@
 	    </div>
 	    <div class="a-2">
 	      <span class="label">바꿀 비밀번호</span>
-	      <input type="password" id="updatePwd" value="">
+	      <span class="data"><input type="password" class="info" id="updatePwd" value=""></span>
 	    </div>
 	    <div class="a-3">
 	      <span class="label">다시 입력</span>
-	      <input type="password" id="updatePwd2" name="updatePwd" value="">
+	      <span class="data"><input type="password" id="updatePwd2" class="info" name="updatePwd" value=""></span>
 	      <input type="text" id="check" class="check">
 	    </div>
 	    <div class="a-4">
 	      <span class="label">현재 비밀번호</span>
-	      <input type="password" id="currentPwd" value="">
+	      <span class="data"><input type="password" class="info" id="currentPwd" value=""></span>
 	      <input type="text" id="checkPwd" class="check">
 	      <input type="hidden" id="pwd" value="${sessionScope.staff.password}">
 	    </div>
