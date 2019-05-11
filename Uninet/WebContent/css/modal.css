@@ -85,10 +85,10 @@ button.button:hover {
   outline: none;
 }
 
-#modalTwo label {
+label {
   color: #c62917;
   font-size: 14px;
-  padding: 5px 30px;
+  padding: 5px 15px;
   border: 1px solid #c62917;
   width: 60px;
   height: 30px;
@@ -96,12 +96,12 @@ button.button:hover {
   margin: auto;
 }
 
-#modalTwo input[type=radio]:checked+label {
+input[type=radio]:checked+label {
   color: white;
   background-color: #c62917;
 }
 
-#modalTwo input[type=radio] {
+input[type=radio] {
   display: none;
 }
 
