@@ -37,7 +37,7 @@
           </li>
           <c:if test="${staff.isAdmin == 'Y'}">
             <li>
-              <a href="<%=request.getContextPath()%>/mypage/admin">회원 관리</a>
+              <a href="<%=request.getContextPath()%>/mypage/admin?page=1&option=default">회원 관리</a>
             </li>
           </c:if>
         </ul>
@@ -77,12 +77,6 @@
         <span class="label">연락처</span>
         <span class="data">${staff.phoneNumber}</span>
       </div>
-      
-      
-       
-       
-       
-      
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />

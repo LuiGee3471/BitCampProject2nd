@@ -102,17 +102,19 @@
     </c:forEach>
     </tbody>
   </table>
-  <a href = "write"><button><i class="far fa-edit"></i></button></a>
-  <p>
-  <button class="button" data-modal="modalOne">
-    강의 검색
-  </button>
-</p>
-<p>
-  <button class="button" data-modal="modalTwo">
-   정렬
-  </button>
-</p>
+  
+
+ 
+<div class = "button-between">  
+
+<div class = "button-group">
+<p><button class="button" data-modal="modalOne">강의 검색</button></p>
+<p><button class="button" data-modal="modalTwo">정렬</button></p>
+</div>
+
+<a href = "write"><button><i class="far fa-edit fa-3x"></i></button></a>
+</div>
+
  </div>
  
 

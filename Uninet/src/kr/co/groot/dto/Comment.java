@@ -13,15 +13,7 @@ public class Comment {
   private long diff;
   private String timeFormat; // 올린 시간 문자열 형태
   private Staff writer;
-  private String deleteId = "(삭제)";
-
-  public String getDeleteId() {
-    return deleteId;
-  }
-
-  public void setDeleteId(String deleteId) {
-    this.deleteId = deleteId;
-  }
+  private int recommentCount;
 
   public String getTimeFormat() {
     return timeFormat;
@@ -102,4 +94,13 @@ public class Comment {
   public void setReferComment(int referComment) {
     this.referComment = referComment;
   }
+
+  public int getRecommentCount() {
+    return recommentCount;
+  }
+
+  public void setRecommentCount(int recommentCount) {
+    this.recommentCount = recommentCount;
+  }
+
 }

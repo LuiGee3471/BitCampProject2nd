@@ -27,9 +27,19 @@
 <c:set var="id" value="${postId}"/> 
 <c:set var="writer" value="${writer}"/>
 <c:set var="curruser" value="${staff}"/>
-<jsp:include page="/common/head.jsp" flush="false" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet"
+  href="<%=request.getContextPath()%>/css/top-bottom.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css" />
+<link rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -55,7 +65,7 @@
       <div class="article-sub">
         <span class="comment-option">쪽지</span>
         <div class="article-stat">
-          <i class="far fa-eye">&nbsp;${post.count}</i>&nbsp;<i class="far fa-comment">&nbsp;${commentCount}</i>
+          <i class="far fa-eye">${post.count}</i>&nbsp;<i class="far fa-comment">${commentCount}</i>
         </div>
       </div>
     </div>
@@ -63,8 +73,10 @@
       <c:forEach var="comment" items="${comments}">
         <c:choose>
           <c:when test="${comment.recomment == 'N'}">
+           <c:if test="${comment.content!='삭제된 댓글입니다.'}">
           <div class="comment-recomment">
             <div class="comment">
+               <input type="hidden" value="false" id="deleteCheck">
               <div class="comment-main">
                 <div class="comment-writer">
                   <img 
@@ -84,10 +96,9 @@
                 <span class="comment-option">쪽지</span>
                 <form action="deleteComment" method ="post">
                 <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="delete-option" id="commentDelete">삭제</button>
-                <input type="hidden" value="${comment.id}" name="deleteId">
+                <input type="hidden" value="${comment.id}" id="deleteId" name="deleteId">
                 <input type="hidden" value="${id}" name="postId">
                 </c:if>
-               
                 </form>
               </div>
             </div>
@@ -104,8 +115,26 @@
                </div>
              </div>
            </div>
+           </c:if>
+           <div class="comment-recomment">
+            <c:if test="${comment.content =='삭제된 댓글입니다.' and comment.recommentCount>=1}">
+            <div class="comment">
+               <input type="hidden" value="false" id="deleteCheck">
+              <div class="comment-main">
+                <div class="comment-writer">
+                  <img 
+                    src="<%=request.getContextPath()%>/images/${comment.writer.image}" 
+                    alt="" 
+                    class="comment-photo" /> 
+                    <span class="comment-id">(삭제)</span>
+                </div>
+                <p class="comment-content">${comment.content}</p>
+              </div>  
+            </div>
+            </c:if>
+            </div>
           </c:when>
-          <c:otherwise>
+           <c:when test="${comment.recomment == 'Y' and comment.content !='삭제된 댓글입니다.'}">
             <div class="recomment">
               <div class="comment-main">
                 <div class="comment-writer">
@@ -121,9 +150,10 @@
                 <p class="comment-content">${comment.content}</p>
                 <span class="time">${comment.timeFormat}</span>
               </div>
+              
               <div class="comment-sub">
                 <span class="comment-option">쪽지</span>
-                <form action="deleteComment" method ="post">
+               <form action="deleteComment" method ="post">
                 <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="recomment-delete" id="commentDelete">삭제</button>
                 <input type="hidden" value="${comment.id}" name="deleteId">
                 <input type="hidden" value="${id}" name="postId">
@@ -131,9 +161,8 @@
                 </form>
               </div>
             </div>
-          </c:otherwise>
+          </c:when>
         </c:choose>
-        
       </c:forEach>
       <div class="comment-input">
         <form action="comment" method="post" class="comment-form">
@@ -146,44 +175,17 @@
         </form>
       </div>
     </div>
-    <div class="modal">
-      <div class="modal-content">
-        <div class="message-modal">
-          <form action="<%=request.getContextPath()%>/message/send" class="message-form" method="post">
-            <h3 class="message-title">쪽지 보내기</h3>
-            <textarea class="message-textarea" name="text" placeholder="내용을 입력해주세요."></textarea>
-            <input type="hidden" value="${postId}" name="postId">
-            <input type="hidden" value="post" name="origin">
-            <input type="submit" value="전송" class="message-submit">
-          </form>
-          <a class="close-btn">&times;</a>
-        </div>
-      </div>
-    </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script type="text/javascript">
-    $(".recomment-option").click(function() {
-       var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
-       recommentDiv.removeClass("unseen");
-    });
-    
-    $(".article .comment-option").click(function() {
-    	$(".modal").css("display", "block");
-    	var receiver_id = $(".article .writer-id").text();
-    	$(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
-    });
-    
-    $(".comment-sub .comment-option").click(function() {
-    	$(".modal").css("display", "block");
-    	var receiver_id = $(this).parent().parent().children(".comment-main").children(".comment-writer").children(".comment-id").text();
-    	$(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
-    });
-    
-    $(".close-btn").click(function() {
-    	$(".receiver").remove();
-    	$(".modal").css("display", "none");
-    });
+  
+  $(".recomment-option").click(function() {
+     var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
+     recommentDiv.removeClass("unseen");
+  });
+  
+      
+ 
 </script>
 </body>
 </html>

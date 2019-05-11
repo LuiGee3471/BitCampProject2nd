@@ -53,7 +53,7 @@
 				변경</a></li>
 		<li><a href="<%=request.getContextPath()%>/mypage/setpicture">프로필
 				이미지 변경</a></li>
-		<li><a href="<%=request.getContextPath()%>/mypage/admin">회원관리</a></li>
+		<li><a href="<%=request.getContextPath()%>/mypage/admin?page=1&option=default">회원관리</a></li>
 	</ul>
 	<table class = "lecturetable">
 		<tr>
