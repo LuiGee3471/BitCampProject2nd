@@ -70,9 +70,11 @@ public class MessageDao {
   /*
    * @method Name: insertMessage
    * 
-   * @date: 2019. 5. 7
+   * @date: 2019. 5. 10
    * 
    * @author: 정성윤
+   * 
+   * @수정 : 윤종석
    * 
    * @description: 쪽지를 삽입하기 위해서 사용한다
    * 
@@ -80,14 +82,15 @@ public class MessageDao {
    * 
    * @return: int
    */
-
   public int insertMessage(Message message) throws SQLException {
     int row = 0;
-    String sql = "insert into message(content) values(?)";
+    String sql = "insert into message(content, receiver_id, sender_id, time) values(?, ?, ?, NOW())";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, message.getContent());
+    pstmt.setInt(2, message.getReceiverId());
+    pstmt.setInt(3, message.getSenderId());
 
     row = pstmt.executeUpdate();
 
@@ -189,7 +192,8 @@ public class MessageDao {
         "from message m " + 
         "left join staff s on m.sender_id = s.id " + 
         "where receiver_id = ? " + 
-        "order by time desc";
+        "order by time desc "
+        + "limit 2";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -222,5 +226,11 @@ public class MessageDao {
       conn.close();
     }
     return messagelist;
+  }
+  
+  public List<Message> selectUserMessage(int userId) {
+	 String sql = "select m.* "
+	 		+ "from message m"
+	 		+ ""
   }
 }

@@ -34,6 +34,7 @@
 <link rel="stylesheet"
   href="<%=request.getContextPath()%>/css/top-bottom.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css" />
 <link rel="stylesheet"
   href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
 <title>Insert title here</title>
@@ -63,7 +64,7 @@
       <div class="article-sub">
         <span class="comment-option">쪽지</span>
         <div class="article-stat">
-          <i class="far fa-eye">${post.count}</i>&nbsp;<i class="far fa-comment">${commentCount}</i>
+          <i class="far fa-eye">&nbsp;${post.count}</i>&nbsp;<i class="far fa-comment">&nbsp;${commentCount}</i>
         </div>
       </div>
     </div>
@@ -154,19 +155,43 @@
         </form>
       </div>
     </div>
+    <div id="modalOne" class="modal">
+      <div class="modal-content">
+        <div class="message-modal">
+          <form action="<%=request.getContextPath()%>/message/send" class="message-form" method="post">
+            <h3 class="message-title">쪽지 보내기</h3>
+            <textarea class="message-text" name="text" placeholder="내용을 입력해주세요."></textarea>
+            <input type="hidden" value="${postId}" name="postId">
+            <input type="submit" value="전송" class="message-submit">
+          </form>
+          <a class="close-btn">&times;</a>
+        </div>
+      </div>
+    </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script type="text/javascript">
-  
-  $(".recomment-option").click(function() {
-     var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
-     recommentDiv.removeClass("unseen");
-  });
-  
-  $(".delete-option").click(function() {
+    $(".recomment-option").click(function() {
+       var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
+       recommentDiv.removeClass("unseen");
+    });
     
+    $(".article .comment-option").click(function() {
+    	$(".modal").css("display", "block");
+    	var receiver_id = $(".article .writer-id").text();
+    	$(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
+    });
     
-  })
+    $(".comment-sub .comment-option").click(function() {
+    	$(".modal").css("display", "block");
+    	var receiver_id = $(this).parent().parent().children(".comment-main").children(".comment-writer").children(".comment-id").text();
+    	$(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
+    });
+    
+    $(".close-btn").click(function() {
+    	$(".receiver").remove();
+    	$(".modal").css("display", "none");
+    });
 </script>
 </body>
 </html>

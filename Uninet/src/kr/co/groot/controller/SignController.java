@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
-import kr.co.groot.service.LoginAction;
-import kr.co.groot.service.RegisterAction;
-import kr.co.groot.service.RegisterCheckAction;
+import kr.co.groot.service.SignLoginAction;
+import kr.co.groot.service.SignRegisterAction;
+import kr.co.groot.service.SignRegisterCheckAction;
 
 @WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login",
     "/register", "/registerCheck", "/main", "/logout", "/registerOK" })
@@ -35,13 +35,13 @@ public class SignController extends HttpServlet {
     ActionForward forward = null;
 
     if (urlCommand.equals("/login")) {
-      action = new LoginAction();
+      action = new SignLoginAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/register")) {
-      action = new RegisterAction();
+      action = new SignRegisterAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/registerCheck")) {
-      action = new RegisterCheckAction();
+      action = new SignRegisterCheckAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/registerOK")) {
       forward = new ActionForward();

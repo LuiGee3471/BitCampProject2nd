@@ -13,7 +13,7 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
-public class LoginAction implements Action {
+public class SignLoginAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
