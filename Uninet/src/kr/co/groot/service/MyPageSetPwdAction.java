@@ -14,7 +14,7 @@ public class MyPageSetPwdAction implements Action {
 
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/mypage/setpassword.jsp");
-    
+
     return forward;
   }
 

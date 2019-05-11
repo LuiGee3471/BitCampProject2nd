@@ -158,7 +158,7 @@
 }
 
 .fa-comment {
-  color: #78D473;
+  color: #0ca5af;
   font-size: 12px;
 }
 
@@ -331,4 +331,9 @@
 .invisible {
   opacity: 0;
   cursor: default;
+}
+
+.time {
+  font-size: 11px;
+  color: #a6a6a6;
 }

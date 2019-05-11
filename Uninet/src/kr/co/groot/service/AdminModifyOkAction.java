@@ -9,44 +9,45 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
-public class MyPageUpdateInfoAction implements Action {
+public class AdminModifyOkAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+    ActionForward forward = null;
     HttpSession session = request.getSession();
     Staff staff = (Staff) session.getAttribute("staff");
-    ActionForward forward = new ActionForward();
-    staff.setEmail(request.getParameter("staffEmail"));
-    staff.setPhoneNumber(request.getParameter("staffPhone"));
-    staff.setStaffName(request.getParameter("staffName"));
+    staff.setPhoneNumber(request.getParameter("phoneNumber"));
+    staff.setIsAdmin(request.getParameter("isAdmin"));
+    staff.setIsManager(request.getParameter("isManager"));
+    staff.setDeptId(Integer.parseInt(request.getParameter("deptId")));
     staff.setId(staff.getId());
+    staff.setStaffName(staff.getStaffName());
+    staff.setEmail(staff.getEmail());
+    staff.setBirthday(staff.getBirthday());
 
     String msg = "";
     String url = "";
+
     try {
       StaffDao dao = new StaffDao();
-      System.out.println("1");
-      int row = dao.updateInfo(staff);
-      System.out.println("2");
+
+      int row = dao.modifyStaff(staff);
       if (row > 0) {
         msg = "수정 성공";
-        url = "../mypage";
-        staff = dao.selectByUniqueId(staff.getId());
-        session.setAttribute("staff", staff);
+        url = "admin";
       } else {
         msg = "수정 실패";
-        url = "setinfo";
+        url = "modify";
       }
-      System.out.println(row);
       request.setAttribute("msg", msg);
       request.setAttribute("url", url);
-      System.out.println("123");
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/etc/redirect.jsp");
+
     return forward;
   }
 
