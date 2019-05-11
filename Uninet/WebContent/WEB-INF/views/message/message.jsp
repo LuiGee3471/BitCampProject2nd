@@ -43,7 +43,7 @@
   <script>
     $(function() {
       const fromMain = ${requestScope.fromMain};
-      const messageId = ${requestScope.id}
+      const messageId = ${requestScope.id};
       if (fromMain) {
         $.ajax({
           url: "message/call",
@@ -64,7 +64,6 @@
   
     $(".message").click(function() {
       const messageId = $(this).children(".hidden").text();
-      console.log($(".message").children(".hidden").text() == 1);
       $.ajax({
         url: "message/call",
         dataType : "html",

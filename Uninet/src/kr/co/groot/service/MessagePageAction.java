@@ -22,7 +22,7 @@ public class MessagePageAction implements Action {
     HttpSession session = request.getSession();
     Staff user = (Staff) session.getAttribute("staff");
     String isFromMain = request.getParameter("fromMain");
-    int id = Integer.parseInt(request.getParameter("id"));
+    String id = request.getParameter("id");
     
     try {
 		MessageDao messageDao = new MessageDao();
@@ -30,7 +30,10 @@ public class MessagePageAction implements Action {
 		
 		if (isFromMain != null) {
 		  request.setAttribute("fromMain", true);
-		  request.setAttribute("id", id);
+	    request.setAttribute("id", id);
+		} else {
+		  request.setAttribute("fromMain", false);
+		  request.setAttribute("id", 0);
 		}
 		request.setAttribute("messageList", messageList);	
 	} catch (NamingException | SQLException e) {
