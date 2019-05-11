@@ -25,7 +25,7 @@
 	</script>
 </head>
 <body>
-	<jsp:include page="/common/head.jsp" flush="false" />
+	<jsp:include page="/common/top.jsp" flush="false" />
 	<div class="container">
 		<div class="aside">
 			<div class="heading">
