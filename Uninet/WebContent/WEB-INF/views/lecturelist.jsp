@@ -94,19 +94,16 @@
       <td>${lecture.lectureType}</td>
       <td>${lecture.majorName}</td>
       <td>${lecture.profName }</td>
-      <td><a href = "updatePage?id=${lecture.id}"><i class="fas fa-user-cog"></i></a></td>
-      <td><a href = "delete?id=${lecture.id}"><i class="fas fa-user-alt-slash"></i></a></td>
+      <td><a href = "updatePage?id=${lecture.id}"><i class="fas fa-folder-plus"></i></a></td>
+      <td><a href = "delete?id=${lecture.id}"><i class="far fa-trash-alt"></i></a></td>
       <td></td>
         
     </tr>
     </c:forEach>
     </tbody>
   </table>
-  <a href = "write"><button class=""><i class="fas fa-user-plus"></i></button></a>
- </div>
- 
-
- <p>
+  <a href = "write"><button><i class="far fa-edit"></i></button></a>
+  <p>
   <button class="button" data-modal="modalOne">
     강의 검색
   </button>
@@ -116,6 +113,10 @@
    정렬
   </button>
 </p>
+ </div>
+ 
+
+ 
 
 <div id="modalOne" class="modal">
   <div class="modal-content">
