@@ -44,15 +44,9 @@
     </select>
       <select name = "lectureTime">
         <option value="">교시 선택</option>
-        <option value = "1">1</option>
-        <option value = "2">2</option>
-        <option value = "3">3</option>
-        <option value = "4">4</option>
-        <option value = "5">5</option>
-        <option value = "6">6</option>
-        <option value = "7">7</option>
-        <option value = "8">8</option>
-        <option value = "9">9</option>
+        <option value = "123">123</option>
+        <option value = "456">456</option>
+        <option value = "789">789</option>
       </select><br>
     <!-- 시간 선택  -->
     
