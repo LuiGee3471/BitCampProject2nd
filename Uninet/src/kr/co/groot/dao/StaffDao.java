@@ -257,8 +257,6 @@ public class StaffDao {
 	  
 	  pstmt.close();
 	  conn.close();
-	  System.out.println("변경완료");
-	  System.out.println(row);
 	  return row;
   }
 
@@ -339,13 +337,12 @@ public class StaffDao {
     default :
     	column = "staff_name";	
     }
-    System.out.println("column 은 : " + column);
+    
     String sql = fristSQL + column + lastSQL;
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     String strToSearch = "%%" + input + "%%";
-    System.out.println(column + strToSearch);
     pstmt.setString(1, strToSearch);
 
     rs = pstmt.executeQuery();
@@ -367,7 +364,6 @@ public class StaffDao {
       staffList.add(staff);
     }
 
-    System.out.println("이름 검색 : " +staffList);
     rs.close();
     pstmt.close();
     conn.close();
@@ -433,8 +429,6 @@ public class StaffDao {
     if (rs.next()) {     
       staff.setId(rs.getInt("id"));
       staff.setStaffId(rs.getString("staff_id"));
-       System.out.println(rs.getString("staff_id"));
-       System.out.println(rs.getString("staff_id"));
       staff.setEmail(rs.getString("email"));
       staff.setPhoneNumber(rs.getString("phoneNumber"));
       staff.setStaffName(rs.getString("staff_name"));
@@ -443,8 +437,6 @@ public class StaffDao {
       staff.setIsAdmin(rs.getString("isAdmin"));
       staff.setIsManager(rs.getString("isManager"));
       staff.setDeptId(rs.getInt("dept_id"));
-      
-      System.out.println("ID: " + id + " staff_id: " + staff.getStaffId());
     }
     rs.close();
     pstmt.close();
@@ -479,8 +471,6 @@ public class StaffDao {
 	  
 	  pstmt.close();
 	  conn.close();
-	  System.out.println("변경완료");
-	  System.out.println(row);
 	  return row;
   }
   /*
@@ -508,8 +498,6 @@ public class StaffDao {
 	  
 	  pstmt.close();
 	  conn.close();
-	  System.out.println("변경완료");
-	  System.out.println(row);
 	  return row;
   }
   /*

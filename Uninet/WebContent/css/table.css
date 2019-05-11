@@ -1,0 +1,27 @@
+@import 'master.css';
+
+.lecturetable th, td {
+  padding: 15px 10px; 
+}
+
+.fa-folder-plus, .fa-trash-alt, .fa-edit{
+  color: #C62917;
+}
+.lecturetable {
+  margin: 25px auto;
+  width: 900px;
+  border: 1px solid #d6d6d6;
+}
+
+.lecturetable tbody{
+  text-align: center;
+}
+
+.lecturetable th {
+  font-weight:bold;
+}
+
+.lecturetable tr {
+  border-bottom: 1px solid #d6d6d6;
+  font-weight: 500;
+}

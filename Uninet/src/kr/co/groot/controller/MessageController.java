@@ -8,57 +8,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
-import kr.co.groot.service.SignLoginAction;
-import kr.co.groot.service.SignRegisterAction;
-import kr.co.groot.service.SignRegisterCheckAction;
+import kr.co.groot.service.MessageDeleteAction;
+import kr.co.groot.service.MessagePageAction;
+import kr.co.groot.service.MessageSendAction;
 
-@WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login",
-    "/register", "/registerCheck", "/main", "/logout", "/registerOK" })
-public class SignController extends HttpServlet {
+@WebServlet({ "/message/*", "/message" })
+public class MessageController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  public SignController() {
+  public MessageController() {
 
   }
-
-  private void doProcess(HttpServletRequest request,
-      HttpServletResponse response) throws ServletException, IOException {
+  
+  private void doProcess (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String requestUri = request.getRequestURI();
     String contextPath = request.getContextPath();
     String urlCommand = requestUri.substring(contextPath.length());
-
+    System.out.println(urlCommand);
+    
     Action action = null;
     ActionForward forward = null;
-
-    if (urlCommand.equals("/login")) {
-      action = new SignLoginAction();
+    
+    if (urlCommand.equals("/message/send")) {
+      action = new MessageSendAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/register")) {
-      action = new SignRegisterAction();
+    } else if (urlCommand.equals("/message")) {
+      action = new MessagePageAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/registerCheck")) {
-      action = new SignRegisterCheckAction();
+    } else if (urlCommand.equals("/message/delete")) {
+      action = new MessageDeleteAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/registerOK")) {
-      forward = new ActionForward();
-      forward.setRedirect(true);
-      forward.setPath("main");
-    } else if (urlCommand.equals("/main")) {
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/main.jsp");
-    } else if (urlCommand.equals("/logout")) {
-      HttpSession session = request.getSession();
-      session.invalidate();
-      forward = new ActionForward();
-      forward.setRedirect(true);
-      forward.setPath(request.getContextPath());
     }
-
+    
     if (forward != null) {
       if (forward.isRedirect()) {
         response.sendRedirect(forward.getPath());
@@ -78,4 +62,5 @@ public class SignController extends HttpServlet {
       HttpServletResponse response) throws ServletException, IOException {
     doProcess(request, response);
   }
+
 }

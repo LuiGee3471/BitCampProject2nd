@@ -1,0 +1,33 @@
+@import 'master.css';
+
+.lecturetable th, td {
+  padding: 15px 10px; 
+}
+
+<<<<<<< HEAD
+.fa-folder-plus, .fa-trash-alt, far fa-edit{
+  color:black;
+=======
+.fa-user-cog, .fa-user-alt-slash, .fa-user-plus{
+  color: #C62917;
+>>>>>>> a0ffed827fabd556f9736eae0b969d66a682d187
+}
+
+.lecturetable {
+  margin: 25px auto;
+  width: 900px;
+  border: 1px solid #d6d6d6;
+}
+
+.lecturetable tbody{
+  text-align: center;
+}
+
+.lecturetable th {
+  font-weight:bold;
+}
+
+.lecturetable tr {
+  border-bottom: 1px solid #d6d6d6;
+  font-weight: 500;
+}

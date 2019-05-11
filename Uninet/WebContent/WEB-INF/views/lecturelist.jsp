@@ -2,18 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 	$(function() {
 	  
 	  /* 검색 비동기 */
@@ -75,21 +69,20 @@
 
 
 </script>
-
 </head>
 <body>
-
 <jsp:include page="/common/top.jsp" flush="false" />
 <div class = "container">
   <table class = "lecturetable">
   <thead>
     <tr>
-      <td>강의이름</td>
-      <td>학점</td>
-      <td>시간</td>
-      <td>종별</td> 
-      <td>학과</td>
-      <td>교수</td>
+      <th>강의이름</th>
+      <th>학점</th>
+      <th>시간</th>
+      <th>종별</th> 
+      <th>학과</th>
+      <th>교수</th>
+      <th colspan = "3"></th>
     </tr>
    </thead>
    <tbody id = "searchResult">
@@ -101,19 +94,16 @@
       <td>${lecture.lectureType}</td>
       <td>${lecture.majorName}</td>
       <td>${lecture.profName }</td>
-      <td><a href = "updatePage?id=${lecture.id}">수정</a></td>
-      <td><a href = "delete?id=${lecture.id}">삭제</a></td>
+      <td><a href = "updatePage?id=${lecture.id}"><i class="fas fa-folder-plus"></i></a></td>
+      <td><a href = "delete?id=${lecture.id}"><i class="far fa-trash-alt"></i></a></td>
       <td></td>
         
     </tr>
     </c:forEach>
     </tbody>
   </table>
-  <a href = "write"><button class="">수업추가</button></a>
- </div>
- 
-
- <p>
+  <a href = "write"><button><i class="far fa-edit"></i></button></a>
+  <p>
   <button class="button" data-modal="modalOne">
     강의 검색
   </button>
@@ -123,6 +113,10 @@
    정렬
   </button>
 </p>
+ </div>
+ 
+
+ 
 
 <div id="modalOne" class="modal">
   <div class="modal-content">
@@ -145,8 +139,7 @@
           <input type = "text" name = "searchInput" id = "searchInput"  placeholder = "검색어">
           <br>
            
-          <button type="button" class = "searchBtn" id = "closeBtn">검색</button>
-          
+          <button type="button" class = "searchBtn" id = "closeBtn">검색</button>          
     </div>
   </div>
 </div>

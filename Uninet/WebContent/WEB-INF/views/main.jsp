@@ -20,15 +20,8 @@
     MessageDao messageDao = new MessageDao();
     List<Message> messageList = messageDao.selectRecentMessage(staff.getId());
   %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/top-bottom.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<jsp:include page="/common/head.jsp" flush="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -87,8 +80,8 @@
       <div class="card board">
         <h3><a href="message">쪽지</a></h3>
         <c:forEach var="message" items="<%=messageList%>">
-          <a href="message" class="message">
-            <h3 class="message-title">${message.staffname}</h3>
+          <a href="message?fromMain=true&id=${message.id}" class="message">
+            <h3 class="message-title">${message.senderName}</h3>
             <span class="content">${message.content}</span><br>
             <span class="time message-time">${message.timeFormat}</span>
           </a>
