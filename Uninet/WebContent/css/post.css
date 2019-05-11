@@ -255,6 +255,7 @@ body {
   font-size: 13px;
   overflow: hidden;
   resize: none;
+  outline: none;
   background-color: #f9f9f9;
 }
 

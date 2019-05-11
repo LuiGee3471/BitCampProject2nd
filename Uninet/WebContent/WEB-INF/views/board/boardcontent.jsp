@@ -156,7 +156,7 @@
       <div class="comment-input">
         <form action="comment" method="post" class="comment-form">
           <input class="comment-text" type="text" name="comment"
-            maxlength="50" placeholder="댓글을 입력하세요" autocomplete="off"/> 
+            maxlength="50" placeholder="댓글을 입력하세요" autocomplete="off" minlength="5"/> 
           <input
             class="submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
@@ -180,28 +180,6 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
-  <script type="text/javascript">
-    $(".recomment-option").click(function() {
-      var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
-      recommentDiv.removeClass("unseen");
-    });
- 
-   $(".article .comment-option").click(function() {
-   	 $(".modal").css("display", "block");
- 	 var receiver_id = $(".article .writer-id").text();
- 	 $(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
-   });
- 
-   $(".comment-sub .comment-option").click(function() {
- 	 $(".modal").css("display", "block");
- 	 var receiver_id = $(this).parent().parent().children(".comment-main").children(".comment-writer").children(".comment-id").text();
-   	 $(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
-   });
- 
-   $(".close-btn").click(function() {
- 	 $(".receiver").remove();
- 	 $(".modal").css("display", "none");
-   });
-  </script>
+  <script src="<%=request.getContextPath()%>/js/boardcontent.js"></script>
 </body>
 </html>

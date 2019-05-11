@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="message" value="${requestScope.message}" />
 <c:set var="userId" value="${sessionScope.staff.id}" />
 <div class="message-top">
-<span class="hidden" id="message-id">${message.id}</span>
-<span class="hidden" id="receiver-id">${message.senderName}</span>
+  <span class="hidden" id="message-id">${message.id}</span>
+  <span class="hidden" id="receiver-id">${message.senderName}</span>
   <c:choose>
     <c:when test="${message.receiverId == userId}">
       <h4 class="paper-title">${message.senderName}</h4>
@@ -26,7 +26,7 @@
 <div class="message-info">
   <c:choose>
     <c:when test="${message.receiverId == userId}">
-      <span class="receive-send">받은 쪽지</span>  
+      <span class="receive-send">받은 쪽지</span>
     </c:when>
     <c:otherwise>
       <span class="receive-send">보낸 쪽지</span>

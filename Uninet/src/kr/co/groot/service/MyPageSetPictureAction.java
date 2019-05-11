@@ -9,10 +9,9 @@ import kr.co.groot.action.ActionForward;
 public class MyPageSetPictureAction implements Action {
 
   @Override
-  public ActionForward execute(HttpServletRequest request,
-      HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
-    
+
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/mypage/setPicture.jsp");

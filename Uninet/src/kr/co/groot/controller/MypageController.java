@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
-import kr.co.groot.service.MyPageAdminAction;
-import kr.co.groot.service.MyPageAdminSearchByInputAction;
+import kr.co.groot.service.AdminAction;
+import kr.co.groot.service.AdminSearchByInputAction;
 import kr.co.groot.service.MyPageDeleteAction;
-import kr.co.groot.service.MyPageModifyAction;
-import kr.co.groot.service.MyPageModifyOkAction;
+import kr.co.groot.service.AdminModifyAction;
+import kr.co.groot.service.AdminModifyOkAction;
 import kr.co.groot.service.MyPageMyAction;
 import kr.co.groot.service.MyPageSetInfoAction;
 import kr.co.groot.service.MyPageSetPictureAction;
@@ -52,7 +52,7 @@ public class MypageController extends HttpServlet {
 			action = new MyPageSetPictureAction();
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/admin")) {
-			action = new MyPageAdminAction();
+			action = new AdminAction();
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/updateInfo")) {
 			action = new MyPageUpdateInfoAction();
@@ -64,13 +64,13 @@ public class MypageController extends HttpServlet {
 			action = new MyPageUpdatePictureAction();
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/modify")) {
-			action = new MyPageModifyAction();
+			action = new AdminModifyAction();
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/modifyOk")) {
-			action = new MyPageModifyOkAction();
+			action = new AdminModifyOkAction();
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/inputText")) {
-			action = new MyPageAdminSearchByInputAction();
+			action = new AdminSearchByInputAction();
 			forward = action.execute(request, response);
 		} else if (urlCommand.equals("/mypage/delete")) {
       action = new MyPageDeleteAction();
