@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -53,7 +55,7 @@
 				이미지 변경</a></li>
 		<li><a href="<%=request.getContextPath()%>/mypage/admin">회원관리</a></li>
 	</ul>
-	<table>
+	<table class = "lecturetable">
 		<tr>
 			<th>이름</th>
 			<th>아이디</th>
@@ -71,8 +73,8 @@
 				<td>${staffList.phoneNumber }</td>
 				<td>${staffList.birthday }</td>
 				<td>${staffList.deptName }</td>
-				<td><a href="modify?id=${staffList.id }">수정</a></td>
-				<td><a href="delete?id=${staffList.id }">삭제</a></td>
+				<td><a href="modify?id=${staffList.id }"><i class="fas fa-user-cog"></i></a></td>
+				<td><a href="delete?id=${staffList.id }"><i class="fas fa-user-alt-slash"></a></td>
         
 			</tr>
 		</c:forEach>
