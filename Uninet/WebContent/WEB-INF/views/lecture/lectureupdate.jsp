@@ -7,19 +7,7 @@
 <c:set var="majorList" value="${requestScope.majorList}"></c:set>
 <c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
 
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>사원 수정</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/update.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-
+<jsp:include page="/common/head.jsp" flush="false" />
 </head>
 <body>
 
@@ -93,6 +81,7 @@
              <c:when test="${professor.profName == lecture2.profName}">
               <option value = "${professor.id}" selected>${lecture2.profName}</option>
              </c:when>
+             
              <c:otherwise>
              <option value = "${professor.id}">${professor.profName}</option>
              </c:otherwise>
