@@ -47,7 +47,10 @@
     </div>
     <form action="write" id="postform" class="unseen" method="post" enctype="multipart/form-data">
       <input type="text" placeholder="글 제목" name="title" class="new-title">
-      <textarea placeholder="글 내용" name="content" class="new-content"></textarea>
+      <div class="textarea">
+      <textarea placeholder="글 내용" name="content" class="new-content" maxlength="500"></textarea>
+      <span class="warning unseen">500자 이상 작성이 불가능합니다.</span>
+      </div>
       <div class="new-option">
         <label for="file" class="file-btn"><img class="file-image" src="<%=request.getContextPath()%>/images/clip.png"></label>
         <input type="file" name="file" id="file" class="file-upload">
@@ -133,58 +136,65 @@
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script type="text/javascript">
-			$("#textbox").click(function() {
-				$(this).addClass("unseen");
-				$("#postform").removeClass("unseen");
-			});
+    $("#textbox").click(function () {
+      $(this).addClass("unseen");
+      $("#postform").removeClass("unseen");
+    });
 
-			$(".page-btn")
-					.click(
-							function() {
-								var pageNo = Number($(this).text());
-								var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-    	location.href = url;
-    });
-    
-    $(".next-page").click(function() {
-    	if (!$(this).hasClass("invisible")) {
-    	  var url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-    	  location.href = url;
-    	}
-    });
-    
-    $(".prv-btn").click(function() {
-    	var currentPage = ${currentPage};
-    	var decision = currentPage % 3;
-    	var pageToMove;
-    	if (decision === 1) {
-    		pageToMove = currentPage - 1;
-    	} else if (decision === 2){
-    		pageToMove = currentPage - 2;
-    	} else {
-    		pageToMove = currentPage - 3;
-    	}
-    	
-    	var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-    	location.href = url;
-    });
-    
-    $(".next-btn").click(function() {
-        var currentPage = ${currentPage};
-        var decision = currentPage % 3;
-        var pageToMove;
-        if (decision === 1) {
-          pageToMove = currentPage + 3;
-        } else if (decision === 2){
-          pageToMove = currentPage + 2;
-        } else {
-          pageToMove = currentPage + 1;
-        }
-        
-        var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+    $(".new-content").keyup(function() {
+      const text = $(".new-content").val();
+      if (text.length >= 500) {
+        $(".warning").removeClass("unseen");
+      } else {
+        $(".warning").addClass("unseen");
+      }
+    })
+
+    $(".page-btn")
+        .click(function () {
+          var pageNo = Number($(this).text());
+          var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+          location.href = url;
+        });
+
+    $(".next-page").click(function () {
+      if (!$(this).hasClass("invisible")) {
+        var url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
         location.href = url;
-      });
-    
+      }
+    });
+
+    $(".prv-btn").click(function () {
+      var currentPage = ${ currentPage };
+      var decision = currentPage % 3;
+      var pageToMove;
+      if (decision === 1) {
+        pageToMove = currentPage - 1;
+      } else if (decision === 2) {
+        pageToMove = currentPage - 2;
+      } else {
+        pageToMove = currentPage - 3;
+      }
+
+      var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+      location.href = url;
+    });
+
+    $(".next-btn").click(function () {
+      var currentPage = ${ currentPage };
+      var decision = currentPage % 3;
+      var pageToMove;
+      if (decision === 1) {
+        pageToMove = currentPage + 3;
+      } else if (decision === 2) {
+        pageToMove = currentPage + 2;
+      } else {
+        pageToMove = currentPage + 1;
+      }
+
+      var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+      location.href = url;
+    });
   </script>
 </body>
 </html>
