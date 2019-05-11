@@ -17,7 +17,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/update.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
 </head>
 <body>
 
@@ -91,7 +93,6 @@
              <c:when test="${professor.profName == lecture2.profName}">
               <option value = "${professor.id}" selected>${lecture2.profName}</option>
              </c:when>
-             
              <c:otherwise>
              <option value = "${professor.id}">${professor.profName}</option>
              </c:otherwise>
