@@ -24,7 +24,7 @@ Staff staff = (Staff) session.getAttribute("staff");
     </div>
  <div class="articles">
     <c:forEach var="post" items="${list}">  
-    <a href="read?id=${post.id}">
+    <a href="board/read?id=${post.id}">
       <div class="article">   
         <div class="article-main">
         <h4 class="article-title">${post.title}</h4>
