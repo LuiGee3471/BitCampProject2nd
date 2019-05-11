@@ -116,7 +116,7 @@ body {
 }
 
 .comment-sub {
-  
+  display:flex;
 }
 
 .comment-writer {
@@ -174,7 +174,7 @@ body {
   cursor: pointer;
 }
 .recomment-delete{
-  margin-left: 8px;
+  margin-left: auto;
   height: 20px;
   line-height: 20px;
   color: #a6a6a6;
@@ -182,10 +182,11 @@ body {
   cursor: pointer;
   background-color:#F9F9F9;
   border:none;
+  padding: 0 0 8 0px;
 }
 
 .delete-option {
-  margin-left: auto;
+  margin-left:auto;
   height: 20px;
   line-height: 20px;
   color: #a6a6a6;
@@ -193,6 +194,7 @@ body {
   cursor: pointer;
   border:none;
   background-color:white;
+  padding:0 0 0 8px;
   
 }
 

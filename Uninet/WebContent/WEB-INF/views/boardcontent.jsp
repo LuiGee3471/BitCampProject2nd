@@ -38,6 +38,8 @@
   href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -71,8 +73,10 @@
       <c:forEach var="comment" items="${comments}">
         <c:choose>
           <c:when test="${comment.recomment == 'N'}">
+           <c:if test="${comment.content!='삭제된 댓글입니다.'}">
           <div class="comment-recomment">
             <div class="comment">
+               <input type="hidden" value="false" id="deleteCheck">
               <div class="comment-main">
                 <div class="comment-writer">
                   <img 
@@ -92,10 +96,9 @@
                 <span class="comment-option">쪽지</span>
                 <form action="deleteComment" method ="post">
                 <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="delete-option" id="commentDelete">삭제</button>
-                <input type="hidden" value="${comment.id}" name="deleteId">
+                <input type="hidden" value="${comment.id}" id="deleteId" name="deleteId">
                 <input type="hidden" value="${id}" name="postId">
                 </c:if>
-               
                 </form>
               </div>
             </div>
@@ -112,8 +115,26 @@
                </div>
              </div>
            </div>
+           </c:if>
+           <div class="comment-recomment">
+            <c:if test="${comment.content =='삭제된 댓글입니다.' and comment.recommentCount>=1}">
+            <div class="comment">
+               <input type="hidden" value="false" id="deleteCheck">
+              <div class="comment-main">
+                <div class="comment-writer">
+                  <img 
+                    src="<%=request.getContextPath()%>/images/${comment.writer.image}" 
+                    alt="" 
+                    class="comment-photo" /> 
+                    <span class="comment-id">(삭제)</span>
+                </div>
+                <p class="comment-content">${comment.content}</p>
+              </div>  
+            </div>
+            </c:if>
+            </div>
           </c:when>
-          <c:otherwise>
+           <c:when test="${comment.recomment == 'Y' and comment.content !='삭제된 댓글입니다.'}">
             <div class="recomment">
               <div class="comment-main">
                 <div class="comment-writer">
@@ -129,9 +150,10 @@
                 <p class="comment-content">${comment.content}</p>
                 <span class="time">${comment.timeFormat}</span>
               </div>
+              
               <div class="comment-sub">
                 <span class="comment-option">쪽지</span>
-                <form action="deleteComment" method ="post">
+               <form action="deleteComment" method ="post">
                 <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="recomment-delete" id="commentDelete">삭제</button>
                 <input type="hidden" value="${comment.id}" name="deleteId">
                 <input type="hidden" value="${id}" name="postId">
@@ -139,9 +161,8 @@
                 </form>
               </div>
             </div>
-          </c:otherwise>
+          </c:when>
         </c:choose>
-        
       </c:forEach>
       <div class="comment-input">
         <form action="comment" method="post" class="comment-form">
@@ -163,10 +184,8 @@
      recommentDiv.removeClass("unseen");
   });
   
-  $(".delete-option").click(function() {
-    
-    
-  })
+      
+ 
 </script>
 </body>
 </html>
