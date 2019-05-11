@@ -69,22 +69,22 @@
           <h4 class="head">개인정보 변경</h4>
         </div>
         <div class="a-2">
-          <span class="label">이름(실명)</span><span class="data">${sessionScope.staff.staffName }</span>
+          <span class="label">이름(실명)</span><span class="data"><input type="text" name="staffName" class="info" value="${sessionScope.staff.staffName}"></span>
         </div>
         <div class="a-3">
-          <span class="label">이메일</span><span class="data">${staff.email }</span>
+          <span class="label">이메일</span><span class="data"><input type="text" class="info" name="staffEmail" value ="${staff.email }"></span>
         </div>
         <div class="a-4">
-          <span class="label">생년월일</span><span class="data"><%=birthdayString%></span>
+          <span class="label">생년월일</span><span class="data"><input type ="text" class="info" value="<%=birthdayString%>"></span>
         </div>
         <div class="a-5">
-          <span class="label">연락처</span><span class="data">${staff.phoneNumber}</span>
+          <span class="label">연락처</span><span class="data"><input type="text" class="info" name="staffPhone" value="${staff.phoneNumber}"></span>
         </div>
         <div class="a-6">
           <span class="label">현재 비밀번호</span>
-          <input type="password" id="currentPwd" name="currentPwd" value="">
+          <span class ="data"><input type="password" id="currentPwd" name="currentPwd" class="info" value="" maxlength="20"></span>
           <input type="text" id="check" class="check">
-          <input type="hidden" id="pwd" name="pwd" value="${sessionScope.staff.password}">
+         <input type="hidden" id="pwd" name="pwd" value="${sessionScope.staff.password}">
         </div>
         <div class="a-7">
           <input type="submit" id="update" class="submit" value="개인정보 변경">
