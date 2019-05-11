@@ -44,9 +44,9 @@
     </div>
     <div class="boards">
       <div class="card board">
-        <h3><a href="notice">공지사항</a></h3>
+        <h3><a href="board/list?page=1&option=default&boardtype=1">공지사항</a></h3>
         <c:forEach var="notice" items="<%=recentNotice%>">
-          <a href="notice/read?id=${notice.id}" class="list"><span class="board-title">${notice.title}</span>
+          <a href="board/read?id=${notice.id}" class="list"><span class="board-title">${notice.title}</span>
           <c:choose>
             <c:when test="${notice.diff < 2}">
               <span class="time">방금</span></a>
@@ -54,9 +54,9 @@
             <c:when test="${notice.diff < 60}">
               <span class="time">${notice.diff}분 전</span></a>
             </c:when>
-          <c:otherwise>
-            <span class="time">${notice.timeFormat}</span></a>
-          </c:otherwise>
+            <c:otherwise>
+              <span class="time">${notice.timeFormat}</span></a>
+            </c:otherwise>
           </c:choose>
         </c:forEach>
       </div>

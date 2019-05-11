@@ -70,8 +70,6 @@ public class LectureDao {
     pstmt.close();
     conn.close();
 
-    System.out.println("강의 목록: " + lectureList);
-
     return lectureList;
   }
 
@@ -161,7 +159,6 @@ public class LectureDao {
     pstmt.setInt(6, lecture.getId());
 
     int row = pstmt.executeUpdate();
-    System.out.println("row : " + row);
     pstmt.close();
     conn.close();
 
@@ -210,10 +207,8 @@ public class LectureDao {
     pstmt = conn.prepareStatement(sql);
 
     String strToSearch = "%%" + input + "%%";
-    System.out.println(column + strToSearch);
 
     pstmt.setString(1, strToSearch);
-
     rs = pstmt.executeQuery();
 
     List<Lecture> lectureList = new ArrayList<>();
@@ -235,8 +230,6 @@ public class LectureDao {
     rs.close();
     pstmt.close();
     conn.close();
-
-    System.out.println("강의 목록: " + lectureList);
 
     return lectureList;
   }
@@ -284,8 +277,6 @@ public class LectureDao {
     rs.close();
     pstmt.close();
     conn.close();
-
-    System.out.println("강의 목록: " + lectureList);
 
     return lectureList;
   }
@@ -357,8 +348,6 @@ public class LectureDao {
     pstmt.close();
     conn.close();
 
-    System.out.println("강의 목록: " + lectureList);
-
     return lectureList;
   }
   /*
@@ -376,9 +365,16 @@ public class LectureDao {
    */
 
   public JSONObject countByLecture() throws SQLException {
-    String sql = "select m.major_name, count(*) as count " + "from lecture l left join professor p on l.prof_id = p.id "
-        + "left join major m on p.id = m.id " + "group by m.id " + "order by m.major_name";
-    System.out.println("하잇");
+    String sql = "select " + 
+        "m.major_name, count(*) as count " + 
+        "from lecture l " + 
+        "left join professor p " + 
+        "on l.prof_id = p.id " + 
+        "left join major m " + 
+        "on p.major_id = m.id " + 
+        "group by m.major_name " + 
+        "order by m.major_name";
+    
     JSONObject json = new JSONObject();
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -391,9 +387,7 @@ public class LectureDao {
     pstmt.close();
     conn.close();
 
-    System.out.println(json);
     return json;
-
   }
 
   /*
@@ -410,7 +404,7 @@ public class LectureDao {
    * @return: JSON
    */
   public JSONObject countByTime() throws SQLException {
-    String sql = "select lecture_name, substr(time, 1, 1) as day, " + "count(substr(time, 1, 1)) as count from lecture "
+    String sql = "select substr(time, 1, 1) as day, " + "count(substr(time, 1, 1)) as count from lecture "
         + "group by substr(time, 1, 1) " + "order by field(day, '월','화','수','목','금')";
     JSONObject json = new JSONObject();
     conn = ds.getConnection();

@@ -31,6 +31,7 @@
   pageContext.setAttribute("endPage", endPage);
 %>
 <c:set var="list" value="${requestScope.list}" />
+<c:set var="type" value="${requestScope.boardType}" />
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 </head>
@@ -40,6 +41,7 @@
     <div class="titlebox">
       <h1>${requestScope.boardName}</h1>
     </div>
+    <c:if test="${(type == 1 && sessionScope.staff.isManager == 'Y') || type == 2}">
     <div class="textbox" id="textbox">
       <span>새 글을 작성해주세요!</span>
     </div>
@@ -53,8 +55,9 @@
             class="new-btn" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
       </div>
-      <input type="hidden" name="boardType" value="2">
+      <input type="hidden" name="boardType" value="${type}">
     </form>
+    </c:if>
     <div class="articles">
     <c:forEach var="post" items="${list}">  
     <a href="read?id=${post.id}">
@@ -91,7 +94,7 @@
           <option value="count">조회순</option>
         </select> 
         <input type="text" name="word" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/>
-        <input type="hidden" name="boardtype" value="2">
+        <input type="hidden" name="boardtype" value="${type}">
         <input type="hidden" name="page" value="1"> 
         <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
       </form>
