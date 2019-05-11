@@ -5,6 +5,7 @@
 <c:set var="profList" value="${requestScope.profList}"></c:set>
 <c:set var="ltList" value="${requestScope.ltList}"></c:set>
 <c:set var="majorList" value="${requestScope.majorList}"></c:set>
+<c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
 
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <body>
-
+${lecture2}
 <jsp:include page="/common/top.jsp" flush="false" />
    <div class="container">
     <form action="updateOk" method = "GET">
@@ -26,7 +27,7 @@
    
     <!-- 과목 입력 -->
     <label for = "lectureName">과목</label>
-    <input type = "text" id = "lectureName" name = "lectureName" placeholder = "과목입력">
+    <input type = "text" id = "lectureName" name = "lectureName" value = "${lecture2.lectureName}">
     <!-- 과목 입력 -->
     <br>
     
@@ -34,7 +35,7 @@
      <!-- 학점 선택  -->
    <span class="lable">학점</span>
       <select name="credit">
-        <option value="">학점 선택</option>
+        <option value="${lecture2.credit}">${lecture2.credit}</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -61,7 +62,7 @@
      <!-- 종별 선택  -->
    <span class = "lable">종별</span>
       <select name = "lecturetype">
-        <option value="">종별 선택</option>
+        <option value="${lecture2.lectureTypeId}">${lecture2.lectureType}</option>
         <c:forEach var = "lect" items = "${ltList}">
         <option value = "${lect.id}">${lect.lectureType}</option>
         </c:forEach>
@@ -72,7 +73,7 @@
      <!-- 교수 선택  -->
    <span class = "lable">교수</span>
       <select name = "professor">
-        <option value="">교수 선택</option>
+        <option value="${lecture2.profId}">${lecture2.profName}</option>
         <c:forEach var = "professor" items = "${profList}">
         <option value = "${professor.id}">${professor.profName}</option>
         </c:forEach>
