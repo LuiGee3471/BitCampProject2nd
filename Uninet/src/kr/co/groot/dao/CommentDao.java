@@ -58,6 +58,7 @@ public class CommentDao {
       comment.setWriter(staffDao.selectByUniqueId(rs.getInt("writer_id")));
       comment.setDiff(rs.getLong("diff"));
       comment.setTimeFormat(rs.getString("timeFormat"));
+      comment.setRecommentCount(rs.getInt("recomment_count"));
       
       list.add(comment);
     }
@@ -177,17 +178,46 @@ public class CommentDao {
    * 
    * @return: int
    */
+  // refer
   public int deleteComment(int id) throws Exception {
     int row = 0;
-    String sql = "update comment set content= '삭제된 댓글입니다' where id= ?";
+    String sql = "update comment set content= '삭제된 댓글입니다.' where id= ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
-    row = pstmt.executeUpdate();
+    row =pstmt.executeUpdate();
+    System.out.println("row"+row);
+   
+
     pstmt.close();
     conn.close();
     return row;
   }
+  
+  public int countRecomment(int id) throws Exception {
+    int result = 0;
+    int row = 0;
+    String sql = "select count(*) as count from comment where refer_comment = ?";
+    String sql2 = "update comment set recomment_count = ? where id = ?";
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    while(rs.next()) {
+      result = rs.getInt("count");
+    }
+    System.out.println("result:"+result);
+    pstmt = conn.prepareStatement(sql2);
+    pstmt.setInt(1,result);
+    pstmt.setInt(2, id);
+    row = pstmt.executeUpdate();
+    
+    pstmt.close();
+    conn.close();
+    return row;
+  }
+  
 
   /*
    * @method Name: selectByWriter

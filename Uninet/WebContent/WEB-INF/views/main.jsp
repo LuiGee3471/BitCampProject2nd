@@ -20,15 +20,8 @@
     MessageDao messageDao = new MessageDao();
     List<Message> messageList = messageDao.selectRecentMessage(staff.getId());
   %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/top-bottom.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<jsp:include page="/common/head.jsp" flush="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
