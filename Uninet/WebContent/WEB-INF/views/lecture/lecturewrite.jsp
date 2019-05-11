@@ -3,15 +3,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <c:set var="profList" value="${requestScope.profList}"></c:set>
 <c:set var="ltList" value="${requestScope.ltList}"></c:set>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<jsp:include page="/common/head.jsp" flush="false" />
 </head>
 <body>
 <jsp:include page="/common/top.jsp" flush="false" />
