@@ -57,7 +57,7 @@ public class BoardWriteAction implements Action {
         msg = "실패하였습니다.";
         url = "board/list?page=1&option=false&boardtype=2";
         forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/redirect.jsp");
+        forward.setPath("/WEB-INF/views/etc/redirect.jsp");
         request.setAttribute("msg", msg);
         request.setAttribute("url", url);
       }

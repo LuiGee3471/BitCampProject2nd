@@ -13,26 +13,25 @@ import kr.co.groot.dao.DepartmentDao;
 
 public class SignRegisterAction implements Action {
   @Override
-  public ActionForward execute(HttpServletRequest request,
-      HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
-    
+
     DepartmentDao dao;
     List<String> nameList;
-    
+
     try {
       dao = new DepartmentDao();
       nameList = dao.getDistinctDeptName();
-      
+
       request.setAttribute("deptList", nameList);
-      
+
       forward = new ActionForward();
       forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/register.jsp");
+      forward.setPath("/WEB-INF/views/etc/register.jsp");
     } catch (NamingException | SQLException e) {
       System.out.println(e.getMessage());
     }
-    
+
     return forward;
   }
 }

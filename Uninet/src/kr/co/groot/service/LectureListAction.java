@@ -25,7 +25,7 @@ public class LectureListAction implements Action {
     request.setAttribute("lecturelist", lecturelist);
     forward = new ActionForward();
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/lecturelist.jsp");
+    forward.setPath("/WEB-INF/views/lecture/lecturelist.jsp");
 
     return forward;
   }

@@ -16,18 +16,18 @@ public class MessageDeleteAction implements Action {
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
     int message_id = Integer.parseInt(request.getParameter("id"));
-    
+
     try {
       MessageDao messageDao = new MessageDao();
       messageDao.deleteMessage(message_id);
-      
+
       forward = new ActionForward();
       forward.setRedirect(true);
       forward.setPath(request.getContextPath() + "/message");
     } catch (NamingException | SQLException e) {
       System.out.println("Message Delete: " + e.getMessage());
     }
-    
+
     return forward;
   }
 }

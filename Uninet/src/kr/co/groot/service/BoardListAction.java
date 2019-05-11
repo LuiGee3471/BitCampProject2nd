@@ -62,7 +62,7 @@ public class BoardListAction implements Action{
       
       forward = new ActionForward();
       forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/boardlist.jsp");
+      forward.setPath("/WEB-INF/views/board/boardlist.jsp");
       
     } catch (SQLException e) {  
       System.out.println(e.getMessage());

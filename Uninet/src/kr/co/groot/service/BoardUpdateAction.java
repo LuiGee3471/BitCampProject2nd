@@ -45,7 +45,7 @@ public class BoardUpdateAction implements Action {
 
       forward = new ActionForward();
       forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/redirect.jsp");
+      forward.setPath("/WEB-INF/views/etc/redirect.jsp");
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

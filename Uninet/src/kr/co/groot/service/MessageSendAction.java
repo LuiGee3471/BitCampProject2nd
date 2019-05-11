@@ -17,8 +17,7 @@ import kr.co.groot.dto.Staff;
 public class MessageSendAction implements Action {
 
   @Override
-  public ActionForward execute(HttpServletRequest request,
-      HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
     String id = request.getParameter("receiver");
     String text = request.getParameter("text");
@@ -26,7 +25,7 @@ public class MessageSendAction implements Action {
     Staff user = (Staff) session.getAttribute("staff");
     String postId = request.getParameter("postId");
     String origin = request.getParameter("origin");
-     
+
     try {
       StaffDao staffDao = new StaffDao();
       Staff staff = staffDao.selectStaff(id);
@@ -36,9 +35,9 @@ public class MessageSendAction implements Action {
       message.setContent(text);
       message.setReceiverId(staff.getId());
       message.setSenderId(user.getId());
-      
+
       messageDao.insertMessage(message);
-      
+
       forward = new ActionForward();
       forward.setRedirect(true);
       if (origin.equals("post")) {

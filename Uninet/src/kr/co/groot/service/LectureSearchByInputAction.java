@@ -11,18 +11,17 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.LectureDao;
 import kr.co.groot.dto.Lecture;
 
-public class LectureSearchByInputAction implements Action{
+public class LectureSearchByInputAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
-    
+
     List<Lecture> list = new ArrayList<Lecture>();
-  
-    
+
     String searchInput = request.getParameter("searchInput");
     String searchradio = request.getParameter("searchradio");
-    
+
     System.out.println("searchInput : " + searchInput);
     System.out.println("searchradio : " + searchradio);
     LectureDao dao;
@@ -32,13 +31,12 @@ public class LectureSearchByInputAction implements Action{
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    
+
     request.setAttribute("list", list);
 
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/lectureSearchResult.jsp");
-    
-    
+    forward.setPath("/WEB-INF/views/lecture/lectureSearchResult.jsp");
+
     return forward;
   }
 

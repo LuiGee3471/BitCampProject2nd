@@ -38,7 +38,7 @@ public class BoardDeleteCommentAction implements Action {
         url = "board/read?id="+postId;
        
         forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/redierct.jsp");
+        forward.setPath("/WEB-INF/views/etc/redierct.jsp");
         request.setAttribute("msg", msg);
         request.setAttribute("url", url);
       }

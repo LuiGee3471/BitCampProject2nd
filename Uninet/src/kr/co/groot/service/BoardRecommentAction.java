@@ -42,7 +42,7 @@ public class BoardRecommentAction implements Action {
         msg = "실패하였습니다.";
         url = "board/read?id="+id;
         forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/redierct.jsp");
+        forward.setPath("/WEB-INF/views/etc/redierct.jsp");
         request.setAttribute("msg", msg);
         request.setAttribute("url", url); 
       }

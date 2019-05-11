@@ -44,7 +44,7 @@ public class BoardReadAction implements Action {
 
     forward = new ActionForward();
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/boardcontent.jsp");
+    forward.setPath("/WEB-INF/views/board/boardcontent.jsp");
     request.setAttribute("boardName", boardName);
     request.setAttribute("post", post);
     request.setAttribute("comments", commentList);

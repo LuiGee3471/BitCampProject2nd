@@ -16,7 +16,7 @@ import kr.co.groot.dto.LectureType;
 import kr.co.groot.dto.Major;
 import kr.co.groot.dto.Professor;
 
-public class LectureUpdateAction implements Action{
+public class LectureUpdateAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -27,33 +27,32 @@ public class LectureUpdateAction implements Action{
     List<Professor> profList = null;
     List<LectureType> ltList = null;
     List<Major> majorList = null;
-    
+
     try {
       LectureDao lecture = new LectureDao();
       lectureList = lecture.selectAll();
-      
+
       ProfessorDao professor = new ProfessorDao();
       profList = professor.selectAll();
-      
+
       LectureTypeDao lectureType = new LectureTypeDao();
       ltList = lectureType.selectAll();
-      
+
       MajorDao major = new MajorDao();
       majorList = major.selectAll();
-      
+
     } catch (Exception e) {
       e.printStackTrace();
     }
-    
+
     request.setAttribute("lectureList", lectureList);
     request.setAttribute("profList", profList);
     request.setAttribute("ltList", ltList);
     request.setAttribute("majorList", majorList);
     request.setAttribute("id", id);
 
-    
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/lectureupdate.jsp");
+    forward.setPath("/WEB-INF/views/lecture/lectureupdate.jsp");
     return forward;
   }
 

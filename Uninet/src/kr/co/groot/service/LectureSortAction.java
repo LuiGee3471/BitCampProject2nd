@@ -29,7 +29,7 @@ public class LectureSortAction implements Action {
     request.setAttribute("list", list);
 
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/lectureSearchResult.jsp");
+    forward.setPath("/WEB-INF/views/lecture/lectureSearchResult.jsp");
 
     return forward;
   }

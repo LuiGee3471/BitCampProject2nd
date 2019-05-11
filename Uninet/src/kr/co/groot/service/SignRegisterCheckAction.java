@@ -17,8 +17,7 @@ import kr.co.groot.dto.Staff;
 
 public class SignRegisterCheckAction implements Action {
   @Override
-  public ActionForward execute(HttpServletRequest request,
-      HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
     int deptId = Integer.parseInt(request.getParameter("dept"));
     String id = request.getParameter("id");
@@ -28,7 +27,7 @@ public class SignRegisterCheckAction implements Action {
     LocalDate birthdate = LocalDate.parse(request.getParameter("birthday"));
     Timestamp birthday = Timestamp.valueOf(birthdate.atStartOfDay());
     String phoneNumber = request.getParameter("phoneNumber");
-    
+
     try {
       Staff staff = new Staff();
       staff.setStaffId(id);
@@ -38,12 +37,12 @@ public class SignRegisterCheckAction implements Action {
       staff.setBirthday(birthday);
       staff.setPhoneNumber(phoneNumber);
       staff.setDeptId(deptId);
-      
+
       StaffDao dao = new StaffDao();
       int row = dao.insertStaff(staff);
-      
+
       staff = dao.selectStaff(id);
-      
+
       if (row > 0) {
         HttpSession session = request.getSession();
         session.setAttribute("staff", staff);
@@ -57,12 +56,12 @@ public class SignRegisterCheckAction implements Action {
         request.setAttribute("msg", msg);
         request.setAttribute("url", url);
         forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/redirect.jsp");
+        forward.setPath("/WEB-INF/views/etc/redirect.jsp");
       }
     } catch (NamingException | SQLException e) {
       System.out.println(e.getMessage());
     }
-    
+
     return forward;
-  } 
+  }
 }

@@ -18,22 +18,22 @@ public class SignLoginAction implements Action {
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
     HttpSession session = request.getSession();
-    
+
     String id = request.getParameter("id");
     String password = request.getParameter("password");
-      
+
     try {
       StaffDao dao = new StaffDao();
       Staff staff = dao.selectStaff(id);
-      
+
       String correctPassword = staff.getPassword();
-      
+
       if (correctPassword == null) {
         correctPassword = "";
       }
-      
+
       if (correctPassword.equals(password)) {
-        session.setAttribute("staff", staff);        
+        session.setAttribute("staff", staff);
         response.sendRedirect("main");
       } else {
         forward = new ActionForward();
@@ -42,7 +42,7 @@ public class SignLoginAction implements Action {
         request.setAttribute("msg", msg);
         request.setAttribute("url", url);
         forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/redirect.jsp");
+        forward.setPath("/WEB-INF/views/etc/redirect.jsp");
       }
     } catch (NamingException e) {
       System.out.println(e.getMessage());
@@ -52,7 +52,7 @@ public class SignLoginAction implements Action {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    
+
     return forward;
   }
 }
