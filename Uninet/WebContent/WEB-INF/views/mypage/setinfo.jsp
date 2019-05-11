@@ -11,13 +11,7 @@
 	LocalDate newBirthday = birthday.toLocalDateTime().toLocalDate();
 	String birthdayString = newBirthday.toString();
 %>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<jsp:include page="/common/head.jsp" flush="false" />
   <script type="text/javascript">
     $(document).ready(function () {
       $('#currentPwd').keyup(function () {
@@ -36,13 +30,14 @@
       });
     });
   </script>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
 </head>
 <body>
   <jsp:include page="/common/head.jsp" flush="false" />
   <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
     <div class="aside">
-      <div class="heading">
+      <div class="mypage-title">
         <h3>내 정보</h3>
       </div>
       <div class="sidebar">
@@ -89,7 +84,7 @@
           <span class="label">현재 비밀번호</span>
           <input type="password" id="currentPwd" name="currentPwd" value="">
           <input type="text" id="check" class="check">
-          <input type="hidden" id="pwd" name="pwd" value="${sessionScope.staff.password}"><br>
+          <input type="hidden" id="pwd" name="pwd" value="${sessionScope.staff.password}">
         </div>
         <div class="a-7">
           <input type="submit" id="update" class="submit" value="개인정보 변경">

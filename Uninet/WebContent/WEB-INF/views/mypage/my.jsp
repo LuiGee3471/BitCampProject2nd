@@ -18,7 +18,7 @@
   <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
     <div class="aside">
-      <div class="heading">
+      <div class="mypage-title">
         <h3>내 정보</h3>
       </div>
       <div class="sidebar">
