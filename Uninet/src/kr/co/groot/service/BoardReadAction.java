@@ -24,12 +24,15 @@ public class BoardReadAction implements Action {
     int id = Integer.parseInt(request.getParameter("id"));
     Post post = null;
     List<Comment> commentList = null;
+    String boardName = "";
     
     try {
       PostDao postDao = new PostDao();
       CommentDao commentDao = new CommentDao();
       postDao.addCount(id);
       post = postDao.getPost(id);
+      
+      boardName = post.getBoardType() == 1 ? "공지사항" : "자유게시판";
       
       commentList = commentDao.getCommentList(id);
 
@@ -42,6 +45,7 @@ public class BoardReadAction implements Action {
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/boardcontent.jsp");
+    request.setAttribute("boardName", boardName);
     request.setAttribute("post", post);
     request.setAttribute("comments", commentList);
     request.setAttribute("postId", id);

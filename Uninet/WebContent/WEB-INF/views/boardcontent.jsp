@@ -19,33 +19,21 @@
   CommentDao commentDao = new CommentDao();
   int commentCount = commentDao.getCommentCount(id);
   pageContext.setAttribute("writer", writer);
-  pageContext.setAttribute("commentCount", commentCount);
-  
+  pageContext.setAttribute("commentCount", commentCount); 
 %>
 <c:set var="post" value="${post}"/>
 <c:set var="comments" value="${comments}"/>
 <c:set var="id" value="${postId}"/> 
 <c:set var="writer" value="${writer}"/>
 <c:set var="curruser" value="${staff}"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<link rel="stylesheet"
-  href="<%=request.getContextPath()%>/css/top-bottom.css" />
+<jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css" />
-<link rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-</script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
     <div class="boardtitle">
-      <h1>자유게시판</h1>
+      <h1>${requestScope.boardName}</h1>
     </div>
     <div class="article">
       <div class="article-main">
