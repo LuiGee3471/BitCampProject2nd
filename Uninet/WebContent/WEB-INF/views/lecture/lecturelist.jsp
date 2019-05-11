@@ -51,12 +51,12 @@
       <div class="contact-form">
         <a class="close">&times;</a>
         <div class="label-container">
-          <label for="lectureSelect">과목명</label>
-          <input type="radio" value="lecture" name="searchradio" id="lectureSelect" checked>   
-          <label for = profSelect>교수명</label>
+          <input type="radio" value="lecture" name="searchradio" id="lectureSelect" checked>
+          <label for="lectureSelect">과목명</label>   
           <input type="radio" value="prof" name="searchradio" id="profSelect">
-          <label for="majorSelect">전공명</label>
+          <label for = profSelect>교수명</label>
           <input type="radio" value="major" name="searchradio" id="majorSelect">
+          <label for="majorSelect">전공명</label>
         </div>
         <input type="text" name="searchInput" id="searchInput" placeholder="검색어 입력">
         <button type="button" class="searchBtn" id="closeBtn">검색</button>          
