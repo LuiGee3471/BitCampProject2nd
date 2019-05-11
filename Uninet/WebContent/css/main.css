@@ -41,6 +41,7 @@
   line-height: 25px;
   padding: 4px 10px;
   text-decoration: none;
+  margin-right: 3px;
 }
 
 .mymenu {
@@ -148,8 +149,4 @@
   overflow: hidden;
   color: #4c4c4c;
   font-size: 13px;
-}
-
-.buttons a {
-  margin-right: 3px;
 }

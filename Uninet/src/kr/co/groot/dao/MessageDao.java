@@ -51,8 +51,11 @@ public class MessageDao {
       Message message = new Message();
       message.setContent(rs.getString("content"));
       message.setTime(rs.getTimestamp("time"));
-      message.setStaffname(rs.getString("s.staff_name"));
+      message.setReceiverId(rs.getInt("receiver_id"));
       message.setSenderId(rs.getInt("sender_id"));
+      message.setReceiverName(rs.getString("receiver"));
+      message.setSenderName(rs.getString("sender"));
+      message.setTimeFormat(rs.getString("timeFormat"));
       messagelist.add(message);
     }
     if (rs != null) {
@@ -156,7 +159,7 @@ public class MessageDao {
       Message message = new Message();
       message.setContent(rs.getString("content"));
       message.setTime(rs.getTimestamp("time"));
-      message.setStaffname(rs.getString("s.staff_name"));
+      message.setSenderName(rs.getString("sender"));
       message.setSenderId(rs.getInt("sender_id"));
       messagelist.add(message);
     }
@@ -175,7 +178,7 @@ public class MessageDao {
   /*
    * @method Name: selectRecentMessage
    * 
-   * @date: 2019. 5. 8
+   * @date: 2019. 5. 10
    * 
    * @author: 윤종석
    * 
@@ -211,7 +214,7 @@ public class MessageDao {
       message.setTime(rs.getTimestamp("time"));
       message.setReceiverId(rs.getInt("receiver_id"));
       message.setSenderId(rs.getInt("sender_id"));
-      message.setStaffname(rs.getString("staff_name"));
+      message.setSenderName(rs.getString("staff_name"));
       message.setDiff(rs.getLong("diff"));
       message.setTimeFormat(rs.getString("timeFormat"));
       messagelist.add(message);
@@ -228,9 +231,101 @@ public class MessageDao {
     return messagelist;
   }
   
-  public List<Message> selectUserMessage(int userId) {
-	 String sql = "select m.* "
-	 		+ "from message m"
-	 		+ ""
+  /*
+   * @method Name: selectUserMessage
+   * 
+   * @date: 2019. 5. 11
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 쪽지함에 출력할 쪽지를 가져온다.
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Message>
+   */
+  public List<Message> selectUserMessage(int userId) throws SQLException {
+    String sql = "select m.*, s1.staff_id as sender, s2.staff_id as receiver, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat " 
+        + "from message m " 
+        + "left join staff s1 "
+        + "on m.sender_id = s1.id " 
+        + "left join staff s2 " 
+        + "on m.receiver_id = s2.id "
+        + "where m.sender_id = ? or m.receiver_id = ? "
+        + "order by time desc ";
+		
+		conn = ds.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, userId);
+		pstmt.setInt(2, userId);
+		rs = pstmt.executeQuery();
+		
+		List<Message> list = new ArrayList<Message>();
+		while (rs.next()) {
+		  Message message = new Message();
+		  message.setId(rs.getInt("id"));
+		  message.setContent(rs.getString("content"));
+		  message.setTime(rs.getTimestamp("time"));
+		  message.setReceiverId(rs.getInt("receiver_id"));
+		  message.setSenderId(rs.getInt("sender_id"));
+		  message.setReceiverName(rs.getString("receiver"));
+		  message.setSenderName(rs.getString("sender"));
+		  message.setTimeFormat(rs.getString("timeFormat"));
+		  list.add(message);
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return list;
+  }
+  
+  /*
+   * @method Name: selectMessage
+   * 
+   * @date: 2019. 5. 11
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 쪽지의 고유 번호로 쪽지 데이터를 가져온다.
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Message>
+   */
+  public Message selectMessage(int messageId) throws SQLException {
+    String sql = "select m.*, s1.staff_id as sender, s2.staff_id as receiver, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat " 
+        + "from message m " 
+        + "left join staff s1 "
+        + "on m.sender_id = s1.id " 
+        + "left join staff s2 " 
+        + "on m.receiver_id = s2.id "
+        + "where m.id = ? ";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, messageId);
+    rs = pstmt.executeQuery();
+    
+    Message message = new Message();
+    if (rs.next()) {
+      message.setId(rs.getInt("id"));
+      message.setContent(rs.getString("content"));
+      message.setTime(rs.getTimestamp("time"));
+      message.setReceiverId(rs.getInt("receiver_id"));
+      message.setSenderId(rs.getInt("sender_id"));
+      message.setReceiverName(rs.getString("receiver"));
+      message.setSenderName(rs.getString("sender"));
+      message.setTimeFormat(rs.getString("timeFormat"));
+    }
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return message;
   }
 }
