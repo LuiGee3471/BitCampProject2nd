@@ -73,8 +73,8 @@
 				<td>${staffList.phoneNumber }</td>
 				<td>${staffList.birthday }</td>
 				<td>${staffList.deptName }</td>
-				<td><a href="modify?id=${staffList.id }"><i class="fas fa-user-cog"></i></a></td>
-				<td><a href="delete?id=${staffList.id }"><i class="fas fa-user-alt-slash"></a></td>
+				<td><a href="modify?id=${staffList.id }"><i class="fas fa-folder-plus"></i></a></td>
+				<td><a href="delete?id=${staffList.id }"><i class="far fa-trash-alt"></i></a></td>
         
 			</tr>
 		</c:forEach>
