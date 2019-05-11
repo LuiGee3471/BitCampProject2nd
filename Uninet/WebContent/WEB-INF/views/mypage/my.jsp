@@ -39,7 +39,7 @@
 				session.getAttribute("staff");
 				if (staff.getIsAdmin().equals("Y")) {
 			%>
-			<li><a href="<%=request.getContextPath()%>/mypage/admin">회원관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/mypage/admin?page=1&option=default">회원관리</a></li>
 			<%
 				}
 			%>
