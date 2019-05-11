@@ -7,18 +7,10 @@
 <c:set var="majorList" value="${requestScope.majorList}"></c:set>
 <c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>사원 수정</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<jsp:include page="/common/head.jsp" flush="false" />
 </head>
 <body>
-${lecture2}
+
 <jsp:include page="/common/top.jsp" flush="false" />
    <div class="container">
     <form action="updateOk" method = "GET">
@@ -32,13 +24,20 @@ ${lecture2}
     
     
      <!-- 학점 선택  -->
-   <span class="lable">학점</span>
-      <select name="credit">
-        <option value="${lecture2.credit}">${lecture2.credit}</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select><br>
+     <span class = "lable">학점</span>
+     <select name = "">
+<c:forEach var = "i" begin="1" end="3">
+  <c:choose>
+    <c:when test="${i==lecture2.credit}">
+        <option value="${i}" selected>${i}</option>
+    </c:when>
+    <c:otherwise>
+        <option value="${i}">${i}</option>
+     </c:otherwise>
+  </c:choose>
+</c:forEach>
+</select>
+<br>
     <!-- 학점 선택  -->
     
      <!-- 시간 선택  -->
@@ -60,23 +59,37 @@ ${lecture2}
     
      <!-- 종별 선택  -->
    <span class = "lable">종별</span>
-      <select name = "lecturetype">
-        <option value="${lecture2.lectureTypeId}">${lecture2.lectureType}</option>
-        <c:forEach var = "lect" items = "${ltList}">
-        <option value = "${lect.id}">${lect.lectureType}</option>
-        </c:forEach>
-      </select><br>
-    <!-- 종별 선택  -->
-    
+ <select name = "lecturetype">
+   <c:forEach var = "lecttype" items = "${ltList}">
+        <c:choose>
+          <c:when test="${lecture2.lectureType == lecttype.lectureType}">
+            <option value = "${lecture2.lectureTypeId}" selected>${lecttype.lectureType}</option>
+          </c:when>
+          <c:otherwise>
+            <option value = "${lecttype.id}">${lecttype.lectureType}</option>
+          </c:otherwise>
+        </c:choose>
+   </c:forEach>
+   </select>
+  <br>    
  
      <!-- 교수 선택  -->
-   <span class = "lable">교수</span>
+     <span class = "lable">교수</span>
       <select name = "professor">
-        <option value="${lecture2.profId}">${lecture2.profName}</option>
-        <c:forEach var = "professor" items = "${profList}">
-        <option value = "${professor.id}">${professor.profName}</option>
-        </c:forEach>
-      </select><br>
+         <c:forEach var = "professor" items = "${profList}">
+           <c:choose>
+             <c:when test="${professor.profName == lecture2.profName}">
+              <option value = "${professor.id}" selected>${lecture2.profName}</option>
+             </c:when>
+             
+             <c:otherwise>
+             <option value = "${professor.id}">${professor.profName}</option>
+             </c:otherwise>
+           </c:choose>     
+         </c:forEach>
+      </select>
+     <br>
+ 
     <!-- 교수 선택  -->
     
     <input type = "submit" value = "수정하기" class = ""><br>

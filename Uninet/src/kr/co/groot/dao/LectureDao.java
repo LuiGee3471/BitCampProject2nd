@@ -477,7 +477,6 @@ public class LectureDao {
       lecture.setProfName(rs.getString("prof_name"));
       lecture.setId(rs.getInt("id"));
       lecture.setLectureTypeId(rs.getInt("lecture_type_id"));
-      lecture.setMajorId(rs.getInt("major_id"));
       lecture.setProfId(rs.getInt("prof_id"));
           
     }
