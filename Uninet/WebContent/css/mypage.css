@@ -1,6 +1,88 @@
-.check {
-	border: 0;
-	background-color: white;
-	width: 250px;
-	disabled :disabled;
+.aside {
+  width: 226px;
+}
+
+.heading {
+  margin-bottom: 5px;
+  padding: 25px;
+  border: 1px solid #d6d6d6;
+  background-color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sidebar {
+  border: 1px solid #d6d6d6;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0 25px;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+  color: #737373;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.head {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.a-1,
+.a-2,
+.a-3,
+.a-4,
+.a-5,
+.a-6,
+.a-7,
+.a-8 {
+  display: flex;
+  margin: auto;
+  padding: 15px 20px;
+  border-top: 1px solid #d6d6d6;
+}
+
+.logout {
+  margin-left: auto;
+  color: #737373;
+  font-size: 12px;
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.label {
+  line-height: 20px;
+  color: #737373;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: right;
+  width: 70px;
+}
+
+.data {
+  line-height: 20px;
+  color: #292929;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0;
+  margin-left: 20px;
+}
+
+.article {
+  margin-left: 25px;
+  width: 574px;
+  border: 1px solid #d6d6d6;
+  border-top: none;
+}
+
+.photo {
+  width: 100px;
+  height: 100px;
+  margin-left: 20px;
 }
