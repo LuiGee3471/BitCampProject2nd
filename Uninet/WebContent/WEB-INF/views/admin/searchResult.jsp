@@ -10,6 +10,15 @@
     <td>${staff.phoneNumber}</td>
     <td>${staff.birthday}</td>
     <td>${staff.deptName}</td>
-    <td><a href="modify?id=${staff.id}">수정</a></td>
+    <td>
+      <a href="modify?id=${staff.id}"> 
+        <i class="fas fa-folder-plus"></i>
+      </a>
+    </td>
+    <td>
+      <a href="delete?id=${staff.id}"> 
+        <i class="far fa-trash-alt"></i>
+      </a>
+    </td>
   </tr>
 </c:forEach>

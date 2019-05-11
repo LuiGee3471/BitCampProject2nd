@@ -93,7 +93,7 @@
     <!-- 교수 선택  -->
     
     <input type = "submit" value = "수정하기" class = ""><br>
-    <a class = "" href = "list">취소하고 돌아가기</a> 
+    <a class="" href="list">취소하고 돌아가기</a> 
     
   
  
