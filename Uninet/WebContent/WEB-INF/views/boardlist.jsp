@@ -31,17 +31,8 @@
   pageContext.setAttribute("endPage", endPage);
 %>
 <c:set var="list" value="${requestScope.list}" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/top-bottom.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
-<link rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<title>유니넷</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />

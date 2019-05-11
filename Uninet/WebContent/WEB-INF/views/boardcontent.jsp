@@ -27,18 +27,9 @@
 <c:set var="id" value="${postId}"/> 
 <c:set var="writer" value="${writer}"/>
 <c:set var="curruser" value="${staff}"/>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<link rel="stylesheet"
-  href="<%=request.getContextPath()%>/css/top-bottom.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css" />
-<link rel="stylesheet"
-  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<jsp:include page="/common/head.jsp" flush="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
