@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.* {
+  font-family: "맑은 고딕", 돋움, tahoma;
+}
+
 .lecturetable tr{
   border:none;
   border-bottom:1px solid black;
@@ -7,4 +11,27 @@
 
 .lecturetable th, td {
   padding:10px;
+  
+}
+
+.fa-user-cog, .fa-user-alt-slash, .fa-user-plus{
+  color:black;
+}
+
+.lecturetable {
+  margin:25px auto;
+  width:900px;  
+}
+
+.lecturetable tbody{
+  text-align: center;
+}
+
+.lecturetable th {
+  font-weight:bold;
+}
+
+.lecturetable tr {
+  border-bottom:1px solid #EBEBEB;
+  font-weight: 500;
 }
