@@ -116,32 +116,27 @@
 </div>
 
  </div>
- 
-
- 
-
 <div id="modalOne" class="modal">
   <div class="modal-content">
     <div class="contact-form">
       <a class="close">&times;</a>
-        <div class = "label-container">
-       <label for = "lectureSelect">과목명</label>
-          <input type = "radio" value = "lecture" name = "searchradio" id = "lectureSelect">
+      <div class = "label-container">
+        <label for = "lectureSelect">과목명</label>
+        <input type = "radio" value = "lecture" name = "searchradio" id = "lectureSelect">
           
-          <label for = profSelect>교수명</label>
-          <input type = "radio" value = "prof" name = "searchradio" id = "profSelect">
+        <label for = profSelect>교수명</label>
+        <input type = "radio" value = "prof" name = "searchradio" id = "profSelect">
           
-          <label for = majorSelect>전공명</label>
-          <input type = "radio" value = "major" name = "searchradio" id = "majorSelect">
-          </div>
-          <div class = "input-text">
-          <label for = "searchInput" class = "label-input">Input</label>
-          </div>
-          <br>
-          <input type = "text" name = "searchInput" id = "searchInput"  placeholder = "검색어">
-          <br>
-           
-          <button type="button" class = "searchBtn" id = "closeBtn">검색</button>          
+        <label for = majorSelect>전공명</label>
+        <input type = "radio" value = "major" name = "searchradio" id = "majorSelect">
+      </div>
+      <div class="input-text">
+        <label for="searchInput" class="label-input">Input</label>
+      </div>
+      <br>
+      <input type="text" name="searchInput" id="searchInput" placeholder="검색어">
+      <br>
+      <button type="button" class = "searchBtn" id = "closeBtn">검색</button>          
     </div>
   </div>
 </div>

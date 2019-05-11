@@ -71,13 +71,13 @@ button.button:hover {
   margin-top: 40px;
 }
 
-input[type='text'] {
+#searchInput {
   border: none;
   border-bottom: 2px solid #CA2917;
   width: 400px;
 }
 
-input[type='text']:focus {
+#searchInput:focus {
   outline: none;
 }
 

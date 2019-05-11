@@ -27,6 +27,7 @@
 <c:set var="writer" value="${writer}"/>
 <c:set var="curruser" value="${staff}"/>
 <jsp:include page="/common/head.jsp" flush="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/post.css" />
 </head>
 <body>
@@ -166,14 +167,10 @@
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script type="text/javascript">
-  
   $(".recomment-option").click(function() {
      var recommentDiv = $(this).parent().parent().siblings(".recomment-input");
      recommentDiv.removeClass("unseen");
   });
-  
-      
- 
 </script>
 </body>
 </html>

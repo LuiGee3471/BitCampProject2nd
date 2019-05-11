@@ -245,7 +245,7 @@ public class MessageDao {
    * @return: List<Message>
    */
   public List<Message> selectUserMessage(int userId) throws SQLException {
-    String sql = "select m.*, s1.staff_id as sender, s2.staff_id as receiver, "
+    String sql = "select m.*, s1.staff_name as sender, s2.staff_name as receiver, "
         + "date_format(time, '%m/%d %H:%i') as timeFormat " 
         + "from message m " 
         + "left join staff s1 "
@@ -296,7 +296,7 @@ public class MessageDao {
    * @return: List<Message>
    */
   public Message selectMessage(int messageId) throws SQLException {
-    String sql = "select m.*, s1.staff_id as sender, s2.staff_id as receiver, "
+    String sql = "select m.*, s1.staff_name as sender, s2.staff_name as receiver, "
         + "date_format(time, '%m/%d %H:%i') as timeFormat " 
         + "from message m " 
         + "left join staff s1 "
