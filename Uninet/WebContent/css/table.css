@@ -1,26 +1,17 @@
-@charset "UTF-8";
-.* {
-  font-family: "맑은 고딕", 돋움, tahoma;
-}
-
-.lecturetable tr{
-  border:none;
-  border-bottom:1px solid black;
-  
-}
+@import 'master.css';
 
 .lecturetable th, td {
-  padding:10px;
-  
+  padding: 15px 10px; 
 }
 
 .fa-user-cog, .fa-user-alt-slash, .fa-user-plus{
-  color:black;
+  color: #C62917;
 }
 
 .lecturetable {
-  margin:25px auto;
-  width:900px;  
+  margin: 25px auto;
+  width: 900px;
+  border: 1px solid #d6d6d6;
 }
 
 .lecturetable tbody{
@@ -32,6 +23,6 @@
 }
 
 .lecturetable tr {
-  border-bottom:1px solid #EBEBEB;
+  border-bottom: 1px solid #d6d6d6;
   font-weight: 500;
 }
