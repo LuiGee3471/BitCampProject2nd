@@ -27,26 +27,29 @@
   margin-top: 200px;
 }
 
-@media (min-width: 1366px) {
+@media ( min-width : 1366px) {
   .modal-content {
     background-color: #fefefe;
     margin: 10vh auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 30%; /* Could be more or less, depending on screen size */
+    position: relative;
   }
 }
 
 /* The Close Button */
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-left: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -73,45 +76,88 @@ button.button:hover {
 
 #searchInput {
   border: none;
-  border-bottom: 2px solid #CA2917;
-  width: 400px;
+  border-bottom: 1px solid #CA2917;
+  width: 90%;
+  margin: 50px auto;
 }
 
 #searchInput:focus {
   outline: none;
 }
 
+#modalTwo label {
+  color: #c62917;
+  font-size: 14px;
+  padding: 5px 30px;
+  border: 1px solid #c62917;
+  width: 60px;
+  height: 30px;
+  line-height: 20px;
+  margin: auto;
+}
+
+#modalTwo input[type=radio]:checked+label {
+  color: white;
+  background-color: #c62917;
+}
+
+#modalTwo input[type=radio] {
+  display: none;
+}
+
+.select-sort {
+  margin-top: 50px;
+  margin: 90px auto 0;
+}
+
 .label-input {
+  display: none;
   color: #CA2917;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 22px;
   position: relative;
 }
 
-.searchBtn {
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.label-container {
+  margin-left: 20px;
   margin-top: 10px;
-  margin-left: 400px;
+}
+
+.label-container label {
+  font-size: 14px;
+}
+
+.searchBtn {
+  margin-left: auto;
+  margin-right: 20px;
   width: 60px;
   height: 30px;
-  background-color: white;
+  background-color: #C62917;
   border: none;
-  color: #CA2917;
-  font-weight: bold;
-  font-size: 21px;
-  position: absolute;
+  color: white;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 6px;
 }
 
 .searchBtn2 {
-  margin-top: 100px;
-  margin-left: 400px;
-  margin-bottom: 40px;
   width: 60px;
   height: 30px;
-  background-color: white;
+  padding: 5px 10px;
+  margin-top: 50px;
+  margin-left: 80%;
+  background-color: #C62917;
   border: none;
-  color: #CA2917;
-  font-weight: bold;
-  font-size: 21px;
+  color: white;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 6px;
 }
 
 .message-modal {

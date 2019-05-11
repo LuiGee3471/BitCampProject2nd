@@ -7,7 +7,6 @@
 <c:set var="majorList" value="${requestScope.majorList}"></c:set>
 <c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
 
-
 <!DOCTYPE html>
 <html>
 <head>

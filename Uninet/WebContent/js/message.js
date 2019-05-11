@@ -41,8 +41,6 @@ $.ajax({
 });
 
 $(function() {
-  const fromMain = ${requestScope.fromMain};
-  const messageId = ${requestScope.id};
   if (fromMain) {
     getMessage(messageId);
   }
