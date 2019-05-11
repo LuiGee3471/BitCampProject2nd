@@ -8,9 +8,26 @@ public class Message {
   private int receiverId;
   private int senderId;
   private Timestamp time;
-  private String staffname;
+  private String receiverName;
+  private String senderName;
   private long diff;
   private String timeFormat;
+
+  public String getReceiverName() {
+    return receiverName;
+  }
+
+  public void setReceiverName(String receiverName) {
+    this.receiverName = receiverName;
+  }
+
+  public String getSenderName() {
+    return senderName;
+  }
+
+  public void setSenderName(String senderName) {
+    this.senderName = senderName;
+  }
 
   public String getTimeFormat() {
     return timeFormat;
@@ -26,14 +43,6 @@ public class Message {
 
   public void setDiff(long diff) {
     this.diff = diff;
-  }
-
-  public String getStaffname() {
-    return staffname;
-  }
-
-  public void setStaffname(String staffname) {
-    this.staffname = staffname;
   }
 
   public int getId() {

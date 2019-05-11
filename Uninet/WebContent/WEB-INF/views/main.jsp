@@ -87,8 +87,8 @@
       <div class="card board">
         <h3><a href="message">쪽지</a></h3>
         <c:forEach var="message" items="<%=messageList%>">
-          <a href="message" class="message">
-            <h3 class="message-title">${message.staffname}</h3>
+          <a href="message?fromMain=true&id=${message.id}" class="message">
+            <h3 class="message-title">${message.senderName}</h3>
             <span class="content">${message.content}</span><br>
             <span class="time message-time">${message.timeFormat}</span>
           </a>
