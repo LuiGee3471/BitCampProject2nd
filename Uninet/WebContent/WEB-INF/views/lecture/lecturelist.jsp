@@ -19,7 +19,7 @@
           <th>종별</th> 
           <th>학과</th>
           <th>교수</th>
-          <th colspan="3"></th>
+          <th colspan="2"></th>
         </tr>
       </thead>
       <tbody id="searchResult">
