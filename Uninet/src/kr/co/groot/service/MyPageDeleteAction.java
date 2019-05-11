@@ -20,7 +20,7 @@ public class MyPageDeleteAction implements Action{
     StaffDao dao;
     int result = 0;
     String msg = "";
-    String url = "admin";
+    String url = "admin?page=1&option=default";
     
     try {
       dao = new StaffDao();
