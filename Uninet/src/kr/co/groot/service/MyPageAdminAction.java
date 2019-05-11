@@ -50,7 +50,7 @@ public class MyPageAdminAction implements Action {
 		
 		forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/WEB-INF/views/mypage/admin.jsp");
+		forward.setPath("/WEB-INF/views/admin/admin.jsp");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
