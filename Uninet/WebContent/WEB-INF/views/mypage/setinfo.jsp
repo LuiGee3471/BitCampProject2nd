@@ -30,7 +30,7 @@
         $('#check').css('color', 'blue');
       }
       $('#update').click(function(event) {
-        if ($('#currentPwd').val() != $('#pwd').val()) {
+    	  if ($('#currentPwd').val() != $('#pwd').val()) {
           event.preventDefault();
         }
       });
@@ -75,16 +75,17 @@
 	  <h4 class="head">개인정보 변경</h4>
 	</div>
 	<div class="a-2">
-	  <span class="lable">이름(실명)</span> <span class="data">${sessionScope.staff.staffName }</span>
+	  <span class="lable">이름(실명)</span> <span class="data"> <input type="text" class="input"name="staffName" value="${sessionScope.staff.staffName }"></span>
 	</div>
 	<div class="a-3">
-	  <span class="lable">이메일</span> <span class="data">${staff.email }</span>
+	  <span class="lable">이메일</span> <span class="data"><input type="text" class="input"name="staffEmail" value="${staff.email}"></span>
 	</div>
 	<div class="a-4">
 	  <span class="lable">생년월일</span> <span><%=birthdayString%></span>
 	</div>
 	<div class="a-5">
-	  <span class="lable">연락처</span> <span>${staff.phoneNumber }</span>
+	  <span class="lable">연락처</span> 
+	  <input type="text" name="staffPhone" class="input" value="${staff.phoneNumber }">
 	</div>
 	<div class="a-6">
 	  <span class="lable">현재 비밀번호</span> &nbsp;&nbsp;&nbsp;<input type="password"
@@ -93,7 +94,8 @@
 			<input type="hidden" id="pwd" name="pwd" value="${sessionScope.staff.password}"><br>
 				</div>
 				<div class="a-7">
-				<input type="submit" id="update" value="개인정보 변경">
+				<input class="fas fa-user-edi" type="submit" id="update" value="개인정보 변경">
+				<a href = "updateInfo"><i class="fas fa-edit"></i></a>
 				</div>
 			</form>
 		</div>
