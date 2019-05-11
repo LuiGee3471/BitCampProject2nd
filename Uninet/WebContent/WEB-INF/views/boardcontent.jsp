@@ -155,13 +155,14 @@
         </form>
       </div>
     </div>
-    <div id="modalOne" class="modal">
+    <div class="modal">
       <div class="modal-content">
         <div class="message-modal">
           <form action="<%=request.getContextPath()%>/message/send" class="message-form" method="post">
             <h3 class="message-title">쪽지 보내기</h3>
-            <textarea class="message-text" name="text" placeholder="내용을 입력해주세요."></textarea>
+            <textarea class="message-textarea" name="text" placeholder="내용을 입력해주세요."></textarea>
             <input type="hidden" value="${postId}" name="postId">
+            <input type="hidden" value="post" name="origin">
             <input type="submit" value="전송" class="message-submit">
           </form>
           <a class="close-btn">&times;</a>

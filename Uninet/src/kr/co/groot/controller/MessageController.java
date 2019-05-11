@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
+import kr.co.groot.service.MessageDeleteAction;
 import kr.co.groot.service.MessagePageAction;
 import kr.co.groot.service.MessageSendAction;
 
@@ -36,6 +37,9 @@ public class MessageController extends HttpServlet {
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/message")) {
       action = new MessagePageAction();
+      forward = action.execute(request, response);
+    } else if (urlCommand.equals("/message/delete")) {
+      action = new MessageDeleteAction();
       forward = action.execute(request, response);
     }
     

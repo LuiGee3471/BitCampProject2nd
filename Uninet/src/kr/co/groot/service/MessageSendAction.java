@@ -25,14 +25,14 @@ public class MessageSendAction implements Action {
     HttpSession session = request.getSession();
     Staff user = (Staff) session.getAttribute("staff");
     String postId = request.getParameter("postId");
-    
-    System.out.println(id + text + user.getId() + postId);
-    
+    String origin = request.getParameter("origin");
+     
     try {
       StaffDao staffDao = new StaffDao();
       Staff staff = staffDao.selectStaff(id);
       Message message = new Message();
       MessageDao messageDao = new MessageDao();
+      System.out.println(id + text + staff.getId() + user.getId() + postId);
       message.setContent(text);
       message.setReceiverId(staff.getId());
       message.setSenderId(user.getId());
@@ -41,11 +41,15 @@ public class MessageSendAction implements Action {
       
       forward = new ActionForward();
       forward.setRedirect(true);
-      forward.setPath(request.getContextPath() + "/board/read?id=" + postId);
+      if (origin.equals("post")) {
+        forward.setPath(request.getContextPath() + "/board/read?id=" + postId);
+      } else {
+        forward.setPath(request.getContextPath() + "/message");
+      }
     } catch (NamingException e) {
-      System.out.println(e.getMessage());
+      System.out.println("MessageSendAction : " + e.getMessage());
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
+      System.out.println("MessageSendAction : " + e.getMessage());
     }
     return forward;
   }

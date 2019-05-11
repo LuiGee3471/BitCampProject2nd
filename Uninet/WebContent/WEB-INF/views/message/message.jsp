@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <title>유니넷</title>
+<link rel="stylesheet" href="css/modal.css">
 <link rel="stylesheet" href="css/message.css">
 </head>
 <body>
@@ -39,31 +40,26 @@
     </div>
     <div class="message-paper"></div>
   </div>
+
+  <div class="modal">
+    <div class="modal-content">
+      <div class="message-modal">
+        <form action="<%=request.getContextPath()%>/message/send"
+          class="message-form" method="post">
+          <h3 class="message-title">쪽지 보내기</h3>
+          <textarea class="message-textarea" name="text"
+            placeholder="내용을 입력해주세요."></textarea>
+          <input type="hidden" value="${postId}" name="postId">
+          <input type="hidden" value="message" name="origin">
+          <input type="submit" value="전송" class="message-submit">
+        </form>
+        <a class="close-btn">&times;</a>
+      </div>
+    </div>
+  </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script>
-    $(function() {
-      const fromMain = ${requestScope.fromMain};
-      const messageId = ${requestScope.id};
-      if (fromMain) {
-        $.ajax({
-          url: "message/call",
-          dataType : "html",
-          data : {
-            id : messageId
-          },
-          success : function(data) {
-            $('.message-paper').html(data);
-          },
-          error : function(xhr) {
-            console.log(xhr.status);
-            alert("쪽지를 불러오지 못했습니다.");
-          }
-        })
-      }
-    }); 
-  
-    $(".message").click(function() {
-      const messageId = $(this).children(".hidden").text();
+    function getMessage(messageId) {
       $.ajax({
         url: "message/call",
         dataType : "html",
@@ -77,11 +73,45 @@
           console.log(xhr.status);
           alert("쪽지를 불러오지 못했습니다.");
         }
-      })
+      }).done(function() {
+        if ($("#reply")) {
+          $("#reply").click(function() {
+            $(".modal").css("display", "block");
+            const receiver_id = $(this).parent().parent().children("#receiver-id").text();    
+            $(".message-form").append("<input type='hidden' value='" + receiver_id + "' name='receiver' class='receiver'>");
+          });
+        }
+        
+        $("#refresh").click(function() {
+          getMessage(messageId);
+        });
+        
+        $("#delete").click(function() {
+          const answer = confirm("쪽지를 삭제하시겠습니까?");
+          if (answer) {
+            location.href = "message/delete?id=" + messageId;
+          }
+        });
+      })     
+    }
+    
+    $(function() {
+      const fromMain = ${requestScope.fromMain};
+      const messageId = ${requestScope.id};
+      if (fromMain) {
+        getMessage(messageId);
+      }
+    }); 
+  
+    $(".message").click(function() {
+      const messageId = $(this).children(".hidden").text();
+      getMessage(messageId);
     });
-    <c:if test="${requestScope.fromMain}">
-      $(".message").trigger("click");
-    </c:if>
+    
+    $(".close-btn").click(function() {
+    	$(".receiver").remove();
+    	$(".modal").css("display", "none");
+    });
   </script>
 </body>
 </html>

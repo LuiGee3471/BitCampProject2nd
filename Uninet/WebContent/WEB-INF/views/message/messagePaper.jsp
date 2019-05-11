@@ -4,6 +4,8 @@
 <c:set var="message" value="${requestScope.message}" />
 <c:set var="userId" value="${sessionScope.staff.id}" />
 <div class="message-top">
+<span class="hidden" id="message-id">${message.id}</span>
+<span class="hidden" id="receiver-id">${message.senderName}</span>
   <c:choose>
     <c:when test="${message.receiverId == userId}">
       <h4 class="paper-title">${message.senderName}</h4>
@@ -14,9 +16,11 @@
   </c:choose>
   <div class="message-menu">
     <!-- 답장, 새로고침, 삭제 -->
-    <i class="far fa-paper-plane fa-lg"></i> 
-    <i class="fas fa-sync-alt fa-lg"></i> 
-    <i class="far fa-trash-alt fa-lg"></i>
+    <c:if test="${message.receiverId == userId}">
+      <i class="far fa-paper-plane fa-lg" id="reply"></i>
+    </c:if>
+    <i class="fas fa-sync-alt fa-lg" id="refresh"></i>
+    <i class="far fa-trash-alt fa-lg" id="delete"></i>
   </div>
 </div>
 <div class="message-info">

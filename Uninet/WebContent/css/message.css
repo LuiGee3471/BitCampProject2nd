@@ -61,7 +61,11 @@
   color: #c62917;
   width: 20%;
   display: flex;
-  justify-content: space-between
+  cursor: pointer;
+}
+
+.message-menu i {
+  margin: 0 auto;
 }
 
 .message-top {
