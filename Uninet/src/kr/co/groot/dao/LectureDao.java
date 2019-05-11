@@ -457,5 +457,35 @@ public class LectureDao {
     return json;
 
   }
+  
+  public Lecture selectById(int id) throws SQLException {
+    Lecture lecture = null;
+    String sql = "select * from lecture l left join lectureType t on l.lecture_type_id = t.id " 
+                +"left join professor p on l.prof_id = p.id where l.id = ?";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    if(rs.next()) {
+      lecture = new Lecture();
+      lecture.setLectureName(rs.getString("lecture_name"));
+      lecture.setCredit(rs.getInt("credit"));
+      lecture.setTime(rs.getString("time"));
+      lecture.setLectureType(rs.getString("lecture_type"));
+      lecture.setProfName(rs.getString("prof_name"));
+      lecture.setId(rs.getInt("id"));
+      lecture.setLectureTypeId(rs.getInt("lecture_type_id"));
+      lecture.setProfId(rs.getInt("prof_id"));
+          
+    }
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    
+    return lecture;
+  }
 
 }

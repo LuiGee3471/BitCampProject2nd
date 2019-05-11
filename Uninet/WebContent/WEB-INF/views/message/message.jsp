@@ -51,6 +51,10 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script>
+    const fromMain = ${requestScope.fromMain};
+    const messageId = ${requestScope.id};
+  </script>
   <script src="<%=request.getContextPath()%>/js/message.js"></script>
 </body>
 </html>

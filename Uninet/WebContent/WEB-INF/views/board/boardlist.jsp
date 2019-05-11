@@ -135,6 +135,12 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script>
+    const currentPage = <%=request.getAttribute("currentPage")%>;
+    const option = "<%=request.getAttribute("option")%>";
+    const boardType = <%=request.getAttribute("boardType")%>;
+    const word = "<%=request.getAttribute("word")%>";
+  </script>
   <script src="<%=request.getContextPath()%>/js/boardlist.js"></script>
 </body>
 </html>

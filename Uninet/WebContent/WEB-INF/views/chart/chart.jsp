@@ -24,8 +24,8 @@
             <option value="lecture">학과별 강의 수</option>
             <option value="professor">학과별 교수 인원</option>
             <option value="day">요일별 수업 개수</option>
-          </select> <a class="chart-link"
-            href="<%=request.getContextPath()%>/main">&lt;돌아가기</a>
+          </select> <a class="chart-link" 
+          href="<%=request.getContextPath()%>/main">&lt;돌아가기</a>
         </div>
       </div>
     </div>
