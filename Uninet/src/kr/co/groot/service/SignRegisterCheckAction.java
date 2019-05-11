@@ -15,7 +15,7 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
-public class RegisterCheckAction implements Action {
+public class SignRegisterCheckAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request,
       HttpServletResponse response) {

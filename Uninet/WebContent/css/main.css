@@ -149,3 +149,7 @@
   color: #4c4c4c;
   font-size: 13px;
 }
+
+.buttons a {
+  margin-right: 3px;
+}
