@@ -9,9 +9,11 @@
 <title>Insert title here</title>
 <c:set var="list" value="${requestScope.mypost}"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<jsp:include page="/common/head.jsp" flush="false" />
 <%
 Staff staff = (Staff) session.getAttribute("staff");
 %>
+
 </head>
 
 <body>
