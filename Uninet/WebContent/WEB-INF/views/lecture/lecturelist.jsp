@@ -23,7 +23,7 @@
         </tr>
       </thead>
       <tbody id="searchResult">
-        <c:forEach var = "lecture" items = "${requestScope.lecturelist}">
+        <c:forEach var="lecture" items="${requestScope.lecturelist}">
           <tr>
             <td>${lecture.lectureName}</td>
             <td>${lecture.credit}</td>
@@ -50,13 +50,13 @@
     <div class="modal-content">
       <div class="contact-form">
         <a class="close">&times;</a>
-        <div class = "label-container">
-          <label for = "lectureSelect">과목명</label>
-          <input type = "radio" value = "lecture" name="searchradio" id = "lectureSelect" checked>   
+        <div class="label-container">
+          <label for="lectureSelect">과목명</label>
+          <input type="radio" value="lecture" name="searchradio" id="lectureSelect" checked>   
           <label for = profSelect>교수명</label>
-          <input type = "radio" value="prof" name="searchradio" id = "profSelect">
-          <label for = majorSelect>전공명</label>
-          <input type = "radio" value="major" name="searchradio" id="majorSelect">
+          <input type="radio" value="prof" name="searchradio" id="profSelect">
+          <label for="majorSelect">전공명</label>
+          <input type="radio" value="major" name="searchradio" id="majorSelect">
         </div>
         <div class="input-text">
           <label for="searchInput" class="label-input">검색</label>
