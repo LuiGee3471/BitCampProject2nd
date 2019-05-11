@@ -34,52 +34,59 @@
 </script>
 </head>
 <body>
-<jsp:include page="/common/top.jsp" flush="false" />
-	<div class="container">
+  <jsp:include page="/common/top.jsp" flush="false" />
+  <div class="container">
 	<div class="aside">
-	<div class="heading">
+	  <div class="heading">
 		<h3>내정보</h3>
-	</div>
-	<div class="sidebar">
-	<ul>
-		<li><a href="<%=request.getContextPath()%>/mypage">기본 정보</a></li>
-		<li><a href="<%=request.getContextPath()%>/mypage/setinfo">개인
-				정보 수정</a></li>
-		<li><a href="<%=request.getContextPath()%>/mypage/setpassword">비밀번호
-				변경</a></li>
-		<li><a href="<%=request.getContextPath()%>/mypage/setpicture">프로필
-				이미지 변경</a></li>
-		<li><a href="<%=request.getContextPath()%>/mypage/admin">회원관리</a></li>
-	</ul>
-	</div>
+	  </div>
+	  <div class="sidebar">
+			<ul>
+				<li><a href="<%=request.getContextPath()%>/mypage">기본 정보</a></li>
+				<li>
+					<a href="<%=request.getContextPath()%>/mypage/setinfo">개인 정보 수정</a>
+				</li>
+				<li>
+					<a href="<%=request.getContextPath()%>/mypage/setpassword">비밀번호 변경</a>
+				</li>
+				<li>
+					<a href="<%=request.getContextPath()%>/mypage/setpicture">프로필 이미지 변경</a>
+				</li>
+				<c:if test="${staff.isAdmin == 'Y'}">
+					<li>
+						<a href="<%=request.getContextPath()%>/mypage/admin?page=1&option=default">회원 관리</a>
+					</li>
+				</c:if>
+			</ul>
+	  </div>
 	</div>
 	<c:set var="staff" value="${staff }" />
 	<div class="article">
-	<form action="updatePwd" method="post">
-	<div class="a-1">
-	<h4 class="head">비밀번호 변경</h4>
+	  <form action="updatePwd" method="post">
+	    <div class="a-1">
+	      <h4 class="head">비밀번호 변경</h4>
+	    </div>
+	    <div class="a-2">
+	      <span class="label">바꿀 비밀번호</span>
+	      <input type="password" id="updatePwd" value="">
+	    </div>
+	    <div class="a-3">
+	      <span class="label">다시 입력</span>
+	      <input type="password" id="updatePwd2" name="updatePwd" value="">
+	      <input type="text" id="check" class="check">
+	    </div>
+	    <div class="a-4">
+	      <span class="label">현재 비밀번호</span>
+	      <input type="password" id="currentPwd" value="">
+	      <input type="text" id="checkPwd" class="check">
+	      <input type="hidden" id="pwd" value="${sessionScope.staff.password}">
+	    </div>
+	    <div class="a-3">
+	       <input type="submit" value="비밀번호 변경" class="submit">
+	    </div>
+	  </form>
 	</div>
-	<div class="a-2">
-	<span>바꿀 비밀번호</span>&nbsp;&nbsp;&nbsp;
-	 <input type="password" id="updatePwd" value="">
-	</div>
-	<div class="a-3">
-	<span>다시 입력</span>&nbsp;&nbsp;&nbsp;
-	<input type="password" id="updatePwd2" name="updatePwd" value="">
-	<input type="text" id="check" class="check">
-	</div>
-	<div class="a-4">
-	<span>현재 비밀번호</span>&nbsp;&nbsp;&nbsp;
-	<input type="password" id="currentPwd" value="">
-	<input type="text" id="checkPwd" class="check">
-	<input type="hidden" id="pwd" value="${sessionScope.staff.password}">
-	</div>
-	<div class="a-3">
-	<input type="submit" value="비밀번호 변경">
-	</div>
-	</form>
-	</div>
-	</div>
-	  <jsp:include page="/common/bottom.jsp" flush="false" />
+  </div>
+  <jsp:include page="/common/bottom.jsp" flush="false" />
 </body>
 </html>

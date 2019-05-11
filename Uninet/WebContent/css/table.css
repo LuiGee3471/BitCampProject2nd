@@ -36,3 +36,17 @@
   flex: auto;
 }
 
+.lecture-add {
+  background: none;
+  border: 1px solid #C62917;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.hover-big:hover {
+  transform: scale(1.1);
+}
+
+.hover:hover {
+  transform: scale(1.08);
+}

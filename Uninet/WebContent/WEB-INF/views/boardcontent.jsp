@@ -106,7 +106,7 @@
            </div>
            </c:if>
            <div class="comment-recomment">
-            <c:if test="${comment.content =='삭제된 댓글입니다.' and comment.recommentCount>=1}">
+            <c:if test="${comment.content =='삭제된 댓글입니다.' and comment.recommentCount >= 1}">
             <div class="comment">
                <input type="hidden" value="false" id="deleteCheck">
               <div class="comment-main">

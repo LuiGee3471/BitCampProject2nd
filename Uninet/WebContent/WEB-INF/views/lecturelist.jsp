@@ -94,8 +94,8 @@
       <td>${lecture.lectureType}</td>
       <td>${lecture.majorName}</td>
       <td>${lecture.profName }</td>
-      <td><a href = "updatePage?id=${lecture.id}"><i class="fas fa-folder-plus"></i></a></td>
-      <td><a href = "delete?id=${lecture.id}"><i class="far fa-trash-alt"></i></a></td>
+      <td><a href="updatePage?id=${lecture.id}"><i class="far fa-edit hover-big"></i></a></td>
+      <td><a href="delete?id=${lecture.id}"><i class="far fa-trash-alt hover-big"></i></a></td>
       <td></td>
         
     </tr>
@@ -112,23 +112,23 @@
 <p><button class="button" data-modal="modalTwo">정렬</button></p>
 </div>
 
-<a href = "write"><button><i class="far fa-edit fa-3x"></i></button></a>
+<a href="write"><button class="lecture-add"><i class="fas fa-folder-plus fa-2x hover"></i></button></a>
 </div>
 
- </div>
+</div>
 <div id="modalOne" class="modal">
   <div class="modal-content">
     <div class="contact-form">
       <a class="close">&times;</a>
       <div class = "label-container">
         <label for = "lectureSelect">과목명</label>
-        <input type = "radio" value = "lecture" name = "searchradio" id = "lectureSelect">
+        <input type = "radio" value = "lecture" name="searchradio" id = "lectureSelect">
           
         <label for = profSelect>교수명</label>
-        <input type = "radio" value = "prof" name = "searchradio" id = "profSelect">
+        <input type = "radio" value="prof" name="searchradio" id = "profSelect">
           
         <label for = majorSelect>전공명</label>
-        <input type = "radio" value = "major" name = "searchradio" id = "majorSelect">
+        <input type = "radio" value="major" name="searchradio" id="majorSelect">
       </div>
       <div class="input-text">
         <label for="searchInput" class="label-input">Input</label>
@@ -136,7 +136,7 @@
       <br>
       <input type="text" name="searchInput" id="searchInput" placeholder="검색어">
       <br>
-      <button type="button" class = "searchBtn" id = "closeBtn">검색</button>          
+      <button type="button" class="searchBtn" id="closeBtn">검색</button>          
     </div>
   </div>
 </div>

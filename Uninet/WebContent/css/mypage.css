@@ -31,6 +31,7 @@
 .head {
   font-size: 18px;
   font-weight: bold;
+  line-height: 30px;
 }
 
 .a-1,
@@ -62,7 +63,7 @@
   font-size: 13px;
   font-weight: bold;
   text-align: right;
-  width: 70px;
+  width: 90px;
 }
 
 .data {
@@ -90,4 +91,24 @@
 .check{
 	border: none;
 	disabled;
+}
+
+input {
+  margin-left: 20px;  
+}
+
+.submit {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: white;
+  background-color: #C62917;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 15px;
+  cursor: pointer;
+}
+
+.btn2 {
+  margin-left: 5px;
 }
