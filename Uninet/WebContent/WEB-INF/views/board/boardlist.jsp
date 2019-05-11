@@ -135,66 +135,6 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
-  <script type="text/javascript">
-    $("#textbox").click(function () {
-      $(this).addClass("unseen");
-      $("#postform").removeClass("unseen");
-    });
-
-    $(".new-content").keyup(function() {
-      const text = $(".new-content").val();
-      if (text.length >= 500) {
-        $(".warning").removeClass("unseen");
-      } else {
-        $(".warning").addClass("unseen");
-      }
-    })
-
-    $(".page-btn")
-        .click(function () {
-          var pageNo = Number($(this).text());
-          var url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-          location.href = url;
-        });
-
-    $(".next-page").click(function () {
-      if (!$(this).hasClass("invisible")) {
-        var url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-        location.href = url;
-      }
-    });
-
-    $(".prv-btn").click(function () {
-      var currentPage = ${ currentPage };
-      var decision = currentPage % 3;
-      var pageToMove;
-      if (decision === 1) {
-        pageToMove = currentPage - 1;
-      } else if (decision === 2) {
-        pageToMove = currentPage - 2;
-      } else {
-        pageToMove = currentPage - 3;
-      }
-
-      var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-      location.href = url;
-    });
-
-    $(".next-btn").click(function () {
-      var currentPage = ${ currentPage };
-      var decision = currentPage % 3;
-      var pageToMove;
-      if (decision === 1) {
-        pageToMove = currentPage + 3;
-      } else if (decision === 2) {
-        pageToMove = currentPage + 2;
-      } else {
-        pageToMove = currentPage + 1;
-      }
-
-      var url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
-      location.href = url;
-    });
-  </script>
+  <script src="<%=request.getContextPath()%>/js/boardlist.js"></script>
 </body>
 </html>

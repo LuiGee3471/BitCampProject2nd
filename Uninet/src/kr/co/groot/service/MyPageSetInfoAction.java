@@ -11,11 +11,10 @@ public class MyPageSetInfoAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
-    
+
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/mypage/setinfo.jsp");
     return forward;
   }
-
 }

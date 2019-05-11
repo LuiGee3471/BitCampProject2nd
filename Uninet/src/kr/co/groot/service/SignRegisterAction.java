@@ -27,7 +27,7 @@ public class SignRegisterAction implements Action {
 
       forward = new ActionForward();
       forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/etc/register.jsp");
+      forward.setPath("/WEB-INF/views/sign/register.jsp");
     } catch (NamingException | SQLException e) {
       System.out.println(e.getMessage());
     }

@@ -34,7 +34,7 @@ public class StatController extends HttpServlet {
     if (urlCommand.equals("/stat/chart")) {
       forward = new ActionForward();
       forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/chart.jsp");
+      forward.setPath("/WEB-INF/views/chart/chart.jsp");
     }
 
     if (forward != null) {
