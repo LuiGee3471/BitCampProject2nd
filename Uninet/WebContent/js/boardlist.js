@@ -10,26 +10,26 @@ $(".new-content").keyup(function() {
   } else {
     $(".warning").addClass("unseen");
   }
-})
+});
 
 $(".page-btn")
     .click(function () {
       const pageNo = Number($(this).text());
-      const url = "list?page=" + pageNo + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+      const url = "list?page=" + pageNo + "&option=<%=request.getAttribute('option')%>&boardtype=<%=request.getAttribute('boardType')%>&word=<%=request.getAttribute('word')%>";
       location.href = url;
     });
 
 $(".next-page").click(function () {
   if (!$(this).hasClass("invisible")) {
-    const url = "list?page=${currentPage + 1}&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+    const url = "list?page=${currentPage + 1}&option=<%=request.getAttribute('option')%>&boardtype=<%=request.getAttribute('boardType')%>&word=<%=request.getAttribute('word')%>";
     location.href = url;
   }
 });
 
 $(".prv-btn").click(function () {
-  const currentPage = ${ currentPage };
+  const currentPage = ${currentPage};
   const decision = currentPage % 3;
-  const pageToMove;
+  const pageToMove=null;
   if (decision === 1) {
     pageToMove = currentPage - 1;
   } else if (decision === 2) {
@@ -38,14 +38,14 @@ $(".prv-btn").click(function () {
     pageToMove = currentPage - 3;
   }
 
-  const url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+  const url = "list?page=" + pageToMove + "&option=<%=request.getAttribute('option')%>&boardtype=<%=request.getAttribute('boardType')%>&word=<%=request.getAttribute('word')%>";
   location.href = url;
 });
 
 $(".next-btn").click(function () {
-  const currentPage = ${ currentPage };
+  const currentPage = ${currentPage};
   const decision = currentPage % 3;
-  const pageToMove;
+  const pageToMove=null;
   if (decision === 1) {
     pageToMove = currentPage + 3;
   } else if (decision === 2) {
@@ -54,6 +54,6 @@ $(".next-btn").click(function () {
     pageToMove = currentPage + 1;
   }
 
-  const url = "list?page=" + pageToMove + "&option=<%=request.getAttribute("option")%>&boardtype=<%=request.getAttribute("boardType")%>&word=<%=request.getAttribute("word")%>";
+  const url = "list?page=" + pageToMove + "&option=<%=request.getAttribute('option')%>&boardtype=<%=request.getAttribute('boardType')%>&word=<%=request.getAttribute('word')%>";
   location.href = url;
 });

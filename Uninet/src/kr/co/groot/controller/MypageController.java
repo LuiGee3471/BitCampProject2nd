@@ -24,7 +24,7 @@ import kr.co.groot.service.MyPageUpdateInfoAction;
 import kr.co.groot.service.MyPageUpdatePictureAction;
 import kr.co.groot.service.MypagePwdUpdateAction;
 
-@WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*" })
+@WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*"})
 public class MypageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

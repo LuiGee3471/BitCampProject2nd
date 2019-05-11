@@ -395,15 +395,19 @@ public class PostDao {
    * 
    * @return: List<Post>
    */
-  public List<Post> selectByWriter(int writerId) throws SQLException {
+  // 시간, 게시판 타입, 글 제목, 내용, 조회수, 댓글수
+  public List<Post> selectByWriter(int writerId) throws SQLException, NamingException {
     List<Post> list = new ArrayList<>();
-    String sql = "select * from post where writer_id = ?";
-
+    String sql = "select post.*,"
+        + "date_format(time, '%m/%d %H:%i') as timeFormat from post"
+        + " where writer_id = ?"
+        + " order by time desc";
+     System.out.println(sql);
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, writerId);
     rs = pstmt.executeQuery();
-
+    CommentDao dao = new CommentDao();
     while (rs.next()) {
       Post post = new Post();
       post.setTitle(rs.getString("title"));
@@ -412,7 +416,9 @@ public class PostDao {
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
       post.setBoardType(rs.getInt("boardtype_id"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       post.setId(rs.getInt("id"));
+      post.setCommentCount(dao.getCommentCount(post.getId()));
       list.add(post);
     }
     if (rs != null) {
