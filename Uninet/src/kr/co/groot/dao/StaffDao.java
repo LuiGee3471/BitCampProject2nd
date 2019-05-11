@@ -415,7 +415,7 @@ public class StaffDao {
 	}
 
 	public Staff selectByUniqueId(int id) throws SQLException {
-		String sql = "select * from staff where id = ?";
+		String sql = "select s.*, d.* from staff s inner join department d on s.dept_id = d.id where s.id = ?";
 
 		conn = ds.getConnection();
 		pstmt = conn.prepareStatement(sql);
@@ -433,6 +433,7 @@ public class StaffDao {
 			staff.setIsAdmin(rs.getString("isAdmin"));
 			staff.setIsManager(rs.getString("isManager"));
 			staff.setDeptId(rs.getInt("dept_id"));
+			staff.setDeptName(rs.getString("dept_name"));
 		}
 		rs.close();
 		pstmt.close();
