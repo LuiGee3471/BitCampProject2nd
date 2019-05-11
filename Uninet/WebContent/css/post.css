@@ -87,6 +87,7 @@ body {
   color: #4c4c4c;
   font-size: 14px;
   word-break: break-all;
+  white-space: pre-wrap;
 }
 
 .comments {
