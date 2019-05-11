@@ -4,15 +4,9 @@
   padding: 15px 10px; 
 }
 
-<<<<<<< HEAD
-.fa-folder-plus, .fa-trash-alt, far fa-edit{
-  color:black;
-=======
-.fa-user-cog, .fa-user-alt-slash, .fa-user-plus{
+.fa-folder-plus, .fa-trash-alt, .fa-edit{
   color: #C62917;
->>>>>>> a0ffed827fabd556f9736eae0b969d66a682d187
 }
-
 .lecturetable {
   margin: 25px auto;
   width: 900px;

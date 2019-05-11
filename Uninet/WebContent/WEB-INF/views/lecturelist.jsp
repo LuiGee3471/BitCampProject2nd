@@ -113,7 +113,7 @@
     </c:forEach>
     </tbody>
   </table>
-  <a href = "write"><button class=""><i class="far fa-edit"></i></button></a>
+  <a href = "write"><button><i class="far fa-edit"></i></button></a>
   <p>
   <button class="button" data-modal="modalOne">
     강의 검색
