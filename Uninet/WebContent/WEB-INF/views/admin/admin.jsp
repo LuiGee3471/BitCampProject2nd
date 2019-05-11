@@ -45,24 +45,16 @@
         <th colspan="2"></th>
       </tr>
       <tbody id="searchResult">
-        <c:forEach var="staffList" items="${requestScope.staffList}">
+        <c:forEach var="staff" items="${requestScope.staffList}">
           <tr>
-            <td>${staffList.staffName}</td>
-            <td>${staffList.staffId}</td>
-            <td>${staffList.email}</td>
-            <td>${staffList.phoneNumber}</td>
-            <td>${staffList.birthday}</td>
-            <td>${staffList.deptName}</td>
-            <td>
-              <a href="modify?id=${staffList.id}">
-                <i class="fas fa-folder-plus"></i>
-              </a>
-            </td>
-            <td>
-              <a href="delete?id=${staffList.id}">
-                <i class="far fa-trash-alt"></i>
-              </a>
-            </td>
+            <td>${staff.staffName}</td>
+            <td>${staff.staffId}</td>
+            <td>${staff.email}</td>
+            <td>${staff.phoneNumber}</td>
+            <td>${staff.birthday}</td>
+            <td>${staff.deptName}</td>
+            <td><a href="updatePage?id=${staff.id}"><i class="far fa-edit hover-big"></i></a></td>
+            <td><a href="delete?id=${staff.id}"><i class="far fa-trash-alt hover-big"></i></a></td>  
           </tr>
         </c:forEach>
       </tbody>
