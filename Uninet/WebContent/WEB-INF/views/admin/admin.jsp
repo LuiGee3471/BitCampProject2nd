@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 <script type="text/javascript">
@@ -46,12 +46,13 @@
       </tr>
       <tbody id="searchResult">
         <c:forEach var="staff" items="${requestScope.staffList}">
+        <fmt:formatDate var= "birthday" value="${staff.birthday}" pattern="yyyy-MM-dd"/>
           <tr>
             <td>${staff.staffName}</td>
             <td>${staff.staffId}</td>
             <td>${staff.email}</td>
             <td>${staff.phoneNumber}</td>
-            <td>${staff.birthday}</td>
+            <td>${birthday}</td>
             <td>${staff.deptName}</td>
             <td><a href="modify?id=${staff.id}"><i class="far fa-edit hover-big"></i></a></td>
             <td><a href="delete?id=${staff.id}"><i class="far fa-trash-alt hover-big"></i></a></td>  
@@ -65,7 +66,7 @@
         <option value="deptName">부서별 검색</option>
       </select> 
       <input type="text" id="input" name="searchInput" class="search" autocomplete="off"> 
-      <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
+      <input type="image" id="btn" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
