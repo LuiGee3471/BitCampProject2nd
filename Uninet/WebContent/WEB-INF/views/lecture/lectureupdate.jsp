@@ -8,6 +8,8 @@
 <c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/update.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -25,7 +27,7 @@
     
      <!-- 학점 선택  -->
      <span class = "label">학점</span>
-     <select name = "credit" class = "textBottom">
+     <select id = "selectCredit" name = "credit" class = "textBottom">
 <c:forEach var = "i" begin="1" end="3">
   <c:choose>
     <c:when test="${i==lecture2.credit}">
@@ -40,7 +42,7 @@
 <br>
     <!-- 학점 선택  -->
     
-     <!-- 시간 선택  -->
+        <!-- 시간 선택  -->
    <span class = "label">시간</span>
     <select name="weekday">
       <option value="월">월</option>
@@ -49,10 +51,11 @@
       <option value="목">목</option>
       <option value="금">금</option>
     </select>
-      <select name = "lecturetime" class = "textBottom">
-        <option value = "123">123</option>
+      <select id = "changeTime" name = "lectureTime" class = "textBottom">
+        
+       <!--  <option value = "123">123</option>
         <option value = "456">456</option>
-        <option value = "789">789</option>
+        <option value = "789">789</option> -->
       </select><br>
     <!-- 시간 선택  -->
     
@@ -100,6 +103,6 @@
     </form>
     </div>
    <jsp:include page="/common/bottom.jsp" flush="false" />
-
+   <script src="<%=request.getContextPath()%>/js/lectureupdate.js"></script>
 </body>
 </html>

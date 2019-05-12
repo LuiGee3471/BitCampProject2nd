@@ -5,6 +5,7 @@
 <c:set var="ltList" value="${requestScope.ltList}"></c:set>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/update.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <jsp:include page="/common/top.jsp" flush="false" />
@@ -18,7 +19,7 @@
     
      <!-- 학점 선택  -->
    <span class="label">학점</span>
-      <select name="credit" class = "textBottom">
+      <select id = "selectCredit" name="credit" class = "textBottom">
         <option value="">학점 선택</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -35,11 +36,11 @@
       <option value="목">목</option>
       <option value="금">금</option>
     </select>
-      <select name = "lectureTime" class = "textBottom">
-        <option value="">교시 선택</option>
-        <option value = "123">123</option>
+      <select id = "changeTime" name = "lectureTime" class = "textBottom">
+        
+       <!--  <option value = "123">123</option>
         <option value = "456">456</option>
-        <option value = "789">789</option>
+        <option value = "789">789</option> -->
       </select><br>
     <!-- 시간 선택  -->
     
@@ -71,6 +72,7 @@
     </form>
      </div>
       <jsp:include page="/common/bottom.jsp" flush="false" />
+      <script src="<%=request.getContextPath()%>/js/lecturewrite.js"></script>
 
 </body>
 </html>
