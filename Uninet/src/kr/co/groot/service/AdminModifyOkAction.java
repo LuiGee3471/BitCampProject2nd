@@ -19,10 +19,7 @@ public class AdminModifyOkAction implements Action {
     staff.setPhoneNumber(request.getParameter("phoneNumber"));
     staff.setIsAdmin(request.getParameter("isAdmin"));
     staff.setIsManager(request.getParameter("isManager"));
-    staff.setId(staff.getId());
-    staff.setStaffName(staff.getStaffName());
-    staff.setEmail(staff.getEmail());
-    staff.setBirthday(staff.getBirthday());
+    staff.setId(Integer.parseInt(request.getParameter("selectId")));
 
     String msg = "";
     String url = "";

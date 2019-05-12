@@ -10,7 +10,7 @@
 <c:set var="staff" value="${requestScope.staff }" />
 <%
 	request.getParameter("id");
-%>
+%>	
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/update.css">
@@ -18,11 +18,12 @@
 	<jsp:include page="/common/top.jsp" flush="false" />
 	<div class="container">
 		<form action="modifyOk" method="post">
+		<input type="hidden" name="selectId" value="${staff.id }">
 			<span class="label">아이디 </span><input type="text" id="id" name="id"
-				value="${staff.staffId}" readOnly><br> <span>이름
-			</span><input type="text" id="name" name="name" value="${staff.staffName}"
+				value="${staff.staffId}" class="text" readOnly ><br> <span>이름
+			</span><input type="text" id="name" name="name" value="${staff.staffName}" class="text"
 				readOnly><br> <span>이메일</span> <input type="email"
-				id="email" name="email" value="${staff.email}" readOnly><br>
+				id="email" name="email" value="${staff.email}" class="text" readOnly><br>
 			<span>핸드폰 번호</span> <input type="text" id="phoneNumber"
 				name="phoneNumber" value="${staff.phoneNumber}"><br>
 			<c:if test="${staff.isAdmin } eq 'Y' "></c:if>
