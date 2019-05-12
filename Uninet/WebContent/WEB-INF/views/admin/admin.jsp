@@ -130,10 +130,10 @@
     </c:choose>
     </div>
     <script>
-    const currentPage = <%=request.getAttribute("currentPage")%>;
-    const option = "<%=request.getAttribute("option")%>";
-    const word = "<%=request.getAttribute("word")%>";
-  </script>
+      const currentPage = <%=request.getAttribute("currentPage")%>;
+      const option = "<%=request.getAttribute("option")%>";
+      const word = "<%=request.getAttribute("word")%>";
+    </script>
   <jsp:include page="/common/bottom.jsp" flush="false" />
   <script src="<%=request.getContextPath()%>/js/stafflist.js"></script>
 </body>
