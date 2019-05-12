@@ -53,7 +53,7 @@
             <td>${staff.phoneNumber}</td>
             <td>${staff.birthday}</td>
             <td>${staff.deptName}</td>
-            <td><a href="updatePage?id=${staff.id}"><i class="far fa-edit hover-big"></i></a></td>
+            <td><a href="modify?id=${staff.id}"><i class="far fa-edit hover-big"></i></a></td>
             <td><a href="delete?id=${staff.id}"><i class="far fa-trash-alt hover-big"></i></a></td>  
           </tr>
         </c:forEach>

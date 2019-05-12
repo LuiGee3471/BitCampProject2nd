@@ -19,7 +19,6 @@ public class AdminModifyOkAction implements Action {
     staff.setPhoneNumber(request.getParameter("phoneNumber"));
     staff.setIsAdmin(request.getParameter("isAdmin"));
     staff.setIsManager(request.getParameter("isManager"));
-    staff.setDeptId(Integer.parseInt(request.getParameter("deptId")));
     staff.setId(staff.getId());
     staff.setStaffName(staff.getStaffName());
     staff.setEmail(staff.getEmail());
@@ -34,7 +33,7 @@ public class AdminModifyOkAction implements Action {
       int row = dao.modifyStaff(staff);
       if (row > 0) {
         msg = "수정 성공";
-        url = "admin";
+        url = "admin?page=1&option=default";
       } else {
         msg = "수정 실패";
         url = "modify";
