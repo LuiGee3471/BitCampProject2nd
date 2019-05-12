@@ -337,3 +337,24 @@
   font-size: 11px;
   color: #a6a6a6;
 }
+
+.board-type {
+  font-size: 11px;
+  color: #a6a6a6;
+  margin:
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-photo {
+  width:20px;
+  height:20px;
+  margin: 0 5px 5px 0;
+  border-radius:4px;
+}
+
+.user {
+  display: flex;
+}

@@ -27,14 +27,26 @@ Staff staff = (Staff) session.getAttribute("staff");
     <a href="board/read?id=${post.id}">
       <div class="article">   
         <div class="article-main">
-        <h4 class="article-title">${post.title}</h4>
-        <p class="article-content">${post.content}</p>
-        <p class="write-info">
-          <span class="time">${post.timeFormat}</span>
-       
+        <div class="user">
+        <img class="profile-photo"
+            src="<%=request.getContextPath()%>/images/${staff.image}" alt="" />
+        <p class="user-info">
           <span class="writer-id">${staff.staffId}</span>
+          <span class="time">${post.timeFormat}</span> 
         </p>
         </div>
+        <h4 class="article-title">${post.title}</h4>
+        <p class="article-content">${post.content}</p>
+        <c:choose>
+        <c:when test="${post.boardType ==1}">
+        <span class="board-type">from 공지게시판</span>
+        </c:when>
+        <c:otherwise>
+        <span class="board-type">from 자유게시판</span>
+        </c:otherwise>
+        </c:choose>
+        </div>
+        
         <div class="article-sub">
         <p class="article-info">
           <i class="far fa-eye">&nbsp;${post.count}</i>&nbsp;<i class="far fa-comment">&nbsp;${post.commentCount}</i>
@@ -46,5 +58,6 @@ Staff staff = (Staff) session.getAttribute("staff");
     </div>    
 </div>
 <jsp:include page="/common/bottom.jsp" flush="false" />
+
 </body>
 </html>
