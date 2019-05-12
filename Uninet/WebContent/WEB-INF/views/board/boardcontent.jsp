@@ -180,6 +180,7 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
-  <script src="<%=request.getContextPath()%>/js/boardcontent.jsp"></script>
+  <script src="<%=request.getContextPath()%>/
+  js/boardcontent.jsp"></script>
 </body>
 </html>

@@ -181,7 +181,7 @@ public class CommentDao {
   // refer
   public int deleteComment(int id) throws Exception {
     int row = 0;
-    String sql = "delete from comment where id= ?";
+    String sql = "update comment set content='삭제된 댓글입니다.' where id= ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
@@ -261,7 +261,7 @@ public class CommentDao {
   }
   
   public int getCommentCount(int id) throws SQLException {
-    String sql = "select count(*) as count from comment where refer = ?";
+    String sql = "select count(*) as count from comment where refer = ? and content!='삭제된 댓글입니다.'";
     
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
