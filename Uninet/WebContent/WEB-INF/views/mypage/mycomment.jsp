@@ -1,13 +1,13 @@
 <%@page import="kr.co.groot.dto.Staff"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:set var="list" value="${requestScope.mypost}"/>
+<c:set var="list" value="${requestScope.mycomment}"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <jsp:include page="/common/head.jsp" flush="false" />
 <%
@@ -18,7 +18,7 @@ Staff staff = (Staff) session.getAttribute("staff");
 <jsp:include page="/common/top.jsp" flush="false" />
 <div class="container">
 <div class="titlebox">
-      <h1>내가 쓴 글 </h1>
+      <h1>댓글 단 글</h1>
     </div>
  <div class="articles">
     <c:forEach var="post" items="${list}">  
@@ -56,6 +56,5 @@ Staff staff = (Staff) session.getAttribute("staff");
     </div>    
 </div>
 <jsp:include page="/common/bottom.jsp" flush="false" />
-
 </body>
 </html>
