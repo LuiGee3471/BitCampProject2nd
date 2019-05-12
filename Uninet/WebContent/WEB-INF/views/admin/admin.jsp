@@ -4,32 +4,6 @@
 
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
-<script type="text/javascript">
-  $(function() {
-    $('#btn').on("click", function() {
-      const inputVal = $("#input").val();
-      const searchVal = $("#search option:selected").val();
-      console.log(inputVal);
-      console.log(searchVal);
-      if (!$('#input').val()) {
-        alert('값을 입력해주세요');
-      } else {
-        $.ajax({
-          url : "inputText",
-          dataType : "html",
-          data : {
-            searchText : inputVal,
-            orderBy : searchVal
-          },
-          success : function(data) {
-            console.log(data);
-            $('#searchResult').html(data);
-          }
-        })
-      }
-    });
-  });
-</script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -69,5 +43,6 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script src="<%=request.getContextPath()%>/js/admin.js"></script>
 </body>
 </html>

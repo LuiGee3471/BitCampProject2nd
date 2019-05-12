@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
-import kr.co.groot.dao.CommentDao;
 import kr.co.groot.dao.PostDao;
-import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Post;
-import kr.co.groot.dto.Staff;
 import kr.co.groot.page.Paginator;
 
 

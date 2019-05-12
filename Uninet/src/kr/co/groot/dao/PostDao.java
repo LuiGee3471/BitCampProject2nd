@@ -905,4 +905,369 @@ public class PostDao {
     
     return list;
   }
+  
+  public int countHowManyMyComment(int id) throws SQLException {
+    String sql = "select count(*) " + 
+        "from " + 
+        "(select distinct title " + 
+        "from post p " + 
+        "left join comment c " + 
+        "on p.id = c.refer " + 
+        "where c.writer_id = ?) q";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    
+    int result = rs.getInt(1);
+    return result;
+  }
+  
+
+  public int countHowManyMyPost(int id) throws SQLException {
+    String sql = "select count(*) as count "
+        + " from post p" 
+        + " where writer_id = ?";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    
+    int result = rs.getInt(1);
+    return result;
+  }
+  
+  public int countHowManyMyCommentWithOption(String option, String word,
+      int id) throws SQLException {
+    String sql1 = "select count(*) from post p"
+        + "LEFT JOIN comment c "
+        + "on p.id = c.refer "
+        + "where ";
+    String sql2 = "";
+    String sql3 = "and c.writer_id = ?";
+    word = "%" + word + "%";
+
+    conn = ds.getConnection();
+
+    switch (option) {
+    case "title":
+      sql2 = "title LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
+      pstmt.setString(1, word);
+      pstmt.setInt(2, id);
+      break;
+    case "content":
+      sql2 = "content LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
+      pstmt.setString(1, word);
+      pstmt.setInt(2, id);
+      break;
+    case "all":
+      sql2 = "(title LIKE ? OR content LIKE ?) ";
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
+      pstmt.setString(1, word);
+      pstmt.setString(2, word);
+      pstmt.setInt(3, id);
+      break;
+    }
+
+    rs = pstmt.executeQuery();
+
+    rs.next();
+    int count = rs.getInt(1);
+    
+    System.out.println("post count: " + count);
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return count;
+  }
+  
+
+  public int countHowManyMyPostWithOption(String option, String word,
+      int id) throws SQLException {
+    String sql1 = "select count(*) from post "
+        + "where ";
+    String sql2 = "";
+    String sql3 = "and writer_id = ?";
+    word = "%" + word + "%";
+
+    conn = ds.getConnection();
+
+    switch (option) {
+    case "title":
+      sql2 = "title LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
+      pstmt.setString(1, word);
+      pstmt.setInt(2, id);
+      break;
+    case "content":
+      sql2 = "content LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
+      pstmt.setString(1, word);
+      pstmt.setInt(2, id);
+      break;
+    case "all":
+      sql2 = "(title LIKE ? OR content LIKE ?) ";
+      pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
+      System.out.println(sql1 + sql2 + sql3);
+      pstmt.setString(1, word);
+      pstmt.setString(2, word);
+      pstmt.setInt(3, id);
+      break;
+    }
+
+    rs = pstmt.executeQuery();
+
+    rs.next();
+    int count = rs.getInt(1);
+    
+    System.out.println("post count: " + count);
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return count;
+  }
+  
+  public List<Post> getMyCommentByPage(int page, int id)
+      throws SQLException, NamingException {
+    CommentDao commentDao = new CommentDao();
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * " + 
+        "from " + 
+        "(select @rownum:=@rownum + 1 as no, q.* " + 
+        "from " + 
+        "(select " + 
+        "distinct p.id, s.staff_id, date_format(p.time, '%m/%d %H:%i') as timeFormat, " + 
+        "p.boardtype_id, p.title, p.content, p.writer_id, p.time, p.count " + 
+        "from post p " + 
+        "LEFT join comment c on p.id = c.refer " + 
+        "left join staff s on p.writer_id = s.id " + 
+        "where c.writer_id = ?) q) q2 " + 
+        "where no > ? " + 
+        "limit 20";
+    
+    System.out.println(sql2);
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql2);
+    pstmt.setInt(1, id);
+    pstmt.setInt(2, (page - 1) * 20);
+
+    rs = pstmt.executeQuery();
+
+    List<Post> list = new ArrayList<Post>();
+    while (rs.next()) {
+      Post post = new Post();
+      post.setId(rs.getInt("id"));
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setStaffId(rs.getString("staff_id"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setCommentCount(commentDao.getCommentCount(post.getId()));
+      list.add(post);
+    }
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return list;
+  }
+
+  public List<Post> getMyCommentByOption(int page, int id, String option, String word) throws NamingException, SQLException {
+    CommentDao commentDao = new CommentDao();
+    word = "'%" + word + "%'";
+    
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * from ";
+    String column = "";
+    switch (option) {
+    case "title":
+      column = "title like " + word;
+      break;
+    case "content":
+      column = "content like " + word;
+      break;
+    case "all":
+      column = "title like " + word + " or content like " + word;
+      break;
+    }
+    
+    String sql3 = "(select @rownum:=@rownum + 1 as no, q.* " 
+        + "from " 
+        + "(select "
+        + "distinct p.id, s.staff_id, date_format(p.time, '%m/%d %H:%i') as timeFormat, "
+        + "p.boardtype_id, p.title, p.content, p.writer_id, p.time, p.count " 
+        + "from post p "
+        + "LEFT join comment c on p.id = c.refer " 
+        + "left join staff s on p.writer_id = s.id "
+        + "where "
+        + column
+        + " and c.writer_id = ?) q) q2 ";
+
+    String sql4 = " where no > ? " 
+        + "limit 20";
+    
+    String sql = sql2 + sql3 + sql4;
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    pstmt.setInt(2, (page - 1) * 20);
+    rs = pstmt.executeQuery();
+    
+    List<Post> list = new ArrayList<Post>();
+    while (rs.next()) {
+      Post post = new Post();
+      post.setId(rs.getInt("id"));
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setStaffId(rs.getString("staff_id"));
+      post.setCommentCount(commentDao.getCommentCount(post.getId()));
+      list.add(post);
+    }
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return list;
+  }
+  
+  public List<Post> getMyPostByPage(int page, int id)
+      throws SQLException, NamingException {
+    CommentDao commentDao = new CommentDao();
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * from " + 
+        "(select @rownum:=@rownum + 1 as no, q.* " + 
+        "from " + 
+        "(select *, date_format(time, '%m/%d %H:%i') as timeFormat " + 
+        "from post " + 
+        "where writer_id = ?) q) q2 " + 
+        "where no > ? " + 
+        "limit 20";
+    
+
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql2);
+    pstmt.setInt(1, id);
+    pstmt.setInt(2, (page - 1) * 20);
+
+    rs = pstmt.executeQuery();
+
+    List<Post> list = new ArrayList<Post>();
+    while (rs.next()) {
+      Post post = new Post();
+      post.setId(rs.getInt("id"));
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setCommentCount(commentDao.getCommentCount(post.getId()));
+      list.add(post);
+    }
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return list;
+  }
+
+  public List<Post> getMyPostByOption(int page, int id, String option, String word) throws NamingException, SQLException {
+    CommentDao commentDao = new CommentDao();
+    word = "'%" + word + "%'";
+    
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * from ";
+    String column = "";
+    switch (option) {
+    case "title":
+      column = "title like " + word;
+      break;
+    case "content":
+      column = "content like " + word;
+      break;
+    case "all":
+      column = "title like " + word + " or content like " + word;
+      break;
+    }
+    
+    String sql3 = "(select @rownum:=@rownum + 1 as no, q.* " 
+        + "from " 
+        + "(select *, date_format(time, '%m/%d %H:%i') as timeFormat " 
+        + "from post " 
+        + " where "
+        + column
+        + " and writer_id = ?) q) q2";
+   
+    String sql4 = " where no > ? " 
+        + "limit 20";
+    
+    String sql = sql2 + sql3 + sql4;
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    pstmt.setInt(2, (page - 1) * 20);
+    rs = pstmt.executeQuery();
+    
+    List<Post> list = new ArrayList<Post>();
+    while (rs.next()) {
+      Post post = new Post();
+      post.setId(rs.getInt("id"));
+      post.setTitle(rs.getString("title"));
+      post.setContent(rs.getString("content"));
+      post.setWriterId(rs.getInt("writer_id"));
+      post.setTime(rs.getTimestamp("time"));
+      post.setCount(rs.getInt("count"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setTimeFormat(rs.getString("timeFormat"));
+      post.setCommentCount(commentDao.getCommentCount(post.getId()));
+      list.add(post);
+    }
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return list;
+  }
 }
