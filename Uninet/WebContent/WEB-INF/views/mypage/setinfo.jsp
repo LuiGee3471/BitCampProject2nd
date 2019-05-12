@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="staff" value="${sessionScope.staff}" />
 <%
 	Staff staff = (Staff) session.getAttribute("staff");
 	Timestamp birthday = staff.getBirthday();
@@ -33,6 +32,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
 </head>
 <body>
+<c:set var="staff" value="${sessionScope.staff}" />
   <jsp:include page="/common/head.jsp" flush="false" />
   <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
@@ -84,7 +84,7 @@
           <span class="label">현재 비밀번호</span>
           <span class ="data"><input type="password" id="currentPwd" name="currentPwd" class="info" value="" maxlength="20"></span>
           <input type="text" id="check" class="check">
-         <input type="hidden" id="pwd" name="pwd" value="${sessionScope.staff.password}">
+         <input type="hidden" id="pwd" name="pwd" value="${staff.password}">
         </div>
         <div class="a-7">
           <input type="submit" id="update" class="submit" value="개인정보 변경">

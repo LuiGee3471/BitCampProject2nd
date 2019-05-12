@@ -64,3 +64,10 @@ select:focus, .textBottom:focus {
   border: 1px solid #C62917;
   
 }
+
+.text:read-only {
+	border-width:1px;
+	border-color:red;
+	border-radius:5px;
+	cursor: not-allowed;
+}
