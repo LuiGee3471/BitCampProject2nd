@@ -6,8 +6,8 @@
 <c:set var="ltList" value="${requestScope.ltList}"></c:set>
 <c:set var="majorList" value="${requestScope.majorList}"></c:set>
 <c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
-
 <jsp:include page="/common/head.jsp" flush="false" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/update.css">
 </head>
 <body>
 
@@ -17,15 +17,15 @@
     <input type="hidden" value = "${requestScope.id}" name="id">
    
     <!-- 과목 입력 -->
-    <label for = "lectureName">과목</label>
-    <input type = "text" id = "lectureName" name = "lectureName" value = "${lecture2.lectureName}">
+    <label for = "lectureName" class = "label">과목</label>
+    <input type = "text" id = "lectureName" name = "lectureName" value = "${lecture2.lectureName}" class = "textBottom">
     <!-- 과목 입력 -->
     <br>
     
     
      <!-- 학점 선택  -->
-     <span class = "lable">학점</span>
-     <select name = "">
+     <span class = "label">학점</span>
+     <select name = "credit" class = "textBottom">
 <c:forEach var = "i" begin="1" end="3">
   <c:choose>
     <c:when test="${i==lecture2.credit}">
@@ -41,7 +41,7 @@
     <!-- 학점 선택  -->
     
      <!-- 시간 선택  -->
-   <span class = "lable">시간</span>
+   <span class = "label">시간</span>
     <select name="weekday">
       <option value="월">월</option>
       <option value="화">화</option>
@@ -49,8 +49,7 @@
       <option value="목">목</option>
       <option value="금">금</option>
     </select>
-      <select name = "lecturetime">
-        <option value="">교시 선택</option>
+      <select name = "lecturetime" class = "textBottom">
         <option value = "123">123</option>
         <option value = "456">456</option>
         <option value = "789">789</option>
@@ -58,8 +57,8 @@
     <!-- 시간 선택  -->
     
      <!-- 종별 선택  -->
-   <span class = "lable">종별</span>
- <select name = "lecturetype">
+   <span class = "label">종별</span>
+ <select name = "lecturetype" class = "textBottom">
    <c:forEach var = "lecttype" items = "${ltList}">
         <c:choose>
           <c:when test="${lecture2.lectureType == lecttype.lectureType}">
@@ -74,8 +73,8 @@
   <br>    
  
      <!-- 교수 선택  -->
-     <span class = "lable">교수</span>
-      <select name = "professor">
+     <span class = "label">교수</span>
+      <select name = "professor" class = "textBottom">
          <c:forEach var = "professor" items = "${profList}">
            <c:choose>
              <c:when test="${professor.profName == lecture2.profName}">
@@ -92,8 +91,8 @@
  
     <!-- 교수 선택  -->
     
-    <input type = "submit" value = "수정하기" class = ""><br>
-    <a class="" href="list">취소하고 돌아가기</a> 
+    <input type = "submit" value = "수정하기" class = "updateBtn"><br>
+    <a class="cancle-back" href="list">취소하고 돌아가기</a> 
     
   
  
