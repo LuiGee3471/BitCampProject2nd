@@ -49,7 +49,6 @@
          <span class="weatherinfo"></span>
       </div>
       </div>
-      <script src = "js/weather.js"></script>  
     </div>
     <div class="boards">
       <div class="board-row">
@@ -155,5 +154,6 @@
     	$(element).children(".news-content").html(news.items[index].description);
     });
   </script>
+  <script src = "js/weather.js"></script>  
 </body>
 </html>

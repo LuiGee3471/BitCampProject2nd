@@ -1,9 +1,7 @@
 package kr.co.groot.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,14 +15,16 @@ public class AdminAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-    ActionForward forward = new ActionForward();
+    ActionForward forward = null;
 
     try {
       StaffDao dao = new StaffDao();
       PaginatorByAdmin paginator = new PaginatorByAdmin();
       int pageNumber = Integer.parseInt(request.getParameter("page"));
+      System.out.println(request.getParameter("option") + "31");
       String option = request.getParameter("option");
       String word = request.getParameter("word");
+      System.out.println(option);
       if (word == null) {
         word = "";
       }
@@ -46,7 +46,6 @@ public class AdminAction implements Action {
       request.setAttribute("currentPage", pageNumber);
       request.setAttribute("pages", page);
       request.setAttribute("staffList", list);
-
       forward = new ActionForward();
       forward.setRedirect(false);
       forward.setPath("/WEB-INF/views/admin/admin.jsp");
