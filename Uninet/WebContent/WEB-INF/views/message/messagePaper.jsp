@@ -20,7 +20,9 @@ pageEncoding="UTF-8"%>
       <i class="far fa-paper-plane fa-lg" id="reply"></i>
     </c:if>
     <i class="fas fa-sync-alt fa-lg" id="refresh"></i>
-    <i class="far fa-trash-alt fa-lg" id="delete"></i>
+    <c:if test="${message.receiverId == userId}">
+      <i class="far fa-trash-alt fa-lg" id="delete"></i>
+    </c:if>
   </div>
 </div>
 <div class="message-info">
