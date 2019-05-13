@@ -1,54 +1,38 @@
 $(function() {
-  /* 검색 비동기 */
-  $("#closeBtn").on("click", function() {
-    // if ($("#searchInput").val()) {
-    /* alert($("#searchInput").val() + " 검색합니다"); */
-    const inputVal = $("#searchInput").val();
-    const radioVal = $("input[name='searchradio']:checked").val();
-
-    $.ajax({
-      url: "inputtext",
-      dataType: "html",
-      data: {
-        searchradio: radioVal,
-        searchInput: inputVal
-      },
-      success: function(data) {
-        $("#searchResult").html(data);
-        console.log(data);
-      },
-      error: function(xhr) {
-        console.log(xhr.status);
-      }
-    });
-    // }
-  });
-
-  /* 검색 비동기 */
-
-  $("#closeBtn2").on("click", function() {
-    // if ($("#searchInput").val()) {
-    /* alert($("#searchInput").val() + " 검색합니다"); */
-    const sortVal = $("input[name='sort']:checked").val();
-    console.log(sortVal);
-
-    $.ajax({
-      url: "lectureSort",
-      dataType: "html",
-      data: {
-        sort: sortVal
-      },
-      success: function(data) {
-        $("#searchResult").html(data);
-        console.log(data);
-      },
-      error: function(xhr) {
-        console.log(xhr.status);
-      }
-    });
-    // }
-  });
-});
+  $.ajax({
+    url: "search",
+    method: "post",
+    dataType: "html",
+    data: {
+      page: 1,
+      method: "default"   
+    },
+    success: function(data) {
+      $("#searchResult").html(data);
+    }
+  }).done(function() {
+    $(".page-btn").click(function() {
+      const pageNo = $(this).text();
+      console.log(pageNo)
+      $(".page-btns").children(".current-btn").removeClass("current-btn");
+      $(this).addClass("current-btn");
+      $.ajax({
+        url: "search",
+        method: "post",
+        dataType: "html",
+        data: {
+          page: pageNo,
+          method: "default"
+        },
+        success: function(data) {
+          $("#searchResult").html(data);
+        }
+      });
+    })
+  })
+  
+  
+})
 
 const modalBtns = [...document.querySelectorAll(".button")];
 modalBtns.forEach(function(btn) {

@@ -4,10 +4,12 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import kr.co.groot.dao.LectureDao;
 import kr.co.groot.dao.PostDao;
 
 public class Paginator {
   private PostDao postDao;
+  private LectureDao lectureDao;
   
   public int getPageNumber(int boardType) throws NamingException, SQLException {
     postDao = new PostDao();
@@ -99,4 +101,24 @@ public class Paginator {
     return page;
   }
   
+  public int getLecturePageNumber() throws NamingException, SQLException {
+    lectureDao = new LectureDao();
+    
+    int lectures = lectureDao.countHowManyLectureList();
+    
+    int page = (lectures % 20 == 0) ? (lectures / 20) : (lectures / 20 + 1);
+    
+    return page;
+  }
+  
+  public int getLecturePageNumberByOption(String option, String word) throws NamingException, SQLException {
+    lectureDao = new LectureDao();
+    
+    int lectures = lectureDao.countHowManyLectureWithOption(option, word);
+    // 기준과 검색어로 검색하고 몇 개인지 리턴하는 함수
+    
+    int page = (lectures % 20 == 0) ? (lectures / 20) : (lectures / 20 + 1);
+    
+    return page;
+  }
 }

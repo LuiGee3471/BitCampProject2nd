@@ -529,16 +529,16 @@ public class LectureDao {
    * 
    * @description: 특정 조건 하에서 게시판 글 개수를 구한다
    * 
-   * @param spec: String option, String word, int boardType
+   * @param spec: int page
    * 
-   * @return: int
+   * @return: List<Lecture>
    */
   
   public List<Lecture> getLectureByPage(int page)
       throws SQLException, NamingException {
     String sql1 = "set @rownum:=0";
     String sql2 = "select * from " 
-           +"(select @rownum:=@rownum +1 as no, l.id, l.lecture_name, l.credit, "
+           +"(select @rownum:=@rownum + 1 as no, l.id, l.lecture_name, l.credit, "
            +"l.time, t.lecture_type as lecturetype, p.prof_name as profname, "
            +"m.major_name as majorname " 
            +"from lecture l left join lecturetype t on l.lecture_type_id = t.id " 
@@ -572,6 +572,170 @@ public class LectureDao {
     conn.close();
 
     return list;
+  }
+  
+  
+  
+  public List<Lecture> getLectureSortByOption(int page, String option) throws NamingException, SQLException {
+    String sql1 = "set @rownum:=0";
+    String firstSQL = "select * from (select @rownum:=@rownum +1 as no, l.id as id, lecture_name, credit, time, lecture_type, " 
+                     +"prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id FROM lecture l " 
+                     +"LEFT JOIN lecturetype lt ON l.lecture_type_id = lt.id LEFT JOIN professor p "
+                     +"ON l.prof_id = p.id LEFT JOIN major m ON p.major_id = m.id";
+    String order = "";
+    
+    switch (option) {
+    case "basic":
+      order = " id";
+      break;
+    case "lecture":
+      order = " lecture_name";
+      break;
+    case "credit":
+      order = " credit";
+      break;
+    case "prof":
+      order = " prof_name";
+      break;
+    case "major":
+      order = " major_name";
+      break;
+    default:
+      order = " id";
+    }
+    String thirdSQL = " ORDER BY " + order + " asc) c ";
+    String lastSQL2 = " where no > ? limit 20";
+    String sql = firstSQL + thirdSQL + lastSQL2;
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, (page - 1) * 20);
+    rs = pstmt.executeQuery();
+
+    List<Lecture> lectureList = new ArrayList<>();
+    while (rs.next()) {
+      Lecture lecture = new Lecture();
+      lecture.setId(rs.getInt("id"));
+      lecture.setLectureName(rs.getString("lecture_name"));
+      lecture.setCredit(rs.getInt("credit"));
+      lecture.setTime(rs.getString("time"));
+      lecture.setLectureType(rs.getString("lecture_type"));
+      lecture.setProfName(rs.getString("prof_name"));
+      lecture.setMajorName(rs.getString("major_name"));
+      lecture.setLectureTypeId(rs.getInt("lecture_type_id"));
+      lecture.setMajorId(rs.getInt("major_id"));
+      lecture.setProfId(rs.getInt("prof_id"));
+      lectureList.add(lecture);
+    }
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return lectureList;
+  }
+  
+  
+  public int countHowManyLectureWithOption(String option, String word)
+ throws SQLException {
+    String sql1 = "select count(*)" 
+                 +"from lecture l left join lecturetype t on l.lecture_type_id = t.id " 
+                 +"left join professor p on l.prof_id = p.id " 
+                 + "where ";
+    String sql2 = "";
+    word = "%" + word + "%";
+
+    conn = ds.getConnection();
+
+    switch (option) {
+    case "lecture":
+      sql2 = "lecture_name LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2);
+      System.out.println(sql1 + sql2);
+      pstmt.setString(1, word);
+      break;
+    case "prof":
+      sql2 = "prof_name LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2);
+      System.out.println(sql1 + sql2);
+      pstmt.setString(1, word);
+      break;
+    case "major":
+      sql2 = "(major_name LIKE ? ";
+      pstmt = conn.prepareStatement(sql1 + sql2);
+      System.out.println(sql1 + sql2);
+      pstmt.setString(1, word);
+      break;
+    }
+
+    rs = pstmt.executeQuery();
+
+    rs.next();
+    int count = rs.getInt(1);
+    
+    System.out.println("post count: " + count);
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return count;
+  }
+  
+  public List<Lecture> getLectureBySearchWord(int page, String option, String word) throws NamingException, SQLException {
+    String sql1 = "set @rownum:=0";
+    String firstSQL = "select * from " 
+                       +"(select @rownum:=@rownum +1 as no, l.id as id, lecture_name, credit, time, lecture_type, " 
+                       +"prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id FROM lecture l " 
+                       +"LEFT JOIN lecturetype lt ON l.lecture_type_id = lt.id LEFT JOIN professor p " 
+                       +"ON l.prof_id = p.id LEFT JOIN major m ON p.major_id = m.id ";
+    String order = "";
+    word = "'%" + word + "%') ";
+    switch (option) {
+    case "lecture":
+      order = " lecture_name ";
+      break;
+    case "prof":
+      order = " prof_name ";
+      break;
+    case "major":
+      order = " major_name ";
+      break;
+    default:
+      order = " lecture_name ";
+    }
+    String thirdSQL = order + " like " + word + " c";
+    String lastSQL2 = " where no > ? limit 20";
+    String sql = firstSQL + thirdSQL + lastSQL2;
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, (page - 1) * 20);
+    rs = pstmt.executeQuery();
+
+    List<Lecture> lectureList = new ArrayList<>();
+    while (rs.next()) {
+      Lecture lecture = new Lecture();
+      lecture.setId(rs.getInt("id"));
+      lecture.setLectureName(rs.getString("lecture_name"));
+      lecture.setCredit(rs.getInt("credit"));
+      lecture.setTime(rs.getString("time"));
+      lecture.setLectureType(rs.getString("lecture_type"));
+      lecture.setProfName(rs.getString("prof_name"));
+      lecture.setMajorName(rs.getString("major_name"));
+      lecture.setLectureTypeId(rs.getInt("lecture_type_id"));
+      lecture.setMajorId(rs.getInt("major_id"));
+      lecture.setProfId(rs.getInt("prof_id"));
+      lectureList.add(lecture);
+    }
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return lectureList;
   }
   
 }

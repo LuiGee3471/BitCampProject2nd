@@ -10,6 +10,7 @@ import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.LectureDao;
 import kr.co.groot.dto.Lecture;
+import kr.co.groot.page.Paginator;
 
 public class LectureSearchByInputAction implements Action {
 
@@ -17,21 +18,39 @@ public class LectureSearchByInputAction implements Action {
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
 
-    List<Lecture> list = new ArrayList<Lecture>();
-
-    String searchInput = request.getParameter("searchInput");
-    String searchradio = request.getParameter("searchradio");
-
-    System.out.println("searchInput : " + searchInput);
-    System.out.println("searchradio : " + searchradio);
+    List<Lecture> list = null;
+    
+    int pageNumber = Integer.parseInt(request.getParameter("page"));
+    String method = request.getParameter("method");
+    String option = request.getParameter("option");
+    String word = request.getParameter("word");
+    int page = 1;
+    
     LectureDao dao;
     try {
       dao = new LectureDao();
-      list = dao.selectByName(searchradio, searchInput);
+      Paginator paginator = new Paginator();
+      
+      switch (method) {
+      case "default":
+        page = paginator.getLecturePageNumber();
+        list = dao.getLectureByPage(pageNumber);
+        break;
+      case "search":
+        page = paginator.getLecturePageNumberByOption(option, word);
+        list = dao.getLectureBySearchWord(pageNumber, option, word);
+        break;
+      case "sort":
+        page = dao.countHowManyLectureList();
+        list = dao.getLectureSortByOption(pageNumber, option);
+        break;
+      }
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
 
+    request.setAttribute("currentPage", pageNumber);
+    request.setAttribute("totalPages", page);
     request.setAttribute("list", list);
 
     forward.setRedirect(false);
