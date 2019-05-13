@@ -1,6 +1,5 @@
 package kr.co.groot.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,28 +9,61 @@ import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
+import kr.co.groot.page.PaginatorByAdmin;
 
 public class AdminSearchByInputAction implements Action {
 
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
-    List<Staff> staffList = new ArrayList<Staff>();
-    String input = request.getParameter("searchText");
-    String search = request.getParameter("orderBy");
 
-    System.out.println("input : " + input);
-    System.out.println("search : " + search);
+    List<Staff> list = null;
+    int pageNumber = Integer.parseInt(request.getParameter("page"));
+    System.out.println("pageNumber : " +pageNumber);
+    String method = request.getParameter("method");
+    System.out.println("method : "+method);
+    String option = request.getParameter("option");
+    System.out.println("option : " +option);
+    String word = request.getParameter("word");
+    System.out.println("ok1");
+    int page = 1;
     StaffDao dao;
     try {
-      dao = new StaffDao();
-      staffList = dao.selectByName(search, input);
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    	dao = new StaffDao();
+    	PaginatorByAdmin paginator = new PaginatorByAdmin();
+    	
+    	switch(method) {
+    	case "default" :
+    	  page = paginator.getStaffPageNumber();
+    	  list = dao.getStaffByPage(pageNumber);
+    	  break;
+    	case "name" :
+    	  page = paginator.getStaffPageNumberByOption(option, word);
+    		list = dao.getStaffByOption(pageNumber, option, word);
+    		break;
+    	case "deptName" :
+    	  page = paginator.getStaffPageNumberByOption(option, word);
+    		list = dao.getStaffByOption(page, option, word);
+    		break;
+    	}
+    }catch(Exception e) {
+    	System.out.println(e.getMessage());
     }
-    request.setAttribute("staffList", staffList);
+
+    request.setAttribute("currentPage", pageNumber);
+    request.setAttribute("totalPages", page);
+    request.setAttribute("staffList", list);
+//    StaffDao dao;
+//    try {
+//      dao = new StaffDao();
+//      staffList = dao.selectByName(search, input);
+//    } catch (Exception e) {
+//      System.out.println(e.getMessage());
+//    }
+//    request.setAttribute("staffList", staffList);
     forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/admin/searchResult.jsp");
+    System.out.println("액션타냐고");
+    forward.setPath ("/WEB-INF/views/admin/searchResult.jsp");
     return forward;
   }
 

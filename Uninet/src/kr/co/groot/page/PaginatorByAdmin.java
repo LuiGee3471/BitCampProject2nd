@@ -33,4 +33,22 @@ public class PaginatorByAdmin {
 		return page;
 		
 	}
+	
+	public int getStaffPageNumber() throws Exception{
+	  staffDao = new StaffDao();
+	  
+	  int staffes = staffDao.countHowManyStaff();
+	  
+	  int page = (staffes % 20 == 0) ? (staffes / 20) : (staffes / 20 +1);
+	  return page;
+	}
+	
+	public int getStaffPageNumberByOption(String option, String word) throws Exception {
+	  staffDao = new StaffDao();
+	  
+	  int staffes = staffDao.countHowManyStaffWithOption(option, word);
+	  int page = (staffes % 20 == 0) ? (staffes / 20) : (staffes / 20 +1);
+    return page;
+	  
+	}
 }
