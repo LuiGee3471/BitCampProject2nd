@@ -257,9 +257,10 @@ public class StaffDao {
 		pstmt.setString(1, staff.getEmail());
 		pstmt.setString(2, staff.getPhoneNumber());
 		pstmt.setString(3, staff.getStaffName());
-		pstmt.setInt(4, staff.getId());
-		pstmt.setString(5, staff.getSelfIntroduce());
-
+		pstmt.setString(4, staff.getSelfIntroduce());
+		pstmt.setInt(5, staff.getId());
+		
+		System.out.println(">" + staff.getSelfIntroduce() + "<");
 		row = pstmt.executeUpdate();
 
 		pstmt.close();
