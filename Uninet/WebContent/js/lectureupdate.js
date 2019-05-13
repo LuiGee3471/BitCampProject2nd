@@ -1,11 +1,17 @@
 $(function() {
   const credit1 = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const credit2 = ['12', '34', '56', '78', '910'];
-  const credit3 = ['123', '456', '789'];
+  const credit2 = ['12', '23', '34', '45', '56', '67', '78', '89',];
+  const credit3 = ['123', '345', '567', '789'];
   let changeItem;
   let selectCredit = '';
+  
+  $("#weekday option").each(function(index, element) {
+    if ($(element).attr("value") === day) {
+      $(element).attr("selected", "selected");
+    }
+  });
 
-  const originSelect = $('#selectCredit option:selected').val();
+  const originSelect = Number($('#selectCredit option:selected').val());
   console.log(originSelect);
 
   if (originSelect === 1) {
@@ -15,10 +21,14 @@ $(function() {
   } else if (originSelect === 3) {
     changeItem = credit3;
   }
+  
   for (let count = 0; count < changeItem.length; count++) {
-    const option = $(
-      `<option value="${changeItem[count]}">${changeItem[count]}</option>`
-    );
+    console.log(time);
+    let tag = `<option value="${changeItem[count]}">${changeItem[count]}</option>`;
+    if (changeItem[count] === time) {
+        tag = `<option value="${changeItem[count]}" selected>${changeItem[count]}</option>`;
+    }
+    const option = $(tag);
     $('#changeTime').append(option);
     /* $("#changeTime  option").attr("value", changeItem[count]); */
   }
