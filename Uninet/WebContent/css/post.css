@@ -46,7 +46,7 @@ body {
 
 .article-sub {
   display: flex;
-
+  flex-direction: column;
   margin-left: auto;
 }
 
@@ -276,4 +276,7 @@ body {
   resize: none;
   background-color: #f9f9f9;
   outline: none;
+}
+.user-menu {
+  display:flex;
 }

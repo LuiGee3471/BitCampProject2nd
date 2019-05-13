@@ -52,6 +52,7 @@
         </div>
       </div>
       <div class="article-sub">
+        <div class ="user-menu">
         <span class="comment-option">쪽지</span>
        <form action="delete" method ="post">
          <c:if test="${curruser.staffId == writer.staffId}"><button type="submit" class="delete-option" id="postDelete">삭제</button>
@@ -59,6 +60,7 @@
           <input type="hidden" value="${post.boardType}" name="boardType">
           </c:if>
         </form>
+        </div>
         <div class="article-stat">
           <i class="far fa-eye">&nbsp;${post.count}</i>&nbsp;<i class="far fa-comment">&nbsp;${commentCount}</i>
         </div>
