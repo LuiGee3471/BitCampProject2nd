@@ -45,6 +45,11 @@
         <!-- 시간 선택  -->
    <span class = "label">시간</span>
     <select name="weekday" id="weekday">
+    <!--  <input type="radio" value="월" name="searchradio" id="monday" checked>
+     <label for="monday"></label>  -->  
+    
+
+
       <option value="월">월</option>
       <option value="화">화</option>
       <option value="수">수</option>

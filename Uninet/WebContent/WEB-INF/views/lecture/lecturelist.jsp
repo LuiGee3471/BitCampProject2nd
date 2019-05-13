@@ -2,6 +2,37 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/common/head.jsp" flush="false" />
+<%
+  int totalPages = (int) request.getAttribute("pages");
+  int currentPage = (int) request.getAttribute("currentPage");
+  int startPage = 1;
+  if (currentPage >= 4) {
+    if (currentPage % 3 == 1) {
+      startPage = currentPage;
+    } else if (currentPage % 3 == 2) {
+      startPage = currentPage - 1;
+    } else {
+      startPage = currentPage - 2;
+    }
+  }
+  
+  int endPage = 0;
+  if (totalPages <= 3) {
+    endPage = totalPages;
+  } else {
+    if (totalPages - startPage >= 3) {
+      endPage = startPage + 2;
+    } else {
+      endPage = totalPages;
+    }
+  }
+  
+  System.out.println(startPage + " / " + endPage);
+  System.out.println(totalPages);
+  System.out.println(currentPage);
+  pageContext.setAttribute("startPage", startPage);
+  pageContext.setAttribute("endPage", endPage);
+%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
@@ -22,18 +53,6 @@
         </tr>
       </thead>
       <tbody id="searchResult">
-        <c:forEach var="lecture" items="${requestScope.lecturelist}">
-          <tr>
-            <td>${lecture.lectureName}</td>
-            <td>${lecture.credit}</td>
-            <td>${lecture.time}</td>
-            <td>${lecture.lectureType}</td>
-            <td>${lecture.majorName}</td>
-            <td>${lecture.profName }</td>
-            <td><a href="updatePage?id=${lecture.id}"><i class="far fa-edit hover-big"></i></a></td>
-            <td><a href="delete?id=${lecture.id}"><i class="far fa-trash-alt hover-big"></i></a></td>       
-          </tr>
-        </c:forEach>
       </tbody>
     </table>
     <div class = "button-between">
@@ -42,6 +61,42 @@
         <p><button class="button" data-modal="modalTwo">정렬</button></p>
       </div>
       <a href="write"><button class="lecture-add"><i class="fas fa-folder-plus fa-2x hover"></i></button></a>
+    </div>
+ <div class="board-bottom">
+    <c:choose>
+    <c:when test="${currentPage == 1}">
+     
+    </c:when>
+    <c:otherwise>
+      <div class="btn prev-page">&lt;&nbsp;이전</div>
+    </c:otherwise>
+    </c:choose>
+    <div class="page-btns">
+      <c:if test="${pages > 3 && currentPage > 3}">
+        <div class="btn prv-btn">&lt;</div>
+      </c:if>
+      <c:forEach var="page" begin="${startPage}" end="${endPage}">
+        <c:choose>
+          <c:when test="${page == currentPage}">
+            <div class="btn page-btn current-btn">${page}</div>
+          </c:when>
+          <c:otherwise>
+            <div class="btn page-btn">${page}</div>
+          </c:otherwise>
+        </c:choose>
+      </c:forEach>
+      <c:if test="${pages - endPage > 0}">
+        <div class="btn next-btn">&gt;</div>
+      </c:if>
+    </div>
+    <c:choose>
+      <c:when test="${currentPage < pages}">
+        <div class="btn next-page">다음&nbsp;&gt;</div>
+      </c:when>
+      <c:otherwise>
+        <div class="btn next-page invisible">다음&nbsp;&gt;</div>
+      </c:otherwise>
+    </c:choose>
     </div>
   </div>
   <div id="modalOne" class="modal">
@@ -56,8 +111,10 @@
           <input type="radio" value="major" name="searchradio" id="majorSelect">
           <label for="majorSelect">전공명</label>
         </div>
+        <form action="list" method = "post" >
         <input type="text" name="searchInput" id="searchInput" placeholder="검색어 입력">
-        <button type="button" class="searchBtn" id="closeBtn">검색</button>          
+        <button type="button" class="searchBtn" id="closeBtn">검색</button>
+        </form>          
       </div>
     </div>
   </div>
@@ -80,8 +137,12 @@
           <button type="button" class="searchBtn2" id="closeBtn2">정렬</button>        
       </div>
     </div>
-  </div>
+  </div> 
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script>
+    const currentPage = <%=request.getAttribute("currentPage")%>;
+    const option = "<%=request.getAttribute("option")%>";
+  </script>
   <script src="<%=request.getContextPath()%>/js/lecturelist.js"></script>
 </body>
 </html>

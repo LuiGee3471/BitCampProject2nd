@@ -30,6 +30,7 @@
     });
   </script>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
+  <script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
 </head>
 <body>
 <c:set var="staff" value="${sessionScope.staff}" />
@@ -87,12 +88,25 @@
          <input type="hidden" id="pwd" name="pwd" value="${staff.password}">
         </div>
         <div class="a-7">
+          <span class="label self">자기소개</span>
+          <textarea name="selfIntroduce" id="editor"></textarea>
+        </div>
+        <div class="a-8">
           <input type="submit" id="update" class="submit" value="개인정보 변경">
         </div>
       </form>
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+        	toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList']
+        	}
+        )
+        .catch(error => {
+            console.error( error );
+        });
+  </script>
 </body>
-
 </html>

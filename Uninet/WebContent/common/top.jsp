@@ -14,7 +14,7 @@
       <ul>
         <li><a href="<%=request.getContextPath()%>/board/list?page=1&option=default&boardtype=1">공지사항</a></li>
         <li><a href="<%=request.getContextPath()%>/board/list?page=1&option=default&boardtype=2">자유게시판</a></li>
-        <li><a href="<%=request.getContextPath()%>/lecture/list?page=1">강의 관리</a></li>
+        <li><a href="<%=request.getContextPath()%>/lecture/list?page=1&option=default">강의 관리</a></li>
         <li><a href="<%=request.getContextPath()%>/stat/chart">통계</a></li>
       </ul>
     </div>
