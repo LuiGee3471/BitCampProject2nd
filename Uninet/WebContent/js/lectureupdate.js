@@ -17,8 +17,11 @@ $(function() {
   }
   for (var count = 0; count < changeItem.length; count++) {
 
-    var option = $("<option>" + changeItem[count] + "</option>");
+    var option = $(`<option value="${changeItem[count]}">${changeItem[count]}</option>`);
     $("#changeTime").append(option);
+    /*$("#changeTime  option").attr("value", changeItem[count]);*/
+    
+    
 
   }
 
@@ -39,9 +42,9 @@ $(function() {
     console.log("changesize : " + changeItem.length);
     for (var count = 0; count < changeItem.length; count++) {
 
-      var option = $("<option>" + changeItem[count] + "</option>");
+      var option = $(`<option value="${changeItem[count]}">${changeItem[count]}</option>`);
       $("#changeTime").append(option);
-
+      /*$("#changeTime  option").attr("value", changeItem[count]);*/
     }
 
   });

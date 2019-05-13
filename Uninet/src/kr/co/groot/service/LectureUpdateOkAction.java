@@ -16,11 +16,11 @@ public class LectureUpdateOkAction implements Action {
     Lecture lecture = new Lecture();
 
     String weekday = request.getParameter("weekday");
-    String lecturetime = request.getParameter("lecturetime");
+    String lecturetime = request.getParameter("lectureTime");
     String lectime = weekday + lecturetime;
 
-    System.out.println(request.getParameter("lecturename"));
-    System.out.println("lecturename : " + request.getParameter("lecturename"));
+    System.out.println(request.getParameter("lectureName"));
+    System.out.println("lecturename : " + request.getParameter("lectureName"));
     System.out.println("id : " + Integer.parseInt(request.getParameter("id")));
     System.out.println("credit : " + Integer.parseInt(request.getParameter("credit")));
     System.out.println("lectime" + lectime);

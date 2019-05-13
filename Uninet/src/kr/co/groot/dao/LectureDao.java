@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import org.json.simple.JSONObject;
 
 import kr.co.groot.dto.Lecture;
+import kr.co.groot.dto.Post;
 
 public class LectureDao {
   private Connection conn;
@@ -487,5 +488,90 @@ public class LectureDao {
     
     return lecture;
   }
+  
+  /*
+   * @method Name: countHowManyLectureList
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 강의 개수를 구한다
+   * 
+   * @param spec: none
+   * 
+   * @return: int
+   */
+  
+  public int countHowManyLectureList() throws SQLException {
+    String sql = "select count(id) as countLectureList from lecture";
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    int count = rs.getInt("countLectureList");
+    
+    rs.close();
+    pstmt.close();
+    rs.close();
+    
+    return count;
+        
+  }
+  
+  /*
+   * @method Name: countHowManyPostWithOption
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 특정 조건 하에서 게시판 글 개수를 구한다
+   * 
+   * @param spec: String option, String word, int boardType
+   * 
+   * @return: int
+   */
+  
+  public List<Lecture> getLectureByPage(int page)
+      throws SQLException, NamingException {
+    String sql1 = "set @rownum:=0";
+    String sql2 = "select * from " 
+           +"(select @rownum:=@rownum +1 as no, l.id, l.lecture_name, l.credit, "
+           +"l.time, t.lecture_type as lecturetype, p.prof_name as profname, "
+           +"m.major_name as majorname " 
+           +"from lecture l left join lecturetype t on l.lecture_type_id = t.id " 
+           +"left join professor p on l.prof_id = p.id " 
+           +"left join major m on p.major_id = m.id) u " 
+           +"where no > ? limit 20";
 
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql1);
+    pstmt.executeUpdate();
+    pstmt = conn.prepareStatement(sql2);
+    pstmt.setInt(1, (page - 1) * 20);
+
+    rs = pstmt.executeQuery();
+
+    List<Lecture> list = new ArrayList<Lecture>();
+    while (rs.next()) {
+      Lecture lecture = new Lecture();
+      lecture.setId(rs.getInt("id"));
+      lecture.setLectureName(rs.getString("lecture_name"));
+      lecture.setCredit(rs.getInt("credit"));
+      lecture.setTime(rs.getString("time"));
+      lecture.setLectureType(rs.getString("lecturetype"));
+      lecture.setProfName(rs.getString("profname"));
+      lecture.setMajorName(rs.getString("majorname"));
+      list.add(lecture);
+    }
+
+    rs.close();
+    pstmt.close();
+    conn.close();
+
+    return list;
+  }
+  
 }
