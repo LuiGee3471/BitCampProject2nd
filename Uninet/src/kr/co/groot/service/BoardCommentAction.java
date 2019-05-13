@@ -29,7 +29,8 @@ public class BoardCommentAction implements Action {
       comment.setWriterId(staff.getId());
       comment.setWriter(staff);
       comment.setRefer(id);
-      result= dao.insertComment(comment);
+      result = dao.insertComment(comment);
+      
       
       forward = new ActionForward();
       

@@ -12,14 +12,14 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <%
-    Staff staff = (Staff) session.getAttribute("staff");
-    PostDao postDao = new PostDao();
-    List<Post> recentNotice = postDao.selectRecentNotice();
-    List<Post> recentPost = postDao.selectRecentPost();
-    List<Post> popularList = postDao.selectByCountForMain();
-    MessageDao messageDao = new MessageDao();
-    List<Message> messageList = messageDao.selectRecentMessage(staff.getId());
-  %>
+  Staff staff = (Staff) session.getAttribute("staff");
+  PostDao postDao = new PostDao();
+  List<Post> recentNotice = postDao.selectRecentNotice();
+  List<Post> recentPost = postDao.selectRecentPost();
+  List<Post> popularList = postDao.selectByCountForMain();
+  MessageDao messageDao = new MessageDao();
+  List<Message> messageList = messageDao.selectRecentMessage(staff.getId());
+%>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
 </head>
@@ -43,6 +43,7 @@
       </div>
     </div>
     <div class="boards">
+      <div class="board-row">
       <div class="card board">
         <h3><a href="board/list?page=1&option=default&boardtype=1">공지사항</a></h3>
         <c:forEach var="notice" items="<%=recentNotice%>">
@@ -77,6 +78,8 @@
           </c:choose>
         </c:forEach>    
       </div>
+      </div>
+      <div class="board-row">
       <div class="card board">
         <h3><a href="message">쪽지</a></h3>
         <c:forEach var="message" items="<%=messageList%>">
@@ -111,8 +114,37 @@
           </c:choose>
         </c:forEach>  
       </div>
+      </div>
+      <div class="board-row">
+      <div class="news-card card board">
+        <div class="news-card-top">
+          <h4 class="news-card-head">최신 대학 뉴스</h4>
+          <h4 class="news-card-naver">네이버 제공</h4>
+        </div>
+        <a href="" class="news">
+          <h4 class="news-title"></h4>
+          <p class="news-content"></p>
+        </a>
+        <a href="" class="news">
+          <h4 class="news-title"></h4>
+          <p class="news-content"></p>
+        </a>
+        <a href="" class="news">
+          <h4 class="news-title"></h4>
+          <p class="news-content"></p>
+        </a>
+      </div>
+      </div>
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script>
+    const news = JSON.parse(`${requestScope.news}`);
+    $(".news").each(function(index, element) {
+    	$(element).attr("href", news.items[index].originallink);
+    	$(element).children(".news-title").html(news.items[index].title);
+    	$(element).children(".news-content").html(news.items[index].description);
+    });
+  </script>
 </body>
 </html>

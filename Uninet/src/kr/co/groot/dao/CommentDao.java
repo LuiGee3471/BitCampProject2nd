@@ -111,6 +111,61 @@ public class CommentDao {
     conn.close();
     return commentList;
   }
+  
+  public Comment selectCommentById(int id) throws SQLException {
+    String sql = "select * from comment where id = ?";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    pstmt.setInt(1, id);
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    
+    Comment comment = new Comment();
+    comment.setId(rs.getInt("id"));
+    comment.setWriterId(rs.getInt("writer_id"));
+    comment.setTime(rs.getTimestamp("time"));
+    comment.setRefer(rs.getInt("refer"));
+    comment.setRecomment(rs.getString("recomment"));
+    comment.setReferComment(rs.getInt("refer_comment"));
+    comment.setRecommentCount(rs.getInt("recomment_count"));
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return comment;
+  }
+  
+  public Comment selectMostRecentComment() throws SQLException {
+    String sql = "select * "
+        + "from comment "
+        + "where id = "
+        + "(select max(id) "
+        + "from comment)";
+    
+    conn = ds.getConnection();
+    pstmt = conn.prepareStatement(sql);
+    rs = pstmt.executeQuery();
+    
+    rs.next();
+    
+    Comment comment = new Comment();
+    comment.setId(rs.getInt("id"));
+    comment.setWriterId(rs.getInt("writer_id"));
+    comment.setTime(rs.getTimestamp("time"));
+    comment.setRefer(rs.getInt("refer"));
+    comment.setRecomment(rs.getString("recomment"));
+    comment.setReferComment(rs.getInt("refer_comment"));
+    comment.setRecommentCount(rs.getInt("recomment_count"));
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
+    return comment;
+  }
 
   /*
    * @method Name: insertComment
@@ -128,12 +183,22 @@ public class CommentDao {
   public int insertComment(Comment comment) throws Exception {
     int row = 0;
     String sql = "insert into comment(content, writer_id, time, refer) values (?,?,NOW(),?)";
+    String sql2 = "update comment "
+        + "set refer_comment = (select max(id) from (select * from comment) q) "
+        + "where id = (select max(id) from (select * from comment) q)";
+    
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
+    
     pstmt.setString(1, comment.getContent());
     pstmt.setInt(2, comment.getWriterId());
     pstmt.setInt(3, comment.getRefer());
+    
     row = pstmt.executeUpdate();
+    
+    pstmt = conn.prepareStatement(sql2);  
+    pstmt.executeUpdate();
+    
     pstmt.close();
     conn.close();
     return row;

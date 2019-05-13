@@ -19,7 +19,9 @@
   CommentDao commentDao = new CommentDao();
   int commentCount = commentDao.getCommentCount(id);
   pageContext.setAttribute("writer", writer);
-  pageContext.setAttribute("commentCount", commentCount); 
+  pageContext.setAttribute("commentCount", commentCount);
+  
+  System.out.println(">" + post.getFileName() + "<");
 %>
 <c:set var="post" value="${post}"/>
 <c:set var="comments" value="${comments}"/>
@@ -61,7 +63,7 @@
           </c:if>
         </form>
         </div>
-        <c:if test="${post.fileName == ''}">
+        <c:if test="${post.fileName ne null}">
           <div class="download">
             <i class="fas fa-paperclip"></i>
             <a href="file/${post.fileName}" download>${post.fileName}</a>
