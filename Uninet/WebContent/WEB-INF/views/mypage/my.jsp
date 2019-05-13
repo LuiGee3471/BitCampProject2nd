@@ -79,7 +79,7 @@
       </div>
       <div class="a-9">
         <span class="label">자기소개</span>
-        <div class="textarea"></div>
+        <div class="textarea">${staff.selfIntroduce}</div>
       </div>
     </div>
   </div>

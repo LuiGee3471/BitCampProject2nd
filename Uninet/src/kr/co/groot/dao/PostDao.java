@@ -926,6 +926,11 @@ public class PostDao {
     rs.next();
     
     int result = rs.getInt(1);
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
     return result;
   }
   
@@ -943,6 +948,11 @@ public class PostDao {
     rs.next();
     
     int result = rs.getInt(1);
+    
+    rs.close();
+    pstmt.close();
+    conn.close();
+    
     return result;
   }
   

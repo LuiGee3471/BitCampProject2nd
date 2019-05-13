@@ -128,6 +128,9 @@ public class LectureDao {
     pstmt.setInt(1, id);
 
     int row = pstmt.executeUpdate();
+    
+    pstmt.close();
+    conn.close();
 
     return row;
   }

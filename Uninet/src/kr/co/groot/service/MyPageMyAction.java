@@ -14,8 +14,7 @@ public class MyPageMyAction implements Action {
 
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/mypage/my.jsp");
-
+    
     return forward;
   }
-
 }

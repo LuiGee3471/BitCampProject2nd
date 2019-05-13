@@ -15,6 +15,15 @@ public class Staff {
   private String isAdmin;
   private int deptId;
   private String deptName;
+  private String selfIntroduce;
+
+  public String getSelfIntroduce() {
+    return selfIntroduce;
+  }
+
+  public void setSelfIntroduce(String selfIntroduce) {
+    this.selfIntroduce = selfIntroduce;
+  }
 
   public String getStaffName() {
     return staffName;
