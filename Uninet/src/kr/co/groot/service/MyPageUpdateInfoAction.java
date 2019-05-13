@@ -19,7 +19,10 @@ public class MyPageUpdateInfoAction implements Action {
     staff.setEmail(request.getParameter("staffEmail"));
     staff.setPhoneNumber(request.getParameter("staffPhone"));
     staff.setStaffName(request.getParameter("staffName"));
+    staff.setSelfIntroduce(request.getParameter("selfIntroduce"));
     staff.setId(staff.getId());
+    
+    System.out.println(request.getParameter("selfIntroduce").replace("/<\\/?[^>]+(>|$)/g", ""));
 
     String msg = "";
     String url = "";

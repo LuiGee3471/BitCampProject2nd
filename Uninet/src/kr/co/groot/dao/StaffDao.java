@@ -94,8 +94,13 @@ public class StaffDao {
 			staff.setIsManager(rs.getString(10));
 			staff.setDeptId(rs.getInt(11));
 			staff.setDeptName(rs.getString("dept_name"));
+			staff.setSelfIntroduce(rs.getString("self_introduce"));
 		}
 
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
 		return staff;
 	}
 
@@ -123,6 +128,10 @@ public class StaffDao {
 			staff.setDeptId(rs.getInt(11));
 			staff.setDeptName(rs.getString("dept_name"));
 		}
+		
+		rs.close();
+    pstmt.close();
+    conn.close();
 
 		return staff;
 	}
@@ -242,13 +251,14 @@ public class StaffDao {
 	 */
 	public int updateInfo(Staff staff) throws SQLException {
 		int row = 0;
-		String sql = "update staff set email = ?, phoneNumber = ?, staff_name = ? where id =?";
+		String sql = "update staff set email = ?, phoneNumber = ?, staff_name = ? , self_introduce = ? where id =?";
 		conn = ds.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, staff.getEmail());
 		pstmt.setString(2, staff.getPhoneNumber());
 		pstmt.setString(3, staff.getStaffName());
 		pstmt.setInt(4, staff.getId());
+		pstmt.setString(5, staff.getSelfIntroduce());
 
 		row = pstmt.executeUpdate();
 

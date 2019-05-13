@@ -17,19 +17,24 @@ public class BoardDeleteAction implements Action {
     
     try {
       PostDao dao = new PostDao();
-      int id = Integer.parseInt(request.getParameter("id"));
+      int id = Integer.parseInt(request.getParameter("postId"));
       int result = dao.deletePost(id);
+      int boardType = Integer.parseInt(request.getParameter("boardType"));
       
-      if(result>0) {
-        msg = "글 삭제 성공";
-        url = "board/list";
-      }else {
-        msg = "글 삭제 실패";
-        url = "board/read";
-      }
       forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/etc/redirect.jsp"); 
+      if(result>0) {
+       forward.setRedirect(true);
+       forward.setPath("list?page=1&option=default&boardtype="+boardType);
+      }else {
+        msg = "글 삭제를 실패하였습니다.";
+        url = "board/read?id="+id;
+        request.setAttribute("msg", msg);
+        request.setAttribute("url", url);
+        forward.setRedirect(false);
+        forward.setPath("/WEB-INF/views/etc/redirect.jsp"); 
+      }
+      
+     
     }catch (Exception e) {
       System.out.println(e.getMessage());
     }

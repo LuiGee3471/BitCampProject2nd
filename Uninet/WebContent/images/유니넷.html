@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://localhost:8090/Uninet/board/read?id=76 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>유니넷</title>
+    <link rel="shortcut icon" href="http://localhost:8090/Uninet/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://localhost:8090/Uninet/board/favicon.ico" type="/Uninet/image/x-icon">
+    <link rel="stylesheet" href="./유니넷_files/top-bottom.css">
+    <link rel="stylesheet" href="./유니넷_files/all.css">
+    <script src="./유니넷_files/jquery.min.js"></script>
+
+<link rel="stylesheet" href="./유니넷_files/modal.css">
+<link rel="stylesheet" href="./유니넷_files/post.css">
+</head>
+<body cz-shortcut-listen="true">
+  
+<nav>
+  <div class="navbar">
+    <a href="http://localhost:8090/Uninet/main" class="pageLogo">
+      <img src="./유니넷_files/logo.png" alt="로고" class="pageLogo-image">
+    </a>
+    <div class="pageTitle">
+      <h3 class="title">유니넷</h3>
+      <h2 class="campus">비트캠퍼스</h2>
+    </div>
+
+    <div class="menu">
+      <ul>
+        <li><a href="http://localhost:8090/Uninet/board/list?page=1&amp;option=default&amp;boardtype=1">공지사항</a></li>
+        <li><a href="http://localhost:8090/Uninet/board/list?page=1&amp;option=default&amp;boardtype=2">자유게시판</a></li>
+        <li><a href="http://localhost:8090/Uninet/lecture/list">강의 관리</a></li>
+        <li><a href="http://localhost:8090/Uninet/stat/chart">통계</a></li>
+      </ul>
+    </div>
+
+    <div class="mypage">
+      <a class="my-link" href="http://localhost:8090/Uninet/message"><img src="./유니넷_files/mail.png" alt="쪽지"></a>
+      <a class="my-link" href="http://localhost:8090/Uninet/mypage"><img src="./유니넷_files/user.png" alt="마이페이지"></a>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container">
+    <div class="boardtitle">
+      <h1>자유게시판</h1>
+    </div>
+    <div class="article">
+      <div class="article-main">
+        <div class="writer">
+          <img class="profile-photo" src="./유니넷_files/default.png" alt="">
+          <div class="writer-info">
+            <span class="writer-id">groot</span> 
+            <span class="time">05/13 10:28</span>
+          </div>
+        </div>
+        <div class="article-content">
+          <h3 class="article-title">ddd</h3>
+          <p class="content">ddddd</p>
+        </div>
+      </div>
+      <div class="article-sub">
+        <span class="comment-option">쪽지</span>
+       <form action="http://localhost:8090/Uninet/board/delete" method="post">
+         <button type="submit" class="delete-option" id="postDelete">삭제</button>
+          <input type="hidden" value="76" name="postId">
+          <input type="hidden" value="2" name="boardType">
+          
+        </form>
+        <div class="article-stat">
+          <i class="far fa-eye">&nbsp;4</i>&nbsp;<i class="far fa-comment">&nbsp;0</i>
+        </div>
+      </div>
+    </div>
+    <div class="comments">
+      
+      <div class="comment-input">
+        <form action="http://localhost:8090/Uninet/board/comment" method="post" class="comment-form">
+          <input class="comment-text" type="text" name="comment" maxlength="50" placeholder="댓글을 입력하세요" autocomplete="off" minlength="5"> 
+          <input class="submit" type="image" src="./유니넷_files/submit.png">
+            <input type="hidden" value="76" name="commentId">
+        </form>
+      </div>
+      <div class="modal">
+      <div class="modal-content">
+        <div class="message-modal">
+          <form action="http://localhost:8090/Uninet/message/send" class="message-form" method="post">
+            <h3 class="message-title">쪽지 보내기</h3>
+            <textarea class="message-textarea" name="text" placeholder="내용을 입력해주세요."></textarea>
+            <input type="hidden" value="76" name="postId">
+            <input type="hidden" value="post" name="origin">
+            <input type="submit" value="전송" class="message-submit">
+          </form>
+          <a class="close-btn">×</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+<div class="bottom">
+  <ul class="bottom-nav">
+    <li class="copyright"><a href="http://localhost:8090/Uninet/board/read?id=76#">© 유니넷</a></li>
+    <li><a href="http://localhost:8090/Uninet/board/list?page=1&amp;option=default&amp;boardtype=1">공지사항</a></li>
+    <li><a href="http://localhost:8090/Uninet/board/list?page=1&amp;option=default&amp;boardtype=2">자유게시판</a></li>
+    <li><a href="http://localhost:8090/Uninet/lecture/list">강의 관리</a></li>
+    <li><a href="http://localhost:8090/Uninet/stat/chart">통계</a></li>
+  </ul>
+</div>
+  <script src="./유니넷_files/boardcontent.js"></script>
+
+
+</body></html>

@@ -19,7 +19,9 @@
   CommentDao commentDao = new CommentDao();
   int commentCount = commentDao.getCommentCount(id);
   pageContext.setAttribute("writer", writer);
-  pageContext.setAttribute("commentCount", commentCount); 
+  pageContext.setAttribute("commentCount", commentCount);
+  
+  System.out.println(">" + post.getFileName() + "<");
 %>
 <c:set var="post" value="${post}"/>
 <c:set var="comments" value="${comments}"/>
@@ -52,7 +54,21 @@
         </div>
       </div>
       <div class="article-sub">
+        <div class ="user-menu">
         <span class="comment-option">쪽지</span>
+        <form action="delete" method ="post">
+          <c:if test="${curruser.staffId == writer.staffId}"><button type="submit" class="delete-option" id="postDelete">삭제</button>
+            <input type="hidden" value="${id}" name="postId">
+            <input type="hidden" value="${post.boardType}" name="boardType">
+          </c:if>
+        </form>
+        </div>
+        <c:if test="${post.fileName ne null}">
+          <div class="download">
+            <i class="fas fa-paperclip"></i>
+            <a href="file/${post.fileName}" download>${post.fileName}</a>
+          </div>  
+        </c:if>
         <div class="article-stat">
           <i class="far fa-eye">&nbsp;${post.count}</i>&nbsp;<i class="far fa-comment">&nbsp;${commentCount}</i>
         </div>
@@ -106,7 +122,7 @@
            </div>
            </c:if>
            <div class="comment-recomment">
-            <c:if test="${comment.content =='삭제된 댓글입니다.' and comment.recommentCount >= 1}">
+            <c:if test="${comment.content =='삭제된 댓글입니다.' and comment.recommentCount > 1}">
             <div class="comment">
                <input type="hidden" value="false" id="deleteCheck">
               <div class="comment-main">

@@ -1,5 +1,7 @@
 package kr.co.groot.service;
 
+import java.util.Enumeration;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,11 +41,18 @@ public class BoardWriteAction implements Action {
 
       String title = multi.getParameter("title");
       String content = multi.getParameter("content");
+      int boardType = Integer.parseInt(multi.getParameter("boardType"));
+      
+      Enumeration<String> filenames = multi.getFileNames();
+      String file = filenames.nextElement();
+      String filename = multi.getFilesystemName(file);
+      
 
       post.setTitle(title);
       post.setContent(content);
       post.setWriterId(staff.getId());
       post.setBoardType(Integer.parseInt(multi.getParameter("boardType")));
+      post.setFileName(filename);
 
       PostDao dao = new PostDao();
       result = dao.insertPost(post);
@@ -51,11 +60,12 @@ public class BoardWriteAction implements Action {
       forward = new ActionForward();
 
       if (result > 0) {
+        request.setAttribute("boardType", boardType);
         forward.setRedirect(false);
         forward.setPath("/board/writeok");
       } else {
         msg = "실패하였습니다.";
-        url = "board/list?page=1&option=false&boardtype=2";
+        url = "board/list?page=1&option=false&boardtype=" + boardType;
         forward.setRedirect(false);
         forward.setPath("/WEB-INF/views/etc/redirect.jsp");
         request.setAttribute("msg", msg);

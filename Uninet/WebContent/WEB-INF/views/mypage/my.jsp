@@ -77,6 +77,10 @@
         <span class="label">연락처</span>
         <span class="data">${staff.phoneNumber}</span>
       </div>
+      <div class="a-9">
+        <span class="label">자기소개</span>
+        <div class="textarea">${staff.selfIntroduce}</div>
+      </div>
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
