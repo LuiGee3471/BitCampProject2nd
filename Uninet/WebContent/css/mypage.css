@@ -135,6 +135,9 @@ input:focus {
   display: none;
 }
 
-.textarea {
+.self-introduce-text {
   white-space: pre-wrap;
+  margin-left: 20px;
+  font-size: 14px;
+  line-height: 20px;
 }

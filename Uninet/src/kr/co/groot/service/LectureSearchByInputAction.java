@@ -19,18 +19,23 @@ public class LectureSearchByInputAction implements Action {
     ActionForward forward = new ActionForward();
 
     List<Lecture> list = null;
-    
+
     int pageNumber = Integer.parseInt(request.getParameter("page"));
+    System.out.println("method : " + request.getParameter("method"));
+    System.out.println("option : " + request.getParameter("option"));
+    System.out.println("word : " + request.getParameter("word"));
+    System.out.println("page : " + pageNumber);
     String method = request.getParameter("method");
     String option = request.getParameter("option");
     String word = request.getParameter("word");
+
     int page = 1;
-    
+
     LectureDao dao;
     try {
       dao = new LectureDao();
       Paginator paginator = new Paginator();
-      
+
       switch (method) {
       case "default":
         page = paginator.getLecturePageNumber();
@@ -41,14 +46,16 @@ public class LectureSearchByInputAction implements Action {
         list = dao.getLectureBySearchWord(pageNumber, option, word);
         break;
       case "sort":
-        page = dao.countHowManyLectureList();
+        page = paginator.getLecturePageNumber();
         list = dao.getLectureSortByOption(pageNumber, option);
         break;
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-
+    request.setAttribute("method", method);
+    request.setAttribute("option", option);
+    request.setAttribute("word", word);
     request.setAttribute("currentPage", pageNumber);
     request.setAttribute("totalPages", page);
     request.setAttribute("list", list);

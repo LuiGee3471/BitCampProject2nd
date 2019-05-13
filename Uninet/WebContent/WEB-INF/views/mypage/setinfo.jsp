@@ -108,9 +108,8 @@
 	<script>
     ClassicEditor
         .create(document.querySelector('#editor'), {
-        	toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList']
-        	}
-        )
+        	toolbar: ['bold'],
+        })
         .catch(error => {
             console.error( error );
         });
