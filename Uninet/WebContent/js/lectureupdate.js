@@ -16,10 +16,8 @@ $(function() {
     changeItem = credit3;
   }
   for (var count = 0; count < changeItem.length; count++) {
-
     var option = $("<option>" + changeItem[count] + "</option>");
     $("#changeTime").append(option);
-
   }
 
   $('#selectCredit').change(function() {
@@ -38,12 +36,8 @@ $(function() {
     console.log("changeTime : " + changeTime);
     console.log("changesize : " + changeItem.length);
     for (var count = 0; count < changeItem.length; count++) {
-
       var option = $("<option>" + changeItem[count] + "</option>");
       $("#changeTime").append(option);
-
     }
-
   });
-
 });
