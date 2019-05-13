@@ -17,7 +17,6 @@ public class AdminSearchByInputAction implements Action {
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = new ActionForward();
     List<Staff> staffList = new ArrayList<Staff>();
-    System.out.println("123");
     String input = request.getParameter("searchText");
     String search = request.getParameter("orderBy");
 
@@ -31,7 +30,6 @@ public class AdminSearchByInputAction implements Action {
       System.out.println(e.getMessage());
     }
     request.setAttribute("staffList", staffList);
-    System.out.println(staffList);
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/admin/searchResult.jsp");
     return forward;

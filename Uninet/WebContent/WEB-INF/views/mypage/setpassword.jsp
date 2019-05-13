@@ -18,11 +18,18 @@
 			if($('#pwd').val() != $('#currentPwd').val()){
 				$('#checkPwd').val('현재 비밀번호와 일치하지 않습니다.');
 				$('#checkPwd').css('color','red');
+				var pwd = $('#pwd').val();
+				console.log(pwd);
 			}else{
 				$('#checkPwd').val('현재 비밀번호와 일치합니다.');
 				$('#checkPwd').css('color','blue');
 			}
 		});		
+			$('#update').click(function (event){
+				if($('#currentPwd').val() != $('#pwd').val()){
+					event.preventDefault();
+				}
+			})
 	});
 </script>
 </head>
@@ -53,7 +60,7 @@
 			</ul>
 	  </div>
 	</div>
-	<c:set var="staff" value="${staff }" />
+	<c:set var="staff" value="${sessionScope.staff }" />
 	<div class="article">
 	  <form action="updatePwd" method="post">
 	    <div class="a-1">
@@ -72,10 +79,10 @@
 	      <span class="label">현재 비밀번호</span>
 	      <span class="data"><input type="password" class="info" id="currentPwd" value=""></span>
 	      <input type="text" id="checkPwd" class="check">
-	      <input type="hidden" id="pwd" value="${sessionScope.staff.password}">
+	      <input type="hidden" id="pwd" value="${staff.password}">
 	    </div>
 	    <div class="a-3">
-	       <input type="submit" value="비밀번호 변경" class="submit">
+	       <input type="submit" id="update" value="비밀번호 변경" class="submit">
 	    </div>
 	  </form>
 	</div>

@@ -36,9 +36,9 @@
         </div>
       </div>
       <div class="mymenu card">
-        <a href="mypost?id=${staff.id}"><i class="fas fa-list-ul"></i>내가 쓴 글</a> 
-        <a href="mycomment" class="mycomment">
-          <i class="far fa-comment"></i>댓글단 글
+        <a href="mypost?id=${staff.id}&page=1&option=default"><i class="fas fa-list-ul"></i>내가 쓴 글</a> 
+        <a href="mycomment?id=${staff.id}&page=1&option=default" class="mycomment">
+          <i class="far fa-comment"></i>댓글 단 글
         </a>
       </div>
     </div>

@@ -92,7 +92,7 @@
               </div>
             </div>
             <div id="recomment-input" class="recomment-input unseen">
-               <div class="recomment">
+               <div class="recomment-write">
                 <form action="recomment" method="post" class="recomment-form" id="comment-form">
                   <input class="recomment-text" type="text" name="comment"
                    maxlength="50" placeholder="댓글을 입력하세요" /> 
@@ -180,6 +180,6 @@
     </div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
-  <script src="<%=request.getContextPath()%>/js/boardcontent.jsp"></script>
+  <script src="<%=request.getContextPath()%>/js/boardcontent.js"></script>
 </body>
 </html>

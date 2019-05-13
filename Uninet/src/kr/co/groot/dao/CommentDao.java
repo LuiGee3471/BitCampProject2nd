@@ -181,7 +181,7 @@ public class CommentDao {
   // refer
   public int deleteComment(int id) throws Exception {
     int row = 0;
-    String sql = "update comment set content= '삭제된 댓글입니다.' where id= ?";
+    String sql = "update comment set content='삭제된 댓글입니다.' where id= ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, id);
@@ -234,22 +234,25 @@ public class CommentDao {
    */
   public List<Post> selectByWriter(int writerId) throws Exception {
     List<Post> postList = new ArrayList<Post>();
-    String sql = "select p.id, title, p.content, p.writer_id, p.time, p.count from post p" + "LEFT join comment c"
-        + "on p.id = c.refer" + "where c.writer_id = ?";
+    String sql = "select distinct p.id,date_format(p.time, '%m/%d %H:%i') as timeFormat,p.boardtype_id, p.title, p.content, p.writer_id, p.time, p.count from post p" + " LEFT join comment c"
+        + " on p.id = c.refer" + " where c.writer_id = ?";
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
     pstmt.setInt(1, writerId);
     rs = pstmt.executeQuery();
+    CommentDao dao = new CommentDao();
     while (rs.next()) {
       Post post = new Post();
       post.setId(rs.getInt("id"));
       post.setTitle(rs.getString("title"));
+      post.setBoardType(rs.getInt("boardtype_id"));
+      post.setTimeFormat(rs.getString("timeFormat"));
       post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writerId"));
+      post.setWriterId(rs.getInt("writer_id"));
       post.setTime(rs.getTimestamp("time"));
       post.setCount(rs.getInt("count"));
+      post.setCommentCount(dao.getCommentCount(post.getId()));
       postList.add(post);
-
     }
     rs.close();
     pstmt.close();
@@ -258,7 +261,7 @@ public class CommentDao {
   }
   
   public int getCommentCount(int id) throws SQLException {
-    String sql = "select count(*) as count from comment where refer = ?";
+    String sql = "select count(*) as count from comment where refer = ? and content!='삭제된 댓글입니다.'";
     
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
