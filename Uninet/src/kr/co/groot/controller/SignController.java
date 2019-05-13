@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
+import kr.co.groot.service.MainAction;
 import kr.co.groot.service.SignLoginAction;
 import kr.co.groot.service.SignRegisterAction;
 import kr.co.groot.service.SignRegisterCheckAction;
@@ -48,9 +49,8 @@ public class SignController extends HttpServlet {
       forward.setRedirect(true);
       forward.setPath("main");
     } else if (urlCommand.equals("/main")) {
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/main.jsp");
+      action = new MainAction();
+      forward = action.execute(request, response);
     } else if (urlCommand.equals("/logout")) {
       HttpSession session = request.getSession();
       session.invalidate();
