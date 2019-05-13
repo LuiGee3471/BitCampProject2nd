@@ -135,8 +135,8 @@ public class PostDao {
    */
   public int insertPost(Post post) throws SQLException {
     int row = 0;
-    String sql = "insert into post (title, content, writer_id, time, count, boardtype_id)"
-        + " values (?, ?, ?, NOW(), 0, ?)";
+    String sql = "insert into post (title, content, writer_id, time, count, boardtype_id, file_name)"
+        + " values (?, ?, ?, NOW(), 0, ?, ?)";
 
     conn = ds.getConnection();
     pstmt = conn.prepareStatement(sql);
@@ -144,6 +144,7 @@ public class PostDao {
     pstmt.setString(2, post.getContent());
     pstmt.setInt(3, post.getWriterId());
     pstmt.setInt(4, post.getBoardType());
+    pstmt.setString(5, post.getFileName());
     row = pstmt.executeUpdate();
 
     pstmt.close();
@@ -507,6 +508,7 @@ public class PostDao {
       post.setId(rs.getInt("id"));
       post.setDiff(rs.getLong("diff"));
       post.setTimeFormat(rs.getString("timeFormat"));
+      post.setFileName(rs.getString("file_name"));
       post.setStaffId(rs.getString("staff_id"));
     }
     if (rs != null) {
@@ -827,6 +829,7 @@ public class PostDao {
       post.setDiff(rs.getLong("diff"));
       post.setTimeFormat(rs.getString("timeFormat"));
       post.setStaffId(rs.getString("staff_id"));
+      post.setFileName(rs.getString("file_name"));
       post.setCommentCount(commentDao.getCommentCount(post.getId()));
       list.add(post);
     }

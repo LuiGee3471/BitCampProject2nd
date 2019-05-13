@@ -14,6 +14,15 @@ public class Post {
   private long diff; // 현재와 글 올린 시간 차이
   private String timeFormat; // 올린 시간 문자열 형태
   private int commentCount;
+  private String fileName;
+
+  public String getFileName() {
+    return fileName;
+  }
+
+  public void setFileName(String filename) {
+    this.fileName = filename;
+  }
 
   public int getCommentCount() {
     return commentCount;

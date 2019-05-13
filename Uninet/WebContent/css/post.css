@@ -280,3 +280,12 @@ body {
 .user-menu {
   display:flex;
 }
+
+.download {
+  margin-top: 3px;
+}
+
+.download * {
+  color: #a6a6a6;
+  font-size: 12px;
+}
