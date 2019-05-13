@@ -95,11 +95,7 @@
     <!-- 교수 선택  -->
     
     <input type = "submit" value = "수정하기" class = "updateBtn"><br>
-    <a class="cancle-back" href="list">취소하고 돌아가기</a> 
-    
-  
- 
-   
+    <a class="cancle-back" href="list">취소하고 돌아가기</a>
     </form>
     </div>
    <jsp:include page="/common/bottom.jsp" flush="false" />
