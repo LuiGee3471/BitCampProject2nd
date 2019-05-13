@@ -103,6 +103,14 @@
     </form>
     </div>
    <jsp:include page="/common/bottom.jsp" flush="false" />
+   <script type="text/javascript">
+   var totalTime = "${lecture2.time}";
+   var day = totalTime.slice(0,1);
+   var time = totalTime.slice(1);
+   
+   
+   
+   </script>
    <script src="<%=request.getContextPath()%>/js/lectureupdate.js"></script>
 </body>
 </html>
