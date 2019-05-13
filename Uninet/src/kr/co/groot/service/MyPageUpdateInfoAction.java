@@ -22,19 +22,16 @@ public class MyPageUpdateInfoAction implements Action {
     staff.setSelfIntroduce(request.getParameter("selfIntroduce"));
     staff.setId(staff.getId());
     
-    System.out.println(request.getParameter("selfIntroduce").replace("/<\\/?[^>]+(>|$)/g", ""));
+    System.out.println(staff.getSelfIntroduce());
 
     String msg = "";
     String url = "";
     try {
       StaffDao dao = new StaffDao();
-      System.out.println("1");
       int row = dao.updateInfo(staff);
-      System.out.println("2");
       if (row > 0) {
         msg = "수정 성공";
         url = "../mypage";
-        staff = dao.selectByUniqueId(staff.getId());
         session.setAttribute("staff", staff);
       } else {
         msg = "수정 실패";

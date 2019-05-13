@@ -89,7 +89,7 @@
         </div>
         <div class="a-7">
           <span class="label self">자기소개</span>
-          <textarea name="selfIntroduce" id="editor"></textarea>
+          <textarea name="selfIntroduce" id="editor">${staff.selfIntroduce}</textarea>
         </div>
         <div class="a-8">
           <input type="submit" id="update" class="submit" value="개인정보 변경">
