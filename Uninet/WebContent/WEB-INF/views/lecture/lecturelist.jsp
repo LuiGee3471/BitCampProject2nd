@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
@@ -45,7 +44,6 @@
       <a href="write"><button class="lecture-add"><i class="fas fa-folder-plus fa-2x hover"></i></button></a>
     </div>
   </div>
-
   <div id="modalOne" class="modal">
     <div class="modal-content">
       <div class="contact-form">
@@ -63,7 +61,6 @@
       </div>
     </div>
   </div>
-
   <div id="modalTwo" class="modal">
     <div class="modal-content">
       <div class="contact-form">
