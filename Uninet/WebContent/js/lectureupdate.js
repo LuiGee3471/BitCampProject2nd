@@ -34,7 +34,7 @@ $(function() {
   }
 
   $('#selectCredit').change(function() {
-    selectCredit = $(this).val();
+    selectCredit = Number($(this).val());
     console.log(selectCredit);
     if (selectCredit === 1) {
       changeItem = credit1;
@@ -47,9 +47,12 @@ $(function() {
     $('#changeTime').empty();
 
     for (let count = 0; count < changeItem.length; count++) {
-      const option = $(
-        `<option value="${changeItem[count]}">${changeItem[count]}</option>`
-      );
+      console.log(time);
+      let tag = `<option value="${changeItem[count]}">${changeItem[count]}</option>`;
+      if (changeItem[count] === time) {
+          tag = `<option value="${changeItem[count]}" selected>${changeItem[count]}</option>`;
+      }
+      const option = $(tag);
       $('#changeTime').append(option);
       /* $("#changeTime  option").attr("value", changeItem[count]); */
     }

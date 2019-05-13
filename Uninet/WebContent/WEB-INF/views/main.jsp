@@ -22,6 +22,7 @@
 %>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" >
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -41,6 +42,14 @@
           <i class="far fa-comment"></i>댓글 단 글
         </a>
       </div>
+      <div class="weathercard">
+      <div class="weather">
+        <h3>Today's Weather</h3>
+        <div class="weatherpic"></div>
+         <span class="weatherinfo"></span>
+      </div>
+      </div>
+      <script src = "js/weather.js"></script>  
     </div>
     <div class="boards">
       <div class="board-row">

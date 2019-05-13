@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+var key = "c467a51ad8b7075e645266c97d051df0";
+var weatheruri = "http://api.openweathermap.org/data/2.5/forecast/hourly";
+var date = new Date();
+var today = date.getDate();
+var time = date.getHours();
+var month = date.getMonth()+1;
+var maxtemp=null;
+var mintemp=null;
+console.log(time);
+
+
+var timearr=[];
+var weatherInfo="";
+$('#btn').click(function(){
+	var temparr = [];
+	$('#content img').remove();
+	
+	$('#content h3').remove();
+	$('#pic img').remove();
+	
+	var str ='<div id="container" style="min-width: 810px; height: 40%; margin: 0 auto"></div>'
+   $('#box').append(str);
+  var city = $('#city').val();
+	
+	$.ajax({
+		url : weatheruri,
+		type : "get",
+		dataType : "json",
+		data : {
+			appid : key,
+			id : city,
+			units : "metric"
+			
+		},
+		success : function(data) {
+			
+			var list = data.list;
+			console.log(list);
+			 
+			
+			for(var i=0; i<96;i++) {
+			   var h = list[i].dt_txt;
+			   var temperature = h.split(" ");
+			   var day = Number(temperature[0].substr(8,9));
+			   var hour = Number(temperature[1].substr(0,2));
+			   var temp = "";
+			  
+			   
+       
+			    if(today==day && time==hour){
+			    	 var cal = month+"월 "+temperature[0].substr(8,9)+"일";
+			    	 console.log(cal);
+			    	 
+			    	 weatherInfo = list[i].weather[0].main;
+			    	 
+			    	   if(weatherInfo==="Rain"){
+				    	   var str ='<img src="images/rain.png">';
+				    	   $('#pic').append(str);
+				    	   
+				       }else if(weatherInfo==="Clouds"){
+				    	   var str ='<img src="images/cloud.png">';
+				    	   $('#pic').append(str);
+				    	   
+				       }else if(weatherInfo==="Clear"){
+				    	   var str ='<img src="images/sunny.png">';
+				    	   $('#pic').append(str);
+				       }
+			    	   temp = Math.round(list[i].main.temp);
+			    	   var info = `<h3>${weatherInfo} / ${temp}°</h3>`;
+						$("#pic").after(info);
+			        for(var j = 0 ; j<8;j++){
+					   temp = list[i+j].main.temp;
+					   temparr.push(temp);
+			    	   	   
+					   var h2 = list[i+j].dt_txt;
+					   var t2 = h2.split(" ");
+					   var hour2 =  Number(t2[1].substr(0,2));
+			    	   timearr.push(hour2+"시");
+			    	
+			        }
+			    	   
+			      
+			    }
+			}
+			
+			
+		
+		
+			    
+			
+			var chart = {
+					chart : {
+						type : 'spline'
+					},
+					title : {
+						text : 'Daily Temperature'
+					},
+					subtitle : {
+						text : cal
+					},
+					xAxis : {
+						categories : timearr
+					},
+					 yAxis: {
+						    title: {
+						      text: 'Temperature'
+						    },
+						    labels: {
+						      formatter: function () {
+						        return this.value + '°';
+						      }
+						    }
+						  },
+					tooltip: {
+					    crosshairs: true,
+					    shared: true
+					  },
+					plotOptions: {
+					    spline: {
+					      marker: {
+					        radius: 4,
+					        lineColor: '#666666',
+					        lineWidth: 1
+					      }
+					    }
+					  },
+					series : [ {
+						name : 'temp',
+						data : temparr
+					}
+					]
+				}
+			
+			Highcharts.chart('container', chart);
+			
+		}
+
+		
+	}
+
+	);
+	
+});
+});
+
+</script>
+<style type="text/css">
+h1 {
+   text-align: center;
+   font-family: sans-serif;
+   margin-top:100px;
+}
+
+h3{
+text-align: center;
+   font-family: sans-serif;
+
+}
+#pic img{
+     width:150px;
+     height:150px;
+    
+}
+
+#pic{
+ display:flex;
+ justify-content:space-around;
+ margin-bottom:20px;
+ font-family: sans-serif;
+}
+
+.umbrella{
+ 
+  width:150px;
+  height:150px;
+  
+}
+#content{
+
+display:flex;
+flex-direction: column;
+justify-content:center;
+align-items: center;
+
+}
+
+
+</style>
+
+</head>
+<body>
+   <div id="content">
+   <h1>What's the weather today?</h1>
+   
+   <img class = "umbrella" src="images/umbrella.png">
+ <div id="pic"></div>
+<div id="box"></div>
+<select id="city">
+ <option value="1835848">서울</option>
+ <option value="1835329">대구</option>
+ <option value="1838524">부산</option>
+ <option value="1843564">인천</option>
+ <option value="1835235">대전</option>
+ <option value="1833747">울산</option>
+ <option value="1841811">광주</option>
+</select>
+<button id="btn">PUSH</button>
+</div>
+
+</body>
+
+</html>
+
+
+
+
+
