@@ -61,7 +61,7 @@
           </c:if>
         </form>
         </div>
-        <c:if test="${post.fileName != ''}">
+        <c:if test="${post.fileName == ''}">
           <div class="download">
             <i class="fas fa-paperclip"></i>
             <a href="file/${post.fileName}" download>${post.fileName}</a>
