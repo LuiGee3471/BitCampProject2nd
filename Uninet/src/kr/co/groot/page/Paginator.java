@@ -10,7 +10,7 @@ public class Paginator {
   private PostDao postDao;
   
   public int getPageNumber(int boardType) throws NamingException, SQLException {
-    postDao = new PostDao();
+     postDao = new PostDao();
     
     int post = postDao.countHowManyPost(boardType);
     int page = (post % 20 == 0) ? (post / 20) : (post / 20 + 1);
