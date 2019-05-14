@@ -44,19 +44,21 @@
     
         <!-- 시간 선택  -->
    <span class = "label">시간</span>
-   <div class="day" id="timeFirst">
-   <input type="radio" name="weekday" id="monday" value="월"><label for="monday" class="date" >월</label>
+   <div class = "day-time">
+   <div class="dayupdate" id="timeFirst">
+   <input type="radio" name="weekday" id="monday" value="월"><label for="monday" class="date" id="mon-label">월</label>
    <input type="radio" name="weekday" id="tuesday" value="화"><label for="tuesday" class="date">화</label>
    <input type="radio" name="weekday" id="wednesday" value="수"><label for="wednesday" class="date">수</label>
    <input type="radio" name="weekday" id="thursday" value="목"><label for="thursday" class="date">목</label>
-   <input type="radio" name="weekday" id="friday" value="금"><label for="friday" class="date">금</label>
+   <input type="radio" name="weekday" id="friday" value="금"><label for="friday" class="date" id="fri-label">금</label>
    </div>
       <select id = "changeTime" name = "lectureTime" class = "textBottom">
         
        <!--  <option value = "123">123</option>
         <option value = "456">456</option>
         <option value = "789">789</option> -->
-      </select><br>
+      </select>
+      </div>
     <!-- 시간 선택  -->
     
      <!-- 종별 선택  -->
