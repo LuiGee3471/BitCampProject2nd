@@ -26,24 +26,20 @@ public class MyPageUpdateInfoAction implements Action {
 
     String msg = "";
     String url = "";
-    try {
-      StaffDao dao = new StaffDao();
-      int row = dao.updateInfo(staff);
-      if (row > 0) {
-        msg = "수정 성공";
-        url = "../mypage";
-        session.setAttribute("staff", staff);
-      } else {
-        msg = "수정 실패";
-        url = "setinfo";
-      }
-      System.out.println(row);
-      request.setAttribute("msg", msg);
-      request.setAttribute("url", url);
-      System.out.println("123");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    StaffDao dao = new StaffDao();
+    int row = dao.updateInfo(staff);
+    if (row > 0) {
+      msg = "수정 성공";
+      url = "../mypage";
+      session.setAttribute("staff", staff);
+    } else {
+      msg = "수정 실패";
+      url = "setinfo";
     }
+    System.out.println(row);
+    request.setAttribute("msg", msg);
+    request.setAttribute("url", url);
+    System.out.println("123");
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/etc/redirect.jsp");

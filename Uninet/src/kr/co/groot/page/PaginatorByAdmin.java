@@ -5,7 +5,7 @@ import kr.co.groot.dao.StaffDao;
 public class PaginatorByAdmin {
 	private StaffDao staffDao;
 	
-	public int getPageNumber() throws Exception {
+  public int getPageNumber() {
 		staffDao = new StaffDao();
 		
 		int staff = staffDao.countHowManyStaff();
@@ -14,7 +14,7 @@ public class PaginatorByAdmin {
 		return page;
 	}
 	
-	public int getPageNumber(String option, String word) throws Exception {
+	public int getPageNumber(String option, String word) {
 		staffDao = new StaffDao();
 		int page = 0;
 		int staff = 0;
@@ -34,7 +34,7 @@ public class PaginatorByAdmin {
 		
 	}
 	
-	public int getStaffPageNumber() throws Exception{
+  public int getStaffPageNumber() {
 	  staffDao = new StaffDao();
 	  
 	  int staffes = staffDao.countHowManyStaff();
@@ -43,7 +43,7 @@ public class PaginatorByAdmin {
 	  return page;
 	}
 	
-	public int getStaffPageNumberByOption(String option, String word) throws Exception {
+	public int getStaffPageNumberByOption(String option, String word) {
 	  staffDao = new StaffDao();
 	  
 	  int staffes = staffDao.countHowManyStaffWithOption(option, word);

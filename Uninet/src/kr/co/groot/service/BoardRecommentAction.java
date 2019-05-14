@@ -11,45 +11,44 @@ import kr.co.groot.dto.Comment;
 import kr.co.groot.dto.Staff;
 
 public class BoardRecommentAction implements Action {
- //refer , referComment, content, writerId, writer
+  // refer , referComment, content, writerId, writer
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = null;
     int id = Integer.parseInt(request.getParameter("commentId"));
     Comment comment = new Comment();
     int result = 0;
-    try {
-      HttpSession session = request.getSession();
-      Staff staff = (Staff) session.getAttribute("staff");
-      CommentDao dao = new CommentDao();
-      String url = "";
-      String msg = "";
-      
-      comment.setContent(request.getParameter("comment"));
-      comment.setWriter(staff);
-      comment.setWriterId(staff.getId());
-      comment.setRefer(id);
-      comment.setReferComment(Integer.parseInt(request.getParameter("referComment")));
-      
-      result = dao.insertRecomment(comment);
-      
-      forward = new ActionForward();
-     
-      if(result>0) {
-        forward.setRedirect(true);
-        forward.setPath("read?id="+id);
-      }else {
-        msg = "실패하였습니다.";
-        url = "board/read?id="+id;
-        forward.setRedirect(false);
-        forward.setPath("/WEB-INF/views/etc/redierct.jsp");
-        request.setAttribute("msg", msg);
-        request.setAttribute("url", url); 
-      }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+
+    HttpSession session = request.getSession();
+    Staff staff = (Staff) session.getAttribute("staff");
+    CommentDao dao = new CommentDao();
+    String url = "";
+    String msg = "";
+
+    comment.setContent(request.getParameter("comment"));
+    comment.setWriter(staff);
+    comment.setWriterId(staff.getId());
+    comment.setRefer(id);
+    comment.setReferComment(
+        Integer.parseInt(request.getParameter("referComment")));
+
+    result = dao.insertRecomment(comment);
+
+    forward = new ActionForward();
+
+    if (result > 0) {
+      forward.setRedirect(true);
+      forward.setPath("read?id=" + id);
+    } else {
+      msg = "실패하였습니다.";
+      url = "board/read?id=" + id;
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/etc/redierct.jsp");
+      request.setAttribute("msg", msg);
+      request.setAttribute("url", url);
     }
-    
+
     return forward;
   }
 

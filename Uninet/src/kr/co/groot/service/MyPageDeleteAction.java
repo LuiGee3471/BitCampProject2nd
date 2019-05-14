@@ -8,9 +8,9 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 
 public class MyPageDeleteAction implements Action {
-
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
 
     ActionForward forward = new ActionForward();
 
@@ -43,5 +43,4 @@ public class MyPageDeleteAction implements Action {
 
     return forward;
   }
-
 }

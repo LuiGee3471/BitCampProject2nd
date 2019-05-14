@@ -9,7 +9,7 @@ import kr.co.groot.dao.LectureDao;
 public class PaginatorLectureList {
   private LectureDao lecturedao;
   
-  public int getPageNumber() throws NamingException, SQLException {
+  public int getPageNumber() {
     lecturedao = new LectureDao();
     
     int post = lecturedao.countHowManyLectureList();

@@ -1,7 +1,5 @@
 package kr.co.groot.service;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,21 +8,18 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.LectureDao;
 
 public class LectureDeleteAction implements Action {
-
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
 
     ActionForward forward = null;
 
     int id = Integer.parseInt(request.getParameter("id"));
     int result = 0;
-    try {
-      LectureDao dao = new LectureDao();
-      result = dao.deleteLecture(id);
-      System.out.println("결과 : " + result);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+
+    LectureDao dao = new LectureDao();
+    result = dao.deleteLecture(id);
+    System.out.println("결과 : " + result);
 
     String msg = "";
     String url = "list";
@@ -45,5 +40,4 @@ public class LectureDeleteAction implements Action {
 
     return forward;
   }
-
 }

@@ -1,10 +1,8 @@
 package kr.co.groot.service;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,21 +19,15 @@ public class StaffInfoAction implements Action {
     ActionForward forward = new ActionForward();
     int id = Integer.parseInt(request.getParameter("id"));
     
-    try {
-      StaffDao staffDao = new StaffDao();
-      Staff staff = staffDao.selectByUniqueId(id);
-      
-      Timestamp birthday = staff.getBirthday();
-      LocalDate newBirthday = birthday.toLocalDateTime().toLocalDate();
-      String birthdayString = newBirthday.toString();
-      
-      request.setAttribute("staff", staff);
-      request.setAttribute("birthday", birthdayString);
-    } catch (NamingException e) {
-      System.out.println("StaffInfoAction: " + e.getMessage());
-    } catch (SQLException e) {
-      System.out.println("StaffInfoAction: " + e.getMessage());
-    }
+    StaffDao staffDao = new StaffDao();
+    Staff staff = staffDao.selectByUniqueId(id);
+    
+    Timestamp birthday = staff.getBirthday();
+    LocalDate newBirthday = birthday.toLocalDateTime().toLocalDate();
+    String birthdayString = newBirthday.toString();
+    
+    request.setAttribute("staff", staff);
+    request.setAttribute("birthday", birthdayString);
     
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/mypage/staffInfo.jsp");

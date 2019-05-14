@@ -1,9 +1,7 @@
 package kr.co.groot.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,28 +14,25 @@ import kr.co.groot.dto.Staff;
 
 public class MessagePageAction implements Action {
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = null;
     HttpSession session = request.getSession();
     Staff user = (Staff) session.getAttribute("staff");
     String isFromMain = request.getParameter("fromMain");
     String id = request.getParameter("id");
 
-    try {
-      MessageDao messageDao = new MessageDao();
-      List<Message> messageList = messageDao.selectUserMessage(user.getId());
+    MessageDao messageDao = new MessageDao();
+    List<Message> messageList = messageDao.selectUserMessage(user.getId());
 
-      if (isFromMain != null) {
-        request.setAttribute("fromMain", true);
-        request.setAttribute("id", id);
-      } else {
-        request.setAttribute("fromMain", false);
-        request.setAttribute("id", 0);
-      }
-      request.setAttribute("messageList", messageList);
-    } catch (NamingException | SQLException e) {
-      System.out.println("MessagePageAction: " + e.getMessage());
+    if (isFromMain != null) {
+      request.setAttribute("fromMain", true);
+      request.setAttribute("id", id);
+    } else {
+      request.setAttribute("fromMain", false);
+      request.setAttribute("id", 0);
     }
+    request.setAttribute("messageList", messageList);
 
     forward = new ActionForward();
     forward.setRedirect(false);

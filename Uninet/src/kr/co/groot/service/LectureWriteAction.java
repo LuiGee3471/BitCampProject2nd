@@ -15,26 +15,22 @@ import kr.co.groot.dto.LectureType;
 import kr.co.groot.dto.Professor;
 
 public class LectureWriteAction implements Action {
-
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = new ActionForward();
 
     List<LectureType> ltList = null;
     List<Professor> profList = null;
     List<Lecture> list = null;
-    try {
-      LectureDao dao = new LectureDao();
-      list = dao.selectAll();
+    LectureDao dao = new LectureDao();
+    list = dao.selectAll();
 
-      ProfessorDao professor = new ProfessorDao();
-      profList = professor.selectAll();
+    ProfessorDao professor = new ProfessorDao();
+    profList = professor.selectAll();
 
-      LectureTypeDao lectureType = new LectureTypeDao();
-      ltList = lectureType.selectAll();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    LectureTypeDao lectureType = new LectureTypeDao();
+    ltList = lectureType.selectAll();
 
     request.setAttribute("profList", profList);
     request.setAttribute("ltList", ltList);
@@ -43,5 +39,4 @@ public class LectureWriteAction implements Action {
     forward.setPath("/WEB-INF/views/lecture/lecturewrite.jsp");
     return forward;
   }
-
 }

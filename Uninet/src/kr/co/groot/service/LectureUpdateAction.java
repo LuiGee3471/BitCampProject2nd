@@ -2,9 +2,9 @@ package kr.co.groot.service;
 
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.LectureDao;
@@ -19,7 +19,8 @@ import kr.co.groot.dto.Professor;
 public class LectureUpdateAction implements Action {
 
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = new ActionForward();
     int id = Integer.parseInt(request.getParameter("id"));
     System.out.println("id의 값은 : " + id);
@@ -29,28 +30,22 @@ public class LectureUpdateAction implements Action {
     List<Major> majorList = null;
 
     Lecture lecture2 = null;
-   
-    try {
-      
-      LectureDao dao = new LectureDao();
-      lecture2 = new Lecture();
-      lecture2 = dao.selectById(id);
-      
-      LectureDao lecture = new LectureDao();
-      lectureList = lecture.selectAll();
 
-      ProfessorDao professor = new ProfessorDao();
-      profList = professor.selectAll();
+    LectureDao dao = new LectureDao();
+    lecture2 = new Lecture();
+    lecture2 = dao.selectById(id);
 
-      LectureTypeDao lectureType = new LectureTypeDao();
-      ltList = lectureType.selectAll();
+    LectureDao lecture = new LectureDao();
+    lectureList = lecture.selectAll();
 
-      MajorDao major = new MajorDao();
-      majorList = major.selectAll();
+    ProfessorDao professor = new ProfessorDao();
+    profList = professor.selectAll();
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    LectureTypeDao lectureType = new LectureTypeDao();
+    ltList = lectureType.selectAll();
+
+    MajorDao major = new MajorDao();
+    majorList = major.selectAll();
 
     request.setAttribute("lectureList", lectureList);
     request.setAttribute("profList", profList);
