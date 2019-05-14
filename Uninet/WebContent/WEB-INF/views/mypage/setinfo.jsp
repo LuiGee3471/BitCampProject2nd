@@ -21,14 +21,19 @@
           $('#check').val('암호가 일치합니다.');
           $('#check').css('color', 'blue');
         }
-        $('#update').click(function (event) {
+        
+      });
+      $('#update').click(function (event) {
           if ($('#currentPwd').val()== ""){
+            alert("암호를 입력해주세요");
             event.preventDefault();
+            return false;
           }else if ($('#currentPwd').val() != $('#pwd').val()) {
+            alert("암호가 틀렸습니다.");
             event.preventDefault();
+            return false;
           }
         });
-      });
     });
   </script>
 <link rel="stylesheet"

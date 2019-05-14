@@ -27,6 +27,7 @@
 		});		
 			$('#update').click(function (event){
 				if($('#currentPwd').val() != $('#pwd').val()){
+					alert("현재 암호를 확인해주세요");
 					event.preventDefault();
 				}
 			})
