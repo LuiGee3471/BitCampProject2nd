@@ -30,5 +30,25 @@ $(function() {
     }
 
   });
+  $('#addBtn').click(function(event){
+	  if(!$('#lectureName').val()){
+		  alert('과목명을 입력해주세요');
+		  event.preventDefault();
+	  }else if(!$('#selectCredit').val()){
+		  alert('학점을 입력해주세요');
+		  event.preventDefault();
+	  }else if(!$('input[name=weekday]:checked').val()){
+		  alert('요일을 선택해주세요');
+		  event.preventDefault();
+	  }else if(!$('#lectureTypeId').val()){
+		  alert('종별을 선택해주세요');
+		  event.preventDefault();
+	  }else if(!$('#professorId').val()){
+		  alert("교수를 선택해 주세요");
+		  event.preventDefault();
+		  
+	  }
+  });
+    
 
 });

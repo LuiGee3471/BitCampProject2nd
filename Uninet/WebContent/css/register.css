@@ -1,13 +1,14 @@
 @import 'master.css';
 
 body {
-  display: flex;
+  margin-top: 13%;
   background-color: #F8F8F8;
+  height: initial;
 }
 
 .label {
-  margin-top: 50px; 
-  margin-bottom : 5px;
+  display: inline-block;
+  margin-bottom : 20px;
   color: #737373;
   font-size: 13px;
   font-weight: bold;
@@ -15,8 +16,7 @@ body {
 }
 
 div#first-div {
-  display: flex;
-  flex-direction: column;
+  margin-top: 20px;
 }
 
 #registerForm {
@@ -25,13 +25,11 @@ div#first-div {
 }
 
 div#second-div {
-  display: flex;
-  flex-direction: column;
+  margin-top: 35px;
 }
 
 div#third-div {
-  display: flex;
-  flex-direction: column;
+  margin-top: 35px;
 }
 
 .check-label {
@@ -44,16 +42,6 @@ div#third-div {
 
 #agree {
   margin-top: 50px;
-}
-
-.seen {
-  opacity: 1 !important;
-  transition: 0.5s;
-}
-
-.unseen {
-  opacity: 0 !important;
-  transition: 0.5s;
 }
 
 input[type=text], input[type=password], input[type=date] {
@@ -74,7 +62,7 @@ input[type=text], input[type=password], input[type=date] {
 
 #dept {
   border: 0;
-  width: 100%;
+  width: 382px;
   height: 36px;
   line-height: 28px;
   color: #292929;
@@ -95,4 +83,24 @@ input[type=text], input[type=password], input[type=date] {
   font-size: 16px;
   color: white;
   width: 100%;
+  cursor: pointer;
+}
+
+.unseen {
+  display: none;
+}
+
+.seen {
+  animation-duration: 1.2s;
+  animation-name: fadein;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

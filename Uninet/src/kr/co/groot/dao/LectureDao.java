@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import org.json.simple.JSONObject;
 
 import kr.co.groot.dto.Lecture;
+import kr.co.groot.dto.Professor;
 
 public class LectureDao {
   private Connection conn;
@@ -851,6 +852,41 @@ public class LectureDao {
       }
     }
     return lectureList;
+  }
+  
+  
+  public List<Professor> getProfessorListByMajorId(){
+	  List<Professor> professorList = null;
+	  Professor professor = null; 
+	  String sql = "select p.*, m.major_name from professor p inner join major m on p.major_id = m.id";
+	  try {
+		  conn = ds.getConnection();
+		  pstmt = conn.prepareStatement(sql);
+		  rs = pstmt.executeQuery();
+		  professorList = new ArrayList<Professor>();
+		  while(rs.next()) {
+			  professor = new Professor();
+			  professor.setId(rs.getInt(1));
+			  professor.setProfName(rs.getString(2));
+			  professor.setMajorId(rs.getInt(3));
+			  professor.setMajorName(rs.getString(4));
+			  professorList.add(professor);
+		  }
+		  System.out.println(professorList.toString());
+		  
+	  }catch(Exception e) {
+		  System.out.println("getProfessorListByMajorId" +e.getMessage());
+	  } finally {
+		try {
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("getProfessorListByMajorId" +e.getMessage());
+		}
+	}
+	  
+	  return professorList;
   }
 
 }

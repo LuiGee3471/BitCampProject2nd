@@ -86,7 +86,7 @@ public class StaffDao {
 
   public Staff selectStaff(String id) {
     String sql = "select * from staff left join department "
-        + "on staff.dept_id = department.id where staff_id = ?";
+        + "on staff.dept_id = department.id where binary staff_id = ?";
     Staff staff = new Staff();
 
     try {

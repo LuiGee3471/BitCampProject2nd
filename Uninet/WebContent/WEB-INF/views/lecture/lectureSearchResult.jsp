@@ -33,7 +33,6 @@
     }
   }
 
-  System.out.println(startPage + " / " + endPage);
   pageContext.setAttribute("startPage", startPage);
   pageContext.setAttribute("endPage", endPage);
 %>
@@ -68,12 +67,12 @@
 </c:forEach>
 <tr>
 <td>
-<span class = "hidden" id="method">${method}</span>
-<span class = "hidden" id="option">${option}</span>
-<span class = "hidden" id="word">${word}</span>
-<span class = "hidden" id="currentPage">${currentPage}</span>
-<span class = "hidden" id="totalPages">${totalPages}</span>
-<span class = "hidden" id="startPage">${startPage}</span>
-<span class = "hidden" id="endPage">${endPage}</span>
+<span class="hidden" id="method">${method}</span>
+<span class="hidden" id="option">${option}</span>
+<span class="hidden" id="word">${word}</span>
+<span class="hidden" id="currentPage">${currentPage}</span>
+<span class="hidden" id="totalPages">${totalPages}</span>
+<span class="hidden" id="startPage">${startPage}</span>
+<span class="hidden" id="endPage">${endPage}</span>
 </td>
 </tr>
