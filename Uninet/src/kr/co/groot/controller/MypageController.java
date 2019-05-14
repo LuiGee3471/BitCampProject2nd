@@ -23,8 +23,9 @@ import kr.co.groot.service.MyPageSetPwdAction;
 import kr.co.groot.service.MyPageUpdateInfoAction;
 import kr.co.groot.service.MyPageUpdatePictureAction;
 import kr.co.groot.service.MypagePwdUpdateAction;
+import kr.co.groot.service.StaffInfoAction;
 
-@WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*" })
+@WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*", "/info" })
 public class MypageController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -74,6 +75,9 @@ public class MypageController extends HttpServlet {
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/mypage/delete")) {
       action = new MyPageDeleteAction();
+      forward = action.execute(request, response);
+    } else if (urlCommand.equals("/info")) {
+      action = new StaffInfoAction();
       forward = action.execute(request, response);
     }
 
