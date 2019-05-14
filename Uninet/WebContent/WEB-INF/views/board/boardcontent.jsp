@@ -44,6 +44,7 @@
           <img class="profile-photo"
             src="<%=request.getContextPath()%>/images/${writer.image}" alt="" />
           <div class="writer-info">
+            <span class="unseen">${writer.id}</span>
             <span class="writer-id">${writer.staffId}</span> 
             <span class="time">${post.timeFormat}</span>
           </div>

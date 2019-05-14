@@ -19,6 +19,7 @@
           <div class="message-sender">     
           <c:choose>
             <c:when test="${message.receiverId == userId}">
+              <span class="hidden">${message.senderId}</span>
               <span class="sender">${message.senderName}</span>
             </c:when>
             <c:otherwise>
