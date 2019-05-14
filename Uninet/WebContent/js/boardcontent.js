@@ -36,3 +36,25 @@ $(".close-btn").click(function() {
   $(".receiver").remove();
   $(".modal").css("display", "none");
 });
+
+$(".recomment-submit").click(function() {
+  if(!$(".recomment-text").val()){
+    alert("내용을 입력해주세요!");
+    event.preventDefault();
+  }
+  
+});
+
+$(".comment-submit").click(function() {
+  if(!$(".comment-text").val()){
+    alert("내용을 입력해주세요!");
+    event.preventDefault();
+  }
+  
+});
+
+
+
+
+
+
