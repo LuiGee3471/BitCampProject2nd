@@ -5,7 +5,6 @@ function makePageBtns() {
   const totalPages = Number($("#totalPages").text());
   const startPage = Number($("#startPage").text());
   const endPage = Number($("#endPage").text());
-  console.log(currentPage);
   const boardBottom = $(".board-bottom");
   const pageBtns = $(".page-btns");
   
@@ -44,13 +43,13 @@ function checkPrevBtnAndNextBtn() {
   const word = $("#word").text();
   const totalPages = Number($("#totalPages").text());
   $(".next-page").click(function () {
-    if (currentPage !== 1 && !$(this).hasClass("hidden")) {
+    if (currentPage !== totalPages && !$(this).hasClass("hidden")) {
       callResult(currentPage + 1, method, option, word);
     }
   });
 
   $(".prev-page").click(function () {
-    if (currentPage !== totalPages && !$(this).hasClass("hidden")) {
+    if (currentPage !== 1 && !$(this).hasClass("hidden")) {
       callResult(currentPage - 1, method, option, word);
     }
   });
@@ -68,7 +67,6 @@ function callResult(page, method, option, word) {
       },
       dataType: "html",
       success: function(data) {
-        console.log(data);
         $("#searchResult").html(data);
       }  
   };
@@ -95,7 +93,6 @@ function callResult(page, method, option, word) {
           word: word
         },
         success: function(data) {
-          console.log(data);
           $("#searchResult").html(data);
         }
       });
