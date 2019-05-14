@@ -33,7 +33,6 @@ public class BoardListAction implements Action {
     int page = 1;
     switch (option) {
     case "default":
-    case "count":
       list = postDao.getPostByPage(pageNumber, boardType);
       page = paginator.getPageNumber(boardType);
       break;

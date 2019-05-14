@@ -86,15 +86,13 @@
     <div class="board-bottom">
     <c:choose>
     <c:when test="${currentPage == 1}">
-      <form action="list" class="searchInput" method="post">
+      <form action="mypost" class="searchInput" method="post">
         <select name="option" id="postSelect" class="postSelect">
           <option value="title">제목</option>
           <option value="content">내용</option>
           <option value="all">제목+내용</option>
-          <option value="count">조회순</option>
         </select> 
         <input type="text" name="word" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/>
-        <input type="hidden" name="boardtype" value="${type}">
         <input type="hidden" name="page" value="1"> 
         <input type="image" class="searchBtn" src="<%=request.getContextPath()%>/images/search.png">
       </form>
