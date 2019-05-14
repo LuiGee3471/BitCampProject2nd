@@ -112,7 +112,7 @@
                 <form action="recomment" method="post" class="recomment-form" id="comment-form">
                   <input class="recomment-text" type="text" name="comment"
                    maxlength="50" placeholder="댓글을 입력하세요" /> 
-                  <input class="submit" type="image"
+                  <input class="submit recomment-submit" type="image"
                    src="<%=request.getContextPath()%>/images/submit.png">
                   <input type="hidden" value="${id}" name="commentId">
                   <input type="hidden" value="${comment.id}" name="referComment">
@@ -174,7 +174,7 @@
           <input class="comment-text" type="text" name="comment"
             maxlength="50" placeholder="댓글을 입력하세요" autocomplete="off" minlength="5"/> 
           <input
-            class="submit" type="image"
+            class="submit comment-submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
             <input type="hidden" value="${id}" name="commentId">
         </form>
