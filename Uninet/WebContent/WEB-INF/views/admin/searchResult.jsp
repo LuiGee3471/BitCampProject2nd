@@ -15,7 +15,7 @@
     <td>${staff.deptName}</td>
     <td>
       <a href="modify?id=${staff.id}"> 
-        <i class="fas fa-folder-plus"></i>
+        <i class="far fa-edit hover-big"></i>
       </a>
     </td>
     <td>
