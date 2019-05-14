@@ -21,9 +21,14 @@ public class MessageDao {
   private ResultSet rs;
   private DataSource ds;
 
-  public MessageDao() throws NamingException {
-    Context context = new InitialContext();
-    ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
+  public MessageDao() {
+    Context context;
+    try {
+      context = new InitialContext();
+      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
+    } catch (NamingException e) {
+      System.out.println("MessageDao: " + e.getMessage());
+    }
   }
 
   /*
@@ -39,34 +44,38 @@ public class MessageDao {
    * 
    * @return: List<Message>
    */
-  public List<Message> selectAll() throws SQLException {
+  public List<Message> selectAll() {
     List<Message> messagelist = new ArrayList<Message>();
     String sql = "select * from message";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    rs = pstmt.executeQuery();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
 
-    if (rs.next()) {
-      Message message = new Message();
-      message.setContent(rs.getString("content"));
-      message.setTime(rs.getTimestamp("time"));
-      message.setReceiverId(rs.getInt("receiver_id"));
-      message.setSenderId(rs.getInt("sender_id"));
-      message.setReceiverName(rs.getString("receiver"));
-      message.setSenderName(rs.getString("sender"));
-      message.setTimeFormat(rs.getString("timeFormat"));
-      messagelist.add(message);
+      if (rs.next()) {
+        Message message = new Message();
+        message.setContent(rs.getString("content"));
+        message.setTime(rs.getTimestamp("time"));
+        message.setReceiverId(rs.getInt("receiver_id"));
+        message.setSenderId(rs.getInt("sender_id"));
+        message.setReceiverName(rs.getString("receiver"));
+        message.setSenderName(rs.getString("sender"));
+        message.setTimeFormat(rs.getString("timeFormat"));
+        messagelist.add(message);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectAll: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectAll: " + e.getMessage());
+      }
     }
-    if (rs != null) {
-      rs.close();
-    }
-    if (pstmt != null) {
-      pstmt.close();
-    }
-    if (conn != null) {
-      conn.close();
-    }
+
     return messagelist;
   }
 
@@ -85,20 +94,28 @@ public class MessageDao {
    * 
    * @return: int
    */
-  public int insertMessage(Message message) throws SQLException {
+  public int insertMessage(Message message) {
     int row = 0;
     String sql = "insert into message(content, receiver_id, sender_id, time) values(?, ?, ?, NOW())";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, message.getContent());
-    pstmt.setInt(2, message.getReceiverId());
-    pstmt.setInt(3, message.getSenderId());
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, message.getContent());
+      pstmt.setInt(2, message.getReceiverId());
+      pstmt.setInt(3, message.getSenderId());
 
-    row = pstmt.executeUpdate();
-
-    pstmt.close();
-    conn.close();
+      row = pstmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("insertMessage: " + e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("insertMessage: " + e.getMessage());
+      }
+    }
 
     return row;
   }
@@ -116,18 +133,26 @@ public class MessageDao {
    * 
    * @return: int
    */
-  public int deleteMessage(int message_id) throws SQLException {
+  public int deleteMessage(int message_id) {
     int row = 0;
     String sql = "delete from message where id = ?";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, message_id);
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, message_id);
 
-    row = pstmt.executeUpdate();
-
-    pstmt.close();
-    conn.close();
+      row = pstmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("deleteMessage: " + e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("deleteMessage: " + e.getMessage());
+      }
+    }
 
     return row;
   }
@@ -145,33 +170,37 @@ public class MessageDao {
    * 
    * @return: List<Message>
    */
-  public List<Message> selectByReceiver(int receiver_id) throws SQLException {
+  public List<Message> selectByReceiver(int receiver_id) {
     List<Message> messagelist = new ArrayList<Message>();
     String sql = "select content, time, s.staff_name AS sender from message m "
         + "LEFT JOIN staff s " + "on m.sender_id = s.id";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, receiver_id);
-    rs = pstmt.executeQuery();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, receiver_id);
+      rs = pstmt.executeQuery();
 
-    if (rs.next()) {
-      Message message = new Message();
-      message.setContent(rs.getString("content"));
-      message.setTime(rs.getTimestamp("time"));
-      message.setSenderName(rs.getString("sender"));
-      message.setSenderId(rs.getInt("sender_id"));
-      messagelist.add(message);
+      if (rs.next()) {
+        Message message = new Message();
+        message.setContent(rs.getString("content"));
+        message.setTime(rs.getTimestamp("time"));
+        message.setSenderName(rs.getString("sender"));
+        message.setSenderId(rs.getInt("sender_id"));
+        messagelist.add(message);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectByReceiver: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectByReceiver: " + e.getMessage());
+      }
     }
-    if (rs != null) {
-      rs.close();
-    }
-    if (pstmt != null) {
-      pstmt.close();
-    }
-    if (conn != null) {
-      conn.close();
-    }
+
     return messagelist;
   }
 
@@ -188,49 +217,50 @@ public class MessageDao {
    * 
    * @return: List<Message>
    */
-  public List<Message> selectRecentMessage(int id) throws SQLException {
+  public List<Message> selectRecentMessage(int id) {
     List<Message> messagelist = new ArrayList<Message>();
-    String sql = "select m.*, s.staff_name, round(time_to_sec(timediff(NOW(), m.time)) / 60) as diff, " + 
-        "date_format(m.time, '%m/%d %H:%i') as timeFormat " + 
-        "from message m " + 
-        "left join staff s on m.sender_id = s.id " + 
-        "where receiver_id = ? " + 
-        "order by time desc "
-        + "limit 2";
+    String sql = "select m.*, s.staff_name, round(time_to_sec(timediff(NOW(), m.time)) / 60) as diff, "
+        + "date_format(m.time, '%m/%d %H:%i') as timeFormat "
+        + "from message m " + "left join staff s on m.sender_id = s.id "
+        + "where receiver_id = ? " + "order by time desc " + "limit 2";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    rs = pstmt.executeQuery();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, id);
+      rs = pstmt.executeQuery();
 
-    while (rs.next()) {
-      Message message = new Message();
-      message.setId(rs.getInt("id"));
-      if (rs.getString("content").length() > 20) {
-        message.setContent(rs.getString("content").substring(0, 20) + "...");
-      } else {
-        message.setContent(rs.getString("content"));  
+      while (rs.next()) {
+        Message message = new Message();
+        message.setId(rs.getInt("id"));
+        if (rs.getString("content").length() > 20) {
+          message.setContent(rs.getString("content").substring(0, 20) + "...");
+        } else {
+          message.setContent(rs.getString("content"));
+        }
+        message.setTime(rs.getTimestamp("time"));
+        message.setReceiverId(rs.getInt("receiver_id"));
+        message.setSenderId(rs.getInt("sender_id"));
+        message.setSenderName(rs.getString("staff_name"));
+        message.setDiff(rs.getLong("diff"));
+        message.setTimeFormat(rs.getString("timeFormat"));
+        messagelist.add(message);
       }
-      message.setTime(rs.getTimestamp("time"));
-      message.setReceiverId(rs.getInt("receiver_id"));
-      message.setSenderId(rs.getInt("sender_id"));
-      message.setSenderName(rs.getString("staff_name"));
-      message.setDiff(rs.getLong("diff"));
-      message.setTimeFormat(rs.getString("timeFormat"));
-      messagelist.add(message);
+    } catch (SQLException e) {
+      System.out.println("selectRecentMessage: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectRecentMessage: " + e.getMessage());
+      }
     }
-    if (rs != null) {
-      rs.close();
-    }
-    if (pstmt != null) {
-      pstmt.close();
-    }
-    if (conn != null) {
-      conn.close();
-    }
+
     return messagelist;
   }
-  
+
   /*
    * @method Name: selectUserMessage
    * 
@@ -244,44 +274,48 @@ public class MessageDao {
    * 
    * @return: List<Message>
    */
-  public List<Message> selectUserMessage(int userId) throws SQLException {
+  public List<Message> selectUserMessage(int userId) {
+    List<Message> list = new ArrayList<Message>();
     String sql = "select m.*, s1.staff_name as sender, s2.staff_name as receiver, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat " 
-        + "from message m " 
-        + "left join staff s1 "
-        + "on m.sender_id = s1.id " 
-        + "left join staff s2 " 
-        + "on m.receiver_id = s2.id "
-        + "where m.sender_id = ? or m.receiver_id = ? "
-        + "order by time desc ";
-		
-		conn = ds.getConnection();
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, userId);
-		pstmt.setInt(2, userId);
-		rs = pstmt.executeQuery();
-		
-		List<Message> list = new ArrayList<Message>();
-		while (rs.next()) {
-		  Message message = new Message();
-		  message.setId(rs.getInt("id"));
-		  message.setContent(rs.getString("content"));
-		  message.setTime(rs.getTimestamp("time"));
-		  message.setReceiverId(rs.getInt("receiver_id"));
-		  message.setSenderId(rs.getInt("sender_id"));
-		  message.setReceiverName(rs.getString("receiver"));
-		  message.setSenderName(rs.getString("sender"));
-		  message.setTimeFormat(rs.getString("timeFormat"));
-		  list.add(message);
-		}
-		
-		rs.close();
-		pstmt.close();
-		conn.close();
-		
-		return list;
+        + "date_format(time, '%m/%d %H:%i') as timeFormat " + "from message m "
+        + "left join staff s1 " + "on m.sender_id = s1.id "
+        + "left join staff s2 " + "on m.receiver_id = s2.id "
+        + "where m.sender_id = ? or m.receiver_id = ? " + "order by time desc ";
+
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, userId);
+      pstmt.setInt(2, userId);
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        Message message = new Message();
+        message.setId(rs.getInt("id"));
+        message.setContent(rs.getString("content"));
+        message.setTime(rs.getTimestamp("time"));
+        message.setReceiverId(rs.getInt("receiver_id"));
+        message.setSenderId(rs.getInt("sender_id"));
+        message.setReceiverName(rs.getString("receiver"));
+        message.setSenderName(rs.getString("sender"));
+        message.setTimeFormat(rs.getString("timeFormat"));
+        list.add(message);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectUserMessage: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectUserMessage: " + e.getMessage());
+      }
+    }
+
+    return list;
   }
-  
+
   /*
    * @method Name: selectMessage
    * 
@@ -295,37 +329,43 @@ public class MessageDao {
    * 
    * @return: List<Message>
    */
-  public Message selectMessage(int messageId) throws SQLException {
-    String sql = "select m.*, s1.staff_name as sender, s2.staff_name as receiver, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat " 
-        + "from message m " 
-        + "left join staff s1 "
-        + "on m.sender_id = s1.id " 
-        + "left join staff s2 " 
-        + "on m.receiver_id = s2.id "
-        + "where m.id = ? ";
-    
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, messageId);
-    rs = pstmt.executeQuery();
-    
+  public Message selectMessage(int messageId) {
     Message message = new Message();
-    if (rs.next()) {
-      message.setId(rs.getInt("id"));
-      message.setContent(rs.getString("content"));
-      message.setTime(rs.getTimestamp("time"));
-      message.setReceiverId(rs.getInt("receiver_id"));
-      message.setSenderId(rs.getInt("sender_id"));
-      message.setReceiverName(rs.getString("receiver"));
-      message.setSenderName(rs.getString("sender"));
-      message.setTimeFormat(rs.getString("timeFormat"));
+    String sql = "select m.*, s1.staff_name as sender, s2.staff_name as receiver, "
+        + "date_format(time, '%m/%d %H:%i') as timeFormat " + "from message m "
+        + "left join staff s1 " + "on m.sender_id = s1.id "
+        + "left join staff s2 " + "on m.receiver_id = s2.id "
+        + "where m.id = ? ";
+
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, messageId);
+      rs = pstmt.executeQuery();
+
+      
+      if (rs.next()) {
+        message.setId(rs.getInt("id"));
+        message.setContent(rs.getString("content"));
+        message.setTime(rs.getTimestamp("time"));
+        message.setReceiverId(rs.getInt("receiver_id"));
+        message.setSenderId(rs.getInt("sender_id"));
+        message.setReceiverName(rs.getString("receiver"));
+        message.setSenderName(rs.getString("sender"));
+        message.setTimeFormat(rs.getString("timeFormat"));
+      }
+    } catch (SQLException e) {
+      System.out.println("selectMessage: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectMessage: " + e.getMessage());
+      }
     }
-    
-    rs.close();
-    pstmt.close();
-    conn.close();
-    
+
     return message;
   }
 }
