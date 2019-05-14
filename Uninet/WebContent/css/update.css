@@ -118,6 +118,8 @@ select {
   height: 30px;
   border-radius: 0;
   padding-left: 10px;
+  font-size:15px;
+  font-weight:400 !important;
 
   /* Removes the default <select> styling */
   -webkit-appearance: none;
