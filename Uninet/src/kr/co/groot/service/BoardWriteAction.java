@@ -24,7 +24,7 @@ public class BoardWriteAction implements Action {
     ActionForward forward = null;
     ServletContext application = request.getServletContext();
     String uploadPath = application.getRealPath("file");
-    
+
     System.out.println(uploadPath);
 
     int size = 1024 * 1024 * 5;
@@ -44,11 +44,11 @@ public class BoardWriteAction implements Action {
       String title = multi.getParameter("title");
       String content = multi.getParameter("content");
       int boardType = Integer.parseInt(multi.getParameter("boardType"));
-      
+
       Enumeration<String> filenames = multi.getFileNames();
       String file = filenames.nextElement();
       String filename = multi.getFilesystemName(file);
-      
+
       post.setTitle(title);
       post.setContent(content);
       post.setWriterId(staff.getId());

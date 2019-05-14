@@ -12,7 +12,7 @@
     <table class="lecturetable">
       <thead>
         <tr>
-          <th>강의이름</th>
+          <th>과목</th>
           <th>학점</th>
           <th>시간</th>
           <th>종별</th> 

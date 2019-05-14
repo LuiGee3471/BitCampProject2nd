@@ -1,9 +1,7 @@
 package kr.co.groot.service;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,13 +42,8 @@ public class SignLoginAction implements Action {
         forward.setRedirect(false);
         forward.setPath("/WEB-INF/views/etc/redirect.jsp");
       }
-    } catch (NamingException e) {
-      System.out.println(e.getMessage());
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      System.out.println("SignLoginAction: " + e.getMessage());
     }
 
     return forward;

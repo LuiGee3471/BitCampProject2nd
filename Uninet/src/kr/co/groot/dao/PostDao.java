@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import kr.co.groot.dto.Comment;
 import kr.co.groot.dto.Post;
 
 public class PostDao {
@@ -468,8 +466,6 @@ public class PostDao {
         list.add(post);
       }
     } catch (SQLException e) {
-      System.out.println("selectByWriter: " + e.getMessage());
-    } catch (NamingException e) {
       System.out.println("selectByWriter: " + e.getMessage());
     } finally {
       try {
@@ -927,8 +923,6 @@ public class PostDao {
       }
     } catch (SQLException e) {
       System.out.println("getPostByPage: " + e.getMessage());
-    } catch (NamingException e) {
-      System.out.println("getPostByPage: " + e.getMessage());
     } finally {
       try {
         rs.close();
@@ -1000,8 +994,6 @@ public class PostDao {
         list.add(post);
       }
     } catch (SQLException e) {
-      System.out.println("getPostByOption: " + e.getMessage());
-    } catch (NamingException e) {
       System.out.println("getPostByOption: " + e.getMessage());
     } finally {
       try {

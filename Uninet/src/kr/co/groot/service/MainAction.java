@@ -20,13 +20,14 @@ public class MainAction implements Action {
   public ActionForward execute(HttpServletRequest request,
       HttpServletResponse response) {
     ActionForward forward = null;
-    
+
     String clientId = "vqLcW7JqiYZue0zeuYqs";
     String clientSecret = "3ItRGLhcxI";
-    
+
     try {
       String text = URLEncoder.encode("대학교", "UTF-8");
-      String apiURL = "https://openapi.naver.com/v1/search/news.json?query=" + text + "&display=3";
+      String apiURL = "https://openapi.naver.com/v1/search/news.json?query="
+          + text + "&display=3";
       URL url = new URL(apiURL);
       HttpURLConnection con = (HttpURLConnection) url.openConnection();
       con.setRequestMethod("GET");
@@ -53,11 +54,11 @@ public class MainAction implements Action {
     } catch (IOException e) {
       System.out.println("뉴스: " + e.getMessage());
     }
-    
+
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/main.jsp");
-    
+
     return forward;
   }
 }

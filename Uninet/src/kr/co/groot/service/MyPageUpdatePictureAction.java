@@ -1,5 +1,6 @@
 package kr.co.groot.service;
 
+import java.io.IOException;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +31,10 @@ public class MyPageUpdatePictureAction implements Action {
 
     String msg = "";
     String url = "";
+    MultipartRequest multi;
+    
     try {
-      MultipartRequest multi = new MultipartRequest(request, uploadpath, size, "UTF-8", new DefaultFileRenamePolicy());
+      multi = new MultipartRequest(request, uploadpath, size, "UTF-8", new DefaultFileRenamePolicy());
       Enumeration<String> filenames = multi.getFileNames();
       String file = filenames.nextElement();
       String image = multi.getFilesystemName(file);
@@ -48,12 +51,12 @@ public class MyPageUpdatePictureAction implements Action {
         msg = "수정실패";
         url = "setpicture";
       }
-      request.setAttribute("msg", msg);
-      request.setAttribute("url", url);
-
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    } catch (IOException e) {
+      System.out.println("MyPageUploadPictureAction: " + e.getMessage());
     }
+    
+    request.setAttribute("msg", msg);
+    request.setAttribute("url", url);
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/etc/redirect.jsp");

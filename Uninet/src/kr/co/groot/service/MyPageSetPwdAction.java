@@ -9,7 +9,8 @@ import kr.co.groot.action.ActionForward;
 public class MyPageSetPwdAction implements Action {
 
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = new ActionForward();
 
     forward.setRedirect(false);
@@ -17,5 +18,4 @@ public class MyPageSetPwdAction implements Action {
 
     return forward;
   }
-
 }

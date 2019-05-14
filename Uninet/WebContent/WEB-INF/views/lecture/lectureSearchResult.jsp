@@ -54,11 +54,17 @@
     <td>${lecture.lectureType}</td>
     <td>${lecture.majorName}</td>
     <td>${lecture.profName }</td>
-    <td><a href="updatePage?id=${lecture.id}"><i
-        class="far fa-edit hover-big"></i></a></td>
-    <td><a href="delete?id=${lecture.id}"><i
-        class="far fa-trash-alt hover-big"></i></a></td>
-</tr>
+    <td>
+      <a href="updatePage?id=${lecture.id}">
+        <i class="far fa-edit hover-big"></i>
+      </a>
+    </td>
+    <td>
+      <a href="delete?id=${lecture.id}">
+        <i class="far fa-trash-alt hover-big"></i>
+      </a>
+    </td>
+  </tr>
 </c:forEach>
 <tr>
 <td>
