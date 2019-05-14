@@ -8,6 +8,9 @@ function makePageBtns(){
   const boardBottom = $(".board-bottom");
   const pageBtns = $(".page-btns");
   
+  
+  
+
   if (currentPage !== 1) {
     boardBottom.prepend("<div class='btn prev-page'>&lt;&nbsp;이전</div>");
   } else {
@@ -37,26 +40,27 @@ function makePageBtns(){
 }
 
 function checkPrevBtnAndNextBtn() {
-  const currentPage = Number($("#currentPage").text());
-  const method = $("#method").text();
-  const option = $("#option").text();
-  const word = $("#word").text();
-  const totalPages = Number($("#totalPages").text());
-  $(".next-page").click(function () {
-    if (currentPage !== totalPages && !$(this).hasClass("hidden")) {
-      callResult(currentPage + 1, method, option, word);
-    }
-  });
+	  const currentPage = Number($("#currentPage").text());
+	  const method = $("#method").text();
+	  const option = $("#option").text();
+	  const word = $("#word").text();
+	  const totalPages = Number($("#totalPages").text());
+	  $(".next-page").click(function () {
+	    if (currentPage !== totalPages && !$(this).hasClass("hidden")) {
+	      callResult(currentPage + 1, method, option, word);
+	    }
+	  });
 
-  $(".prev-page").click(function () {
-    if (currentPage !== 1 && !$(this).hasClass("hidden")) {
-      callResult(currentPage - 1, method, option, word);
-    }
-  });
-}
+	  $(".prev-page").click(function () {
+	    if (currentPage !== 1 && !$(this).hasClass("hidden")) {
+	      callResult(currentPage - 1, method, option, word);
+	    }
+	  });
+	}
 
 function callResult(page, method, option, word){
   console.log("check2");
+  console.log("나는 js에서의 option : " + option);
   const ajax = {
       url: "search",
       method: "post",
@@ -71,8 +75,9 @@ function callResult(page, method, option, word){
         $("#searchResult").html(data);
       }  
   };
-  console.log("check1");
   $.ajax(ajax).done(function() {
+	  console.log("currentPage : " + currentPage);
+	  console.log("나는 done이야 ㅎㅎㅎ");
     $(".page-btn").off("click");
     $(".board-bottom").empty();
     $(".board-bottom").append("<div class='page-btns'></div>");
@@ -99,16 +104,25 @@ function callResult(page, method, option, word){
       });
     })
   });
-
 }
 
 $(function() {
   callResult(1, "default");
+  
+  const input = $("#searchInput");
+  
+  input.keypress(event, function(event) {
+	    if(event.keyCode === 13) {
+	      event.preventDefault();
+	      $("#btn").click();
+	    }
+	  });
+	  
+  
   $("#btn").click(function(){
     const textInput = $('#searchInput').val();
     const option = $("#search option:selected").val();
-    console.log(textInput);
-    console.log(option);
+    
     callResult(1, "search", option, textInput);
   })
 });

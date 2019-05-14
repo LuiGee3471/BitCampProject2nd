@@ -2186,3 +2186,6 @@ java.lang.IllegalArgumentException
 
 !ENTRY org.eclipse.jface.text 2 0 2019-05-14 10:35:12.362
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.jface.text 2 0 2019-05-14 15:05:34.655
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'

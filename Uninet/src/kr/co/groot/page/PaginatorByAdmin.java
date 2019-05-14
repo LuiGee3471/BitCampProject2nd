@@ -20,7 +20,7 @@ public class PaginatorByAdmin {
 		int staff = 0;
 		
 		switch(option) {
-		case "deptname" :
+		case "deptName" :
 		case "name" :
 			staff = staffDao.countHowManyStaffWithOption(option, word);
 			break;

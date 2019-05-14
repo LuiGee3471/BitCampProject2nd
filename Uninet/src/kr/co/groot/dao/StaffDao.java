@@ -737,7 +737,7 @@ public class StaffDao {
       conn = ds.getConnection();
 
       switch (option) {
-      case "deptname":
+      case "deptName":
         sql2 = "d.dept_name like ? ";
         pstmt = conn.prepareStatement(sql1 + sql2);
         pstmt.setString(1, word);
@@ -841,24 +841,29 @@ public class StaffDao {
   public List<Staff> getStaffByOption(int page, String option, String word) {
     List<Staff> list = new ArrayList<Staff>();
 
-    word = "%" + word + "%1";
+    word = "%" + word + "%";
 
     String sql1 = "set @rownum=0";
     String sql2 = "select * from ";
     String column = "";
-    switch (column) {
+    System.out.println("나는 옵션입니당 : " + option);
+    switch (option) {
     case "name":
-      column = "staff_name like " + word;
+      column = "staff_name like ?";
       break;
-
-    case "deptname":
-      column = "dept_name like " + word;
+    case "deptName":
+      column = "dept_name like ?";
       break;
     }
+    
 
     String sql3 = "(select @rownum:=@rownum + 1 as no, s.*, d.dept_name "
-        + "from staff s left join department d on s.dept_id = d.id "
-        + "order by staff_name asc) q";
+        + "from staff s "
+        + "left join department d "
+        + "on s.dept_id = d.id "
+        + "where "
+        + column
+        + " order by staff_name asc) q";
     String sql4 = " where no > ? " + "limit 20";
     String sql = sql2 + sql3 + sql4;
 
@@ -868,7 +873,8 @@ public class StaffDao {
       pstmt.executeUpdate();
 
       pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, (page - 1) * 20);
+      pstmt.setString(1, word);
+      pstmt.setInt(2, (page - 1) * 20);
       rs = pstmt.executeQuery();
 
       while (rs.next()) {
@@ -880,7 +886,7 @@ public class StaffDao {
         staff.setEmail(rs.getString("email"));
         staff.setPhoneNumber(rs.getString("phoneNumber"));
         staff.setBirthday(rs.getTimestamp("birthday"));
-        staff.setDeptName(rs.getString("deptName"));
+        staff.setDeptName(rs.getString("dept_name"));
         list.add(staff);
       }
     } catch (SQLException e) {
