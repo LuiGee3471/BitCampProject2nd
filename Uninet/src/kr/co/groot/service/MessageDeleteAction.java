@@ -1,8 +1,5 @@
 package kr.co.groot.service;
 
-import java.sql.SQLException;
-
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,16 +14,12 @@ public class MessageDeleteAction implements Action {
     ActionForward forward = null;
     int message_id = Integer.parseInt(request.getParameter("id"));
 
-    try {
-      MessageDao messageDao = new MessageDao();
-      messageDao.deleteMessage(message_id);
+    MessageDao messageDao = new MessageDao();
+    messageDao.deleteMessage(message_id);
 
-      forward = new ActionForward();
-      forward.setRedirect(true);
-      forward.setPath(request.getContextPath() + "/message");
-    } catch (NamingException | SQLException e) {
-      System.out.println("Message Delete: " + e.getMessage());
-    }
+    forward = new ActionForward();
+    forward.setRedirect(true);
+    forward.setPath(request.getContextPath() + "/message");
 
     return forward;
   }

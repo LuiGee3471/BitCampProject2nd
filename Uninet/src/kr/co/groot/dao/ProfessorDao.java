@@ -12,7 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import kr.co.groot.dto.Major;
 import kr.co.groot.dto.Professor;
 
 public class ProfessorDao {

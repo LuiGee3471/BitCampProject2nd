@@ -1,8 +1,5 @@
 package kr.co.groot.service;
 
-import java.sql.SQLException;
-
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,32 +25,25 @@ public class MessageSendAction implements Action {
 
     System.out.println(id);
 
-    try {
-      StaffDao staffDao = new StaffDao();
-      Staff staff = staffDao.selectByUniqueId(id);
-      System.out.println(staff.getId());
-      Message message = new Message();
-      MessageDao messageDao = new MessageDao();
-      System.out.println(id + text + staff.getId() + user.getId() + postId);
-      message.setContent(text);
-      message.setReceiverId(staff.getId());
-      message.setSenderId(user.getId());
+    StaffDao staffDao = new StaffDao();
+    Staff staff = staffDao.selectByUniqueId(id);
+    System.out.println(staff.getId());
+    Message message = new Message();
+    MessageDao messageDao = new MessageDao();
+    System.out.println(id + text + staff.getId() + user.getId() + postId);
+    message.setContent(text);
+    message.setReceiverId(staff.getId());
+    message.setSenderId(user.getId());
 
-      messageDao.insertMessage(message);
+    messageDao.insertMessage(message);
 
-      forward = new ActionForward();
-      forward.setRedirect(true);
-      if (origin.equals("post")) {
-        forward.setPath(request.getContextPath() + "/board/read?id=" + postId);
-      } else {
-        forward.setPath(request.getContextPath() + "/message");
-      }
-    } catch (NamingException e) {
-      System.out.println("MessageSendAction : " + e.getMessage());
-    } catch (SQLException e) {
-      System.out.println("MessageSendAction : " + e.getMessage());
+    forward = new ActionForward();
+    forward.setRedirect(true);
+    if (origin.equals("post")) {
+      forward.setPath(request.getContextPath() + "/board/read?id=" + postId);
+    } else {
+      forward.setPath(request.getContextPath() + "/message");
     }
     return forward;
   }
-
 }
