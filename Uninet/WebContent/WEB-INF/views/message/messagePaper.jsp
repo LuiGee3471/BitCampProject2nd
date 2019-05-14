@@ -17,6 +17,7 @@ pageEncoding="UTF-8"%>
   <div class="message-menu">
     <!-- 답장, 새로고침, 삭제 -->
     <c:if test="${message.receiverId == userId}">
+      <span class="hidden">${message.senderId}</span>
       <i class="far fa-paper-plane fa-lg" id="reply"></i>
     </c:if>
     <i class="fas fa-sync-alt fa-lg" id="refresh"></i>

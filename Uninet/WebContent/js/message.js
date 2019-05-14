@@ -17,10 +17,8 @@ function getMessage(messageId) {
       $('#reply').click(function() {
         $('.modal').css('display', 'block');
         const receiver_id = $(this)
-          .parent()
-          .parent()
-          .children('#receiver-id')
-          .text();
+          .siblings(".hidden").text();
+          console.log(receiver_id);
         $('.message-form').append(
           "<input type='hidden' value='" +
             receiver_id +

@@ -19,16 +19,19 @@ public class MessageSendAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
-    String id = request.getParameter("receiver");
+    int id = Integer.parseInt(request.getParameter("receiver"));
     String text = request.getParameter("text");
     HttpSession session = request.getSession();
     Staff user = (Staff) session.getAttribute("staff");
     String postId = request.getParameter("postId");
     String origin = request.getParameter("origin");
 
+    System.out.println(id);
+
     try {
       StaffDao staffDao = new StaffDao();
-      Staff staff = staffDao.selectStaff(id);
+      Staff staff = staffDao.selectByUniqueId(id);
+      System.out.println(staff.getId());
       Message message = new Message();
       MessageDao messageDao = new MessageDao();
       System.out.println(id + text + staff.getId() + user.getId() + postId);
