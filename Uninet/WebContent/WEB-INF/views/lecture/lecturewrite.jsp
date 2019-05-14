@@ -65,7 +65,7 @@
       <select name = "professorId" id="professorId" class = "textBottom">
         <option value="">교수 선택</option>
         <c:forEach var = "professor" items = "${professorList}">
-        <option value = "${professor.id}">${professor.profName}: [${professor.majorName] }</option>
+        <option value = "${professor.id}">${professor.profName}: [${professor.majorName}]</option>
         </c:forEach>
       </select><br>
     <!-- 교수 선택  -->
