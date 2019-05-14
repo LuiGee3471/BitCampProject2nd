@@ -8,9 +8,9 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.MessageDao;
 
 public class MessageDeleteAction implements Action {
-
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = null;
     int message_id = Integer.parseInt(request.getParameter("id"));
 

@@ -7,7 +7,6 @@ import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 
 public class MyPageSetInfoAction implements Action {
-
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;

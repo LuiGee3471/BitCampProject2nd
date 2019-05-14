@@ -11,9 +11,9 @@ import kr.co.groot.dao.LectureDao;
 import kr.co.groot.dto.Lecture;
 
 public class LectureWriteOkAction implements Action {
-
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = null;
 
     int result = 0;
@@ -29,15 +29,12 @@ public class LectureWriteOkAction implements Action {
     lecture.setLectureName(request.getParameter("lectureName"));
     lecture.setCredit(Integer.parseInt(request.getParameter("credit")));
     lecture.setTime(lectureTime);
-    lecture.setLectureTypeId(Integer.parseInt(request.getParameter("lectureTypeId")));
+    lecture.setLectureTypeId(
+        Integer.parseInt(request.getParameter("lectureTypeId")));
     lecture.setProfId(Integer.parseInt(request.getParameter("professorId")));
 
-    try {
-      LectureDao dao = new LectureDao();
-      result = dao.insertLecture(lecture);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    LectureDao dao = new LectureDao();
+    result = dao.insertLecture(lecture);
 
     if (result > 0) {
       msg = "등록 성공";
@@ -56,5 +53,4 @@ public class LectureWriteOkAction implements Action {
 
     return forward;
   }
-
 }

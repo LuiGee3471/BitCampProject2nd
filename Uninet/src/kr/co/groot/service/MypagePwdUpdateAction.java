@@ -10,7 +10,6 @@ import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
 public class MypagePwdUpdateAction implements Action {
-
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;
@@ -22,30 +21,25 @@ public class MypagePwdUpdateAction implements Action {
 
     String msg = "";
     String url = "";
-    try {
-      StaffDao dao = new StaffDao();
-      int row = dao.updatePwd(staff);
-      System.out.println("row " + row);
-      if (row > 0) {
-        msg = "수정 성공";
-        url = "../mypage";
-        staff = dao.selectByUniqueId(staff.getId());
-        session.setAttribute("staff", staff);
-      } else {
-        msg = "수정 실패";
-        url = "setpassword";
-      }
-      System.out.println(row);
-      request.setAttribute("msg", msg);
-      request.setAttribute("url", url);
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/etc/redirect.jsp");
-      System.out.println("123");
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
+    StaffDao dao = new StaffDao();
+    int row = dao.updatePwd(staff);
+    
+    if (row > 0) {
+      msg = "수정 성공";
+      url = "../mypage";
+      staff = dao.selectByUniqueId(staff.getId());
+      session.setAttribute("staff", staff);
+    } else {
+      msg = "수정 실패";
+      url = "setpassword";
     }
+    
+    request.setAttribute("msg", msg);
+    request.setAttribute("url", url);
+    forward = new ActionForward();
+    forward.setRedirect(false);
+    forward.setPath("/WEB-INF/views/etc/redirect.jsp");
+    System.out.println("123");
     return forward;
   }
-
 }

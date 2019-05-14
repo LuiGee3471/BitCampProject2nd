@@ -14,7 +14,8 @@ import kr.co.groot.dto.Staff;
 
 public class MessagePageAction implements Action {
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = null;
     HttpSession session = request.getSession();
     Staff user = (Staff) session.getAttribute("staff");

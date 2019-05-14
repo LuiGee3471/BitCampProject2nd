@@ -12,9 +12,9 @@ import kr.co.groot.dto.Message;
 import kr.co.groot.dto.Staff;
 
 public class MessageSendAction implements Action {
-
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = null;
     int id = Integer.parseInt(request.getParameter("receiver"));
     String text = request.getParameter("text");

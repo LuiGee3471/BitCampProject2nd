@@ -13,7 +13,8 @@ import kr.co.groot.dto.Post;
 public class BoardSearchAction implements Action {
 
   @Override
-  public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+  public ActionForward execute(HttpServletRequest request,
+      HttpServletResponse response) {
     ActionForward forward = new ActionForward();
     String option = request.getParameter("searchOption");
     int boardType = Integer.parseInt(request.getParameter("boardType"));
@@ -21,7 +22,7 @@ public class BoardSearchAction implements Action {
 
     PostDao postDao = new PostDao();
     List<Post> postList = null;
-    
+
     switch (option) {
     case "title":
       postList = postDao.selectByTitle(searchWord, boardType);
