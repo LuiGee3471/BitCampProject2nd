@@ -7,6 +7,7 @@
 <c:set var="word" value="${requestScope.word}" />
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="totalPages" value="${requestScope.totalPages}" />
+
 <%
   int totalPages = (int) request.getAttribute("totalPages");
   int currentPage = (int) request.getAttribute("currentPage");

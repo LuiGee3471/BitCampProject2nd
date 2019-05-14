@@ -103,13 +103,23 @@ function callResult(page, method, option, word) {
 
 $(function() {
   callResult(1, "default");
+ 
+  const input = $("#searchInput");
+  
+  input.keypress(event, function(event) {
+    if(event.keyCode === 13) {
+      event.preventDefault();
+      $("#closeBtn").click();
+    }
+    
+  });
   
   $("#closeBtn").click(function() {
     const textInput = $("#searchInput").val();
     const option = $("input[name='searchradio']:checked").val();
     callResult(1, "search", option, textInput);
   });
-  
+
   $("#closeBtn2").click(function() {
     const optionValue = $("input[name='sort']:checked").val();
     callResult(1, "sort", optionValue);
