@@ -63,9 +63,11 @@
       </div>
       <div class="article-sub">
         <div class ="user-menu">
-        <span class="comment-option">쪽지</span>
+        <c:if test="${writer.staffId ne curruser.staffId}">
+          <span class="comment-option">쪽지</span>
+        </c:if>
         <form action="delete" method ="post">
-          <c:if test="${curruser.staffId == writer.staffId}">
+          <c:if test="${curruser.id == writer.id}">
             <button type="submit" class="delete-option" id="postDelete">삭제</button>
             <input type="hidden" value="${id}" name="postId">
             <input type="hidden" value="${post.boardType}" name="boardType">
@@ -106,8 +108,10 @@
                 <span class="time">${comment.timeFormat}</span>
               </div>
               <div class="comment-sub">
-                <span class="recomment-option" id="recomment">대댓글</span> 
-                <span class="comment-option">쪽지</span>
+                <span class="recomment-option" id="recomment">대댓글</span>
+                <c:if test="${comment.writer.staffId ne curruser.staffId}">
+                  <span class="comment-option">쪽지</span>
+                </c:if>
                 <form action="deleteComment" method ="post">
                 <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="delete-option" id="commentDelete">삭제</button>
                 <input type="hidden" value="${comment.id}" id="deleteId" name="deleteId">
@@ -166,7 +170,9 @@
               </div>
               
               <div class="comment-sub">
-                <span class="comment-option">쪽지</span>
+               <c:if test="${comment.writer.staffId ne curruser.staffId}">
+                 <span class="comment-option">쪽지</span>
+               </c:if>
                <form action="deleteComment" method ="post">
                 <c:if test="${curruser.staffId == comment.writer.staffId}"><button type="submit" class="recomment-delete" id="commentDelete">삭제</button>
                 <input type="hidden" value="${comment.id}" name="deleteId">
