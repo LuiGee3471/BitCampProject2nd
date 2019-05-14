@@ -6,6 +6,7 @@
 <c:set var="ltList" value="${requestScope.ltList}"></c:set>
 <c:set var="majorList" value="${requestScope.majorList}"></c:set>
 <c:set var="lecture2" value="${requestScope.lecture2}"></c:set>
+<c:set var="professorList" value="${requestScope.professorList }"/>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/update.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -80,14 +81,14 @@
      <!-- 교수 선택  -->
      <span class = "label">교수</span>
       <select name = "professor" class = "textBottom">
-         <c:forEach var = "professor" items = "${profList}">
+         <c:forEach var = "professor" items = "${professorList}">
            <c:choose>
              <c:when test="${professor.profName == lecture2.profName}">
               <option value = "${professor.id}" selected>${lecture2.profName}</option>
              </c:when>
              
              <c:otherwise>
-             <option value = "${professor.id}">${professor.profName}</option>
+             <option value = "${professor.id}">${professor.profName}: [${professor.majorName}]</option>
              </c:otherwise>
            </c:choose>     
          </c:forEach>

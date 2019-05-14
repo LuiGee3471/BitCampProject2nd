@@ -28,12 +28,15 @@ public class LectureUpdateAction implements Action {
     List<Professor> profList = null;
     List<LectureType> ltList = null;
     List<Major> majorList = null;
-
+    List<Professor> professorList = null;
+    
     Lecture lecture2 = null;
 
     LectureDao dao = new LectureDao();
     lecture2 = new Lecture();
     lecture2 = dao.selectById(id);
+    professorList = dao.getProfessorListByMajorId();
+    
 
     LectureDao lecture = new LectureDao();
     lectureList = lecture.selectAll();
@@ -53,6 +56,7 @@ public class LectureUpdateAction implements Action {
     request.setAttribute("majorList", majorList);
     request.setAttribute("id", id);
     request.setAttribute("lecture2", lecture2);
+    request.setAttribute("professorList", professorList);
 
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/lecture/lectureupdate.jsp");
