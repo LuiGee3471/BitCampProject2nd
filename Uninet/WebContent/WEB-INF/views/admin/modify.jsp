@@ -29,10 +29,11 @@
 			</div>
 			<br>
 			<span class="label">부서이름</span> 
-			 <select name = "departList" id="departList">
+			 <select name = "deptname" id="deptname">
 			 <option value="">부서 선택</option>
 			 <c:forEach var="departList" items="${departList }">
 			 <option value="${departList.id}">${departList.deptName }</option>
+			 ${departList.id }
 			 </c:forEach>
 			 </select>
 			<input type="submit"
