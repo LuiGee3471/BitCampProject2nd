@@ -15,18 +15,21 @@ import javax.sql.DataSource;
 import kr.co.groot.dto.LectureType;
 
 public class LectureTypeDao {
-
   private Connection conn;
   private PreparedStatement pstmt;
   private ResultSet rs;
   private DataSource ds;
 
-  public LectureTypeDao() throws NamingException {
-
-    Context context = new InitialContext();
-    ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
-
+  public LectureTypeDao() {
+    Context context;
+    try {
+      context = new InitialContext();
+      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
+    } catch (NamingException e) {
+      System.out.println("LectureTypeDao: " + e.getMessage());
+    }
   }
+
   /*
    * @method Name: selectAll
    * 
@@ -34,31 +37,42 @@ public class LectureTypeDao {
    * 
    * @author: 정성윤
    * 
-   * @description: 종별정보를  모두 가져온다
+   * @description: 종별정보를 모두 가져온다
    * 
    * @param spec: none
    * 
    * @return: List<LectureType>
    */
-  
-  public List<LectureType> selectAll() throws SQLException {
+  public List<LectureType> selectAll() {
     String sql = "select * from lecturetype";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    rs = pstmt.executeQuery();
     List<LectureType> lectureTypeList = new ArrayList<LectureType>();
-    while(rs.next()) {
-      LectureType lt = new LectureType();
-      lt.setId(rs.getInt(1));
-      lt.setLectureType(rs.getString(2));
-      lectureTypeList.add(lt);
+
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        LectureType lt = new LectureType();
+        lt.setId(rs.getInt(1));
+        lt.setLectureType(rs.getString(2));
+        lectureTypeList.add(lt);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectAll: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectAll: " + e.getMessage());
+      }
     }
-    rs.close();
-    pstmt.close();
-    conn.close();
+
+    
     
     return lectureTypeList;
   }
-  
-  
+
 }

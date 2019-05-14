@@ -44,7 +44,7 @@
     
         <!-- 시간 선택  -->
    <span class = "label">시간</span>
-   <div class="day">
+   <div class="day" id="timeFirst">
    <input type="radio" name="weekday" id="monday" value="월"><label for="monday" class="date" >월</label>
    <input type="radio" name="weekday" id="tuesday" value="화"><label for="tuesday" class="date">화</label>
    <input type="radio" name="weekday" id="wednesday" value="수"><label for="wednesday" class="date">수</label>
