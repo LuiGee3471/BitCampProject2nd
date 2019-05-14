@@ -19,18 +19,14 @@ public class SignRegisterAction implements Action {
     DepartmentDao dao;
     List<String> nameList;
 
-    try {
-      dao = new DepartmentDao();
-      nameList = dao.getDistinctDeptName();
+    dao = new DepartmentDao();
+    nameList = dao.getDistinctDeptName();
 
-      request.setAttribute("deptList", nameList);
+    request.setAttribute("deptList", nameList);
 
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/sign/register.jsp");
-    } catch (NamingException | SQLException e) {
-      System.out.println(e.getMessage());
-    }
+    forward = new ActionForward();
+    forward.setRedirect(false);
+    forward.setPath("/WEB-INF/views/sign/register.jsp");
 
     return forward;
   }

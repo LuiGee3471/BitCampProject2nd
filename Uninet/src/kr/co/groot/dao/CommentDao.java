@@ -27,7 +27,7 @@ public class CommentDao {
     ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
   }
 
-  public List<Comment> getCommentList(int id) throws SQLException, NamingException {
+  public List<Comment> getCommentList(int id) {
 
     String sql = "select comment.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, " 
         + "date_format(time, '%m/%d %H:%i') as timeFormat, "
@@ -39,37 +39,46 @@ public class CommentDao {
         + "order by refer_comment asc, time asc";
 
     List<Comment> list = new ArrayList<>();
-    StaffDao staffDao = new StaffDao();
+   
     
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    rs = pstmt.executeQuery();
+    try {
+      StaffDao staffDao = null;
+      try {
+        staffDao = new StaffDao();
+      } catch (NamingException e) {
+        System.out.println( e.getMessage());
+      }
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, id);
+      rs = pstmt.executeQuery();
 
-    while (rs.next()) {
-      Comment comment = new Comment();
-      comment.setId(rs.getInt("id"));
-      comment.setWriterId(rs.getInt("writer_id"));
-      comment.setContent(rs.getString("content"));
-      comment.setTime(rs.getTimestamp("time"));
-      comment.setRecomment(rs.getString("recomment"));
-      comment.setRefer(rs.getInt("refer"));
-      comment.setReferComment(rs.getInt("refer_comment"));
-      comment.setWriter(staffDao.selectByUniqueId(rs.getInt("writer_id")));
-      comment.setDiff(rs.getLong("diff"));
-      comment.setTimeFormat(rs.getString("timeFormat"));
-      comment.setRecommentCount(rs.getInt("recomment_count"));
-      
-      list.add(comment);
-    }
-    if (rs != null) {
-      rs.close();
-    }
-    if (pstmt != null) {
-      pstmt.close();
-    }
-    if (conn != null) {
-      conn.close();
+      while (rs.next()) {
+        Comment comment = new Comment();
+        comment.setId(rs.getInt("id"));
+        comment.setWriterId(rs.getInt("writer_id"));
+        comment.setContent(rs.getString("content"));
+        comment.setTime(rs.getTimestamp("time"));
+        comment.setRecomment(rs.getString("recomment"));
+        comment.setRefer(rs.getInt("refer"));
+        comment.setReferComment(rs.getInt("refer_comment"));
+        comment.setWriter(staffDao.selectByUniqueId(rs.getInt("writer_id")));
+        comment.setDiff(rs.getLong("diff"));
+        comment.setTimeFormat(rs.getString("timeFormat"));
+        comment.setRecommentCount(rs.getInt("recomment_count"));
+        
+        list.add(comment);
+      }
+    } catch (SQLException e) {
+      System.out.println("getCommentList:" +e.getMessage());
+    }finally {
+        try {
+          rs.close();
+          pstmt.close();
+          conn.close();
+        } catch (SQLException e) {
+          System.out.println(e.getMessage());
+        }
     }
     return list;
   }
@@ -87,83 +96,109 @@ public class CommentDao {
    * @return: List<Comment>
    */
 
-  public List<Comment> selectAll(int refer) throws Exception {
+  public List<Comment> selectAll(int refer) {
     List<Comment> commentList = new ArrayList<Comment>();
     String sql = "select s.staff_id, c.content, c.time from post p LEFT join comment c on p.id = c.refer left join staff s on p.writer_id = s.id where refer =?";
 
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, refer);
-    rs = pstmt.executeQuery();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, refer);
+      rs = pstmt.executeQuery();
 
-    while (rs.next()) {
-      Comment comment = new Comment();
-      comment.setContent(rs.getString("content"));
-      comment.setWriterId(rs.getInt("writerId"));
-      comment.setTime(rs.getTimestamp("time"));
-      comment.setRefer(rs.getInt("refer"));
-      comment.setReferComment(rs.getInt("referComment"));
-      comment.setRecomment(rs.getString("recomment"));
-      commentList.add(comment);
+      while (rs.next()) {
+        Comment comment = new Comment();
+        comment.setContent(rs.getString("content"));
+        comment.setWriterId(rs.getInt("writerId"));
+        comment.setTime(rs.getTimestamp("time"));
+        comment.setRefer(rs.getInt("refer"));
+        comment.setReferComment(rs.getInt("referComment"));
+        comment.setRecomment(rs.getString("recomment"));
+        commentList.add(comment);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectAll:"+e.getMessage());
+    }finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+         System.out.println("selectAll:"+e.getMessage());
+      }
+     
     }
-    rs.close();
-    pstmt.close();
-    conn.close();
     return commentList;
   }
   
-  public Comment selectCommentById(int id) throws SQLException {
+  public Comment selectCommentById(int id) {
     String sql = "select * from comment where id = ?";
-    
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    rs = pstmt.executeQuery();
-    
-    rs.next();
-    
-    Comment comment = new Comment();
-    comment.setId(rs.getInt("id"));
-    comment.setWriterId(rs.getInt("writer_id"));
-    comment.setTime(rs.getTimestamp("time"));
-    comment.setRefer(rs.getInt("refer"));
-    comment.setRecomment(rs.getString("recomment"));
-    comment.setReferComment(rs.getInt("refer_comment"));
-    comment.setRecommentCount(rs.getInt("recomment_count"));
-    
-    rs.close();
-    pstmt.close();
-    conn.close();
-    
+    Comment comment= null;
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, id);
+      rs = pstmt.executeQuery();
+      
+      rs.next();
+      
+      comment = new Comment();
+      comment.setId(rs.getInt("id"));
+      comment.setWriterId(rs.getInt("writer_id"));
+      comment.setTime(rs.getTimestamp("time"));
+      comment.setRefer(rs.getInt("refer"));
+      comment.setRecomment(rs.getString("recomment"));
+      comment.setReferComment(rs.getInt("refer_comment"));
+      comment.setRecommentCount(rs.getInt("recomment_count"));
+      
+    } catch (SQLException e) {
+      System.out.println("selectCommentById:"+e.getMessage());
+    }finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectCommentById:"+e.getMessage());
+      }
+    }
     return comment;
   }
   
-  public Comment selectMostRecentComment() throws SQLException {
+  public Comment selectMostRecentComment() {
     String sql = "select * "
         + "from comment "
         + "where id = "
         + "(select max(id) "
         + "from comment)";
-    
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    rs = pstmt.executeQuery();
-    
-    rs.next();
-    
-    Comment comment = new Comment();
-    comment.setId(rs.getInt("id"));
-    comment.setWriterId(rs.getInt("writer_id"));
-    comment.setTime(rs.getTimestamp("time"));
-    comment.setRefer(rs.getInt("refer"));
-    comment.setRecomment(rs.getString("recomment"));
-    comment.setReferComment(rs.getInt("refer_comment"));
-    comment.setRecommentCount(rs.getInt("recomment_count"));
-    
-    rs.close();
-    pstmt.close();
-    conn.close();
-    
+    Comment comment = null;
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      
+      rs.next();
+      
+      comment = new Comment();
+      comment.setId(rs.getInt("id"));
+      comment.setWriterId(rs.getInt("writer_id"));
+      comment.setTime(rs.getTimestamp("time"));
+      comment.setRefer(rs.getInt("refer"));
+      comment.setRecomment(rs.getString("recomment"));
+      comment.setReferComment(rs.getInt("refer_comment"));
+      comment.setRecommentCount(rs.getInt("recomment_count"));
+    } catch (SQLException e) {
+         System.out.println("selectMostRecentComment:"+e.getMessage());
+    }finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectMostRecentComment:"+e.getMessage());
+      }
+      
+    }
     return comment;
   }
 
@@ -180,27 +215,35 @@ public class CommentDao {
    * 
    * @return: int
    */
-  public int insertComment(Comment comment) throws Exception {
+  public int insertComment(Comment comment) {
     int row = 0;
     String sql = "insert into comment(content, writer_id, time, refer) values (?,?,NOW(),?)";
     String sql2 = "update comment "
         + "set refer_comment = (select max(id) from (select * from comment) q) "
         + "where id = (select max(id) from (select * from comment) q)";
     
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    
-    pstmt.setString(1, comment.getContent());
-    pstmt.setInt(2, comment.getWriterId());
-    pstmt.setInt(3, comment.getRefer());
-    
-    row = pstmt.executeUpdate();
-    
-    pstmt = conn.prepareStatement(sql2);  
-    pstmt.executeUpdate();
-    
-    pstmt.close();
-    conn.close();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      
+      pstmt.setString(1, comment.getContent());
+      pstmt.setInt(2, comment.getWriterId());
+      pstmt.setInt(3, comment.getRefer());
+      
+      row = pstmt.executeUpdate();
+      
+      pstmt = conn.prepareStatement(sql2);  
+      pstmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("insertComment:"+e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("insertComment:"+e.getMessage());
+      } 
+    }
     return row;
   }
 
@@ -217,16 +260,25 @@ public class CommentDao {
    * 
    * @return: int
    */
-  public int updateComment(Comment comment) throws Exception {
+  public int updateComment(Comment comment) {
     int row = 0;
     String sql = "update comment set content= ? where writer_id = ?";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, comment.getContent());
-    pstmt.setInt(2, comment.getWriterId());
-    row = pstmt.executeUpdate();
-    pstmt.close();
-    conn.close();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, comment.getContent());
+      pstmt.setInt(2, comment.getWriterId());
+      row = pstmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("updateComment:"+e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+      System.out.println("updateComment:"+e.getMessage());
+      }
+    }
     return row;
   }
 
@@ -244,42 +296,55 @@ public class CommentDao {
    * @return: int
    */
   // refer
-  public int deleteComment(int id) throws Exception {
+  public int deleteComment(int id) {
     int row = 0;
     String sql = "update comment set content='삭제된 댓글입니다.' where id= ?";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    row =pstmt.executeUpdate();
-    System.out.println("row"+row);
-   
-
-    pstmt.close();
-    conn.close();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, id);
+      row =pstmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("deleteComment:"+e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("deleteComment:"+e.getMessage());
+      }
+    } 
     return row;
   }
   
-  public int countRecomment(int id) throws Exception {
+  public int countRecomment(int id) {
     int result = 0;
     int row = 0;
     String sql = "select count(*) as count from comment where refer_comment = ?";
     String sql2 = "update comment set recomment_count = ? where id = ?";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    rs = pstmt.executeQuery();
-    
-    while(rs.next()) {
-      result = rs.getInt("count");
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, id);
+      rs = pstmt.executeQuery();
+      
+      while(rs.next()) {
+        result = rs.getInt("count");
+      }
+      pstmt = conn.prepareStatement(sql2);
+      pstmt.setInt(1,result);
+      pstmt.setInt(2, id);
+      row = pstmt.executeUpdate();
+    } catch (SQLException e) {
+     System.out.println("countRecomment:"+e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("countRecomment:"+e.getMessage());
+      }
     }
-    System.out.println("result:"+result);
-    pstmt = conn.prepareStatement(sql2);
-    pstmt.setInt(1,result);
-    pstmt.setInt(2, id);
-    row = pstmt.executeUpdate();
-    
-    pstmt.close();
-    conn.close();
     return row;
   }
   
@@ -297,66 +362,100 @@ public class CommentDao {
    * 
    * @return: List<Post>
    */
-  public List<Post> selectByWriter(int writerId) throws Exception {
+  public List<Post> selectByWriter(int writerId) {
     List<Post> postList = new ArrayList<Post>();
     String sql = "select distinct p.id,date_format(p.time, '%m/%d %H:%i') as timeFormat,p.boardtype_id, p.title, p.content, p.writer_id, p.time, p.count from post p" + " LEFT join comment c"
         + " on p.id = c.refer" + " where c.writer_id = ?";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, writerId);
-    rs = pstmt.executeQuery();
-    CommentDao dao = new CommentDao();
-    while (rs.next()) {
-      Post post = new Post();
-      post.setId(rs.getInt("id"));
-      post.setTitle(rs.getString("title"));
-      post.setBoardType(rs.getInt("boardtype_id"));
-      post.setTimeFormat(rs.getString("timeFormat"));
-      post.setContent(rs.getString("content"));
-      post.setWriterId(rs.getInt("writer_id"));
-      post.setTime(rs.getTimestamp("time"));
-      post.setCount(rs.getInt("count"));
-      post.setCommentCount(dao.getCommentCount(post.getId()));
-      postList.add(post);
+    CommentDao dao = null;
+  
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, writerId);
+      rs = pstmt.executeQuery();
+      try {
+        dao = new CommentDao();
+      } catch (NamingException e) {
+        System.out.println("selectByWriter: "+e.getMessage());
+      }
+      while (rs.next()) {
+        Post post = new Post();
+        post.setId(rs.getInt("id"));
+        post.setTitle(rs.getString("title"));
+        post.setBoardType(rs.getInt("boardtype_id"));
+        post.setTimeFormat(rs.getString("timeFormat"));
+        post.setContent(rs.getString("content"));
+        post.setWriterId(rs.getInt("writer_id"));
+        post.setTime(rs.getTimestamp("time"));
+        post.setCount(rs.getInt("count"));
+        post.setCommentCount(dao.getCommentCount(post.getId()));
+        postList.add(post);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectByWriter: "+e.getMessage());
+    }finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {        
+        System.out.println("selectByWriter: "+e.getMessage());
+      }
     }
-    rs.close();
-    pstmt.close();
-    conn.close();
+   
+   
     return postList;
   }
   
-  public int getCommentCount(int id) throws SQLException {
+  public int getCommentCount(int id) {
     String sql = "select count(*) as count from comment where refer = ? and content!='삭제된 댓글입니다.'";
-    
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setInt(1, id);
-    
-    rs = pstmt.executeQuery();
-    rs.next();
-    
-    int row = rs.getInt(1);
-    
-    rs.close();
-    pstmt.close();
-    conn.close();
-    
+     int row = 0;
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, id);
+      
+      rs = pstmt.executeQuery();
+      rs.next();
+      
+      row = rs.getInt(1);
+    } catch (SQLException e) {
+      System.out.println("getCommentCount:"+e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {  
+        System.out.println("getCommentCount:"+e.getMessage());
+      }
+     
+    }
     return row;
   }
   
-  public int insertRecomment(Comment comment) throws Exception {
+  public int insertRecomment(Comment comment) {
     int row = 0;
     String sql = "insert into comment(content, writer_id, time, refer,recomment, refer_comment) values (?,?,NOW(),?,'Y',?)";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    pstmt.setString(1, comment.getContent());
-    pstmt.setInt(2, comment.getWriterId());
-    pstmt.setInt(3, comment.getRefer());
-    pstmt.setInt(4, comment.getReferComment());
-    
-    row = pstmt.executeUpdate();
-    pstmt.close();
-    conn.close();
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, comment.getContent());
+      pstmt.setInt(2, comment.getWriterId());
+      pstmt.setInt(3, comment.getRefer());
+      pstmt.setInt(4, comment.getReferComment());
+      
+      row = pstmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("insertRecomment:" +e.getMessage());
+    } finally {
+      try {
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("insertRecomment:" +e.getMessage());
+      }
+    }
     return row;
   }
 }
