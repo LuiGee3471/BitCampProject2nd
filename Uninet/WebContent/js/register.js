@@ -1,37 +1,31 @@
-const dept = $('#dept');
-const second = $('#second-div');
-const third = $('#third-div');
-const fourth = $('#fourth-div');
-const submit = $('#btn');
-const email = $('#email');
-const phoneNumber = $('#phoneNumber');
-const agree = $('#agree');
-const id = $('#id');
-const pwd = $('#pwd');
-const pwdCheck = $('#pwdcheck');
-
-const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/;
-const phoneRegExp = /^010([0-9]{4})([0-9]{4})$/;
-const pwdRegExp = /^.{4,}$/;
-const idRegExp = /^[0-9a-zA-Z]{6,}$/;
-
 function match(string, regexp) {
   return string.match(regexp);
 }
 
 $('#registerForm').keypress((event) => {
-  if (event.keyCode == 13) {
+  if (event.keyCode === 13) {
     event.preventDefault();
     return false;
   }
 });
 
-dept.change(() => {
+$("#dept").change(() => {
+  const second = $('#second-div');
   second.removeClass('unseen');
   second.addClass('seen');
 });
 
 $('#second-div input').keyup(() => {
+  const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{3,}))$/;
+  const pwdRegExp = /^.{4,}$/;
+  const idRegExp = /^[0-9a-zA-Z]{6,}$/;
+
+  const email = $('#email');
+  const id = $('#id');
+  const pwd = $('#pwd');
+  const pwdCheck = $('#pwdcheck');
+
+  const third = $('#third-div');
   if (
     match(id.val(), idRegExp)
     && pwd.val() === pwdCheck.val()
@@ -43,7 +37,14 @@ $('#second-div input').keyup(() => {
   }
 });
 
-phoneNumber.keyup(() => {
+$('#third-div input').keyup(() => {
+  const fourth = $('#fourth-div');
+
+  const nameRegExp = /^[가-힣]{2,5}$/;
+  const phoneRegExp = /^010\d{4}\d{4}$/;
+
+  const name = $("#name");
+  const phoneNumber = $('#phoneNumber');
   if (phoneNumber.val().match(phoneRegExp)) {
     fourth.removeClass('unseen');
     fourth.addClass('seen');
@@ -51,6 +52,9 @@ phoneNumber.keyup(() => {
 });
 
 agree.change(() => {
+  const submit = $('#btn');
+  const agree = $('#agree');
+
   if (agree.is(':checked')) {
     submit.removeClass('unseen');
     submit.addClass('seen');

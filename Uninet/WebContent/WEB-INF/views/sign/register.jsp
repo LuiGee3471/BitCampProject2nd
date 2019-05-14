@@ -20,7 +20,7 @@
       
       <div id="second-div" class="unseen">
       <label for="id" class="label">로그인 정보 입력</label>
-        <input type="text" name="id" id="id" placeholder="아이디" />
+        <input type="text" name="id" id="id" placeholder="아이디"/>
         <input
           type="password"
           name="password"

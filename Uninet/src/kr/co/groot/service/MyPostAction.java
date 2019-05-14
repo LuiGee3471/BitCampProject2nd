@@ -1,6 +1,5 @@
 package kr.co.groot.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +38,6 @@ public class MyPostAction implements Action {
     int page = 1;
     switch (option) {
     case "default":
-    case "count":
       list = postDao.getMyPostByPage(pageNumber, id);
       page = paginator.getMyPostPageNumber(id);
       break;
@@ -50,8 +48,6 @@ public class MyPostAction implements Action {
       page = paginator.getMyPostPageNumber(option, word, id);
       break;
     }
-
-    System.out.println("페이지 수: " + page);
 
     request.setAttribute("list", list);
     request.setAttribute("option", option);

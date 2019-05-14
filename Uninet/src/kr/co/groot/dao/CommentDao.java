@@ -28,18 +28,15 @@ public class CommentDao {
       context = new InitialContext();
       ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
     } catch (NamingException e) {
-      System.out.println("CommentDao:" + e.getMessage());
+      System.out.println("CommentDao: " + e.getMessage());
     }
-
   }
 
   public List<Comment> getCommentList(int id) {
 
     String sql = "select comment.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
-        + "date_format(time, '%m/%d %H:%i') as timeFormat, " + "staff.staff_id "
-        + "from comment " + "left join staff "
-        + "on comment.writer_id = staff.id " + "where refer = ? "
-        + "order by refer_comment asc, time asc";
+        + "date_format(time, '%m/%d %H:%i') as timeFormat, " + "staff.staff_id " + "from comment " + "left join staff "
+        + "on comment.writer_id = staff.id " + "where refer = ? " + "order by refer_comment asc, time asc";
 
     List<Comment> list = new ArrayList<>();
 
@@ -68,14 +65,14 @@ public class CommentDao {
         list.add(comment);
       }
     } catch (SQLException e) {
-      System.out.println("getCommentList:" + e.getMessage());
+      System.out.println("getCommentList: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("getCommentList:" + e.getMessage());
+        System.out.println("getCommentList: " + e.getMessage());
       }
     }
     return list;
@@ -164,8 +161,7 @@ public class CommentDao {
   }
 
   public Comment selectMostRecentComment() {
-    String sql = "select * " + "from comment " + "where id = "
-        + "(select max(id) " + "from comment)";
+    String sql = "select * " + "from comment " + "where id = " + "(select max(id) " + "from comment)";
     Comment comment = null;
     try {
       conn = ds.getConnection();
@@ -213,8 +209,7 @@ public class CommentDao {
   public int insertComment(Comment comment) {
     int row = 0;
     String sql = "insert into comment(content, writer_id, time, refer) values (?,?,NOW(),?)";
-    String sql2 = "update comment "
-        + "set refer_comment = (select max(id) from (select * from comment) q) "
+    String sql2 = "update comment " + "set refer_comment = (select max(id) from (select * from comment) q) "
         + "where id = (select max(id) from (select * from comment) q)";
 
     try {
@@ -290,10 +285,11 @@ public class CommentDao {
    * 
    * @return: int
    */
-  // refer
+  // 
   public int deleteComment(int id) {
     int row = 0;
     String sql = "update comment set content='삭제된 댓글입니다.' where id= ?";
+    
     try {
       conn = ds.getConnection();
       pstmt = conn.prepareStatement(sql);
@@ -315,7 +311,7 @@ public class CommentDao {
   public int countRecomment(int id) {
     int result = 0;
     int row = 0;
-    String sql = "select count(*) as count from comment where refer_comment = ?";
+    String sql = "select count(*) as count from comment where refer_comment = ? and content!='삭제된 댓글입니다.'";
     String sql2 = "update comment set recomment_count = ? where id = ?";
     try {
       conn = ds.getConnection();
@@ -359,8 +355,7 @@ public class CommentDao {
   public List<Post> selectByWriter(int writerId) {
     List<Post> postList = new ArrayList<Post>();
     String sql = "select distinct p.id,date_format(p.time, '%m/%d %H:%i') as timeFormat,p.boardtype_id, p.title, p.content, p.writer_id, p.time, p.count from post p"
-        + " LEFT join comment c" + " on p.id = c.refer"
-        + " where c.writer_id = ?";
+        + " LEFT join comment c" + " on p.id = c.refer" + " where c.writer_id = ?";
     CommentDao dao = null;
 
     try {

@@ -43,6 +43,7 @@ public class LectureSearchByInputAction implements Action {
       list = dao.getLectureSortByOption(pageNumber, option);
       break;
     }
+    
     request.setAttribute("method", method);
     request.setAttribute("option", option);
     request.setAttribute("word", word);

@@ -19,13 +19,13 @@ public class LectureWriteAction implements Action {
   public ActionForward execute(HttpServletRequest request,
       HttpServletResponse response) {
     ActionForward forward = new ActionForward();
-
     List<LectureType> ltList = null;
     List<Professor> profList = null;
     List<Lecture> list = null;
+    List<Professor> professorList = null;
     LectureDao dao = new LectureDao();
     list = dao.selectAll();
-
+    professorList = dao.getProfessorListByMajorId();
     ProfessorDao professor = new ProfessorDao();
     profList = professor.selectAll();
 
@@ -34,6 +34,7 @@ public class LectureWriteAction implements Action {
 
     request.setAttribute("profList", profList);
     request.setAttribute("ltList", ltList);
+    request.setAttribute("professorList", professorList);
 
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/lecture/lecturewrite.jsp");

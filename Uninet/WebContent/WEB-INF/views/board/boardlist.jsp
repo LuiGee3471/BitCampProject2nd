@@ -94,7 +94,6 @@
           <option value="title">제목</option>
           <option value="content">내용</option>
           <option value="all">제목+내용</option>
-          <option value="count">조회순</option>
         </select> 
         <input type="text" name="word" id="search" class="search" placeholder="검색어를 입력하세요." autocomplete="off"/>
         <input type="hidden" name="boardtype" value="${type}">
