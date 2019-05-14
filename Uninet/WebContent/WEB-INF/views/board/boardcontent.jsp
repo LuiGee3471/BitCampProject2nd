@@ -45,7 +45,7 @@
             src="<%=request.getContextPath()%>/images/${writer.image}" alt="" />
           <div class="writer-info">
             <span class="unseen">${writer.id}</span>
-            <span class="writer-id">${writer.staffId}</span> 
+            <a href="<%=request.getContextPath()%>/info?id=${writer.id}" class="writer-id">${writer.staffId}</a> 
             <span class="time">${post.timeFormat}</span>
           </div>
         </div>
@@ -58,7 +58,8 @@
         <div class ="user-menu">
         <span class="comment-option">쪽지</span>
         <form action="delete" method ="post">
-          <c:if test="${curruser.staffId == writer.staffId}"><button type="submit" class="delete-option" id="postDelete">삭제</button>
+          <c:if test="${curruser.staffId == writer.staffId}">
+            <button type="submit" class="delete-option" id="postDelete">삭제</button>
             <input type="hidden" value="${id}" name="postId">
             <input type="hidden" value="${post.boardType}" name="boardType">
           </c:if>

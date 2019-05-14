@@ -445,6 +445,7 @@ public class StaffDao {
 			staff.setIsManager(rs.getString("isManager"));
 			staff.setDeptId(rs.getInt("dept_id"));
 			staff.setDeptName(rs.getString("dept_name"));
+			staff.setSelfIntroduce(rs.getString("self_introduce"));
 		}
 		rs.close();
 		pstmt.close();
