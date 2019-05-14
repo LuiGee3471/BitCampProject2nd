@@ -32,8 +32,14 @@
 			 <select name = "deptname" id="deptname">
 			 <option value="">부서 선택</option>
 			 <c:forEach var="departList" items="${departList }">
+			 <c:choose>
+			 <c:when test="${staff.deptName ==departList.deptName}">
+			 	<option value="${departList.id}" selected>${departList.deptName }</option>
+			 </c:when>
+			 <c:otherwise>
 			 <option value="${departList.id}">${departList.deptName }</option>
-			 ${departList.id }
+			 </c:otherwise>
+			 </c:choose>
 			 </c:forEach>
 			 </select>
 			<input type="submit"
@@ -42,5 +48,7 @@
 		</form>
 	</div>
 	<jsp:include page="/common/bottom.jsp" flush="false" />
+	<script type="text/javascript">
+	</script>
 </body>
 </html>
