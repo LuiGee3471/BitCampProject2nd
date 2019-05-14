@@ -8,7 +8,7 @@ $(".recomment-option").click(function() {
 
 $(".article .comment-option").click(function() {
   $(".modal").css("display", "block");
-  const receiver_id = $(".article .writer-id").text();
+  const receiver_id = $(".article .unseen").text();
   $(".message-form").append(
     "<input type='hidden' value='" +
       receiver_id +
