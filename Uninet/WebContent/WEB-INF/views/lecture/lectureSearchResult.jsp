@@ -58,10 +58,9 @@
         <i class="far fa-edit hover-big"></i>
       </a>
     </td>
-    <td>
-      <a href="delete?id=${lecture.id}">
-        <i class="far fa-trash-alt hover-big"></i>
-      </a>
+    <td class="deleteBtn">
+      <i class="far fa-trash-alt hover-big" id="deleteBtn" ></i>
+      <input type="hidden" value ="${lecture.id}" id="deleteId" >
     </td>
   </tr>
 </c:forEach>
