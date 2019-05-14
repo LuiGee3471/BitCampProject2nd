@@ -45,7 +45,14 @@
             src="<%=request.getContextPath()%>/images/${writer.image}" alt="" />
           <div class="writer-info">
             <span class="unseen">${writer.id}</span>
-            <a href="<%=request.getContextPath()%>/info?id=${writer.id}" class="writer-id">${writer.staffId}</a> 
+            <c:choose>
+              <c:when test="${writer.id eq sessionScope.staff.id}">
+                <a href="<%=request.getContextPath()%>/mypage" class="writer-id">${writer.staffId}</a>
+              </c:when>
+              <c:otherwise>
+                <a href="<%=request.getContextPath()%>/info?id=${writer.id}" class="writer-id">${writer.staffId}</a>
+              </c:otherwise> 
+            </c:choose>
             <span class="time">${post.timeFormat}</span>
           </div>
         </div>
@@ -68,7 +75,7 @@
         <c:if test="${post.fileName ne null}">
           <div class="download">
             <i class="fas fa-paperclip"></i>
-            <a href="file/${post.fileName}" download>${post.fileName}</a>
+            <a href="<%=request.getContextPath()%>/file/${post.fileName}" download>${post.fileName}</a>
           </div>  
         </c:if>
         <div class="article-stat">
