@@ -50,7 +50,7 @@
 	<tr>
 		<td>${staff.staffName}</td>
 		<td>${staff.staffId}</td>
-		<td>${staff.email}$</td>
+		<td>${staff.email}</td>
 		<td>${staff.phoneNumber}</td>
 		<td><fmt:formatDate value="${staff.birthday}"
 				pattern="yyyy-MM-dd" /></td>
@@ -64,10 +64,12 @@
 	</tr>
 </c:forEach>
 <tr>
-	<td><input type="hidden" id="method"> <span class="hidden"
-		id="method">${method}</span> <span class="hidden" id="option">${option}</span>
-		<span class="hidden" id="word">${word}</span> <span class="hidden"
-		id="currentPage">${currentPage}</span> <span class="hidden"
-		id="totalPages">${totalPages}</span> <span class="hidden"
-		id="startPage">${startPage}</span> <span class="hidden" id="endPage">${endPage}</span></td>
+	<td>
+  <span class="hidden" id="method">${method}</span> 
+  <span class="hidden" id="option">${option}</span>
+	<span class="hidden" id="word">${word}</span> 
+  <span class="hidden" id="currentPage">${currentPage}</span> 
+  <span class="hidden" id="totalPages">${totalPages}</span> 
+  <span class="hidden" id="startPage">${startPage}</span> 
+  <span class="hidden" id="endPage">${endPage}</span></td>
 </tr>
