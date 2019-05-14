@@ -48,6 +48,11 @@
   right: 0;
 }
 
+.hidden {
+  opacity: 0;
+  cursor: default;
+}
+
 .close:hover, .close:focus {
   color: black;
   text-decoration: none;
