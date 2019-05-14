@@ -2,42 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
-	int totalPages = (int) request.getAttribute("pages");
-	int currentPage = (int) request.getAttribute("currentPage");
-	int startPage = 1;
-	if (currentPage >= 4) {
-		if (currentPage % 3 == 1) {
-			startPage = currentPage;
-		} else if (currentPage % 3 == 2) {
-			startPage = currentPage - 1;
-		} else {
-			startPage = currentPage - 2;
-		}
-	}
-
-	int endPage = 0;
-	if (totalPages <= 3) {
-		endPage = totalPages;
-	} else {
-		if (totalPages - startPage >= 3) {
-			endPage = startPage + 2;
-		} else {
-			endPage = totalPages;
-		}
-	}
-
-	System.out.println(startPage + " / " + endPage);
-	pageContext.setAttribute("startPage", startPage);
-	pageContext.setAttribute("endPage", endPage);
-%>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/admin.css">
-<script type="text/javascript">
-</script>
 </head>
 <body>
 	<jsp:include page="/common/top.jsp" flush="false" />
