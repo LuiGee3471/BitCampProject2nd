@@ -23,8 +23,12 @@
         }
         $('#update').click(function (event) {
           if ($('#currentPwd').val()== ""){
+            alert("암호를 입력해주세요")
             event.preventDefault();
+            return false;
           }else if ($('#currentPwd').val() != $('#pwd').val()) {
+            alert("암호가 틀렸습니다.")
+            return false;
             event.preventDefault();
           }
         });

@@ -19,13 +19,9 @@ public class AdminSearchByInputAction implements Action {
 
     List<Staff> list = null;
     int pageNumber = Integer.parseInt(request.getParameter("page"));
-    System.out.println("pageNumber : " +pageNumber);
     String method = request.getParameter("method");
-    System.out.println("method : "+method);
     String option = request.getParameter("option");
-    System.out.println("option : " +option);
     String word = request.getParameter("word");
-    System.out.println("ok1");
     int page = 1;
     StaffDao dao;
     try {
@@ -38,18 +34,17 @@ public class AdminSearchByInputAction implements Action {
     	  list = dao.getStaffByPage(pageNumber);
     	  break;
     	case "name" :
-    	  page = paginator.getStaffPageNumberByOption(option, word);
-    		list = dao.getStaffByOption(pageNumber, option, word);
-    		break;
     	case "deptName" :
     	  page = paginator.getStaffPageNumberByOption(option, word);
-    		list = dao.getStaffByOption(page, option, word);
+    		list = dao.getStaffByOption(pageNumber, option, word);
     		break;
     	}
     }catch(Exception e) {
     	System.out.println(e.getMessage());
     }
-
+    request.setAttribute("method", method);
+    request.setAttribute("option", option);
+    request.setAttribute("word", word);
     request.setAttribute("currentPage", pageNumber);
     request.setAttribute("totalPages", page);
     request.setAttribute("staffList", list);
