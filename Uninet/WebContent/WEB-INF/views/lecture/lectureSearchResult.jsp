@@ -37,8 +37,17 @@
   pageContext.setAttribute("startPage", startPage);
   pageContext.setAttribute("endPage", endPage);
 %>
+ <tr>
+          <th>강의이름</th>
+          <th>학점</th>
+          <th>시간</th>
+          <th>종별</th> 
+          <th>학과</th>
+          <th>교수</th>
+          <th colspan="2"></th>
+        </tr>
 <c:forEach var="lecture" items="${list}">
-  <tr>
+<tr>
     <td>${lecture.lectureName}</td>
     <td>${lecture.credit}</td>
     <td>${lecture.time}</td>
