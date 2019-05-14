@@ -24,6 +24,7 @@
         
       });
       $('#update').click(function (event) {
+		const phoneRegExp = /^010\d{4}\d{4}$/;
           if ($('#currentPwd').val()== ""){
             alert("암호를 입력해주세요");
             event.preventDefault();
@@ -32,7 +33,10 @@
             alert("암호가 틀렸습니다.");
             event.preventDefault();
             return false;
-          }
+          }else if(!$('#staffPhone').val().match(phoneRegExp)){
+						alert('올바른 전화번호가 아닙니다.');
+						event.preventDefault();
+					}
         });
     });
   </script>
@@ -83,13 +87,9 @@
 					<span class="label">이메일</span><span class="data"><input
 						type="text" class="info" name="staffEmail" value="${staff.email }"></span>
 				</div>
-				<div class="a-4">
-					<span class="label">생년월일</span><span class="data"><input
-						type="text" class="info" value="<%=birthdayString%>"></span>
-				</div>
 				<div class="a-5">
 					<span class="label">연락처</span><span class="data"><input
-						type="text" class="info" name="staffPhone"
+						type="text" class="info" id="staffPhone" name="staffPhone"
 						value="${staff.phoneNumber}"></span>
 				</div>
 				<div class="a-6">
