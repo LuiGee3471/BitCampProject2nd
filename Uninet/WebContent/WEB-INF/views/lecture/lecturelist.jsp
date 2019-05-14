@@ -35,7 +35,7 @@
  <div class="board-bottom">
  <div class='page-btns'></div>
     
-    </div>
+  </div>
   </div>
   <div id="modalOne" class="modal">
     <div class="modal-content">
@@ -77,10 +77,6 @@
     </div>
   </div> 
   <jsp:include page="/common/bottom.jsp" flush="false" />
-  <script>
-    const currentPage = <%=request.getAttribute("currentPage")%>;
-    const option = "<%=request.getAttribute("option")%>";
-  </script>
   <script src="<%=request.getContextPath()%>/js/lecturelist.js"></script>
 </body>
 </html>

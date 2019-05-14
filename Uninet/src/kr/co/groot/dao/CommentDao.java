@@ -65,14 +65,14 @@ public class CommentDao {
         list.add(comment);
       }
     } catch (SQLException e) {
-      System.out.println("getCommentList:" + e.getMessage());
+      System.out.println("getCommentList: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        System.out.println("getCommentList: " + e.getMessage());
       }
     }
     return list;
