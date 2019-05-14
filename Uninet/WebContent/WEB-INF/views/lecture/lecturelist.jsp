@@ -2,37 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/common/head.jsp" flush="false" />
-<%
-  int totalPages = (int) request.getAttribute("pages");
-  int currentPage = (int) request.getAttribute("currentPage");
-  int startPage = 1;
-  if (currentPage >= 4) {
-    if (currentPage % 3 == 1) {
-      startPage = currentPage;
-    } else if (currentPage % 3 == 2) {
-      startPage = currentPage - 1;
-    } else {
-      startPage = currentPage - 2;
-    }
-  }
-  
-  int endPage = 0;
-  if (totalPages <= 3) {
-    endPage = totalPages;
-  } else {
-    if (totalPages - startPage >= 3) {
-      endPage = startPage + 2;
-    } else {
-      endPage = totalPages;
-    }
-  }
-  
-  System.out.println(startPage + " / " + endPage);
-  System.out.println(totalPages);
-  System.out.println(currentPage);
-  pageContext.setAttribute("startPage", startPage);
-  pageContext.setAttribute("endPage", endPage);
-%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
@@ -53,6 +22,7 @@
         </tr>
       </thead>
       <tbody id="searchResult">
+      
       </tbody>
     </table>
     <div class = "button-between">

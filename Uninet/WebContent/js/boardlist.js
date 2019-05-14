@@ -62,3 +62,14 @@ $(".next-btn").click(function () {
   const url = "list?page=" + pageToMove + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
   location.href = url;
 });
+
+$(".new-btn").click(function() {
+  if(!$(".new-title").val()){
+    alert("제목을 입력해주세요!");
+    event.preventDefault();
+  }else if(!$(".new-content").val()){
+     alert("내용을 입력해주세요!");
+     event.preventDefault();
+  }
+});
+

@@ -44,7 +44,15 @@
           <img class="profile-photo"
             src="<%=request.getContextPath()%>/images/${writer.image}" alt="" />
           <div class="writer-info">
-            <span class="writer-id">${writer.staffId}</span> 
+            <span class="unseen">${writer.id}</span>
+            <c:choose>
+              <c:when test="${writer.id eq sessionScope.staff.id}">
+                <a href="<%=request.getContextPath()%>/mypage" class="writer-id">${writer.staffId}</a>
+              </c:when>
+              <c:otherwise>
+                <a href="<%=request.getContextPath()%>/info?id=${writer.id}" class="writer-id">${writer.staffId}</a>
+              </c:otherwise> 
+            </c:choose>
             <span class="time">${post.timeFormat}</span>
           </div>
         </div>
@@ -57,7 +65,8 @@
         <div class ="user-menu">
         <span class="comment-option">쪽지</span>
         <form action="delete" method ="post">
-          <c:if test="${curruser.staffId == writer.staffId}"><button type="submit" class="delete-option" id="postDelete">삭제</button>
+          <c:if test="${curruser.staffId == writer.staffId}">
+            <button type="submit" class="delete-option" id="postDelete">삭제</button>
             <input type="hidden" value="${id}" name="postId">
             <input type="hidden" value="${post.boardType}" name="boardType">
           </c:if>
@@ -66,7 +75,7 @@
         <c:if test="${post.fileName ne null}">
           <div class="download">
             <i class="fas fa-paperclip"></i>
-            <a href="file/${post.fileName}" download>${post.fileName}</a>
+            <a href="<%=request.getContextPath()%>/file/${post.fileName}" download>${post.fileName}</a>
           </div>  
         </c:if>
         <div class="article-stat">
@@ -112,7 +121,7 @@
                 <form action="recomment" method="post" class="recomment-form" id="comment-form">
                   <input class="recomment-text" type="text" name="comment"
                    maxlength="50" placeholder="댓글을 입력하세요" /> 
-                  <input class="submit" type="image"
+                  <input class="submit recomment-submit" type="image"
                    src="<%=request.getContextPath()%>/images/submit.png">
                   <input type="hidden" value="${id}" name="commentId">
                   <input type="hidden" value="${comment.id}" name="referComment">
@@ -174,7 +183,7 @@
           <input class="comment-text" type="text" name="comment"
             maxlength="50" placeholder="댓글을 입력하세요" autocomplete="off" minlength="5"/> 
           <input
-            class="submit" type="image"
+            class="submit comment-submit" type="image"
             src="<%=request.getContextPath()%>/images/submit.png">
             <input type="hidden" value="${id}" name="commentId">
         </form>

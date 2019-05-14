@@ -14,20 +14,20 @@ import javax.sql.DataSource;
 
 import kr.co.groot.dto.Major;
 
-
-
 public class MajorDao {
-
   private Connection conn;
   private PreparedStatement pstmt;
   private ResultSet rs;
   private DataSource ds;
 
-  public MajorDao() throws NamingException {
-
-    Context context = new InitialContext();
-    ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
-
+  public MajorDao() {
+    Context context;
+    try {
+      context = new InitialContext();
+      ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql");
+    } catch (NamingException e) {
+      System.out.println("MajorDao: " + e.getMessage());
+    }
   }
   
   /*
@@ -42,26 +42,34 @@ public class MajorDao {
    * @param spec: none
    * 
    * @return: List<Major>
-   */
-  
-  public List<Major> selectAll() throws SQLException {
-    String sql = "select * from major";
-    conn = ds.getConnection();
-    pstmt = conn.prepareStatement(sql);
-    rs = pstmt.executeQuery();
+   */ 
+  public List<Major> selectAll() {
     List<Major> majorList = new ArrayList<Major>();
-    while(rs.next()) {
-      Major m = new Major();
-      m.setId(rs.getInt(1));
-      m.setMajorName(rs.getString(2));
-      majorList.add(m);
-    }
-    rs.close();
-    pstmt.close();
-    conn.close();
+    String sql = "select * from major";
     
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      
+      while(rs.next()) {
+        Major m = new Major();
+        m.setId(rs.getInt(1));
+        m.setMajorName(rs.getString(2));
+        majorList.add(m);
+      }
+    } catch (SQLException e) {
+      System.out.println("selectAll: " + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("selectAll: " + e.getMessage());
+      }
+    }
+
     return majorList;
   }
-  
-  
 }
