@@ -118,6 +118,8 @@ select {
   height: 30px;
   border-radius: 0;
   padding-left: 10px;
+  font-size:15px;
+  font-weight:400 !important;
 
   /* Removes the default <select> styling */
   -webkit-appearance: none;
@@ -137,4 +139,15 @@ select {
 .day-time select {
   flex: 1 1 0;
   height: 32px; 
+}
+input[type=checkbox]{
+	display: none;
+}
+input[type=checkbox] + label{
+ 	color :#a6a6a6;
+	
+}
+input[type=checkbox]:checked + label{
+	color :#c62917;
+	
 }
