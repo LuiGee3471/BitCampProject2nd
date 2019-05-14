@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/common/head.jsp" flush="false" />
-
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
@@ -23,6 +22,7 @@
         </tr>
       </thead>
       <tbody id="searchResult">
+      
       </tbody>
     </table>
     <div class = "button-between">

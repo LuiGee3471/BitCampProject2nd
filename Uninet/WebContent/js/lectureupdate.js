@@ -4,10 +4,10 @@ $(function() {
   const credit3 = ['123', '345', '567', '789'];
   let changeItem;
   let selectCredit = '';
-  
-  $("#weekday option").each(function(index, element) {
+  console.log($("#timeFirst radio"));
+  $("#timeFirst input").each(function(index, element) {
     if ($(element).attr("value") === day) {
-      $(element).attr("selected", "selected");
+      $(element).attr("checked", true);
     }
   });
 
