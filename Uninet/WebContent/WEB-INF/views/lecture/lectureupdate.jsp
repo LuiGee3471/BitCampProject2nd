@@ -97,7 +97,7 @@
  
     <!-- 교수 선택  -->
     
-    <input type = "submit" value = "수정하기" class = "updateBtn"><br>
+    <input type = "submit" value = "수정하기" class = "updateBtn" id="updateBtn"><br>
     <a class="cancle-back" href="list">취소하고 돌아가기</a>
     </form>
     </div>
@@ -106,9 +106,7 @@
    var totalTime = "${lecture2.time}";
    var day = totalTime.slice(0,1);
    var time = totalTime.slice(1);
-   
-   
-   
+ 
    </script>
    <script src="<%=request.getContextPath()%>/js/lectureupdate.js"></script>
 </body>
