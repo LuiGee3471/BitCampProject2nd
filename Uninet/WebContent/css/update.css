@@ -71,3 +71,28 @@ select:focus, .textBottom:focus {
 	border-radius:5px;
 	cursor: not-allowed;
 }
+
+.day{
+	display: flex;
+	
+}
+
+input[type=radio]:checked+label {
+  color: white;
+  background-color: #c62917;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.day label {
+    color: #c62917;
+    font-size: 14px;
+    padding: 5px 10px 10px 10px;
+    border: 1px solid #c62917;
+    width: 20px;
+    height: 15px;
+    line-height: 20px;
+    margin: 10px 0px 5px 20px;
+}

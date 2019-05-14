@@ -44,7 +44,7 @@
       </div>
       <div class="weathercard">
       <div class="weather">
-        <h3>Today's Weather</h3>
+        <h2>오늘의 날씨</h2>
         <div class="weatherpic"></div>
          <span class="weatherinfo"></span>
       </div>

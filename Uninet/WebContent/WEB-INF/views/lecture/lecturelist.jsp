@@ -57,46 +57,14 @@
     </table>
     <div class = "button-between">
       <div class = "button-group">
-        <p><button class="button" data-modal="modalOne">강의 검색</button></p>
+        <p><button id = "lecture-search" class="button" data-modal="modalOne">강의 검색</button></p>
         <p><button class="button" data-modal="modalTwo">정렬</button></p>
       </div>
       <a href="write"><button class="lecture-add"><i class="fas fa-folder-plus fa-2x hover"></i></button></a>
     </div>
  <div class="board-bottom">
-    <c:choose>
-    <c:when test="${currentPage == 1}">
-     
-    </c:when>
-    <c:otherwise>
-      <div class="btn prev-page">&lt;&nbsp;이전</div>
-    </c:otherwise>
-    </c:choose>
-    <div class="page-btns">
-      <c:if test="${pages > 3 && currentPage > 3}">
-        <div class="btn prv-btn">&lt;</div>
-      </c:if>
-      <c:forEach var="page" begin="${startPage}" end="${endPage}">
-        <c:choose>
-          <c:when test="${page == currentPage}">
-            <div class="btn page-btn current-btn">${page}</div>
-          </c:when>
-          <c:otherwise>
-            <div class="btn page-btn">${page}</div>
-          </c:otherwise>
-        </c:choose>
-      </c:forEach>
-      <c:if test="${pages - endPage > 0}">
-        <div class="btn next-btn">&gt;</div>
-      </c:if>
-    </div>
-    <c:choose>
-      <c:when test="${currentPage < pages}">
-        <div class="btn next-page">다음&nbsp;&gt;</div>
-      </c:when>
-      <c:otherwise>
-        <div class="btn next-page invisible">다음&nbsp;&gt;</div>
-      </c:otherwise>
-    </c:choose>
+ <div class='page-btns'></div>
+    
     </div>
   </div>
   <div id="modalOne" class="modal">

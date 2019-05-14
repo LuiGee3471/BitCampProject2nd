@@ -44,18 +44,13 @@
     
         <!-- 시간 선택  -->
    <span class = "label">시간</span>
-    <select name="weekday" id="weekday">
-    <!--  <input type="radio" value="월" name="searchradio" id="monday" checked>
-     <label for="monday"></label>  -->  
-    
-
-
-      <option value="월">월</option>
-      <option value="화">화</option>
-      <option value="수">수</option>
-      <option value="목">목</option>
-      <option value="금">금</option>
-    </select>
+   <div class="day">
+   <input type="radio" name="weekday" id="monday" value="월"><label for="monday" class="date" >월</label>
+   <input type="radio" name="weekday" id="tuesday" value="월"><label for="tuesday" class="date">화</label>
+   <input type="radio" name="weekday" id="wednesday" value="월"><label for="wednesday" class="date">수</label>
+   <input type="radio" name="weekday" id="thursday" value="월"><label for="thursday" class="date">목</label>
+   <input type="radio" name="weekday" id="friday" value="월"><label for="friday" class="date">금</label>
+   </div>
       <select id = "changeTime" name = "lectureTime" class = "textBottom">
         
        <!--  <option value = "123">123</option>

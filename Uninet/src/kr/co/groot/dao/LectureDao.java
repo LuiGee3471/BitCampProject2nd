@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 import org.json.simple.JSONObject;
 
 import kr.co.groot.dto.Lecture;
-import kr.co.groot.dto.Post;
 
 public class LectureDao {
   private Connection conn;
@@ -581,10 +580,11 @@ public class LectureDao {
   
   public List<Lecture> getLectureSortByOption(int page, String option) throws NamingException, SQLException {
     String sql1 = "set @rownum:=0";
-    String firstSQL = "select * from (select @rownum:=@rownum +1 as no, l.id as id, lecture_name, credit, time, lecture_type, " 
-                     +"prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id FROM lecture l " 
-                     +"LEFT JOIN lecturetype lt ON l.lecture_type_id = lt.id LEFT JOIN professor p "
-                     +"ON l.prof_id = p.id LEFT JOIN major m ON p.major_id = m.id";
+    String firstSQL = "select * from (select @rownum:=@rownum +1 as no, c.* from (select l.id as id, lecture_name, credit, time, lecture_type, " 
+                      +"prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id FROM lecture l " 
+                      +"LEFT JOIN lecturetype lt ON l.lecture_type_id = lt.id LEFT JOIN professor p " 
+                      +"ON l.prof_id = p.id LEFT JOIN major m ON p.major_id = m.id";
+    String test = "order by prof_name asc) c) c2 where no > ? limit 20";
     String order = "";
     
     switch (option) {
@@ -606,7 +606,7 @@ public class LectureDao {
     default:
       order = " id";
     }
-    String thirdSQL = " ORDER BY " + order + " asc) c ";
+    String thirdSQL = " ORDER BY " + order + " asc) c) c2 ";
     String lastSQL2 = " where no > ? limit 20";
     String sql = firstSQL + thirdSQL + lastSQL2;
     conn = ds.getConnection();
@@ -642,9 +642,10 @@ public class LectureDao {
   
   public int countHowManyLectureWithOption(String option, String word)
  throws SQLException {
-    String sql1 = "select count(*)" 
-                 +"from lecture l left join lecturetype t on l.lecture_type_id = t.id " 
-                 +"left join professor p on l.prof_id = p.id " 
+    String sql1 = "select count(*) " 
+                 + "from lecture l left join lecturetype t on l.lecture_type_id = t.id " 
+                 + "left join professor p on l.prof_id = p.id "
+                 + "left join major m on p.major_id = m.id " 
                  + "where ";
     String sql2 = "";
     word = "%" + word + "%";
@@ -665,7 +666,7 @@ public class LectureDao {
       pstmt.setString(1, word);
       break;
     case "major":
-      sql2 = "(major_name LIKE ? ";
+      sql2 = "major_name LIKE ? ";
       pstmt = conn.prepareStatement(sql1 + sql2);
       System.out.println(sql1 + sql2);
       pstmt.setString(1, word);
@@ -692,7 +693,7 @@ public class LectureDao {
                        +"(select @rownum:=@rownum +1 as no, l.id as id, lecture_name, credit, time, lecture_type, " 
                        +"prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id FROM lecture l " 
                        +"LEFT JOIN lecturetype lt ON l.lecture_type_id = lt.id LEFT JOIN professor p " 
-                       +"ON l.prof_id = p.id LEFT JOIN major m ON p.major_id = m.id ";
+                       +"ON l.prof_id = p.id LEFT JOIN major m ON p.major_id = m.id where ";
     String order = "";
     word = "'%" + word + "%') ";
     switch (option) {
