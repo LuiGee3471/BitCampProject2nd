@@ -24,7 +24,7 @@ public class AdminModifyAction implements Action {
     StaffDao dao = new StaffDao();
     staff = dao.selectInfo(id);
     DepartmentDao departdao = new DepartmentDao();
-    departList = departdao.getDistinctDeptName();
+    departList = departdao.getDistinctDeptNameList();
     request.setAttribute("staff", staff);
     request.setAttribute("departList", departList);
     forward = new ActionForward();
