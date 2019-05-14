@@ -41,7 +41,6 @@ public class MyCommentAction implements Action {
     int page = 1;
     switch (option) {
     case "default":
-    case "count":
       list = postDao.getMyCommentByPage(pageNumber, id);
       page = paginator.getMyCommentPageNumber(id);
       break;

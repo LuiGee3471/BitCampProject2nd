@@ -13,44 +13,32 @@ import kr.co.groot.page.PaginatorByAdmin;
 
 public class AdminAction implements Action {
 
-  @Override
-  public ActionForward execute(HttpServletRequest request,
-      HttpServletResponse response) {
-    ActionForward forward = null;
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		ActionForward forward = null;
+		PaginatorByAdmin paginator = new PaginatorByAdmin();
+		int pageNumber = Integer.parseInt(request.getParameter("page"));
 
-    StaffDao dao = new StaffDao();
-    PaginatorByAdmin paginator = new PaginatorByAdmin();
-    int pageNumber = Integer.parseInt(request.getParameter("page"));
-    System.out.println(request.getParameter("option") + "31");
-    String option = request.getParameter("option");
-    String word = request.getParameter("word");
-    System.out.println(option);
-    if (word == null) {
-      word = "";
-    }
-    List<Staff> list = null;
-    int page = 1;
-    switch (option) {
-    case "default":
-      list = dao.getStaffByPage(pageNumber);
-      page = paginator.getPageNumber();
-      break;
-    case "deptname":
-    case "name":
-      list = dao.getStaffByOption(pageNumber, option, word);
-      page = paginator.getPageNumber(option, word);
-      break;
-    }
-    request.setAttribute("option", option);
-    request.setAttribute("word", word);
-    request.setAttribute("currentPage", pageNumber);
-    request.setAttribute("pages", page);
-    request.setAttribute("staffList", list);
-    forward = new ActionForward();
-    forward.setRedirect(false);
-    forward.setPath("/WEB-INF/views/admin/admin.jsp");
+		StaffDao dao = null;
+		List<Staff> staffList = null;
+		int page = 1;
 
-    return forward;
-  }
+		try {
+			dao = new StaffDao();
+			staffList = dao.getStaffByPage(pageNumber);
+			page = paginator.getPageNumber();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		request.setAttribute("staffList", staffList);
+		request.setAttribute("currentPage", pageNumber);
+		request.setAttribute("pages", page);
+		
+		forward = new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("/WEB-INF/views/admin/admin.jsp");
+		
+		return forward;
+	}
 
 }

@@ -38,9 +38,11 @@ $(".close-btn").click(function() {
 });
 
 $(".recomment-submit").click(function() {
-  if(!$(".recomment-text").val()){
-    alert("내용을 입력해주세요!");
+  const text = $(this).parent().children(".recomment-text").val();
+  
+  if(!text){
     event.preventDefault();
+    alert("내용을 입력해주세요!");
   }
   
 });
