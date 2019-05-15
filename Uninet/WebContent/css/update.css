@@ -21,6 +21,7 @@ form {
 .textBottom {
   margin-bottom: 20px;
   height:30px;
+  font-size:15px;
 }
 .updateBtn {
   margin-left: auto;
@@ -67,10 +68,9 @@ form {
 }
 
 .text:read-only {
-	border-width:1px;
-	border-color:red;
-	border-radius:5px;
 	cursor: not-allowed;
+	margin-bottom:20px;
+	
 }
 
 .day{
@@ -117,7 +117,7 @@ select {
   /* General styling */
   height: 30px;
   border-radius: 0;
-  padding-left: 10px;
+  padding-left: 3px;
   font-size:15px;
   font-weight:400 !important;
 
@@ -151,3 +151,32 @@ input[type=checkbox]:checked + label{
 	color :#c62917;
 	
 }
+
+input::placeholder {
+  color:black;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+input[type=text], input[type=email] {
+  height: 30px;
+  margin-bottom:20px;
+}
+
+.deptname {
+  margin-bottom:40px;
+}
+
+.citeAdmin {
+  margin-bottom:20px;
+}
+
+.totalAdmin {
+  display:flex;
+
+}
+
+.deptAdmin {
+  margin-left:4px;
+}
+

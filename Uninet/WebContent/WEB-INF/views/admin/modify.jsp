@@ -12,24 +12,29 @@
 		<form action="modifyOk" method="post">
 		<input type="hidden" name="selectId" value="${staff.id }">
 			<span class="label">아이디 </span><input type="text" id="id" name="id"
-				value="${staff.staffId}" class="text" readOnly ><br> <span>이름
+				value="${staff.staffId}" class="text" readOnly ><br> <span class="label">이름
 			</span><input type="text" id="name" name="name" value="${staff.staffName}" class="text"
-				readOnly><br> <span>이메일</span> <input type="email"
+				readOnly><br> <span class="label">이메일</span> <input type="email"
 				id="email" name="email" value="${staff.email}" class="text" readOnly><br>
-			<span>핸드폰 번호</span> <input type="text" id="phoneNumber"
+			<span class="label">핸드폰 번호</span> <input type="text" id="phoneNumber"
 				name="phoneNumber" value="${staff.phoneNumber}"><br>
+        
+       <div class = "totalAdmin">
 				<div class="citeAdmin">			
-			<span>사이트 관리자 </span> <br>
-			<input type="checkbox" name="isAdmin" value="Y" id="isAdmin"><label for="isAdmin"><i class="far fa-check-square"></i></label>		
+			<span class="label">사이트 관리자 </span> <br>
+			<input type="checkbox" name="isAdmin" value="Y" id="isAdmin">
+       <label for="isAdmin"><i class="far fa-check-square fa-2x"></i></label>	
 			</div>
 			<br>
-			 <div class="citeAdmin">			
-			<span>부서 관리자 </span> <br>
-			<input type="checkbox" value="Y" id="isManager"><label for="isManager"><i class="far fa-check-square"></i></label>		
+			<div class="deptAdmin">			
+			<span class="label">부서 관리자 </span> <br>
+			<input type="checkbox" value="Y" id="isManager">
+      <label for="isManager"><i class="far fa-check-square fa-2x"></i></label>		
 			</div>
+      </div>
 			<br>
 			<span class="label">부서이름</span> 
-			 <select name = "deptname" id="deptname">
+			 <select name = "deptname" id="deptname" class="deptname">
 			 <option value="">부서 선택</option>
 			 <c:forEach var="departList" items="${departList }">
 			 <c:choose>
