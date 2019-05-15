@@ -8,12 +8,20 @@ $(document).ready(function() {
 		    	$('#check').css('color','blue');
 			}
 		});
+		$('#updatePwd').keyup(function (){
+			if($('#updatePwd').val().length <4){
+				$('#firstCheck').val('4자리 이상입력해주세요.');
+				$('#firstCheck').css('color','red');
+			} else{
+				$('#firstCheck').val('사용가능한 비밀번호입니다.');
+				$('#firstCheck').css('color','blue');
+			}
+		});
 		$('#currentPwd').keyup(function(event){
 			if($('#pwd').val() != $('#currentPwd').val()){
 				$('#checkPwd').val('현재 비밀번호와 일치하지 않습니다.');
 				$('#checkPwd').css('color','red');
 				var pwd = $('#pwd').val();
-				console.log(pwd);
 			}else{
 				$('#checkPwd').val('현재 비밀번호와 일치합니다.');
 				$('#checkPwd').css('color','blue');

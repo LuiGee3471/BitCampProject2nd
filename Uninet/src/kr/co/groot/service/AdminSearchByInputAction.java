@@ -19,7 +19,6 @@ public class AdminSearchByInputAction implements Action {
 
     List<Staff> list = null;
     int pageNumber = Integer.parseInt(request.getParameter("page"));
-    System.out.println("pageNumber은 : " + pageNumber);
     String method = request.getParameter("method");
     String option = request.getParameter("option");
     String word = request.getParameter("word");
