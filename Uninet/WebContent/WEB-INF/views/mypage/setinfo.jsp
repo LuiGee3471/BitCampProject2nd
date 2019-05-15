@@ -82,16 +82,6 @@
 		</div>
 	</div>
 	<jsp:include page="/common/bottom.jsp" flush="false" />
-	<script>
-	$(document).ready(function() {
-    $('#summernote').summernote({
-       height : 200, 
-       minHeight : null,
-       maxHeight : null,
-       focus : true,
-       lang : 'ko-KR' 
-    });
-  });
-  </script>
+	<script src="<%=request.getContextPath()%>/js/setInfo.js"></script>
 </body>
 </html>
