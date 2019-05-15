@@ -1,9 +1,9 @@
 $(function() {
-  var credit1 = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  var credit2 = ["12", "34", "56", "78", "910"];
-  var credit3 = ["123", "456", "789"];
-  var changeItem;
-  var selectCredit = "";
+  const credit1 = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ];
+  const credit2 = [ "12", "34", "56", "78", "910" ];
+  const credit3 = [ "123", "456", "789" ];
+  let changeItem;
+  let selectCredit = "";
 
   $("#selectCredit").change(function() {
     selectCredit = $(this).val();
