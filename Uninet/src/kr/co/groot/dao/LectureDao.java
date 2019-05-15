@@ -49,11 +49,9 @@ public class LectureDao {
    */
   public List<Lecture> selectAll() {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
-        + "ON p.major_id = m.id";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id";
     List<Lecture> lectureList = null;
     try {
       conn = ds.getConnection();
@@ -224,11 +222,9 @@ public class LectureDao {
    */
   public List<Lecture> selectByName(String criterion, String input) {
     String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
-        + "ON p.major_id = m.id " + "WHERE ";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "WHERE ";
 
     String lastSQL = " LIKE ?";
 
@@ -304,11 +300,9 @@ public class LectureDao {
    */
   public List<Lecture> selectByLectureType(int lectureType) {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id"
-        + "WHERE lt.id = ?";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id" + "WHERE lt.id = ?";
     List<Lecture> lectureList = null;
     try {
       conn = ds.getConnection();
@@ -361,11 +355,9 @@ public class LectureDao {
    */
   public List<Lecture> sortLecture(String criterion) {
     String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
-        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
-        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
-        + "ON p.major_id = m.id " + "ORDER BY ";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
+        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "ORDER BY ";
 
     String order = "";
     String lastSQL = " asc ";
@@ -442,10 +434,9 @@ public class LectureDao {
    */
 
   public JSONObject countByLecture() {
-    String sql = "select " + "m.major_name, count(*) as count "
-        + "from lecture l " + "left join professor p " + "on l.prof_id = p.id "
-        + "left join major m " + "on p.major_id = m.id "
-        + "group by m.major_name " + "order by m.major_name";
+    String sql = "select " + "m.major_name, count(*) as count " + "from lecture l " + "left join professor p "
+        + "on l.prof_id = p.id " + "left join major m " + "on p.major_id = m.id " + "group by m.major_name "
+        + "order by m.major_name";
 
     JSONObject json = null;
     try {
@@ -485,10 +476,8 @@ public class LectureDao {
    * @return: JSON
    */
   public JSONObject countByTime() {
-    String sql = "select substr(time, 1, 1) as day, "
-        + "count(substr(time, 1, 1)) as count from lecture "
-        + "group by substr(time, 1, 1) "
-        + "order by field(day, '월','화','수','목','금')";
+    String sql = "select substr(time, 1, 1) as day, " + "count(substr(time, 1, 1)) as count from lecture "
+        + "group by substr(time, 1, 1) " + "order by field(day, '월','화','수','목','금')";
     JSONObject json = null;
     try {
       conn = ds.getConnection();
@@ -528,8 +517,7 @@ public class LectureDao {
 
   public JSONObject countByProfessor() {
     String sql = "select m.major_name as major_name, count(m.major_name) as count "
-        + "from professor p left join major m " + "on p.major_id = m.id "
-        + "group by m.major_name";
+        + "from professor p left join major m " + "on p.major_id = m.id " + "group by m.major_name";
 
     JSONObject json = null;
     try {
@@ -647,13 +635,10 @@ public class LectureDao {
 
   public List<Lecture> getLectureByPage(int page) {
     String sql1 = "set @rownum:=0";
-    String sql2 = "select * from "
-        + "(select @rownum:=@rownum + 1 as no, l.id, l.lecture_name, l.credit, "
-        + "l.time, t.lecture_type as lecturetype, p.prof_name as profname, "
-        + "m.major_name as majorname "
+    String sql2 = "select * from " + "(select @rownum:=@rownum + 1 as no, l.id, l.lecture_name, l.credit, "
+        + "l.time, t.lecture_type as lecturetype, p.prof_name as profname, " + "m.major_name as majorname "
         + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
-        + "left join professor p on l.prof_id = p.id "
-        + "left join major m on p.major_id = m.id) u "
+        + "left join professor p on l.prof_id = p.id " + "left join major m on p.major_id = m.id) u "
         + "where no > ? limit 20";
     List<Lecture> list = new ArrayList<Lecture>();
     try {
@@ -691,6 +676,19 @@ public class LectureDao {
     return list;
   }
 
+  /*
+   * @method Name: getLectureSortByOption
+   * 
+   * @date: 2019. 5. 13
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 옵션에 따른 강의를 정렬한다
+   * 
+   * @param spec: int page
+   * 
+   * @return: List<Lecture>
+   */
   public List<Lecture> getLectureSortByOption(int page, String option) {
 
     String sql1 = "set @rownum:=0";
@@ -762,10 +760,8 @@ public class LectureDao {
   }
 
   public int countHowManyLectureWithOption(String option, String word) {
-    String sql1 = "select count(*) "
-        + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
-        + "left join professor p on l.prof_id = p.id "
-        + "left join major m on p.major_id = m.id " + "where ";
+    String sql1 = "select count(*) " + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
+        + "left join professor p on l.prof_id = p.id " + "left join major m on p.major_id = m.id " + "where ";
     String sql2 = "";
     word = "%" + word + "%";
     int count = 0;
@@ -806,8 +802,7 @@ public class LectureDao {
     return count;
   }
 
-  public List<Lecture> getLectureBySearchWord(int page, String option,
-      String word) {
+  public List<Lecture> getLectureBySearchWord(int page, String option, String word) {
     String sql1 = "set @rownum:=0";
     String firstSQL = "select * from "
         + "(select @rownum:=@rownum +1 as no, l.id as id, lecture_name, credit, time, lecture_type, "
@@ -887,6 +882,7 @@ public class LectureDao {
         professor.setMajorName(rs.getString(4));
         professorList.add(professor);
       }
+
     } catch (Exception e) {
       System.out.println("getProfessorListByMajorId" + e.getMessage());
     } finally {

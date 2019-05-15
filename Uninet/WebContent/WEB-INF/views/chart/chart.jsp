@@ -31,21 +31,21 @@
     </div>
   </div>
   <script>
-      var myChart;
+      let myChart;
       $(function() {
       <%LectureDao dao = new LectureDao();%>
-      var keylist = [];
-      var valuelist = [];
+      const keylist = [];
+      const valuelist = [];
 
-      var json = <%=dao.countByLecture()%>;
-      for (var key in json) {
+      const json = <%=dao.countByLecture()%>;
+      for (let key in json) {
         keylist.push(key);
         valuelist.push(json[key]);
       }
 
-      var ctx = $('#container');
+      const ctx = $('#container');
 
-      var data = {
+      const data = {
         datasets : [
           {
             backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
@@ -108,13 +108,13 @@
           options : {
             animation : {
               onComplete : function() {
-                var chartInstance = this.chart;
-                var ctx = chartInstance.ctx;
-                var height = chartInstance.controller.boxes[0].bottom;
+                const chartInstance = this.chart;
+                const ctx = chartInstance.ctx;
+                const height = chartInstance.controller.boxes[0].bottom;
                 ctx.textAlign = "center";
                 Chart.helpers.each(this.data.datasets.forEach(function(dataset,
                     i) {
-                  var meta = chartInstance.controller.getDatasetMeta(i);
+                  const meta = chartInstance.controller.getDatasetMeta(i);
                   Chart.helpers.each(meta.data.forEach(function(bar, index) {
                     ctx.fillText(dataset.data[index], bar._model.x, height
                         - ((height - bar._model.y) / 2));
@@ -163,35 +163,34 @@
 
       $("#chart").change(
           function() {
-            var selected = $("#chart").val();
-            var titleText = "";
-            var keylist = [];
-            var valuelist = [];
-            var titleText = $(this).find(
+            const selected = $("#chart").val();
+            const keylist = [];
+            const valuelist = [];
+            const titleText = $(this).find(
                 "option[value='" + $(this).val() + "']").text();
 
             if (selected == "lecture") {
-              var json = <%=dao.countByLecture()%>;
-              for ( var key in json) {
+              const json = <%=dao.countByLecture()%>;
+              for ( let key in json) {
                 keylist.push(key);
                 valuelist.push(json[key]);
               }
             } else if (selected == "day") {
-              var json = <%=dao.countByTime()%>;
-              for ( var key in json) {
+              const json = <%=dao.countByTime()%>;
+              for ( let key in json) {
                 keylist.push(key);
                 valuelist.push(json[key]);
               }
             } else if (selected == "professor") {
-              var json = <%=dao.countByProfessor()%>;
-              for ( var key in json) {
+              const json = <%=dao.countByProfessor()%>;
+              for ( let key in json) {
                 keylist.push(key);
                 valuelist.push(json[key]);
               }
             }
 
-            var ctx = $('#container');
-            var data = {
+            const ctx = $('#container');
+            const data = {
               datasets : [
                   {
                     backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
@@ -254,13 +253,13 @@
               options : {
                 animation : {
                   onComplete : function() {
-                    var chartInstance = this.chart;
-                    var ctx = chartInstance.ctx;
-                    var height = chartInstance.controller.boxes[0].bottom;
+                    const chartInstance = this.chart;
+                    const ctx = chartInstance.ctx;
+                    const height = chartInstance.controller.boxes[0].bottom;
                     ctx.textAlign = "center";
                     Chart.helpers.each(this.data.datasets.forEach(function(
                         dataset, i) {
-                      var meta = chartInstance.controller.getDatasetMeta(i);
+                      const meta = chartInstance.controller.getDatasetMeta(i);
                       Chart.helpers.each(meta.data
                           .forEach(function(bar, index) {
                             ctx.fillText(dataset.data[index], bar._model.x,

@@ -19,7 +19,6 @@ public class LectureDeleteAction implements Action {
 
     LectureDao dao = new LectureDao();
     result = dao.deleteLecture(id);
-    System.out.println("결과 : " + result);
 
     String msg = "";
     String url = "list";
