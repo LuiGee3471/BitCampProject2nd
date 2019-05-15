@@ -40,17 +40,17 @@
 	    <div class="a-2">
 	      <span class="label">바꿀 비밀번호</span>
 	      <span class="data"><input type="password" class="info" id="updatePwd" value=""></span>
-	      <input type="text" id="firstCheck" class="check" size="25">
+	      <input type="text" id="firstCheck" class="check" size="35" readonly>
 	    </div>
 	    <div class="a-3">
 	      <span class="label">다시 입력</span>
 	      <span class="data"><input type="password" id="updatePwd2" class="info" name="updatePwd" value=""></span>
-	      <input type="text" id="check" class="check" size="35">
+	      <input type="text" id="check" class="check" size="35" readonly>
 	    </div>
 	    <div class="a-4">
 	      <span class="label">현재 비밀번호</span>
 	      <span class="data"><input type="password" class="info" id="currentPwd" value=""></span>
-	      <input type="text" id="checkPwd" class="check" size="35">
+	      <input type="text" id="checkPwd" class="check" size="35" readonly>
 	      <input type="hidden" id="pwd" value="${staff.password}">
 	    </div>
 	    <div class="a-3">
