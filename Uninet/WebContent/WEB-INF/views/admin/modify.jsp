@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원 수정 페이지</title>
-</head>
 <c:set var="staff" value="${requestScope.staff }" />
-<%
-	request.getParameter("id");
-%>	
+<c:set var="departList" value="${requestScope.departList }" />
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/update.css">
@@ -26,17 +18,37 @@
 				id="email" name="email" value="${staff.email}" class="text" readOnly><br>
 			<span>핸드폰 번호</span> <input type="text" id="phoneNumber"
 				name="phoneNumber" value="${staff.phoneNumber}"><br>
-			<c:if test="${staff.isAdmin } eq 'Y' "></c:if>
-			<span>사이트 관리자 </span> <input type="text" id="isAdmin" name="isAdmin"
-				value="${staff.isAdmin }"><br> <span>부서 관리자 </span>  <input
-				type="text" id="isManager" name="isManager"
-				value="${staff.isManager }"><br> 
-			<span>부서이름</span>  <input type=text id="deptName" name="deptName"
-				value="${staff.deptName }"><br> <input type="submit"
+				<div class="citeAdmin">			
+			<span>사이트 관리자 </span> <br>
+			<input type="checkbox" name="isAdmin" value="Y" id="isAdmin"><label for="isAdmin"><i class="far fa-check-square"></i></label>		
+			</div>
+			<br>
+			 <div class="citeAdmin">			
+			<span>부서 관리자 </span> <br>
+			<input type="checkbox" value="Y" id="isManager"><label for="isManager"><i class="far fa-check-square"></i></label>		
+			</div>
+			<br>
+			<span class="label">부서이름</span> 
+			 <select name = "deptname" id="deptname">
+			 <option value="">부서 선택</option>
+			 <c:forEach var="departList" items="${departList }">
+			 <c:choose>
+			 <c:when test="${staff.deptName ==departList.deptName}">
+			 	<option value="${departList.id}" selected>${departList.deptName }</option>
+			 </c:when>
+			 <c:otherwise>
+			 <option value="${departList.id}">${departList.deptName }</option>
+			 </c:otherwise>
+			 </c:choose>
+			 </c:forEach>
+			 </select>
+			<input type="submit"
 				value="수정" class="updateBtn"> 
 				<a class="cancle-back" href="admin?page=1&option=default">취소하고 돌아가기</a> 	
 		</form>
 	</div>
 	<jsp:include page="/common/bottom.jsp" flush="false" />
+	<script type="text/javascript">
+	</script>
 </body>
 </html>

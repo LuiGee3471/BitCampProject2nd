@@ -84,7 +84,7 @@ function handlePageBtnClick(currentPage, method, option, word) {
   });
 }
 
-$(function() {
+$(function() {  
   callData(1, "default");
 
   const input = $("#searchInput");
@@ -106,17 +106,18 @@ $(function() {
     const optionValue = $("input[name='sort']:checked").val();
     callData(1, "sort", optionValue);
   });
-  
+   
   $(document).on("click","#deleteBtn",function() {
-      var result = confirm("하잉");
-      if(result) {
-        return false;
-      } else {
-        
-      }
+    
+    var result = confirm("강의를 정말 삭제하시겠습니까?");
+    
+    if(result){
+      location.replace("delete?id="+$(this).siblings("#deleteId").val());
+    }else{
+      
+    }
+   
   });
-
-  
 });
 
 const modalBtns = [...document.querySelectorAll(".button")];
@@ -156,3 +157,4 @@ window.onclick = function(event) {
     event.target.style.display = "none";
   }
 };
+

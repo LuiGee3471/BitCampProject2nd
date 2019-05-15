@@ -54,3 +54,7 @@
 .hover:hover {
   transform: scale(1.08);
 }
+
+i {
+  cursor:pointer;
+}
