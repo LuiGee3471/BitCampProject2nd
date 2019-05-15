@@ -22,16 +22,17 @@ public class MessageController extends HttpServlet {
   public MessageController() {
 
   }
-  
-  private void doProcess (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+  private void doProcess(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException {
     String requestUri = request.getRequestURI();
     String contextPath = request.getContextPath();
     String urlCommand = requestUri.substring(contextPath.length());
     System.out.println(urlCommand);
-    
+
     Action action = null;
     ActionForward forward = null;
-    
+
     if (urlCommand.equals("/message/send")) {
       action = new MessageSendAction();
       forward = action.execute(request, response);
@@ -41,8 +42,12 @@ public class MessageController extends HttpServlet {
     } else if (urlCommand.equals("/message/delete")) {
       action = new MessageDeleteAction();
       forward = action.execute(request, response);
+    } else {
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/etc/error_404.jsp");
     }
-    
+
     if (forward != null) {
       if (forward.isRedirect()) {
         response.sendRedirect(forward.getPath());

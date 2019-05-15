@@ -17,8 +17,8 @@ import kr.co.groot.service.SignLoginAction;
 import kr.co.groot.service.SignRegisterAction;
 import kr.co.groot.service.SignRegisterCheckAction;
 
-@WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login",
-    "/register", "/registerCheck", "/main", "/logout", "/registerOK" })
+@WebServlet(description = "로그인, 회원가입 처리", urlPatterns = { "/login", "/register",
+    "/registerCheck", "/main", "/logout", "/registerOK" })
 public class SignController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -57,6 +57,10 @@ public class SignController extends HttpServlet {
       forward = new ActionForward();
       forward.setRedirect(true);
       forward.setPath(request.getContextPath());
+    } else {
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/etc/error_404.jsp");
     }
 
     if (forward != null) {

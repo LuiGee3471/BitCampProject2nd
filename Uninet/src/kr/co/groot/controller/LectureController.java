@@ -28,8 +28,8 @@ public class LectureController extends HttpServlet {
 
   }
 
-  private void doProcess(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  private void doProcess(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException {
     String requestUri = request.getRequestURI();
     String contextPath = request.getContextPath();
     String urlCommand = requestUri.substring(contextPath.length());
@@ -68,6 +68,10 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/lectureSort")) {
       action = new LectureSortAction();
       forward = action.execute(request, response);
+    } else {
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/etc/error_404.jsp");
     }
 
     if (forward != null) {
@@ -81,11 +85,13 @@ public class LectureController extends HttpServlet {
 
   }
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
     doProcess(request, response);
   }
 
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request,
+      HttpServletResponse response) throws ServletException, IOException {
     doProcess(request, response);
   }
 
