@@ -2,23 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/common/head.jsp" flush="false" />
-	<script>
-		$(function () {
-			$("#upload").change(function (e) {
-				event.preventDefault();
-
-				var file = e.target.files[0];
-				var url = URL.createObjectURL(file);
-				$("#previewImage").attr("src", url);
-			});
-			$('#delbtn').click(function () {
-				$('#previewImage').attr("src", "<%=request.getContextPath()%>/images/default.png");
-			});
-			$("#delbtn").click(function(){
-				$('#upload').attr('src',"default.png");
-			});
-		});
-	</script>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
 </head>
 <body>
@@ -72,6 +55,7 @@
 		</div>
 	</div>
 	<jsp:include page="/common/bottom.jsp" flush="false" />
+	<script src="<%=request.getContextPath()%>/js/setpicture.js"></script>
 </body>
 
 </html>
