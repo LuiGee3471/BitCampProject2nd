@@ -11,11 +11,11 @@
 	String birthdayString = newBirthday.toString();
 %>
 <jsp:include page="/common/head.jsp" flush="false" />
- <script src="<%=request.getContextPath()%>/js/setInfo.js"></script>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/mypage.css">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
+  href="<%=request.getContextPath()%>/css/mypage.css">
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"defer></script>
 </head>
 <body>
 	<c:set var="staff" value="${sessionScope.staff}" />
@@ -73,7 +73,7 @@
 				</div>
 				<div class="a-7">
 					<span class="label self">자기소개</span>
-					<textarea name="selfIntroduce" id="editor">${staff.selfIntroduce}</textarea>
+					<textarea name="selfIntroduce" id="summernote">${staff.selfIntroduce}</textarea>
 				</div>
 				<div class="a-8">
 					<input type="submit" id="update" class="submit" value="개인정보 변경">
@@ -83,13 +83,15 @@
 	</div>
 	<jsp:include page="/common/bottom.jsp" flush="false" />
 	<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-        	toolbar: ['bold'],
-        })
-        .catch(error => {
-            console.error( error );
-        });
+	$(document).ready(function() {
+    $('#summernote').summernote({
+       height : 200, 
+       minHeight : null,
+       maxHeight : null,
+       focus : true,
+       lang : 'ko-KR' 
+    });
+  });
   </script>
 </body>
 </html>
