@@ -30,6 +30,19 @@ public class DepartmentDao {
     }
   }
 
+  /*
+   * @method Name: getDistinctDeptName
+   * 
+   * @date: 2019. 5. 15
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 부서 이름을 중복제거해서 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<String>
+   */
   public List<String> getDistinctDeptName() {
     List<String> nameList = new ArrayList<String>();
     String sql = "select distinct dept_name from department";
@@ -57,6 +70,19 @@ public class DepartmentDao {
     return nameList;
   }
 
+  /*
+   * @method Name: getDistinctDeptNameList
+   * 
+   * @date: 2019. 5. 15
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 부서 이름과 id를 중복제거해서 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Department>
+   */
   public List<Department> getDistinctDeptNameList() {
     String sql = "select distinct id, dept_name from department";
     List<Department> nameList = new ArrayList<>();
