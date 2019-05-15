@@ -35,15 +35,19 @@ function makePageBtns() {
   }
 
   if (startPage !== 1) {
-    $(".page-btns").append($("<div class='btn prev-page-bundle>&lt;</div>"));
+    $(".page-btns").append($("<div class='btn prev-page-bundle'>&lt;</div>"));
   }
 
   for (let i = startPage; i <= endPage; i++) {
-    $(".page-btns").append($("<div class='btn page-btn'>" + i + "</div>"));
+	if (i === currentPage) {
+      $(".page-btns").append($("<div class='btn page-btn current-btn'>" + i + "</div>"));
+	  } else {
+	    $(".page-btns").append($("<div class='btn page-btn'>" + i + "</div>"));
+	  }
   }
 
   if (totalPages > endPage) {
-    $(".page-btns").append($("<div class='btn next-page-bundle>&gt;</div>"));
+    $(".page-btns").append($("<div class='btn next-page-bundle'>&gt;</div>"));
   }
 
   if (totalPages > currentPage) {
@@ -82,6 +86,16 @@ function handlePageBtnClick(currentPage, method, option, word) {
       callData(currentPage - 1, method, option, word).done(makePageBtns());
     }
   });
+  
+  $(".next-page-bundle").click(function() {
+	    if (currentPage % 3 === 0) {
+	      callData(currentPage + 1, method, option, word).done(makePageBtns());
+	    } else if (currentPage % 3 === 2) {
+	      callData(currentPage + 2, method, option, word).done(makePageBtns());
+	    } else {
+	      callData(currentPage + 3, method, option, word).done(makePageBtns());
+	    }
+	  });
 }
 
 $(function() {  

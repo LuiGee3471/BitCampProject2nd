@@ -32,13 +32,9 @@
 }
 
 .button-between {
-  display:flex;
-  width:100%;
-}
-
-.button-group {
-  
-  
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .lecture-add {

@@ -305,6 +305,8 @@
 
 .page-btn {
   padding: 3px 8px;
+  height: 33px;
+  box-sizing: border-box;
 }
 
 .page-btns {
@@ -321,6 +323,8 @@
 
 .current-btn {
   font-weight: bold;
+  border: 2px solid #C62917;
+  line-height: 24px;
 }
 
 .prev-page {
