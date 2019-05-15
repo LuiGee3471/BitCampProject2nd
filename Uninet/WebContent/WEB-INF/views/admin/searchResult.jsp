@@ -57,9 +57,10 @@
 		<td>${staff.deptName}</td>
 		<td><a href="modify?id=${staff.id}"> <i class="far fa-edit hover-big"></i>
 		</a></td>
-		<td><a href="delete?id=${staff.id}"> <i
-				class="far fa-trash-alt"></i>
-		</a></td>
+		 <td class="deleteBtn">
+      <i class="far fa-trash-alt hover-big" id="deleteBtn" ></i>
+      <input type="hidden" value ="${staff.id}" id="deleteId" >
+    </td>
 	</tr>
 </c:forEach>
 <tr>

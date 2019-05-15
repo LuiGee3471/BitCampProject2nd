@@ -11,39 +11,11 @@
 	String birthdayString = newBirthday.toString();
 %>
 <jsp:include page="/common/head.jsp" flush="false" />
-<script type="text/javascript">
-    $(document).ready(function () {
-      $('#currentPwd').keyup(function () {
-        if ($('#currentPwd').val() != $('#pwd').val()) {
-          $('#check').val('암호가 불일치 합니다.');
-          $('#check').css('color', 'red');
-        } else {
-          $('#check').val('암호가 일치합니다.');
-          $('#check').css('color', 'blue');
-        }
-        
-      });
-      $('#update').click(function (event) {
-		const phoneRegExp = /^010\d{4}\d{4}$/;
-          if ($('#currentPwd').val()== ""){
-            alert("암호를 입력해주세요");
-            event.preventDefault();
-            return false;
-          }else if ($('#currentPwd').val() != $('#pwd').val()) {
-            alert("암호가 틀렸습니다.");
-            event.preventDefault();
-            return false;
-          }else if(!$('#staffPhone').val().match(phoneRegExp)){
-						alert('올바른 전화번호가 아닙니다.');
-						event.preventDefault();
-					}
-        });
-    });
-  </script>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/mypage.css">
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
+  href="<%=request.getContextPath()%>/css/mypage.css">
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"defer></script>
 </head>
 <body>
 	<c:set var="staff" value="${sessionScope.staff}" />
@@ -101,7 +73,7 @@
 				</div>
 				<div class="a-7">
 					<span class="label self">자기소개</span>
-					<textarea name="selfIntroduce" id="editor">${staff.selfIntroduce}</textarea>
+					<textarea name="selfIntroduce" id="summernote">${staff.selfIntroduce}</textarea>
 				</div>
 				<div class="a-8">
 					<input type="submit" id="update" class="submit" value="개인정보 변경">
@@ -111,13 +83,15 @@
 	</div>
 	<jsp:include page="/common/bottom.jsp" flush="false" />
 	<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-        	toolbar: ['bold'],
-        })
-        .catch(error => {
-            console.error( error );
-        });
+	$(document).ready(function() {
+    $('#summernote').summernote({
+       height : 200, 
+       minHeight : null,
+       maxHeight : null,
+       focus : true,
+       lang : 'ko-KR' 
+    });
+  });
   </script>
 </body>
 </html>

@@ -3,10 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/common/head.jsp" flush="false" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/board.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/admin.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 </head>
 <body>
 	<jsp:include page="/common/top.jsp" flush="false" />
@@ -32,23 +30,19 @@
 					<select id="search" name="option" class="select">
 						<option value="name">이름별 검색</option>
 						<option value="deptName">부서별 검색</option>
-					</select> <input type="text" id="searchInput" name="searchInput" class="search"
-						autocomplete="off"> <input type="image" id="btn"
-						class="searchBtn"
+					</select> 
+					<input type="text" id="searchInput" name="searchInput"
+						class="search" autocomplete="off"> <input type="image"
+						id="btn" class="searchBtn"
 						src="<%=request.getContextPath()%>/images/search.png">
 				</div>
 			</div>
-		</div >
+		</div>
 		<div class="board-bottom">
 			<div class='page-btns'></div>
-
 		</div>
-		<jsp:include page="/common/bottom.jsp" flush="false" />
-		<script>
-      const currentPage = <%=request.getAttribute("currentPage")%>;
-      const option = "<%=request.getAttribute("option")%>";
-    </script>
 	</div>
+		<jsp:include page="/common/bottom.jsp" flush="false" />
 	<script src="<%=request.getContextPath()%>/js/stafflist.js"></script>
 </body>
 </html>
