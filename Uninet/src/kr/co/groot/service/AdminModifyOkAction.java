@@ -13,14 +13,19 @@ public class AdminModifyOkAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request,
       HttpServletResponse response) {
+	  System.out.println("나 modifyOkAction이야");
     ActionForward forward = null;
     HttpSession session = request.getSession();
     Staff staff = (Staff) session.getAttribute("staff");
+    System.out.println("여기는 찍히니?");
     staff.setPhoneNumber(request.getParameter("phoneNumber"));
     staff.setIsAdmin(request.getParameter("isAdmin"));
     staff.setIsManager(request.getParameter("isManager"));
     staff.setId(Integer.parseInt(request.getParameter("selectId")));
-    staff.setDeptId(Integer.parseInt(request.getParameter("departList")));
+    System.out.println("여기는?");
+    staff.setDeptId(Integer.parseInt(request.getParameter("deptname")));
+    System.out.println(request.getParameter("deptname")+"deptname이야");
+
     String msg = "";
     String url = "";
 
