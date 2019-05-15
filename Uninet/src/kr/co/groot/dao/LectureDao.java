@@ -685,7 +685,7 @@ public class LectureDao {
    * 
    * @description: 옵션에 따른 강의를 정렬한다
    * 
-   * @param spec: int page
+   * @param spec: int page, String option
    * 
    * @return: List<Lecture>
    */
@@ -759,6 +759,20 @@ public class LectureDao {
     return lectureList;
   }
 
+  /*
+   * @method Name: countHowManyLectureWithOption
+   * 
+   * @date: 2019. 5. 13
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 단어로 검색했을때의 강의 수를 구하는 함수
+   * 
+   * @param spec: String option, String word
+   * 
+   * @return: int
+   */
+  
   public int countHowManyLectureWithOption(String option, String word) {
     String sql1 = "select count(*) " + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
         + "left join professor p on l.prof_id = p.id " + "left join major m on p.major_id = m.id " + "where ";
@@ -865,6 +879,21 @@ public class LectureDao {
     return lectureList;
   }
 
+  
+  /*
+   * @method Name: getProfessorListByMajorId
+   * 
+   * @date: 2019. 5. 13
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 교수의 강의정보를 구하기 위한 함수
+   * 
+   * @param spec: none
+   * 
+   * @return: List<Professor>
+   */
+  
   public List<Professor> getProfessorListByMajorId() {
     List<Professor> professorList = null;
     Professor professor = null;

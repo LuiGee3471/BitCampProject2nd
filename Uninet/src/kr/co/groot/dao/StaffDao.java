@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import kr.co.groot.dto.Professor;
 import kr.co.groot.dto.Staff;
 
 public class StaffDao {
@@ -83,7 +84,22 @@ public class StaffDao {
 
     return staffList;
   }
+  
+  /*
+   * @method Name: selectStaff
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 교직원을 가져오는 함수
+   * 
+   * @param spec: String id
+   * 
+   * @return: Staff
+   */
 
+  
   public Staff selectStaff(String id) {
     String sql = "select * from staff left join department "
         + "on staff.dept_id = department.id where binary staff_id = ?";
@@ -125,6 +141,20 @@ public class StaffDao {
     return staff;
   }
 
+  /*
+   * @method Name: selectInfo
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 정성윤
+   * 
+   * @description: 해당 교직원의 부서이름을 받아오는 함수
+   * 
+   * @param spec: int id
+   * 
+   * @return: Staff
+   */
+  
   public Staff selectInfo(int id) {
     String sql = "select * from staff left join department "
         + "on staff.dept_id = department.id where staff.id = ?";
