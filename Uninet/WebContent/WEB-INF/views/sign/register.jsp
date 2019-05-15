@@ -20,34 +20,54 @@
       
       <div id="second-div" class="unseen">
       <label for="id" class="label">로그인 정보 입력</label>
-        <input type="text" name="id" id="id" placeholder="아이디"/>
-        <input
-          type="password"
-          name="password"
-          id="pwd"
-          placeholder="비밀번호"
-        />
-        <input
-          type="password"
-          name="passwordcheck"
-          id="pwdcheck"
-          placeholder="비밀번호 확인"
-        />
-        <input type="text" name="email" id="email" placeholder="이메일" />
+        <div class="id register-input">
+          <input type="text" name="id" id="id" placeholder="아이디"/>
+          <span class="tip">영문자, 숫자 6자 이상</span>
+        </div>
+        <div class="password register-input">
+          <input
+            type="password"
+            name="password"
+            id="pwd"
+            placeholder="비밀번호"
+          />
+          <span class="tip">4자 이상</span>
+        </div>
+        <div class="password-check register-input">
+          <input
+            type="password"
+            name="passwordcheck"
+            id="pwdcheck"
+            placeholder="비밀번호 확인"
+          />
+          <span class="tip"></span>
+        </div>
+        <div class="email register-input">
+          <input type="text" name="email" id="email" placeholder="이메일" />
+          <span class="tip"></span>
+        </div>
       </div>
       
       
       <div id="third-div" class="unseen">
       <label for="name" class="label">개인 정보 입력</label>
-        <input type="text" name="name" id="name" placeholder="이름(실명)" />
-        <input type="date" name="birthday" id="birthday" placeholder="생일" />
-        <input
-          type="text"
-          name="phoneNumber"
-          id="phoneNumber"
-          placeholder="전화번호"
-          maxlength="11"
-        />
+        <div class="name register-input">
+          <input type="text" name="name" id="name" placeholder="이름(실명)" />
+          <span class="tip">최대 5자</span>
+        </div>
+        <div class="birthday register-input">
+          <input type="date" name="birthday" id="birthday" placeholder="생일" value="2000-01-01" min="1958-01-01" max="2000-12-31"/>
+        </div>
+        <div class="phonenumber register-input">
+          <input
+            type="text"
+            name="phoneNumber"
+            id="phoneNumber"
+            placeholder="전화번호"
+            maxlength="11"
+          />
+          <span class="tip">'-' 없이 숫자만 입력</span>
+        </div>
       </div>
 
       <div id="fourth-div" class="unseen">
