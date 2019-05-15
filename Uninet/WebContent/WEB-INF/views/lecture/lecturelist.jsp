@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/table.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/modal.css">
+
 </head>
+
 <body>
 <jsp:include page="/common/top.jsp" flush="false" />
   <div class="container">
@@ -72,7 +74,8 @@
             <input type="radio" value="major" id="major" name="sort">
             <label for="major">전공</label>
           </div>   
-          <button type="button" class="searchBtn2" id="closeBtn2">정렬</button>        
+          <button type="button" class="searchBtn2" id="closeBtn2">정렬</button>
+          
       </div>
     </div>
   </div> 

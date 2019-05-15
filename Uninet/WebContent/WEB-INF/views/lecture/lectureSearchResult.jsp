@@ -60,7 +60,8 @@
     </td>
     <td>
       <a href="delete?id=${lecture.id}">
-        <i class="far fa-trash-alt hover-big"></i>
+        <i class="far fa-trash-alt hover-b
+        ig" id="deleteBtn"></i>
       </a>
     </td>
   </tr>

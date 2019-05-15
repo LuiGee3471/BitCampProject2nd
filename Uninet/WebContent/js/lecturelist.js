@@ -105,7 +105,18 @@ $(function() {
   $("#closeBtn2").click(function() {
     const optionValue = $("input[name='sort']:checked").val();
     callData(1, "sort", optionValue);
-  }) 
+  });
+  
+  $(document).on("click","#deleteBtn",function() {
+      var result = confirm("하잉");
+      if(result) {
+        return false;
+      } else {
+        
+      }
+  });
+
+  
 });
 
 const modalBtns = [...document.querySelectorAll(".button")];
