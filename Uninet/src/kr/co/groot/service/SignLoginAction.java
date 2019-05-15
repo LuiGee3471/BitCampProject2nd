@@ -26,11 +26,7 @@ public class SignLoginAction implements Action {
 
       String correctPassword = staff.getPassword();
 
-      if (correctPassword == null) {
-        correctPassword = "";
-      }
-
-      if (correctPassword.equals(password)) {
+      if (password.equals(correctPassword)) {
         session.setAttribute("staff", staff);
         response.sendRedirect("main");
       } else {

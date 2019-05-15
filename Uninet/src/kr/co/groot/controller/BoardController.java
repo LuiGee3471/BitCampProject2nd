@@ -20,7 +20,7 @@ import kr.co.groot.service.BoardSearchAction;
 import kr.co.groot.service.BoardUpdateAction;
 import kr.co.groot.service.BoardWriteAction;
 
-@WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*", "/notice/*" })
+@WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*" })
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
