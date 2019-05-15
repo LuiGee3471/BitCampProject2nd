@@ -20,7 +20,6 @@ public class MyPageUpdatePictureAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     String uploadpath = request.getServletContext().getRealPath("images");
-    System.out.println(uploadpath);
     int size = 1024 * 1024 * 10;
 
     HttpSession session = request.getSession();

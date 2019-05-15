@@ -4,7 +4,7 @@ $(function() {
   const credit3 = ['123', '345', '567', '789'];
   let changeItem;
   let selectCredit = '';
-  console.log($("#timeFirst radio"));
+
   $("#timeFirst input").each(function(index, element) {
     if ($(element).attr("value") === day) {
       $(element).attr("checked", true);
@@ -12,7 +12,6 @@ $(function() {
   });
 
   const originSelect = Number($('#selectCredit option:selected').val());
-  console.log(originSelect);
 
   if (originSelect === 1) {
     changeItem = credit1;
@@ -23,7 +22,6 @@ $(function() {
   }
   
   for (let count = 0; count < changeItem.length; count++) {
-    console.log(time);
     let tag = `<option value="${changeItem[count]}">${changeItem[count]}</option>`;
     if (changeItem[count] === time) {
         tag = `<option value="${changeItem[count]}" selected>${changeItem[count]}</option>`;
@@ -35,7 +33,7 @@ $(function() {
 
   $('#selectCredit').change(function() {
     selectCredit = Number($(this).val());
-    console.log(selectCredit);
+
     if (selectCredit === 1) {
       changeItem = credit1;
     } else if (selectCredit === 2) {
@@ -47,7 +45,6 @@ $(function() {
     $('#changeTime').empty();
 
     for (let count = 0; count < changeItem.length; count++) {
-      console.log(time);
       let tag = `<option value="${changeItem[count]}">${changeItem[count]}</option>`;
       if (changeItem[count] === time) {
           tag = `<option value="${changeItem[count]}" selected>${changeItem[count]}</option>`;

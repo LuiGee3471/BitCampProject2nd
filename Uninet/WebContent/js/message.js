@@ -9,7 +9,6 @@ function getMessage(messageId) {
       $('.message-paper').html(data);
     },
     error: function(xhr) {
-      console.log(xhr.status);
       alert('쪽지를 불러오지 못했습니다.');
     },
   }).done(function() {
@@ -18,7 +17,6 @@ function getMessage(messageId) {
         $('.modal').css('display', 'block');
         const receiver_id = $(this)
           .siblings(".hidden").text();
-          console.log(receiver_id);
         $('.message-form').append(
           "<input type='hidden' value='" +
             receiver_id +

@@ -23,14 +23,12 @@ public class MessageSendAction implements Action {
     String postId = request.getParameter("postId");
     String origin = request.getParameter("origin");
 
-    System.out.println(id);
-
     StaffDao staffDao = new StaffDao();
     Staff staff = staffDao.selectByUniqueId(id);
-    System.out.println(staff.getId());
+
     Message message = new Message();
     MessageDao messageDao = new MessageDao();
-    System.out.println(id + text + staff.getId() + user.getId() + postId);
+
     message.setContent(text);
     message.setReceiverId(staff.getId());
     message.setSenderId(user.getId());

@@ -26,7 +26,7 @@ public class StatController extends HttpServlet {
     String requestUri = request.getRequestURI();
     String contextPath = request.getContextPath();
     String urlCommand = requestUri.substring(contextPath.length());
-    System.out.println(urlCommand);
+
     Action action = null;
     ActionForward forward = null;
 

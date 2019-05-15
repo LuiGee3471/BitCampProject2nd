@@ -23,7 +23,7 @@ public class LectureWriteOkAction implements Action {
     Lecture lecture = new Lecture();
     String weekday = request.getParameter("weekday");
     String Time = request.getParameter("lectureTime");
-    System.out.println("lectureWriteOk에서 출력 : " + weekday + Time);
+
     String lectureTime = weekday + Time;
 
     lecture.setLectureName(request.getParameter("lectureName"));

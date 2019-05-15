@@ -56,9 +56,6 @@ $("#id").keyup(function() {
           tip.removeClass("warning");
           tip.text("사용 가능한 아이디입니다");
         }
-      },
-      error: function(xhr) {
-        console.dir(xhr);
       }
     })
   }

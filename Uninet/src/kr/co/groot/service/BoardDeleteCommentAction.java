@@ -24,8 +24,6 @@ public class BoardDeleteCommentAction implements Action {
     dao.countRecomment(id);
 
     forward = new ActionForward();
-    System.out.println(result);
-    System.out.println("result" + result);
     if (result > 0) {
       forward.setRedirect(true);
       forward.setPath("read?id=" + postId);

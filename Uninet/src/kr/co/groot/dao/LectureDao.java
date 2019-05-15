@@ -49,9 +49,11 @@ public class LectureDao {
    */
   public List<Lecture> selectAll() {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
-        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
+        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
+        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
+        + "ON p.major_id = m.id";
     List<Lecture> lectureList = null;
     try {
       conn = ds.getConnection();
@@ -124,7 +126,7 @@ public class LectureDao {
         System.out.println("insertLecture:" + e.getMessage());
       }
     }
-  
+
     return row;
   }
 
@@ -152,7 +154,7 @@ public class LectureDao {
       row = pstmt.executeUpdate();
     } catch (SQLException e) {
       System.out.println("deleteLecture:" + e.getMessage());
-    }finally {
+    } finally {
       try {
         pstmt.close();
         conn.close();
@@ -161,7 +163,6 @@ public class LectureDao {
       }
     }
 
-  
     return row;
   }
 
@@ -196,7 +197,7 @@ public class LectureDao {
       row = pstmt.executeUpdate();
     } catch (SQLException e) {
       System.out.println("updateLecture: " + e.getMessage());
-    }finally {
+    } finally {
       try {
         pstmt.close();
         conn.close();
@@ -204,7 +205,7 @@ public class LectureDao {
         System.out.println("updateLecture: " + e.getMessage());
       }
     }
-   
+
     return row;
   }
 
@@ -223,9 +224,11 @@ public class LectureDao {
    */
   public List<Lecture> selectByName(String criterion, String input) {
     String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
-        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "WHERE ";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
+        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
+        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
+        + "ON p.major_id = m.id " + "WHERE ";
 
     String lastSQL = " LIKE ?";
 
@@ -273,7 +276,7 @@ public class LectureDao {
       }
     } catch (SQLException e) {
       System.out.println("selectByName: " + e.getMessage());
-    }finally {
+    } finally {
       try {
         rs.close();
         pstmt.close();
@@ -282,7 +285,7 @@ public class LectureDao {
         System.out.println("selectByName: " + e.getMessage());
       }
     }
-  
+
     return lectureList;
   }
 
@@ -301,9 +304,11 @@ public class LectureDao {
    */
   public List<Lecture> selectByLectureType(int lectureType) {
     String sql = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
-        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id" + "WHERE lt.id = ?";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
+        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
+        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id"
+        + "WHERE lt.id = ?";
     List<Lecture> lectureList = null;
     try {
       conn = ds.getConnection();
@@ -328,14 +333,14 @@ public class LectureDao {
       }
 
     } catch (SQLException e) {
-      System.out.println("selectByLectureType: "+e.getMessage());
-    }finally {
+      System.out.println("selectByLectureType: " + e.getMessage());
+    } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("selectByLectureType: "+e.getMessage());
+        System.out.println("selectByLectureType: " + e.getMessage());
       }
     }
     return lectureList;
@@ -356,9 +361,11 @@ public class LectureDao {
    */
   public List<Lecture> sortLecture(String criterion) {
     String firstSQL = "SELECT l.id as id, lecture_name, credit, time, lecture_type,"
-        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id " + "FROM lecture l "
-        + "LEFT JOIN lecturetype lt " + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
-        + "ON l.prof_id = p.id " + "LEFT JOIN major m " + "ON p.major_id = m.id " + "ORDER BY ";
+        + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id "
+        + "FROM lecture l " + "LEFT JOIN lecturetype lt "
+        + "ON l.lecture_type_id = lt.id " + "LEFT JOIN professor p "
+        + "ON l.prof_id = p.id " + "LEFT JOIN major m "
+        + "ON p.major_id = m.id " + "ORDER BY ";
 
     String order = "";
     String lastSQL = " asc ";
@@ -406,18 +413,18 @@ public class LectureDao {
         lectureList.add(lecture);
       }
     } catch (SQLException e) {
-      System.out.println("sortLecture: "+e.getMessage());
+      System.out.println("sortLecture: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("sortLecture: "+e.getMessage());
+        System.out.println("sortLecture: " + e.getMessage());
       }
-      
+
     }
-   
+
     return lectureList;
   }
   /*
@@ -435,9 +442,10 @@ public class LectureDao {
    */
 
   public JSONObject countByLecture() {
-    String sql = "select " + "m.major_name, count(*) as count " + "from lecture l " + "left join professor p "
-        + "on l.prof_id = p.id " + "left join major m " + "on p.major_id = m.id " + "group by m.major_name "
-        + "order by m.major_name";
+    String sql = "select " + "m.major_name, count(*) as count "
+        + "from lecture l " + "left join professor p " + "on l.prof_id = p.id "
+        + "left join major m " + "on p.major_id = m.id "
+        + "group by m.major_name " + "order by m.major_name";
 
     JSONObject json = null;
     try {
@@ -449,16 +457,16 @@ public class LectureDao {
         json.put(rs.getString("major_name"), rs.getInt("count"));
       }
     } catch (SQLException e) {
-      System.out.println("countByLecture: "+e.getMessage());
+      System.out.println("countByLecture: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("countByLecture: "+e.getMessage());
+        System.out.println("countByLecture: " + e.getMessage());
       }
-    
+
     }
     return json;
   }
@@ -477,8 +485,10 @@ public class LectureDao {
    * @return: JSON
    */
   public JSONObject countByTime() {
-    String sql = "select substr(time, 1, 1) as day, " + "count(substr(time, 1, 1)) as count from lecture "
-        + "group by substr(time, 1, 1) " + "order by field(day, '월','화','수','목','금')";
+    String sql = "select substr(time, 1, 1) as day, "
+        + "count(substr(time, 1, 1)) as count from lecture "
+        + "group by substr(time, 1, 1) "
+        + "order by field(day, '월','화','수','목','금')";
     JSONObject json = null;
     try {
       conn = ds.getConnection();
@@ -489,14 +499,14 @@ public class LectureDao {
         json.put(rs.getString("day"), rs.getInt("count"));
       }
     } catch (SQLException e) {
-     System.out.println("countByTime: "+e.getMessage());
-    }finally {
+      System.out.println("countByTime: " + e.getMessage());
+    } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("countByTime: "+e.getMessage());
+        System.out.println("countByTime: " + e.getMessage());
       }
     }
     return json;
@@ -518,27 +528,28 @@ public class LectureDao {
 
   public JSONObject countByProfessor() {
     String sql = "select m.major_name as major_name, count(m.major_name) as count "
-        + "from professor p left join major m " + "on p.major_id = m.id " + "group by m.major_name";
+        + "from professor p left join major m " + "on p.major_id = m.id "
+        + "group by m.major_name";
 
     JSONObject json = null;
     try {
       conn = ds.getConnection();
       pstmt = conn.prepareStatement(sql);
       rs = pstmt.executeQuery();
-      json =  new JSONObject();
-      
+      json = new JSONObject();
+
       while (rs.next()) {
         json.put(rs.getString("major_name"), rs.getInt("count"));
       }
     } catch (SQLException e) {
-       System.out.println("countByProfessor: "+e.getMessage());
-    }finally {
+      System.out.println("countByProfessor: " + e.getMessage());
+    } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("countByProfessor: "+e.getMessage());
+        System.out.println("countByProfessor: " + e.getMessage());
       }
     }
     return json;
@@ -568,14 +579,14 @@ public class LectureDao {
         lecture.setProfId(rs.getInt("prof_id"));
       }
     } catch (SQLException e) {
-      System.out.println("selectById: "+e.getMessage());
-    }finally {
+      System.out.println("selectById: " + e.getMessage());
+    } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("selectById: "+e.getMessage());
+        System.out.println("selectById: " + e.getMessage());
       }
     }
     return lecture;
@@ -606,15 +617,15 @@ public class LectureDao {
       rs.next();
       count = rs.getInt("countLectureList");
     } catch (SQLException e) {
-      System.out.println("countHowManyLectureList: "+e.getMessage());
+      System.out.println("countHowManyLectureList: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         rs.close();
       } catch (SQLException e) {
-        System.out.println("countHowManyLectureList: "+e.getMessage());
-      }  
+        System.out.println("countHowManyLectureList: " + e.getMessage());
+      }
     }
     return count;
 
@@ -636,10 +647,13 @@ public class LectureDao {
 
   public List<Lecture> getLectureByPage(int page) {
     String sql1 = "set @rownum:=0";
-    String sql2 = "select * from " + "(select @rownum:=@rownum + 1 as no, l.id, l.lecture_name, l.credit, "
-        + "l.time, t.lecture_type as lecturetype, p.prof_name as profname, " + "m.major_name as majorname "
+    String sql2 = "select * from "
+        + "(select @rownum:=@rownum + 1 as no, l.id, l.lecture_name, l.credit, "
+        + "l.time, t.lecture_type as lecturetype, p.prof_name as profname, "
+        + "m.major_name as majorname "
         + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
-        + "left join professor p on l.prof_id = p.id " + "left join major m on p.major_id = m.id) u "
+        + "left join professor p on l.prof_id = p.id "
+        + "left join major m on p.major_id = m.id) u "
         + "where no > ? limit 20";
     List<Lecture> list = new ArrayList<Lecture>();
     try {
@@ -664,21 +678,21 @@ public class LectureDao {
         list.add(lecture);
       }
     } catch (SQLException e) {
-      System.out.println("getLectureByPage: "+e.getMessage());
+      System.out.println("getLectureByPage: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("getLectureByPage: "+e.getMessage());
+        System.out.println("getLectureByPage: " + e.getMessage());
       }
     }
     return list;
   }
 
   public List<Lecture> getLectureSortByOption(int page, String option) {
-   
+
     String sql1 = "set @rownum:=0";
     String firstSQL = "select * from (select @rownum:=@rownum +1 as no, c.* from (select l.id as id, lecture_name, credit, time, lecture_type, "
         + "prof_name, major_name, lt.id as lecture_type_id, m.id as major_id, p.id as prof_id FROM lecture l "
@@ -734,22 +748,24 @@ public class LectureDao {
         lectureList.add(lecture);
       }
     } catch (SQLException e) {
-      System.out.println("getLectureSortByOption: "+e.getMessage());
+      System.out.println("getLectureSortByOption: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("getLectureSortByOption: "+e.getMessage());
+        System.out.println("getLectureSortByOption: " + e.getMessage());
       }
     }
     return lectureList;
   }
 
   public int countHowManyLectureWithOption(String option, String word) {
-    String sql1 = "select count(*) " + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
-        + "left join professor p on l.prof_id = p.id " + "left join major m on p.major_id = m.id " + "where ";
+    String sql1 = "select count(*) "
+        + "from lecture l left join lecturetype t on l.lecture_type_id = t.id "
+        + "left join professor p on l.prof_id = p.id "
+        + "left join major m on p.major_id = m.id " + "where ";
     String sql2 = "";
     word = "%" + word + "%";
     int count = 0;
@@ -777,21 +793,21 @@ public class LectureDao {
       rs.next();
       count = rs.getInt(1);
     } catch (SQLException e) {
-      System.out.println("countHowManyLectureWithOption: "+e.getMessage());
-    }finally {
+      System.out.println("countHowManyLectureWithOption: " + e.getMessage());
+    } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("countHowManyLectureWithOption: "+e.getMessage());
+        System.out.println("countHowManyLectureWithOption: " + e.getMessage());
       }
     }
     return count;
   }
-  
 
-  public List<Lecture> getLectureBySearchWord(int page, String option, String word) {
+  public List<Lecture> getLectureBySearchWord(int page, String option,
+      String word) {
     String sql1 = "set @rownum:=0";
     String firstSQL = "select * from "
         + "(select @rownum:=@rownum +1 as no, l.id as id, lecture_name, credit, time, lecture_type, "
@@ -841,52 +857,49 @@ public class LectureDao {
         lectureList.add(lecture);
       }
     } catch (SQLException e) {
-      System.out.println("getLectureBySearchWord: "+e.getMessage());
+      System.out.println("getLectureBySearchWord: " + e.getMessage());
     } finally {
       try {
         rs.close();
         pstmt.close();
         conn.close();
       } catch (SQLException e) {
-        System.out.println("getLectureBySearchWord: "+e.getMessage());
+        System.out.println("getLectureBySearchWord: " + e.getMessage());
       }
     }
     return lectureList;
   }
-  
-  
-  public List<Professor> getProfessorListByMajorId(){
-	  List<Professor> professorList = null;
-	  Professor professor = null; 
-	  String sql = "select p.*, m.major_name from professor p inner join major m on p.major_id = m.id";
-	  try {
-		  conn = ds.getConnection();
-		  pstmt = conn.prepareStatement(sql);
-		  rs = pstmt.executeQuery();
-		  professorList = new ArrayList<Professor>();
-		  while(rs.next()) {
-			  professor = new Professor();
-			  professor.setId(rs.getInt(1));
-			  professor.setProfName(rs.getString(2));
-			  professor.setMajorId(rs.getInt(3));
-			  professor.setMajorName(rs.getString(4));
-			  professorList.add(professor);
-		  }
-		  System.out.println(professorList.toString());
-		  
-	  }catch(Exception e) {
-		  System.out.println("getProfessorListByMajorId" +e.getMessage());
-	  } finally {
-		try {
-			rs.close();
-			pstmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			System.out.println("getProfessorListByMajorId" +e.getMessage());
-		}
-	}
-	  
-	  return professorList;
+
+  public List<Professor> getProfessorListByMajorId() {
+    List<Professor> professorList = null;
+    Professor professor = null;
+    String sql = "select p.*, m.major_name from professor p inner join major m on p.major_id = m.id";
+    try {
+      conn = ds.getConnection();
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      professorList = new ArrayList<Professor>();
+      while (rs.next()) {
+        professor = new Professor();
+        professor.setId(rs.getInt(1));
+        professor.setProfName(rs.getString(2));
+        professor.setMajorId(rs.getInt(3));
+        professor.setMajorName(rs.getString(4));
+        professorList.add(professor);
+      }
+    } catch (Exception e) {
+      System.out.println("getProfessorListByMajorId" + e.getMessage());
+    } finally {
+      try {
+        rs.close();
+        pstmt.close();
+        conn.close();
+      } catch (SQLException e) {
+        System.out.println("getProfessorListByMajorId" + e.getMessage());
+      }
+    }
+
+    return professorList;
   }
 
 }

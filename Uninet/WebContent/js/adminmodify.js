@@ -13,8 +13,7 @@ $(document).ready(function() {
 			event.preventDefault();
 		}
 	})
-	console.log($('#totalAdmin checkbox'));
-	console.log($('#adminCheck').val());
+
 	const adminCheck = $('#adminCheck').val();
 	$("#citeAdmin input").each(function(index, element){
 		if($(element).attr("value")==adminCheck){

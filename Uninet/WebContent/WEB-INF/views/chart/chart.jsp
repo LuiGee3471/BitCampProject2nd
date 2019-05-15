@@ -110,7 +110,6 @@
               onComplete : function() {
                 var chartInstance = this.chart;
                 var ctx = chartInstance.ctx;
-                console.log(chartInstance);
                 var height = chartInstance.controller.boxes[0].bottom;
                 ctx.textAlign = "center";
                 Chart.helpers.each(this.data.datasets.forEach(function(dataset,
@@ -165,7 +164,6 @@
       $("#chart").change(
           function() {
             var selected = $("#chart").val();
-            console.log(selected);
             var titleText = "";
             var keylist = [];
             var valuelist = [];
@@ -258,7 +256,6 @@
                   onComplete : function() {
                     var chartInstance = this.chart;
                     var ctx = chartInstance.ctx;
-                    console.log(chartInstance);
                     var height = chartInstance.controller.boxes[0].bottom;
                     ctx.textAlign = "center";
                     Chart.helpers.each(this.data.datasets.forEach(function(

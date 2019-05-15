@@ -44,8 +44,6 @@ public class BoardListAction implements Action {
       break;
     }
 
-    System.out.println("페이지 수: " + page);
-
     request.setAttribute("boardName", boardName);
     request.setAttribute("boardType", boardType);
     request.setAttribute("list", list);

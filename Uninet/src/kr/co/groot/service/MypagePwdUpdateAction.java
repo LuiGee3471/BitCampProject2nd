@@ -39,7 +39,7 @@ public class MypagePwdUpdateAction implements Action {
     forward = new ActionForward();
     forward.setRedirect(false);
     forward.setPath("/WEB-INF/views/etc/redirect.jsp");
-    System.out.println("123");
+
     return forward;
   }
 }

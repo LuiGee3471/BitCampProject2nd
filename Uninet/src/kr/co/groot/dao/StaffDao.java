@@ -846,7 +846,6 @@ public class StaffDao {
     String sql1 = "set @rownum=0";
     String sql2 = "select * from ";
     String column = "";
-    System.out.println("나는 옵션입니당 : " + option);
     switch (option) {
     case "name":
       column = "staff_name like ?";

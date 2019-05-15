@@ -23,7 +23,7 @@ public class LectureUpdateAction implements Action {
       HttpServletResponse response) {
     ActionForward forward = new ActionForward();
     int id = Integer.parseInt(request.getParameter("id"));
-    System.out.println("id의 값은 : " + id);
+    
     List<Lecture> lectureList = null;
     List<Professor> profList = null;
     List<LectureType> ltList = null;

@@ -30,9 +30,7 @@ public class LoggedFilter implements Filter {
     HttpServletRequest req = (HttpServletRequest) request;
     HttpServletResponse res = (HttpServletResponse) response;
     HttpSession session = req.getSession();
-    System.out.println("FILTER");
     Staff loggedUser = (Staff) session.getAttribute("staff");
-    System.out.println(loggedUser);
     if (loggedUser != null) {
       res.sendRedirect(req.getContextPath() + "/main");
       return;

@@ -42,7 +42,6 @@ public class LectureUpdateOkAction implements Action {
       msg = "수정 실패";
       url = "list";
     }
-    System.out.println("url : " + url);
     request.setAttribute("msg", msg);
     request.setAttribute("url", url);
 

@@ -22,9 +22,7 @@ public class AdminSearchByInputAction implements Action {
     String method = request.getParameter("method");
     String option = request.getParameter("option");
     String word = request.getParameter("word");
-    System.out.println("method : " + method);
-    System.out.println("option : " + option);
-    System.out.println("word : " + word);
+
     int page = 1;
     StaffDao dao;
     try {
@@ -39,9 +37,6 @@ public class AdminSearchByInputAction implements Action {
     	case "search" :
     	  page = paginator.getStaffPageNumberByOption(option, word);
     		list = dao.getStaffByOption(pageNumber, option, word);
-    		System.out.println("PageNumber 가지고 들어간다 : " + pageNumber);
-    		System.out.println("option 가지고 들어간다 : " + option);
-    		System.out.println("word 가지고 들어간다 : " + word);
     		break;
     	}
     }catch(Exception e) {
@@ -54,16 +49,8 @@ public class AdminSearchByInputAction implements Action {
     request.setAttribute("currentPage", pageNumber);
     request.setAttribute("totalPages", page);
     request.setAttribute("staffList", list);
-//    StaffDao dao;
-//    try {
-//      dao = new StaffDao();
-//      staffList = dao.selectByName(search, input);
-//    } catch (Exception e) {
-//      System.out.println(e.getMessage());
-//    }
-//    request.setAttribute("staffList", staffList);
+
     forward.setRedirect(false);
-    System.out.println("액션타냐고");
     forward.setPath ("/WEB-INF/views/admin/searchResult.jsp");
     return forward;
   }

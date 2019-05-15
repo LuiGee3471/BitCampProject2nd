@@ -20,8 +20,6 @@
   int commentCount = commentDao.getCommentCount(id);
   pageContext.setAttribute("writer", writer);
   pageContext.setAttribute("commentCount", commentCount);
-  
-  System.out.println(">" + post.getFileName() + "<");
 %>
 <c:set var="post" value="${post}"/>
 <c:set var="comments" value="${comments}"/>

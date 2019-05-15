@@ -17,9 +17,6 @@ import kr.co.groot.service.AdminModifyOkAction;
 import kr.co.groot.service.AdminSearchByInputAction;
 import kr.co.groot.service.MyPageDeleteAction;
 import kr.co.groot.service.MyPageMyAction;
-import kr.co.groot.service.MyPageSetInfoAction;
-import kr.co.groot.service.MyPageSetPictureAction;
-import kr.co.groot.service.MyPageSetPwdAction;
 import kr.co.groot.service.MyPageUpdateInfoAction;
 import kr.co.groot.service.MyPageUpdatePictureAction;
 import kr.co.groot.service.MypagePwdUpdateAction;
@@ -44,14 +41,17 @@ public class MypageController extends HttpServlet {
       action = new MyPageMyAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/mypage/setinfo")) {
-      action = new MyPageSetInfoAction();
-      forward = action.execute(request, response);
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/mypage/setinfo.jsp");
     } else if (urlCommand.equals("/mypage/setpassword")) {
-      action = new MyPageSetPwdAction();
-      forward = action.execute(request, response);
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/mypage/setpassword.jsp");
     } else if (urlCommand.equals("/mypage/setpicture")) {
-      action = new MyPageSetPictureAction();
-      forward = action.execute(request, response);
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/mypage/setPicture.jsp");
     } else if (urlCommand.equals("/mypage/admin")) {
       action = new AdminAction();
       forward = action.execute(request, response);

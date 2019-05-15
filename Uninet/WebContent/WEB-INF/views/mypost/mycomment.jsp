@@ -32,7 +32,6 @@
     }
   }
   
-  System.out.println(startPage + " / " + endPage);
   pageContext.setAttribute("startPage", startPage);
   pageContext.setAttribute("endPage", endPage);
 %>

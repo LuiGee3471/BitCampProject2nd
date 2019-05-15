@@ -9,9 +9,7 @@ function getWeather(lat,lng){
      
     return response.json();
     }).then(function(json){
-         console.log(json);
         const mainWeather = json.weather[0].main;
-        console.log(mainWeather);
         const temp = Math.round(json.main.temp);
         const place = json.name;
         var info = `${mainWeather} / ${temp}°`;

@@ -9,7 +9,6 @@
   Timestamp birthday = staff.getBirthday();
   LocalDate newBirthday = birthday.toLocalDateTime().toLocalDate();
   String birthdayString = newBirthday.toString();
-  System.out.println(staff.getSelfIntroduce());
 %>
 <c:set var="staff" value="${sessionScope.staff}" />
 <jsp:include page="/common/head.jsp" flush="false" />
