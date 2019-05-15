@@ -6,11 +6,11 @@
   </welcome-file-list>
   <error-page>
   <error-code>404</error-code>
-  <location>/views/etc/error.jsp</location>
+  <location>/WEB-INF/views/etc/error_404.jsp</location>
   </error-page>
   
  <error-page>
   <error-code>500</error-code>
-  <location>/views/etc/error.jsp</location>
+  <location>/WEB-INF/views/etc/error_500.jsp</location>
  </error-page>
 </web-app>
