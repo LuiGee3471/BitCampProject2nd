@@ -25,7 +25,6 @@ public class BoardWriteAction implements Action {
     ServletContext application = request.getServletContext();
     String uploadPath = application.getRealPath("file");
 
-    System.out.println(uploadPath);
 
     int size = 1024 * 1024 * 5;
 
