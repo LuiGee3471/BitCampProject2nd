@@ -16,7 +16,7 @@
 				class="label">이름 </span><input type="text" id="name" name="name"
 				value="${staff.staffName}" class="text" readOnly><br> <span
 				class="label">이메일</span> <input type="email" id="email" name="email"
-				value="${staff.email}" class="text" readOnly><br> <span
+				value="${staff.email}" class="text"><br> <span
 				class="label">핸드폰 번호</span> <input type="text" id="phoneNumber"
 				name="phoneNumber" value="${staff.phoneNumber}"><br>
 
