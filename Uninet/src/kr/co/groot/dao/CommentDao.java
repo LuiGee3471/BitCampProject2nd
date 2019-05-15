@@ -32,6 +32,19 @@ public class CommentDao {
     }
   }
 
+  /*
+   * @method Name: getCommentList
+   * 
+   * @date: 2019. 5. 11.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 로그인 되어있는 회원의 댓글 리스트를 가져온다.
+   * 
+   * @param spec: int id
+   * 
+   * @return: List<Comment>
+   */
   public List<Comment> getCommentList(int id) {
 
     String sql = "select comment.*, round(time_to_sec(timediff(NOW(), time)) / 60) as diff, "
@@ -128,6 +141,19 @@ public class CommentDao {
     return commentList;
   }
 
+  /*
+   * @method Name: selectCommentById
+   * 
+   * @date: 2019. 5. 11.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 로그인 되어있는 회원의 댓글 리스트를 가져온다.
+   * 
+   * @param spec: int id
+   * 
+   * @return: Comment
+   */
   public Comment selectCommentById(int id) {
     String sql = "select * from comment where id = ?";
     Comment comment = null;
@@ -162,9 +188,22 @@ public class CommentDao {
     return comment;
   }
 
+  /*
+   * @method Name: selectMostRecentComment
+   * 
+   * @date: 2019. 5. 10.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 가장 많은 조회수를 가진 게시글을 가져온다
+   * 
+   * @param spec: none
+   * 
+   * @return: Comment
+   */
   public Comment selectMostRecentComment() {
-    String sql = "select * " + "from comment " + "where id = "
-        + "(select max(id) " + "from comment)";
+	    String sql = "select * " + "from comment " + "where id = "
+	        + "(select max(id) " + "from comment)";
     Comment comment = null;
     try {
       conn = ds.getConnection();
@@ -311,7 +350,21 @@ public class CommentDao {
     }
     return row;
   }
-
+  
+  
+  /*
+   * @method Name: countRecomment
+   * 
+   * @date: 2019. 5. 10.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 가장 많은 조회수를 가진 게시글을 가져온다
+   * 
+   * @param spec: int id
+   * 
+   * @return: int
+   */
   public int countRecomment(int id) {
     int result = 0;
     int row = 0;
@@ -397,6 +450,19 @@ public class CommentDao {
     return postList;
   }
 
+  /*
+   * @method Name: getCommentCount
+   * 
+   * @date: 2019. 5. 10.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판 댓글의 조회수를 가져온다
+   * 
+   * @param spec: int id
+   * 
+   * @return: int
+   */
   public int getCommentCount(int id) {
     String sql = "select count(*) as count from comment where refer = ? and content!='삭제된 댓글입니다.'";
     int row = 0;
@@ -423,7 +489,20 @@ public class CommentDao {
     }
     return row;
   }
-
+  
+  /*
+   * @method Name: insertRecomment
+   * 
+   * @date: 2019. 5. 10.
+   * 
+   * @author: 강기훈
+   * 
+   * @description: 게시판 게시글에 댓글에 대댓글 추가한다
+   * 
+   * @param spec: Comment comment
+   * 
+   * @return: int
+   */	
   public int insertRecomment(Comment comment) {
     int row = 0;
     String sql = "insert into comment(content, writer_id, time, refer,recomment, refer_comment) values (?,?,NOW(),?,'Y',?)";
