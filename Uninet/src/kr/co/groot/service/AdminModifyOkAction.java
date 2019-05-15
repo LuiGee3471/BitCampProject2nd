@@ -20,7 +20,7 @@ public class AdminModifyOkAction implements Action {
     staff.setIsAdmin(request.getParameter("isAdmin"));
     staff.setIsManager(request.getParameter("isManager"));
     staff.setId(Integer.parseInt(request.getParameter("selectId")));
-
+    staff.setDeptId(Integer.parseInt(request.getParameter("departList")));
     String msg = "";
     String url = "";
 
