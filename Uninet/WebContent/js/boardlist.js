@@ -1,4 +1,4 @@
-$("#textbox").click(function () {
+$("#textbox").click(function() {
   $(this).addClass("unseen");
   $("#postform").removeClass("unseen");
 });
@@ -10,30 +10,53 @@ $(".new-content").keyup(function() {
   } else {
     $(".warning").addClass("unseen");
   }
-})
+});
 
-$(".page-btn")
-    .click(function () {
-      const pageNo = Number($(this).text());
-      const url = "list?page=" + pageNo + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
-      location.href = url;
-    });
+$(".page-btn").click(function() {
+  const pageNo = Number($(this).text());
+  const url =
+    "list?page=" +
+    pageNo +
+    "&option=" +
+    option +
+    "&boardtype=" +
+    boardType +
+    "&word=" +
+    word;
+  location.href = url;
+});
 
-$(".next-page").click(function () {
+$(".next-page").click(function() {
   if (!$(this).hasClass("invisible")) {
-    const url = "list?page=" + (currentPage + 1) + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+    const url =
+      "list?page=" +
+      (currentPage + 1) +
+      "&option=" +
+      option +
+      "&boardtype=" +
+      boardType +
+      "&word=" +
+      word;
     location.href = url;
   }
 });
 
-$(".prev-page").click(function () {
+$(".prev-page").click(function() {
   if (!$(this).hasClass("invisible")) {
-    const url = "list?page=" + (currentPage - 1) + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+    const url =
+      "list?page=" +
+      (currentPage - 1) +
+      "&option=" +
+      option +
+      "&boardtype=" +
+      boardType +
+      "&word=" +
+      word;
     location.href = url;
   }
 });
 
-$(".prv-btn").click(function () {
+$(".prv-btn").click(function() {
   const decision = currentPage % 3;
   let pageToMove;
   if (decision === 1) {
@@ -44,11 +67,19 @@ $(".prv-btn").click(function () {
     pageToMove = currentPage - 3;
   }
 
-  const url = "list?page=" + pageToMove + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+  const url =
+    "list?page=" +
+    pageToMove +
+    "&option=" +
+    option +
+    "&boardtype=" +
+    boardType +
+    "&word=" +
+    word;
   location.href = url;
 });
 
-$(".next-btn").click(function () {
+$(".next-btn").click(function() {
   const decision = currentPage % 3;
   let pageToMove;
   if (decision === 1) {
@@ -59,17 +90,24 @@ $(".next-btn").click(function () {
     pageToMove = currentPage + 1;
   }
 
-  const url = "list?page=" + pageToMove + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+  const url =
+    "list?page=" +
+    pageToMove +
+    "&option=" +
+    option +
+    "&boardtype=" +
+    boardType +
+    "&word=" +
+    word;
   location.href = url;
 });
 
 $(".new-btn").click(function() {
-  if(!$(".new-title").val()){
+  if (!$(".new-title").val()) {
     alert("제목을 입력해주세요!");
     event.preventDefault();
-  }else if(!$(".new-content").val()){
-     alert("내용을 입력해주세요!");
-     event.preventDefault();
+  } else if (!$(".new-content").val()) {
+    alert("내용을 입력해주세요!");
+    event.preventDefault();
   }
 });
-
