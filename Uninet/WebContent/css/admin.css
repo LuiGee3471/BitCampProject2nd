@@ -49,3 +49,7 @@
 .lecturetable i {
   font-size: 18px;
 }
+
+.hidden{
+  visibility: hidden;
+}
