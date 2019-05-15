@@ -14,6 +14,9 @@
 			$('#delbtn').click(function () {
 				$('#previewImage').attr("src", "<%=request.getContextPath()%>/images/default.png");
 			});
+			$("#delbtn").click(function(){
+				$('#upload').attr('src',"default.png");
+			});
 		});
 	</script>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
@@ -63,7 +66,7 @@
 					<input type="file" id="upload" value="" name="image" ><br>
 				</div>
 				<div class="a-4">
-					<input type="submit" value="변경완료" class="submit btn2">
+					<input type="submit" value="변경완료" class="submit">
 				</div>
 			</form>
 		</div>

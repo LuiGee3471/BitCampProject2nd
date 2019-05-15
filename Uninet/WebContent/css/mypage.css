@@ -107,7 +107,15 @@ input:focus {
 }
 
 .btn2 {
-  margin-left: 5px;
+ margin-left: auto;
+  background: none;
+  border: none;
+  color: white;
+  background-color: #C62917;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 15px;
+  cursor: pointer;
 }
 
 .info {
