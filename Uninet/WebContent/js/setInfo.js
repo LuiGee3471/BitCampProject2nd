@@ -1,4 +1,11 @@
  $(document).ready(function () {
+	 $('#summernote').summernote({
+	       height : 200, 
+	       minHeight : null,
+	       maxHeight : null,
+	       focus : true,
+	       lang : 'ko-KR' 
+	    });
       $('#currentPwd').keyup(function () {
         if ($('#currentPwd').val() != $('#pwd').val()) {
           $('#check').val('암호가 불일치 합니다.');

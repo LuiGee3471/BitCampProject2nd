@@ -63,7 +63,7 @@
 					<input type="file" id="upload" value="" name="image" ><br>
 				</div>
 				<div class="a-4">
-					<input type="button" value="삭제" id="delbtn" class="submit"><input type="submit" value="변경완료" class="submit btn2">
+					<input type="submit" value="변경완료" class="submit btn2">
 				</div>
 			</form>
 		</div>
