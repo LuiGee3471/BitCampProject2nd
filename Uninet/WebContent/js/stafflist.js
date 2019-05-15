@@ -128,7 +128,7 @@ $(function() {
   
   $(document).on("click","#deleteBtn",function() {
     
-    var result = confirm("강의를 정말 삭제하시겠습니까?");
+    var result = confirm("회원을 정말 삭제하시겠습니까?");
     
     if(result){
       location.replace("delete?id="+$(this).siblings("#deleteId").val());

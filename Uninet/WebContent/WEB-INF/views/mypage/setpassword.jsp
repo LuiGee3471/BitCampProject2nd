@@ -3,36 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#updatePwd2').keyup(function() {
-			if ($('#updatePwd2').val() != $('#updatePwd').val()) {
-				$('#check').val('변경할 비밀번호와 일치하지 않습니다.');
-				$('#check').css('color', 'red');
-			} else {
-				$('#check').val('암호가 일치합니다.');
-		    	$('#check').css('color','blue');
-			}
-		});
-		$('#currentPwd').keyup(function(event){
-			if($('#pwd').val() != $('#currentPwd').val()){
-				$('#checkPwd').val('현재 비밀번호와 일치하지 않습니다.');
-				$('#checkPwd').css('color','red');
-				var pwd = $('#pwd').val();
-				console.log(pwd);
-			}else{
-				$('#checkPwd').val('현재 비밀번호와 일치합니다.');
-				$('#checkPwd').css('color','blue');
-			}
-		});		
-			$('#update').click(function (event){
-				if($('#currentPwd').val() != $('#pwd').val()){
-					alert("현재 암호를 확인해주세요");
-					event.preventDefault();
-				}
-			})
-	});
-</script>
 </head>
 <body>
   <jsp:include page="/common/top.jsp" flush="false" />
@@ -70,24 +40,26 @@
 	    <div class="a-2">
 	      <span class="label">바꿀 비밀번호</span>
 	      <span class="data"><input type="password" class="info" id="updatePwd" value=""></span>
+	      <input type="text" id="firstCheck" class="check" size="35" readonly>
 	    </div>
 	    <div class="a-3">
 	      <span class="label">다시 입력</span>
 	      <span class="data"><input type="password" id="updatePwd2" class="info" name="updatePwd" value=""></span>
-	      <input type="text" id="check" class="check">
+	      <input type="text" id="check" class="check" size="35" readonly>
 	    </div>
 	    <div class="a-4">
 	      <span class="label">현재 비밀번호</span>
 	      <span class="data"><input type="password" class="info" id="currentPwd" value=""></span>
-	      <input type="text" id="checkPwd" class="check">
+	      <input type="text" id="checkPwd" class="check" size="35" readonly>
 	      <input type="hidden" id="pwd" value="${staff.password}">
 	    </div>
 	    <div class="a-3">
-	       <input type="submit" id="update" value="비밀번호 변경" class="submit">
+	       <input type="submit" id="update" value="비밀번호 변경" class="submit" >
 	    </div>
 	  </form>
 	</div>
   </div>
   <jsp:include page="/common/bottom.jsp" flush="false" />
+  <script src="<%=request.getContextPath()%>/js/setpassword.js"></script>
 </body>
 </html>
