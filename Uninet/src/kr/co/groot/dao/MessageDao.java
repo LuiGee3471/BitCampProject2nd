@@ -32,54 +32,6 @@ public class MessageDao {
   }
 
   /*
-   * @method Name: selectAll
-   * 
-   * @date: 2019. 5. 8
-   * 
-   * @author: 윤종석
-   * 
-   * @description: 모든 쪽지 데이터를 가져온다
-   * 
-   * @param spec: none
-   * 
-   * @return: List<Message>
-   */
-  public List<Message> selectAll() {
-    List<Message> messagelist = new ArrayList<Message>();
-    String sql = "select * from message";
-
-    try {
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      rs = pstmt.executeQuery();
-
-      if (rs.next()) {
-        Message message = new Message();
-        message.setContent(rs.getString("content"));
-        message.setTime(rs.getTimestamp("time"));
-        message.setReceiverId(rs.getInt("receiver_id"));
-        message.setSenderId(rs.getInt("sender_id"));
-        message.setReceiverName(rs.getString("receiver"));
-        message.setSenderName(rs.getString("sender"));
-        message.setTimeFormat(rs.getString("timeFormat"));
-        messagelist.add(message);
-      }
-    } catch (SQLException e) {
-      System.out.println("selectAll: " + e.getMessage());
-    } finally {
-      try {
-        rs.close();
-        pstmt.close();
-        conn.close();
-      } catch (SQLException e) {
-        System.out.println("selectAll: " + e.getMessage());
-      }
-    }
-
-    return messagelist;
-  }
-
-  /*
    * @method Name: insertMessage
    * 
    * @date: 2019. 5. 10

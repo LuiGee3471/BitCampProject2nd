@@ -17,7 +17,6 @@ import kr.co.groot.service.BoardDeleteCommentAction;
 import kr.co.groot.service.BoardListAction;
 import kr.co.groot.service.BoardReadAction;
 import kr.co.groot.service.BoardRecommentAction;
-import kr.co.groot.service.BoardSearchAction;
 import kr.co.groot.service.BoardWriteAction;
 
 @WebServlet(description = "게시판 작업 처리", urlPatterns = { "/board/*" })
@@ -60,9 +59,6 @@ public class BoardController extends HttpServlet {
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/board/recomment")) {
       action = new BoardRecommentAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/board/search")) {
-      action = new BoardSearchAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/board/deleteComment")) {
       action = new BoardDeleteCommentAction();

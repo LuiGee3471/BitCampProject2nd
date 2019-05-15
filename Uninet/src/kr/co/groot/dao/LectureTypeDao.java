@@ -70,8 +70,6 @@ public class LectureTypeDao {
       }
     }
 
-    
-    
     return lectureTypeList;
   }
 

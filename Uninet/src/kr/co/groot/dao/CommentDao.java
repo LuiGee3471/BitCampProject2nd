@@ -92,148 +92,6 @@ public class CommentDao {
     }
     return list;
   }
-  /*
-   * @method Name: selectAll
-   * 
-   * @date: 2019. 5. 7.
-   * 
-   * @author: 곽호원
-   * 
-   * @description: 댓글 전체 검색.
-   * 
-   * @param spec: void
-   * 
-   * @return: List<Comment>
-   */
-
-  public List<Comment> selectAll(int refer) {
-    List<Comment> commentList = new ArrayList<Comment>();
-    String sql = "select s.staff_id, c.content, c.time from post p LEFT join comment c on p.id = c.refer left join staff s on p.writer_id = s.id where refer =?";
-
-    try {
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, refer);
-      rs = pstmt.executeQuery();
-
-      while (rs.next()) {
-        Comment comment = new Comment();
-        comment.setContent(rs.getString("content"));
-        comment.setWriterId(rs.getInt("writerId"));
-        comment.setTime(rs.getTimestamp("time"));
-        comment.setRefer(rs.getInt("refer"));
-        comment.setReferComment(rs.getInt("referComment"));
-        comment.setRecomment(rs.getString("recomment"));
-        commentList.add(comment);
-      }
-    } catch (SQLException e) {
-      System.out.println("selectAll:" + e.getMessage());
-    } finally {
-      try {
-        rs.close();
-        pstmt.close();
-        conn.close();
-      } catch (SQLException e) {
-        System.out.println("selectAll:" + e.getMessage());
-      }
-
-    }
-    return commentList;
-  }
-
-  /*
-   * @method Name: selectCommentById
-   * 
-   * @date: 2019. 5. 11.
-   * 
-   * @author: 강기훈
-   * 
-   * @description: 로그인 되어있는 회원의 댓글 리스트를 가져온다.
-   * 
-   * @param spec: int id
-   * 
-   * @return: Comment
-   */
-  public Comment selectCommentById(int id) {
-    String sql = "select * from comment where id = ?";
-    Comment comment = null;
-    try {
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, id);
-      rs = pstmt.executeQuery();
-
-      rs.next();
-
-      comment = new Comment();
-      comment.setId(rs.getInt("id"));
-      comment.setWriterId(rs.getInt("writer_id"));
-      comment.setTime(rs.getTimestamp("time"));
-      comment.setRefer(rs.getInt("refer"));
-      comment.setRecomment(rs.getString("recomment"));
-      comment.setReferComment(rs.getInt("refer_comment"));
-      comment.setRecommentCount(rs.getInt("recomment_count"));
-
-    } catch (SQLException e) {
-      System.out.println("selectCommentById:" + e.getMessage());
-    } finally {
-      try {
-        rs.close();
-        pstmt.close();
-        conn.close();
-      } catch (SQLException e) {
-        System.out.println("selectCommentById:" + e.getMessage());
-      }
-    }
-    return comment;
-  }
-
-  /*
-   * @method Name: selectMostRecentComment
-   * 
-   * @date: 2019. 5. 10.
-   * 
-   * @author: 강기훈
-   * 
-   * @description: 가장 많은 조회수를 가진 게시글을 가져온다
-   * 
-   * @param spec: none
-   * 
-   * @return: Comment
-   */
-  public Comment selectMostRecentComment() {
-	    String sql = "select * " + "from comment " + "where id = "
-	        + "(select max(id) " + "from comment)";
-    Comment comment = null;
-    try {
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      rs = pstmt.executeQuery();
-
-      rs.next();
-
-      comment = new Comment();
-      comment.setId(rs.getInt("id"));
-      comment.setWriterId(rs.getInt("writer_id"));
-      comment.setTime(rs.getTimestamp("time"));
-      comment.setRefer(rs.getInt("refer"));
-      comment.setRecomment(rs.getString("recomment"));
-      comment.setReferComment(rs.getInt("refer_comment"));
-      comment.setRecommentCount(rs.getInt("recomment_count"));
-    } catch (SQLException e) {
-      System.out.println("selectMostRecentComment:" + e.getMessage());
-    } finally {
-      try {
-        rs.close();
-        pstmt.close();
-        conn.close();
-      } catch (SQLException e) {
-        System.out.println("selectMostRecentComment:" + e.getMessage());
-      }
-
-    }
-    return comment;
-  }
 
   /*
    * @method Name: insertComment
@@ -275,41 +133,6 @@ public class CommentDao {
         conn.close();
       } catch (SQLException e) {
         System.out.println("insertComment:" + e.getMessage());
-      }
-    }
-    return row;
-  }
-
-  /*
-   * @method Name: updateComment
-   * 
-   * @date: 2019. 5. 7.
-   * 
-   * @author: 곽호원
-   * 
-   * @description: 댓글 수정.
-   * 
-   * @param spec: Comment comment
-   * 
-   * @return: int
-   */
-  public int updateComment(Comment comment) {
-    int row = 0;
-    String sql = "update comment set content= ? where writer_id = ?";
-    try {
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, comment.getContent());
-      pstmt.setInt(2, comment.getWriterId());
-      row = pstmt.executeUpdate();
-    } catch (SQLException e) {
-      System.out.println("updateComment:" + e.getMessage());
-    } finally {
-      try {
-        pstmt.close();
-        conn.close();
-      } catch (SQLException e) {
-        System.out.println("updateComment:" + e.getMessage());
       }
     }
     return row;
@@ -397,67 +220,13 @@ public class CommentDao {
   }
 
   /*
-   * @method Name: selectByWriter
-   * 
-   * @date: 2019. 5. 7.
-   * 
-   * @author: 곽호원
-   * 
-   * @description: 내가 쓴 댓글 검색
-   * 
-   * @param spec: int writerId
-   * 
-   * @return: List<Post>
-   */
-  public List<Post> selectByWriter(int writerId) {
-    List<Post> postList = new ArrayList<Post>();
-    String sql = "select distinct p.id,date_format(p.time, '%m/%d %H:%i') as timeFormat,p.boardtype_id, p.title, p.content, p.writer_id, p.time, p.count from post p"
-        + " LEFT join comment c" + " on p.id = c.refer"
-        + " where c.writer_id = ?";
-    CommentDao dao = null;
-
-    try {
-      conn = ds.getConnection();
-      pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, writerId);
-      rs = pstmt.executeQuery();
-      dao = new CommentDao();
-      while (rs.next()) {
-        Post post = new Post();
-        post.setId(rs.getInt("id"));
-        post.setTitle(rs.getString("title"));
-        post.setBoardType(rs.getInt("boardtype_id"));
-        post.setTimeFormat(rs.getString("timeFormat"));
-        post.setContent(rs.getString("content"));
-        post.setWriterId(rs.getInt("writer_id"));
-        post.setTime(rs.getTimestamp("time"));
-        post.setCount(rs.getInt("count"));
-        post.setCommentCount(dao.getCommentCount(post.getId()));
-        postList.add(post);
-      }
-    } catch (SQLException e) {
-      System.out.println("selectByWriter: " + e.getMessage());
-    } finally {
-      try {
-        rs.close();
-        pstmt.close();
-        conn.close();
-      } catch (SQLException e) {
-        System.out.println("selectByWriter: " + e.getMessage());
-      }
-    }
-
-    return postList;
-  }
-
-  /*
    * @method Name: getCommentCount
    * 
    * @date: 2019. 5. 10.
    * 
    * @author: 강기훈
    * 
-   * @description: 게시판 댓글의 조회수를 가져온다
+   * @description: 게시판 댓글의 수를 가져온다
    * 
    * @param spec: int id
    * 
