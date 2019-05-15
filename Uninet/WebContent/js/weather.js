@@ -14,19 +14,19 @@ function getWeather(lat, lng) {
       const mainWeather = json.weather[0].main;
       const temp = Math.round(json.main.temp);
       const place = json.name;
-      var info = `${mainWeather} / ${temp}°`;
+      const info = `${temp}°`;
       weatherinfo.append(info);
       if (mainWeather === "Rain") {
-        var str = '<img class="weatherpic" src="images/weather/rain.png">';
+        const str = '<i class="fas fa-umbrella fa-3x" style="color: #1762c6;"></i>';
         $(".weatherpic").append(str);
       } else if (mainWeather === "Clouds") {
-        var str = '<img class="weatherpic" src="images/weather/cloud.png">';
+        const str = '<i class="fas fa-cloud fa-3x" style="color: #5d5c5b;"></i>';
         $(".weatherpic").append(str);
       } else if (mainWeather === "Clear") {
-        var str = '<img class="weatherpic" src="images/weather/sunny.png">';
+        const str = '<i class="fas fa-sun fa-3x" style="color: #fdb60a;"></i>';
         $(".weatherpic").append(str);
       } else if (mainWeather === "Haze") {
-        var str = '<img class="weatherpic" src="images/weather/haze.png">';
+        const str = '<i class="fas fa-smog fa-3x" style="color: #1762c6;"></i>';
         $(".weatherpic").append(str);
       }
     });
