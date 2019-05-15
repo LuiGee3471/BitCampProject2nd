@@ -38,25 +38,20 @@ $(".close-btn").click(function() {
 });
 
 $(".recomment-submit").click(function() {
-  const text = $(this).parent().children(".recomment-text").val();
-  
-  if(!text){
+  const text = $(this)
+    .parent()
+    .children(".recomment-text")
+    .val();
+
+  if (!text) {
     event.preventDefault();
     alert("내용을 입력해주세요!");
   }
-  
 });
 
 $(".comment-submit").click(function() {
-  if(!$(".comment-text").val()){
+  if (!$(".comment-text").val()) {
     alert("내용을 입력해주세요!");
     event.preventDefault();
   }
-  
 });
-
-
-
-
-
-

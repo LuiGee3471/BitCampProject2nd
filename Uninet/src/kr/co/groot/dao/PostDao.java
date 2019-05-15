@@ -843,21 +843,18 @@ public class PostDao {
       case "title":
         sql2 = "title LIKE ? ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setInt(2, boardType);
         break;
       case "content":
         sql2 = "content LIKE ? ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setInt(2, boardType);
         break;
       case "all":
         sql2 = "(title LIKE ? OR content LIKE ?) ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setString(2, word);
         pstmt.setInt(3, boardType);
@@ -883,6 +880,19 @@ public class PostDao {
     return count;
   }
 
+  /*
+   * @method Name: getPostByPage
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 페이지에 맞는 글을 가져온다
+   * 
+   * @param spec: int page, int boardType
+   * 
+   * @return: List<Post>
+   */
   public List<Post> getPostByPage(int page, int boardType) {
     List<Post> list = new ArrayList<Post>();
 
@@ -936,6 +946,19 @@ public class PostDao {
     return list;
   }
 
+  /*
+   * @method Name: getPostByOption
+   * 
+   * @date: 2019. 5. 10
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 페이지와 검색 조건에 맞는 글을 가져온다
+   * 
+   * @param spec: int page, int boardType, String option, String word
+   * 
+   * @return: List<Post>
+   */
   public List<Post> getPostByOption(int page, int boardType, String option,
       String word) {
     List<Post> list = new ArrayList<Post>();
@@ -1008,6 +1031,19 @@ public class PostDao {
     return list;
   }
 
+  /*
+   * @method Name: countHowManyMyComment
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 회원이 댓글을 단 댓글이 몇 개인지 가져온다
+   * 
+   * @param spec: int id
+   * 
+   * @return: int
+   */
   public int countHowManyMyComment(int id) {
     int result = 0;
     String sql = "select count(*) " + "from " + "(select distinct title "
@@ -1038,6 +1074,19 @@ public class PostDao {
     return result;
   }
 
+  /*
+   * @method Name: countHowManyMyPost
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 회원이 쓴 글이 몇 개인지 가져온다
+   * 
+   * @param spec: int id
+   * 
+   * @return: int
+   */
   public int countHowManyMyPost(int id) {
     int result = 0;
     String sql = "select count(*) as count " + " from post p"
@@ -1067,6 +1116,19 @@ public class PostDao {
     return result;
   }
 
+  /*
+   * @method Name: countHowManyMyCommentWithOption
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 검색 조건에 맞는 회원이 댓글을 단 글의 개수를 가져온다
+   * 
+   * @param spec: String option, String word, int id
+   * 
+   * @return: int
+   */
   public int countHowManyMyCommentWithOption(String option, String word,
       int id) {
     int count = 0;
@@ -1082,21 +1144,18 @@ public class PostDao {
       case "title":
         sql2 = "title LIKE ? ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setInt(2, id);
         break;
       case "content":
         sql2 = "content LIKE ? ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setInt(2, id);
         break;
       case "all":
         sql2 = "(title LIKE ? OR content LIKE ?) ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setString(2, word);
         pstmt.setInt(3, id);
@@ -1123,6 +1182,19 @@ public class PostDao {
     return count;
   }
 
+  /*
+   * @method Name: countHowManyMyCommentWithOption
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 검색 조건에 맞는 회원이 쓴 글의 개수를 가져온다
+   * 
+   * @param spec: String option, String word, int id
+   * 
+   * @return: int
+   */
   public int countHowManyMyPostWithOption(String option, String word, int id) {
     int count = 0;
     String sql1 = "select count(*) from post " + "where ";
@@ -1136,21 +1208,18 @@ public class PostDao {
       case "title":
         sql2 = "title LIKE ? ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setInt(2, id);
         break;
       case "content":
         sql2 = "content LIKE ? ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setInt(2, id);
         break;
       case "all":
         sql2 = "(title LIKE ? OR content LIKE ?) ";
         pstmt = conn.prepareStatement(sql1 + sql2 + sql3);
-        System.out.println(sql1 + sql2 + sql3);
         pstmt.setString(1, word);
         pstmt.setString(2, word);
         pstmt.setInt(3, id);
@@ -1176,6 +1245,19 @@ public class PostDao {
     return count;
   }
 
+  /*
+   * @method Name: getMyCommentByPage
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 회원이 댓글을 단 글을 페이지에 맞게 가져온다
+   * 
+   * @param spec: int page, int id
+   * 
+   * @return: List<Post>
+   */
   public List<Post> getMyCommentByPage(int page, int id) {
     List<Post> list = new ArrayList<Post>();
     String sql1 = "set @rownum:=0";
@@ -1227,6 +1309,19 @@ public class PostDao {
     return list;
   }
 
+  /*
+   * @method Name: getMyCommentByOption
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 회원이 댓글을 단 글을 검색 조건을 걸어 페이지에 맞게 가져온다
+   * 
+   * @param spec: int page, int id, String option, String word
+   * 
+   * @return: List<Post>
+   */
   public List<Post> getMyCommentByOption(int page, int id, String option,
       String word) {
     List<Post> list = new ArrayList<Post>();
@@ -1300,6 +1395,19 @@ public class PostDao {
     return list;
   }
 
+  /*
+   * @method Name: getMyPostByPage
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 회원이 쓴 글을 페이지에 맞게 가져온다
+   * 
+   * @param spec: int page, int id
+   * 
+   * @return: List<Post>
+   */
   public List<Post> getMyPostByPage(int page, int id) {
     List<Post> list = new ArrayList<Post>();
 
@@ -1347,7 +1455,20 @@ public class PostDao {
 
     return list;
   }
-
+  
+  /*
+   * @method Name: getMyPostByOption
+   * 
+   * @date: 2019. 5. 12
+   * 
+   * @author: 윤종석
+   * 
+   * @description: 회원이 쓴 글을 검색 조건에 따라 페이지에 맞게 가져온다
+   * 
+   * @param spec: int page, int id, String option, String word
+   * 
+   * @return: List<Post>
+   */
   public List<Post> getMyPostByOption(int page, int id, String option,
       String word) {
     List<Post> list = new ArrayList<Post>();

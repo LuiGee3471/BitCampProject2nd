@@ -1,17 +1,17 @@
 function callData(page, method, option, word) {
   return $.ajax({
-    url : "search",
-    type : "post",
-    dataType : "html",
-    data : {
-      page : page,
-      method : method,
-      option : option,
-      word : word
+    url: "search",
+    type: "post",
+    dataType: "html",
+    data: {
+      page: page,
+      method: method,
+      option: option,
+      word: word,
     },
-    success : function(data) {
+    success: function(data) {
       $("#searchResult").html(data);
-    }
+    },
   }).done(makePageBtns);
 }
 
@@ -30,10 +30,12 @@ function makePageBtns() {
 
   if (currentPage !== 1) {
     $(".board-bottom").prepend(
-        $("<div class='btn prev-page'>&lt;&nbsp;이전</div>"));
+      $("<div class='btn prev-page'>&lt;&nbsp;이전</div>")
+    );
   } else {
     $(".board-bottom").prepend(
-        $("<div class='btn prev-page hidden'>&lt;&nbsp;이전</div>"));
+      $("<div class='btn prev-page hidden'>&lt;&nbsp;이전</div>")
+    );
   }
 
   if (startPage !== 1) {
@@ -43,7 +45,8 @@ function makePageBtns() {
   for (let i = startPage; i <= endPage; i++) {
     if (i === currentPage) {
       $(".page-btns").append(
-          $("<div class='btn page-btn current-btn'>" + i + "</div>"));
+        $("<div class='btn page-btn current-btn'>" + i + "</div>")
+      );
     } else {
       $(".page-btns").append($("<div class='btn page-btn'>" + i + "</div>"));
     }
@@ -55,10 +58,12 @@ function makePageBtns() {
 
   if (totalPages > currentPage) {
     $(".board-bottom").append(
-        $("<div class='btn next-page'>다음&nbsp;&gt;</div>"));
+      $("<div class='btn next-page'>다음&nbsp;&gt;</div>")
+    );
   } else {
     $(".board-bottom").append(
-        $("<div class='btn next-page hidden'>다음&nbsp;&gt;</div>"));
+      $("<div class='btn next-page hidden'>다음&nbsp;&gt;</div>")
+    );
   }
 
   handlePageBtnClick(currentPage, method, option, word);
@@ -83,21 +88,21 @@ function handlePageBtnClick(currentPage, method, option, word) {
 
   $(".prev-page-bundle").click(function() {
     if (currentPage % 3 === 0) {
-      callData(currentPage - 3, method, option, word).done(makePageBtns());
+      callData(currentPage - 3, method, option, word);
     } else if (currentPage % 3 === 2) {
-      callData(currentPage - 2, method, option, word).done(makePageBtns());
+      callData(currentPage - 2, method, option, word);
     } else {
-      callData(currentPage - 1, method, option, word).done(makePageBtns());
+      callData(currentPage - 1, method, option, word);
     }
   });
 
   $(".next-page-bundle").click(function() {
     if (currentPage % 3 === 0) {
-      callData(currentPage + 1, method, option, word).done(makePageBtns());
+      callData(currentPage + 1, method, option, word);
     } else if (currentPage % 3 === 2) {
-      callData(currentPage + 2, method, option, word).done(makePageBtns());
+      callData(currentPage + 2, method, option, word);
     } else {
-      callData(currentPage + 3, method, option, word).done(makePageBtns());
+      callData(currentPage + 3, method, option, word);
     }
   });
 }
@@ -121,14 +126,16 @@ $(function() {
   });
 
   $(document).on("click", "#deleteBtn", function() {
-
     const result = confirm("회원를 정말 삭제하시겠습니까?");
 
     if (result) {
-      location.replace("delete?id=" + $(this).siblings("#deleteId").val());
+      location.replace(
+        "delete?id=" +
+          $(this)
+            .siblings("#deleteId")
+            .val()
+      );
     } else {
-
     }
-
   });
 });

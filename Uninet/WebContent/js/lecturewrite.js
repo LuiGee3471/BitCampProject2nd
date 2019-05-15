@@ -5,7 +5,7 @@ $(function() {
   let changeItem;
   let selectCredit = "";
 
-  $('#selectCredit').change(function() {
+  $("#selectCredit").change(function() {
     selectCredit = $(this).val();
 
     if (selectCredit == 1) {
@@ -18,30 +18,27 @@ $(function() {
 
     $("#changeTime").empty();
 
-    for (var count = 0; count < changeItem.length; count++) {
-      var option = $("<option>" + changeItem[count] + "</option>");
+    for (let count = 0; count < changeItem.length; count++) {
+      const option = $("<option>" + changeItem[count] + "</option>");
       $("#changeTime").append(option);
     }
-
   });
-  $('#addBtn').click(function(event) {
-    if (!$('#lectureName').val()) {
-      alert('과목명을 입력해주세요');
+  $("#addBtn").click(function(event) {
+    if (!$("#lectureName").val()) {
+      alert("과목명을 입력해주세요");
       event.preventDefault();
-    } else if (!$('#selectCredit').val()) {
-      alert('학점을 입력해주세요');
+    } else if (!$("#selectCredit").val()) {
+      alert("학점을 입력해주세요");
       event.preventDefault();
-    } else if (!$('input[name=weekday]:checked').val()) {
-      alert('요일을 선택해주세요');
+    } else if (!$("input[name=weekday]:checked").val()) {
+      alert("요일을 선택해주세요");
       event.preventDefault();
-    } else if (!$('#lectureTypeId').val()) {
-      alert('종별을 선택해주세요');
+    } else if (!$("#lectureTypeId").val()) {
+      alert("종별을 선택해주세요");
       event.preventDefault();
-    } else if (!$('#professorId').val()) {
+    } else if (!$("#professorId").val()) {
       alert("교수를 선택해 주세요");
       event.preventDefault();
-
     }
   });
-
 });

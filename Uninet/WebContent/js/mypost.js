@@ -1,25 +1,48 @@
-$(".page-btn")
-    .click(function () {
-      const pageNo = Number($(this).text());
-      const url = "mypost?page=" + pageNo + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
-      location.href = url;
-    });
+$(".page-btn").click(function() {
+  const pageNo = Number($(this).text());
+  const url =
+    "mypost?page=" +
+    pageNo +
+    "&option=" +
+    option +
+    "&boardtype=" +
+    boardType +
+    "&word=" +
+    word;
+  location.href = url;
+});
 
-$(".next-page").click(function () {
+$(".next-page").click(function() {
   if (!$(this).hasClass("invisible")) {
-    const url = "mypost?page=" + (currentPage + 1) + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+    const url =
+      "mypost?page=" +
+      (currentPage + 1) +
+      "&option=" +
+      option +
+      "&boardtype=" +
+      boardType +
+      "&word=" +
+      word;
     location.href = url;
   }
 });
 
-$(".prev-page").click(function () {
+$(".prev-page").click(function() {
   if (!$(this).hasClass("invisible")) {
-    const url = "mypost?page=" + (currentPage - 1) + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+    const url =
+      "mypost?page=" +
+      (currentPage - 1) +
+      "&option=" +
+      option +
+      "&boardtype=" +
+      boardType +
+      "&word=" +
+      word;
     location.href = url;
   }
 });
 
-$(".prv-btn").click(function () {
+$(".prv-btn").click(function() {
   const decision = currentPage % 3;
   let pageToMove;
   if (decision === 1) {
@@ -30,11 +53,19 @@ $(".prv-btn").click(function () {
     pageToMove = currentPage - 3;
   }
 
-  const url = "mypost?page=" + pageToMove + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+  const url =
+    "mypost?page=" +
+    pageToMove +
+    "&option=" +
+    option +
+    "&boardtype=" +
+    boardType +
+    "&word=" +
+    word;
   location.href = url;
 });
 
-$(".next-btn").click(function () {
+$(".next-btn").click(function() {
   const decision = currentPage % 3;
   let pageToMove;
   if (decision === 1) {
@@ -45,6 +76,14 @@ $(".next-btn").click(function () {
     pageToMove = currentPage + 1;
   }
 
-  const url = "mypost?page=" + pageToMove + "&option=" + option + "&boardtype=" + boardType + "&word=" + word;
+  const url =
+    "mypost?page=" +
+    pageToMove +
+    "&option=" +
+    option +
+    "&boardtype=" +
+    boardType +
+    "&word=" +
+    word;
   location.href = url;
 });
