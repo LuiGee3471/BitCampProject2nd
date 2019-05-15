@@ -21,7 +21,7 @@ $(document).ready(function() {
 			if($('#pwd').val() != $('#currentPwd').val()){
 				$('#checkPwd').val('현재 비밀번호와 일치하지 않습니다.');
 				$('#checkPwd').css('color','red');
-				var pwd = $('#pwd').val();
+				const pwd = $('#pwd').val();
 			}else{
 				$('#checkPwd').val('현재 비밀번호와 일치합니다.');
 				$('#checkPwd').css('color','blue');
