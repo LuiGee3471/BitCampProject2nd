@@ -18,8 +18,8 @@ $(function() {
 
     $("#changeTime").empty();
 
-    for (var count = 0; count < changeItem.length; count++) {
-      var option = $("<option>" + changeItem[count] + "</option>");
+    for (let count = 0; count < changeItem.length; count++) {
+      const option = $("<option>" + changeItem[count] + "</option>");
       $("#changeTime").append(option);
     }
   });

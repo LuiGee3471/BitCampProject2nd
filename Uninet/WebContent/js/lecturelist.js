@@ -79,21 +79,21 @@ function handlePageBtnClick(currentPage, method, option, word) {
 
   $(".prev-page-bundle").click(function() {
     if (currentPage % 3 === 0) {
-      callData(currentPage - 3, method, option, word).done(makePageBtns());
+      callData(currentPage - 3, method, option, word);
     } else if (currentPage % 3 === 2) {
-      callData(currentPage - 2, method, option, word).done(makePageBtns());
+      callData(currentPage - 2, method, option, word);
     } else {
-      callData(currentPage - 1, method, option, word).done(makePageBtns());
+      callData(currentPage - 1, method, option, word);
     }
   });
   
   $(".next-page-bundle").click(function() {
 	    if (currentPage % 3 === 0) {
-	      callData(currentPage + 1, method, option, word).done(makePageBtns());
+	      callData(currentPage + 1, method, option, word);
 	    } else if (currentPage % 3 === 2) {
-	      callData(currentPage + 2, method, option, word).done(makePageBtns());
+	      callData(currentPage + 2, method, option, word);
 	    } else {
-	      callData(currentPage + 3, method, option, word).done(makePageBtns());
+	      callData(currentPage + 3, method, option, word);
 	    }
 	  });
 }
