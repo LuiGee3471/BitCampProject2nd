@@ -32,7 +32,7 @@ public class SignLoginAction implements Action {
       } else {
         forward = new ActionForward();
         String msg = "아이디나 비밀번호를 바르게 입력해주세요.";
-        String url = "index.html";
+        String url = "index.jsp";
         request.setAttribute("msg", msg);
         request.setAttribute("url", url);
         forward.setRedirect(false);
