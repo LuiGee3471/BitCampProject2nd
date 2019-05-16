@@ -28,11 +28,15 @@ $(document).ready(function() {
 			}
 		});		
 			$('#update').click(function (event){
-				const length = $('#updatePwd2').val().length;
+				const length = $('#updatePwd').val().length;
+				console.log(length);
 				if($('#currentPwd').val() != $('#pwd').val()){
 					alert("현재 암호를 확인해주세요");
 					event.preventDefault();
-				}else if(length<4){
+				}else if(!$('#updatePwd').val()){
+					alert('바꿀 비밀번호를 다시 입력해주세요');
+					event.preventDefault();
+				} else if(length<4){
 					alert('암호는 4자리 이상이어야 합니다');
 					event.preventDefault();
 				}else if($('#updatePwd2').val() != $('#updatePwd').val()){
