@@ -73,7 +73,7 @@ $(function() {
     } else if (!$("input[name=weekday]:checked").val()) {
       alert("요일을 선택해주세요");
       event.preventDefault();
-    } else if (!$("#lectureTypeId").val()) {
+    } else if (!$("#lecturetype").val()) {
       alert("종별을 선택해주세요");
       event.preventDefault();
     } else if (!$("#professorId").val()) {

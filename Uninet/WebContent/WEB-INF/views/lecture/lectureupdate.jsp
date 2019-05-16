@@ -64,7 +64,7 @@
     
      <!-- 종별 선택  -->
    <span class = "label">종별</span>
- <select name = "lecturetype" class = "textBottom">
+ <select id = "lectureTypeId" name = "lecturetype" class = "textBottom">
    <c:forEach var = "lecttype" items = "${ltList}">
         <c:choose>
           <c:when test="${lecture2.lectureType == lecttype.lectureType}">
@@ -80,7 +80,7 @@
  
      <!-- 교수 선택  -->
      <span class = "label">교수</span>
-      <select name = "professor" class = "textBottom">
+      <select id = "professorId" name = "professor" class = "textBottom">
          <c:forEach var = "professor" items = "${professorList}">
            <c:choose>
              <c:when test="${professor.profName == lecture2.profName}">
