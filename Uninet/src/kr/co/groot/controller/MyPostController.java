@@ -16,10 +16,10 @@ import kr.co.groot.service.MyPostAction;
 
 @WebServlet(description = "내가 쓴 글, 댓글 작업 처리", urlPatterns = { "/mypost",
     "/mycomment" })
-public class MyarticleController extends HttpServlet {
+public class MyPostController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  public MyarticleController() {
+  public MyPostController() {
 
   }
 

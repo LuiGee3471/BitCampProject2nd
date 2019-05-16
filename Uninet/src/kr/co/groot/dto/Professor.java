@@ -5,18 +5,16 @@ public class Professor {
   private String profName;
   private int majorId;
   private String majorName;
-  
-  
 
   public String getMajorName() {
-	return majorName;
-}
+    return majorName;
+  }
 
-public void setMajorName(String majorName) {
-	this.majorName = majorName;
-}
+  public void setMajorName(String majorName) {
+    this.majorName = majorName;
+  }
 
-public int getId() {
+  public int getId() {
     return id;
   }
 

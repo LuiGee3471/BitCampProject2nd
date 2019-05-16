@@ -57,12 +57,8 @@ public class SignController extends HttpServlet {
       forward = new ActionForward();
       forward.setRedirect(true);
       forward.setPath(request.getContextPath());
-    } else {
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/etc/error_404.jsp");
     }
-
+    
     if (forward != null) {
       if (forward.isRedirect()) {
         response.sendRedirect(forward.getPath());

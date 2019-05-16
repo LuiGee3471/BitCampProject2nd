@@ -9,7 +9,7 @@ import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 import kr.co.groot.dto.Staff;
 
-public class MypagePwdUpdateAction implements Action {
+public class MyPagePwdUpdateAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
     ActionForward forward = null;

@@ -26,7 +26,7 @@ public class AdminAction implements Action {
 		try {
 			dao = new StaffDao();
 			staffList = dao.getStaffByPage(pageNumber);
-			page = paginator.getPageNumber();
+			page = paginator.getStaffPageNumber();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

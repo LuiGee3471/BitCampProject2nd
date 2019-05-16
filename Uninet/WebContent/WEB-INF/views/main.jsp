@@ -149,8 +149,8 @@
   <script>
     const news = JSON.parse(`${requestScope.news}`);
     $(".news").each(function(index, element) {
-    	$(element).attr("href", news.items[index].originallink);
-    	$(element).attr("target", "_blank");
+    	$(element).prop("href", news.items[index].originallink);
+    	$(element).prop("target", "_blank");
     	$(element).children(".news-title").html(news.items[index].title);
     	$(element).children(".news-content").html(news.items[index].description);
     });

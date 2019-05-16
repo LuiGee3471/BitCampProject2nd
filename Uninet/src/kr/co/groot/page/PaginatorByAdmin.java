@@ -5,49 +5,46 @@ import kr.co.groot.dao.StaffDao;
 public class PaginatorByAdmin {
 	private StaffDao staffDao;
 	
-  public int getPageNumber() {
-		staffDao = new StaffDao();
-		
-		int staff = staffDao.countHowManyStaff();
-		int page = (staff % 20 == 0) ? (staff / 20) : (staff / 20 +1);
-		
-		return page;
-	}
-	
-	public int getPageNumber(String option, String word) {
-		staffDao = new StaffDao();
-		int page = 0;
-		int staff = 0;
-		
-		switch(option) {
-		case "deptName" :
-		case "name" :
-			staff = staffDao.countHowManyStaffWithOption(option, word);
-			break;
-		case "default" :
-			staff = staffDao.countHowManyStaff();
-			break;
-		}
-		
-		page = (staff % 20 == 0) ? (staff / 20) : (staff / 20 +1);
-		return page;
-		
-	}
-	
+	/*
+   * @method Name: getStaffPageNumber
+   * 
+   * @date: 2019. 5. 11.
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 회원 목록의 페이지 수를 구한다
+   * 
+   * @param spec: none
+   *
+   * @return: int
+   */
   public int getStaffPageNumber() {
 	  staffDao = new StaffDao();
 	  
-	  int staffes = staffDao.countHowManyStaff();
+	  int staffes = staffDao.countHowManyStaff();  
+	  int page = (staffes % 20 == 0) ? (staffes / 20) : (staffes / 20 + 1);
 	  
-	  int page = (staffes % 20 == 0) ? (staffes / 20) : (staffes / 20 +1);
 	  return page;
 	}
 	
+  /*
+   * @method Name: getStaffPageNumberByOption
+   * 
+   * @date: 2019. 5. 11.
+   * 
+   * @author: 곽호원
+   * 
+   * @description: 검색했을 때 회원 목록의 페이지 수를 구한다
+   * 
+   * @param spec: none
+   *
+   * @return: int
+   */
 	public int getStaffPageNumberByOption(String option, String word) {
 	  staffDao = new StaffDao();
 	  
 	  int staffes = staffDao.countHowManyStaffWithOption(option, word);
-	  int page = (staffes % 20 == 0) ? (staffes / 20) : (staffes / 20 +1);
+	  int page = (staffes % 20 == 0) ? (staffes / 20) : (staffes / 20 + 1);
     return page;
 	  
 	}
