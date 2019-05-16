@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.service.LectureDeleteAction;
-import kr.co.groot.service.LectureListAction;
 import kr.co.groot.service.LectureSearchByInputAction;
-import kr.co.groot.service.LectureSortAction;
 import kr.co.groot.service.LectureUpdateAction;
 import kr.co.groot.service.LectureUpdateOkAction;
 import kr.co.groot.service.LectureWriteAction;
@@ -41,13 +39,11 @@ public class LectureController extends HttpServlet {
       action = new LectureDeleteAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/list")) {
-      action = new LectureListAction();
-      forward = action.execute(request, response);
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/lecture/lecturelist.jsp");
     } else if (urlCommand.equals("/lecture/input")) {
       action = new LectureSearchByInputAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/sort")) {
-      action = new LectureSortAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/lecture/updatePage")) {
       action = new LectureUpdateAction();
@@ -64,13 +60,6 @@ public class LectureController extends HttpServlet {
     } else if (urlCommand.equals("/lecture/search")) {
       action = new LectureSearchByInputAction();
       forward = action.execute(request, response);
-    } else if (urlCommand.equals("/lecture/lectureSort")) {
-      action = new LectureSortAction();
-      forward = action.execute(request, response);
-    } else {
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/etc/error_404.jsp");
     }
 
     if (forward != null) {
