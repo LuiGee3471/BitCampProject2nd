@@ -35,6 +35,9 @@ $(document).ready(function() {
 				}else if(length<4){
 					alert('암호는 4자리 이상이어야 합니다');
 					event.preventDefault();
+				}else if($('#updatePwd2').val() != $('#updatePwd').val()){
+					alert('재확인 비밀번호와 맞지 않습니다.');
+					event.preventDefault();
 				}
 			})
 	});
