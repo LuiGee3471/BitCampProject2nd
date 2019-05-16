@@ -1,6 +1,6 @@
 function callData(page, method, option, word) {
   return $.ajax({
-    url: "search",
+    url: "admin/search",
     type: "post",
     dataType: "html",
     data: {
@@ -130,7 +130,7 @@ $(function() {
 
     if (result) {
       location.replace(
-        "delete?id=" +
+        "admin/delete?id=" +
           $(this)
             .siblings("#deleteId")
             .val()

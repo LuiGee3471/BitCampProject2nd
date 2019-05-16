@@ -32,7 +32,11 @@
 						<option value="deptName">부서별 검색</option>
 					</select> 
 					<input type="text" id="searchInput" name="searchInput"
-						class="search" autocomplete="off"> <input type="image"
+						class="search" autocomplete="off"> 
+					<select class="unseen">
+						<option value="11"></option>
+					</select>	
+						<input type="image"
 						id="btn" class="searchBtn"
 						src="<%=request.getContextPath()%>/images/search.png">
 				</div>
