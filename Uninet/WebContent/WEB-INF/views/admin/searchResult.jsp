@@ -54,7 +54,7 @@
 		<td><fmt:formatDate value="${staff.birthday}"
 				pattern="yyyy-MM-dd" /></td>
 		<td>${staff.deptName}</td>
-		<td><a href="modify?id=${staff.id}"> <i class="far fa-edit hover-big"></i>
+		<td><a href="admin/modify?id=${staff.id}"> <i class="far fa-edit hover-big"></i>
 		</a></td>
 		 <td class="deleteBtn">
       <i class="far fa-trash-alt hover-big" id="deleteBtn" ></i>

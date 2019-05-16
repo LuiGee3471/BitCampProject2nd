@@ -1,6 +1,6 @@
 function callData(page, method, option, word) {
   return $.ajax({
-    url: "search",
+    url: "admin/search",
     type: "post",
     dataType: "html",
     data: {
@@ -130,7 +130,7 @@ $(function() {
 
     if (result) {
       location.replace(
-        "delete?id=" +
+        "admin/delete?id=" +
           $(this)
             .siblings("#deleteId")
             .val()
@@ -138,4 +138,24 @@ $(function() {
     } else {
     }
   });
+  $("#search").on('change',function(){
+    if($("#search option:selected").val()=="deptName") {
+       $("#searchInput").remove();
+       const str = "<select id='searchInput' name='searchInput' class='search'>" +
+       		"<option value'학사지원처'>학사지원처</option>"
+         +"<option value='예비군대대'>예비군대대</option>" +
+          "<option value='교무지원처'>교무지원처</option>" +
+          "<option value='입학지원처'>입학지원처</option>" +
+          "<option value='학술정보부'>학술정보부</option>" +
+          "<option value='전산업무부'>전산업무부</option>" +
+         "</select>" 
+       $("#search").after(str);
+    }else if($("#search option:selected").val()=="name") {
+     $("#searchInput").remove();
+      const str = "<input type='text' id='searchInput' name='searchInput'"
+           + "class='search' autocomplete='off'>";
+      $("#search").after(str);
+    }
+  });
+  
 });

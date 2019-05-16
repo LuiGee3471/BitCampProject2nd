@@ -7,7 +7,7 @@ import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
 import kr.co.groot.dao.StaffDao;
 
-public class MyPageDeleteAction implements Action {
+public class AdminDeleteAction implements Action {
   @Override
   public ActionForward execute(HttpServletRequest request,
       HttpServletResponse response) {
@@ -19,7 +19,7 @@ public class MyPageDeleteAction implements Action {
     StaffDao dao;
     int result = 0;
     String msg = "";
-    String url = "admin?page=1&option=default";
+    String url = "../admin?page=1&option=default";
 
     try {
       dao = new StaffDao();

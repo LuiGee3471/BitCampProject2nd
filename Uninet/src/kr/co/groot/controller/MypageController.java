@@ -11,12 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
-import kr.co.groot.service.AdminAction;
-import kr.co.groot.service.AdminModifyAction;
-import kr.co.groot.service.AdminModifyOkAction;
-import kr.co.groot.service.AdminSearchByInputAction;
-import kr.co.groot.service.MyPageDeleteAction;
-import kr.co.groot.service.MyPagePwdUpdateAction;
+import kr.co.groot.service.MyPageMyAction;
 import kr.co.groot.service.MyPageUpdateInfoAction;
 import kr.co.groot.service.MyPageUpdatePictureAction;
 import kr.co.groot.service.StaffInfoAction;
@@ -52,10 +47,7 @@ public class MypageController extends HttpServlet {
       forward = new ActionForward();
       forward.setRedirect(false);
       forward.setPath("/WEB-INF/views/mypage/setPicture.jsp");
-    } else if (urlCommand.equals("/mypage/admin")) {
-      action = new AdminAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/mypage/updateInfo")) {
+    }  else if (urlCommand.equals("/mypage/updateInfo")) {
       action = new MyPageUpdateInfoAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/mypage/updatePwd")) {
@@ -63,18 +55,6 @@ public class MypageController extends HttpServlet {
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/mypage/updatePicture")) {
       action = new MyPageUpdatePictureAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/mypage/modify")) {
-      action = new AdminModifyAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/mypage/modifyOk")) {
-      action = new AdminModifyOkAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/mypage/search")) {
-      action = new AdminSearchByInputAction();
-      forward = action.execute(request, response);
-    } else if (urlCommand.equals("/mypage/delete")) {
-      action = new MyPageDeleteAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/info")) {
       action = new StaffInfoAction();

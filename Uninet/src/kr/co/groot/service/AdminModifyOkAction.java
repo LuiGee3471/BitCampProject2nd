@@ -30,7 +30,7 @@ public class AdminModifyOkAction implements Action {
     int row = dao.modifyStaff(staff);
     if (row > 0) {
       msg = "수정 성공";
-      url = "admin?page=1&option=default";
+      url = "../admin?page=1&option=default";
     } else {
       msg = "수정 실패";
       url = "modify";
