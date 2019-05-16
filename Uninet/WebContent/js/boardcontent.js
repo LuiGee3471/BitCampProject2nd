@@ -1,3 +1,5 @@
+console.log($(".comment-sub .comment-option"));
+
 $(".recomment-option").click(function() {
   const recommentDiv = $(this)
     .parent()
@@ -17,14 +19,16 @@ $(".article .comment-option").click(function() {
 });
 
 $(".comment-sub .comment-option").click(function() {
+  console.log(this);
   $(".modal").css("display", "block");
   const receiver_id = $(this)
     .parent()
     .parent()
     .children(".comment-main")
     .children(".comment-writer")
-    .children(".comment-id")
+    .children(".comment-writer-id")
     .text();
+   console.log(receiver_id);
   $(".message-form").append(
     "<input type='hidden' value='" +
       receiver_id +
