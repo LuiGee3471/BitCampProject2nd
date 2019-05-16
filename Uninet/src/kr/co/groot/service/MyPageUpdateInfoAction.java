@@ -29,7 +29,6 @@ public class MyPageUpdateInfoAction implements Action {
     if (row > 0) {
       msg = "수정 성공";
       url = "../mypage";
-      session.setAttribute("staff", staff);
     } else {
       msg = "수정 실패";
       url = "setinfo";

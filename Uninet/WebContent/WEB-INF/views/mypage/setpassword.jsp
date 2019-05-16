@@ -1,6 +1,11 @@
+<%@page import="kr.co.groot.dto.Staff"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+Staff staff = (Staff) session.getAttribute("staff");
+
+%>
 <jsp:include page="/common/head.jsp" flush="false" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css">
 </head>
@@ -31,7 +36,7 @@
 			</ul>
 	  </div>
 	</div>
-	<c:set var="staff" value="${sessionScope.staff }" />
+	<c:set var="staff" value="${staff}" />
 	<div class="article">
 	  <form action="updatePwd" method="post">
 	    <div class="a-1">
