@@ -41,10 +41,6 @@ public class MessageController extends HttpServlet {
     } else if (urlCommand.equals("/message/delete")) {
       action = new MessageDeleteAction();
       forward = action.execute(request, response);
-    } else {
-      forward = new ActionForward();
-      forward.setRedirect(false);
-      forward.setPath("/WEB-INF/views/etc/error_404.jsp");
     }
 
     if (forward != null) {

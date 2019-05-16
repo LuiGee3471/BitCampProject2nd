@@ -16,10 +16,9 @@ import kr.co.groot.service.AdminModifyAction;
 import kr.co.groot.service.AdminModifyOkAction;
 import kr.co.groot.service.AdminSearchByInputAction;
 import kr.co.groot.service.MyPageDeleteAction;
-import kr.co.groot.service.MyPageMyAction;
+import kr.co.groot.service.MyPagePwdUpdateAction;
 import kr.co.groot.service.MyPageUpdateInfoAction;
 import kr.co.groot.service.MyPageUpdatePictureAction;
-import kr.co.groot.service.MypagePwdUpdateAction;
 import kr.co.groot.service.StaffInfoAction;
 
 @WebServlet(description = "마이페이지 작업 처리", urlPatterns = { "/mypage/*", "/info" })
@@ -38,8 +37,9 @@ public class MypageController extends HttpServlet {
     Action action = null;
     ActionForward forward = null;
     if (urlCommand.equals("/mypage")) {
-      action = new MyPageMyAction();
-      forward = action.execute(request, response);
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("/WEB-INF/views/mypage/my.jsp");
     } else if (urlCommand.equals("/mypage/setinfo")) {
       forward = new ActionForward();
       forward.setRedirect(false);
@@ -59,7 +59,7 @@ public class MypageController extends HttpServlet {
       action = new MyPageUpdateInfoAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/mypage/updatePwd")) {
-      action = new MypagePwdUpdateAction();
+      action = new MyPagePwdUpdateAction();
       forward = action.execute(request, response);
     } else if (urlCommand.equals("/mypage/updatePicture")) {
       action = new MyPageUpdatePictureAction();
