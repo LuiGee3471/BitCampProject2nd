@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.groot.action.Action;
 import kr.co.groot.action.ActionForward;
-import kr.co.groot.service.MyPageMyAction;
+import kr.co.groot.service.MyPagePwdUpdateAction;
 import kr.co.groot.service.MyPageUpdateInfoAction;
 import kr.co.groot.service.MyPageUpdatePictureAction;
 import kr.co.groot.service.StaffInfoAction;
