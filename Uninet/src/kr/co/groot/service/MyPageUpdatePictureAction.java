@@ -43,9 +43,6 @@ public class MyPageUpdatePictureAction implements Action {
       if (row > 0) {
         msg = "수정 성공";
         url = "../mypage";
-        staff = dao.selectByUniqueId(staff.getId());
-        session.setAttribute("staff", staff);
-        ;
       } else {
         msg = "수정실패";
         url = "setpicture";
