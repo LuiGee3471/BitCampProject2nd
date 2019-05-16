@@ -14,8 +14,9 @@ public class AdminModifyOkAction implements Action {
   public ActionForward execute(HttpServletRequest request,
       HttpServletResponse response) {
     ActionForward forward = null;
-    HttpSession session = request.getSession();
-    Staff staff = (Staff) session.getAttribute("staff");
+    
+    StaffDao staffDao = new StaffDao();
+    Staff staff = staffDao.selectByUniqueId(Integer.parseInt(request.getParameter("selectId")));
     staff.setPhoneNumber(request.getParameter("phoneNumber"));
     staff.setIsAdmin(request.getParameter("isAdmin"));
     staff.setIsManager(request.getParameter("isManager"));

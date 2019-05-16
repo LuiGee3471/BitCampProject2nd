@@ -2862,3 +2862,6 @@ java.lang.Exception: The resource tree is locked for modifications.
 !MESSAGE Could not publish server configuration for Tomcat v9.0 Server at localhost.
 !SUBENTRY 1 org.eclipse.jst.server.tomcat.core 4 0 2019-05-16 14:47:26.160
 !MESSAGE Multiple Contexts have a path of "/Uninet".
+
+!ENTRY org.eclipse.jface.text 2 0 2019-05-16 14:58:58.687
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
