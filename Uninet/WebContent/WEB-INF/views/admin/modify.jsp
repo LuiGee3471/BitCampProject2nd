@@ -40,7 +40,6 @@
 
 			<br> <span class="label">부서이름</span> <select name="deptname"
 				id="deptname" class="deptname">
-				<option value="">부서 선택</option>
 				<c:forEach var="departList" items="${departList }">
 					<c:choose>
 						<c:when test="${staff.deptName ==departList.deptName}">
