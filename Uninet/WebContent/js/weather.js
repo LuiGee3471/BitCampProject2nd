@@ -28,6 +28,9 @@ function getWeather(lat, lng) {
       } else if (mainWeather === "Haze") {
         const str = '<i class="fas fa-smog fa-3x" style="color: #1762c6;"></i>';
         $(".weatherpic").append(str);
+      } else if (mainWeather === "Mist") {
+        const str = "<img src='images/weather/mist.png' widith='50px' height='50px'>";
+        $(".weatherpic").append(str);
       }
     });
 }
