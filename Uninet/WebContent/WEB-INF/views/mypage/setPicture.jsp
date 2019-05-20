@@ -27,7 +27,7 @@
 					</li>
 					<c:if test="${staff.isAdmin == 'Y'}">
 						<li>
-							<a href="<%=request.getContextPath()%>/mypage/admin?page=1&option=default">회원 관리</a>
+							<a href="<%=request.getContextPath()%>/admin?page=1&option=default">회원 관리</a>
 						</li>
 					</c:if>
 				</ul>

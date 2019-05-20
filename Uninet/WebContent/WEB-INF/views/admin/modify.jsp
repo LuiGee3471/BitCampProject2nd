@@ -51,7 +51,7 @@
 					</c:choose>
 				</c:forEach>
 			</select> <input type="submit" value="수정" class="updateBtn" id="updateBtn">
-			<a class="cancle-back" href="admin?qpage=1&option=default">취소하고
+			<a class="cancle-back" href="../admin?page=1&option=default">취소하고
 				돌아가기</a>
 		</form>
 	</div>
